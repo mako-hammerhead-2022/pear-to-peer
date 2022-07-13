@@ -8,6 +8,9 @@ server.use(express.static(path.resolve(__dirname, '../dist')))
 
 server.use(express.json())
 
+server.use('/api/items', require('./routes/items'))
+server.use('/api/users', require('./routes/users'))
+
 server.get('*', (req, res) => {
   try {
     const html = fs.readFileSync(
