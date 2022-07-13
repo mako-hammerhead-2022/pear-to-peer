@@ -1,0 +1,24 @@
+const { tab } = require('@testing-library/user-event/dist/types/convenience')
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.up = function (knex) {
+  return knex.schema.createTable('users', (table) => {
+    table.increments('id').primary()
+    table.string('authId').notNullable()
+    table.string('name')
+    table.string('username')
+    table.string('email')
+    table.integer('postcode')
+  })
+}
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.down = function (knex) {
+  return knex.schema.dropTable('users')
+}
