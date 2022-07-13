@@ -2,31 +2,37 @@ import { vi } from 'vitest'
 
 const request = require('supertest')
 const server = require('../../server')
-require('../../db')
+const db = require('../../db/items')
+// db object with methods
+// a collection of exported functions
+// vi.mock('../../db', () => ({
+//   getAllItems: vi
+//     .fn()
+//     .mockReturnValue(Promise.resolve(JSON.stringify([1, 2, 3]))),
+// }))
 
-vi.mock('../../db', () => ({
-  getAllItems: vi
-    .fn()
-    .mockReturnValue(Promise.resolve(JSON.stringify([1, 2, 3]))),
-}))
+vi.spyOn(db, 'getAllItems')
+vi.spyOn(db, 'getItemsByUserId')
 
-afterEach(() => {
+afterAll(() => {
   vi.restoreAllMocks()
 })
 
 describe('GET /api/items', () => {
-  it.skip('does something', async () => {
+  it('does something', async () => {
+    console.log(db)
     // const fakeGetAllItems = vi
     //   .fn()
     //   .mockReturnValue(Promise.resolve(new Array(10)))
-    // db.getAllItems.mockImplementation(fakeGetAllItems)
+    db.getAllItems.mockReturnValue(
+      Promise.resolve([{ id: 1 }, { id: 2 }, { id: 'bananas' }])
+    )
 
-    // http://127.0.0.1:61322/api/items
     //console.log('fake', await getAllItems())
 
     const res = await request(server).get('/api/items')
 
-    console.log(res.body.message)
+    console.log(res.body)
 
     expect(res.status).toBe(200)
   })

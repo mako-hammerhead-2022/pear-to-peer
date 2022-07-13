@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const db = require('../db')
+const db = require('../db/items')
+// import * as db from '../db/items'
 
 router.get('/', (req, res) => {
   db.getAllItems()
@@ -9,6 +10,7 @@ router.get('/', (req, res) => {
       res.json(items)
     })
     .catch((err) => {
+      console.log(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })
