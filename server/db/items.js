@@ -25,7 +25,22 @@ function getItemsByUserId(userId, db = connection) {
     .where('users.id', userId)
 }
 
+// //name location allergens posted expiry description availability
+// function insertItem(item, db = connection) {
+//   return db('items').insert({
+//     itemName,
+//     allergens,
+//     description,
+//     dateCreated,
+//     expiry,
+//     availability,
+//   })
+// }
+
+// getItemsWithUserDetails()
+
 module.exports = {
   getAllItems,
   getItemsByUserId,
+  // insertItem,
 }
