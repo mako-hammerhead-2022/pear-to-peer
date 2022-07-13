@@ -25,8 +25,6 @@ function getItemsByUserId(userId, db = connection) {
     .where('users.id', userId)
 }
 
-// getItemsWithUserDetails()
-
 module.exports = {
   getAllItems,
   getItemsByUserId,

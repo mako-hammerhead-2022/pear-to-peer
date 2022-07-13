@@ -19,20 +19,30 @@ afterAll(() => {
 })
 
 describe('GET /api/items', () => {
-  it('does something', async () => {
-    console.log(db)
-    // const fakeGetAllItems = vi
-    //   .fn()
-    //   .mockReturnValue(Promise.resolve(new Array(10)))
+  it('returns an array of items', async () => {
     db.getAllItems.mockReturnValue(
-      Promise.resolve([{ id: 1 }, { id: 2 }, { id: 'bananas' }])
+      Promise.resolve([
+        { id: 1, itemName: 'Hummus' },
+        { id: 2, itemName: 'Scones' },
+        { id: 3, itemName: 'Chicken Empanadas' },
+      ])
     )
-
-    //console.log('fake', await getAllItems())
 
     const res = await request(server).get('/api/items')
 
-    console.log(res.body)
+    expect(res.status).toBe(200)
+    expect(res.body).toHaveLength(3)
+    expect(res.body[1].itemName).toBe('Scones')
+  })
+})
+
+describe('GET /api/items/userId', () => {
+  it('returns items from the user', async () => {
+    db.getItemsByUserId.mockReturnValue(
+      Promise.resolve([{ userId: 1, itemsId: 1, itemName: 'Hummus' }])
+    )
+
+    const res = await request(server).get('/api/items/1')
 
     expect(res.status).toBe(200)
   })
