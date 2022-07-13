@@ -24,3 +24,13 @@ describe('getAllItems', () => {
     expect(items[0].itemName).toBe('Hummus')
   })
 })
+
+describe('getItemsByUsers', () => {
+  it('returns an array of items for a given user', async () => {
+    const userItems = await db.getItemsByUserId(1, testDb)
+
+    expect(userItems).toHaveLength(1)
+    expect(userItems[0].userId).toBe(1)
+    expect(userItems[0].itemName).toBe('Hummus')
+  })
+})
