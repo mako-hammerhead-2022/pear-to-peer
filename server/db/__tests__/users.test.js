@@ -4,14 +4,23 @@ const testDb = knex(testConfig)
 
 const db = require('../users')
 
-beforeAll(() => {
-  return testDb.migrate.latest()
+beforeAll(async () => {
+  await testDb.migrate.latest()
 })
 
-beforeEach(() => {
-  return testDb.seed.run()
+beforeEach(async () => {
+  await testDb.seed.run()
 })
 
-afterAll(() => {
-  return testDb.destroy()
+afterAll(async () => {
+  await testDb.destroy()
+})
+
+describe('getAllUsers', () => {
+  it('returns an array of users', async () => {
+    const users = await db.getAllUsers(testDb)
+
+    expect(users).toHaveLength(3)
+    expect(users[0].name).toBe('Harry Horatio')
+  })
 })
