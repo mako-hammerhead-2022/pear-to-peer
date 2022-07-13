@@ -11,7 +11,7 @@ exports.seed = async function (knex) {
       itemName: 'Hummus',
       allergens: JSON.stringify(['nuts']),
       description:
-        'Homecooked Hummus that is both filling and healthy! Cooked with chickpeas, tahini, lemon juice, garlic, cumin, salt and olive oil.',
+        'Home-cooked Hummus that is both filling and healthy! Cooked with chickpeas, tahini, lemon juice, garlic, cumin, salt and olive oil.',
       imageUrl:
         '["https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3252&q=80"]',
       //expiry: new Date().setDate(new Date().getDate() + 7),
@@ -42,7 +42,7 @@ exports.seed = async function (knex) {
       itemName: 'Chicken Empanadas',
       allergens: JSON.stringify(['poultry', 'eggs', 'dairy']),
       description:
-        'Empanadas are a type of pastry that is filled with meat and cooked vegetables. Made with chicken, eggs, butter, carrots, greenpeas, potato, and raisins',
+        'Empanadas are a type of pastry that is filled with meat and cooked vegetables. Made with chicken, eggs, butter, carrots, green peas, potato, and raisins',
       imageUrl:
         '["https://images.themodernproper.com/billowy-turkey/production/posts/2020/Chicken-Empanada-14.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1599768574&s=e3b5e8fe53c559c704cad71e33d367e5"]',
       //Hard-coded for seed data,

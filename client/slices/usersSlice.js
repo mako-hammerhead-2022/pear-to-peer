@@ -27,3 +27,5 @@ export const usersSlice = createSlice({
 export const {} = usersSlice.actions
 
 export default usersSlice.reducer
+
+//by default reducers from one createSlice will only respond to actions from that same createSlice. If we want a slice to respond to actions from another slice, we need to use extraReducers.

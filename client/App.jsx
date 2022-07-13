@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { increment } from '@/slices/counterSlice'
 import { fetchAllUsers } from './slices/usersSlice'
 
+import Nav from './components/Nav'
+
 // function App() {
 //   const count = useSelector((state) => state.counter.value)
 //   const dispatch = useDispatch()
@@ -60,11 +62,14 @@ function App() {
   }
 
   return (
-    <ul>
-      {users.users.map((user) => (
-        <li key={user.id}>{user.name}</li>
-      ))}
-    </ul>
+    <>
+      <Nav />
+      <ul>
+        {users.users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </>
   )
 }
 
