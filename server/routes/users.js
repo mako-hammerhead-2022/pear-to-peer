@@ -13,4 +13,22 @@ router.get('/', (req, res) => {
     })
 })
 
+// POST /api/users
+router.post('/', async (req, res) => {
+  const newUser = req.body
+  const { auth0Id, email, name } = newUser
+  const user = {
+    auth0Id,
+    email,
+    name,
+  }
+  try {
+    await db.createUser(user)
+    res.sendStatus(201)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(err.message)
+  }
+})
+
 module.exports = router

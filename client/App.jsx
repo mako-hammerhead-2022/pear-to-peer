@@ -4,7 +4,7 @@ import './App.css'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { increment } from '@/slices/counterSlice'
-import { fetchAllUsers } from './slices/usersSlice'
+import { fetchAllUsers, postNewUser } from './slices/usersSlice'
 
 import Nav from './components/Nav'
 
@@ -64,6 +64,20 @@ function App() {
   return (
     <>
       <Nav />
+      <button
+        onClick={() => {
+          dispatch(
+            postNewUser({
+              auth0Id: 'client',
+              email: 'client@react',
+              name: 'reactClient',
+            })
+          )
+          dispatch(fetchAllUsers())
+        }}
+      >
+        addUser
+      </button>
       <ul>
         {users.users.map((user) => (
           <li key={user.id}>{user.name}</li>
