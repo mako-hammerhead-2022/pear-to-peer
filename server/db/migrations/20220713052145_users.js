@@ -1,5 +1,3 @@
-const { tab } = require('@testing-library/user-event/dist/types/convenience')
-
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
