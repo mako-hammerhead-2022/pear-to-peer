@@ -39,6 +39,19 @@ function insertItem(items, db = connection) {
   return db('items').insert(newItem)
 }
 
+// function updateItem(availability, id, items, db = connection) {
+//   console.log('is this availability', availability)
+//   const itemUpdated = {
+//     availability: items.availability,
+//   }
+//   console.log('item updated is', itemUpdated)
+//   return db('items').update(itemUpdated).where('id', id)
+// }
+
+function updateItem(id, item, db = connection) {
+  return db('items').update(item).where({ id })
+}
+
 // itemName: items.itemName,
 // allergens: items.allergens,
 // description: items.description,
@@ -51,4 +64,5 @@ module.exports = {
   getAllItems,
   getItemsByUserId,
   insertItem,
+  updateItem,
 }
