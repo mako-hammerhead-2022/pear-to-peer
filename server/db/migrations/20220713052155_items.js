@@ -9,11 +9,12 @@ exports.up = function (knex) {
     table.string('allergens').notNullable()
     table.string('description')
     table.string('imageUrl').defaultTo('Please add an image')
-    table.date('dateCreated').defaultTo(knex.fn.now())
-    // table.timestamps(true, true, true)
+    // table.date('dateCreated').defaultTo(knex.fn.now())
+    table.timestamps(true, true, true)
     table.date('expiry')
-    table.string('availability')
-    table.string('userId').notNullable()
+    // table.string('availability')
+    table.enu('availability', ['Yes', 'No'])
+    table.integer('userId').notNullable()
   })
 }
 
