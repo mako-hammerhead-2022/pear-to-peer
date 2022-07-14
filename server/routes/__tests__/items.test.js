@@ -3,13 +3,6 @@ import { vi } from 'vitest'
 const request = require('supertest')
 const server = require('../../server')
 const db = require('../../db/items')
-// db object with methods
-// a collection of exported functions
-// vi.mock('../../db', () => ({
-//   getAllItems: vi
-//     .fn()
-//     .mockReturnValue(Promise.resolve(JSON.stringify([1, 2, 3]))),
-// }))
 
 vi.spyOn(db, 'getAllItems')
 vi.spyOn(db, 'getItemsByUserId')
