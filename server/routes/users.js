@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
 // POST /api/users
 router.post('/', async (req, res) => {
   const newUser = req.body
+  const auth0Id = req.user?.sub
   const { auth0Id, email, name } = newUser
   const user = {
     auth0Id,

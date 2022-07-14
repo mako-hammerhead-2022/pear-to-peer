@@ -13,12 +13,13 @@ server.use('/api/users', require('./routes/users'))
 
 server.get('*', (req, res) => {
   try {
-    const html = fs.readFileSync(
-      path.resolve(__dirname, '../dist/index.html'),
-      'utf8'
-    )
+    res.sendFile(path.join(__dirname, 'public/index.html')) // benjamin's change
+    // const html = fs.readFileSync(
+    //   path.resolve(__dirname, '../dist/index.html'),
+    //   'utf8'
+    // )
 
-    res.send(html)
+    // res.send(html)
   } catch (err) {
     if (err.message.includes('no such file or directory')) {
       return res
