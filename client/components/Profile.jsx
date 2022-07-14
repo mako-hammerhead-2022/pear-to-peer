@@ -1,5 +1,9 @@
 import React from 'react'
 
 export default function Profile() {
-  return <div>Profile</div>
+  return (
+    <>
+      <h1>Hey this is a profile page</h1>
+    </>
+  )
 }

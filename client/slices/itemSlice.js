@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getAllItems, addItem } from '@/apiClient/users'
+import { addItem } from '@/apiClient/items'
 
-const initialState = { items: [], loading: false, error: null }
+const initialState = {}
 
 export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
   const response = await addItem(item)
@@ -10,11 +10,11 @@ export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
 })
 
 export const itemSlice = createSlice({
-  name: 'item',
+  name: 'itemData',
   initialState,
   reducers: {
-    setNewItem: (state, action) => {
-      state.items = action.payload
+    setNewItem: (state, { payload }) => {
+      return { ...state, ...payload.userToSave }
     },
   },
 

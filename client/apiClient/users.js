@@ -5,7 +5,7 @@ export function getAllUsers() {
 }
 
 export function addUser(user) {
-  return request.post(`/api/users/`).send(user).catch(logError)
+  return request.post(`/api/users/`).send(user).catch(logError, 'whoopsie')
 }
 
 function logError(err) {
