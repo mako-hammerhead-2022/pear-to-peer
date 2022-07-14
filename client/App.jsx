@@ -1,53 +1,14 @@
 import React, { useEffect } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { increment } from '@/slices/counterSlice'
+import { Routes, Route } from 'react-router-dom'
 import { fetchAllUsers, postNewUser } from './slices/usersSlice'
 
-import Nav from './components/Nav'
-
-// function App() {
-//   const count = useSelector((state) => state.counter.value)
-//   const dispatch = useDispatch()
-
-//   return (
-//     <div className='App'>
-//       <header className='App-header'>
-//         <img src={logo} className='App-logo' alt='logo' />
-//         <p>Hello Vite + React!</p>
-//         <p>
-//           <button type='button' onClick={() => dispatch(increment())}>
-//             count is: {count}
-//           </button>
-//         </p>
-//         <p>
-//           Edit <code>App.jsx</code> and save to test HMR updates.
-//         </p>
-//         <p>
-//           <a
-//             className='App-link'
-//             href='https://reactjs.org'
-//             target='_blank'
-//             rel='noopener noreferrer'
-//           >
-//             Learn React
-//           </a>
-//           {' | '}
-//           <a
-//             className='App-link'
-//             href='https://vitejs.dev/guide/features.html'
-//             target='_blank'
-//             rel='noopener noreferrer'
-//           >
-//             Vite Docs
-//           </a>
-//         </p>
-//       </header>
-//     </div>
-//   )
-// }
+import MainLayout from './components/MainLayout'
+import Home from './components/Home'
+import Register from './components/Register'
+import NotFound from './components/NotFound'
+import { Container } from '@chakra-ui/react'
 
 function App() {
   const users = useSelector((state) => state.users)
@@ -63,26 +24,16 @@ function App() {
 
   return (
     <>
-      <Nav />
-      <button
-        onClick={() => {
-          dispatch(
-            postNewUser({
-              auth0Id: 'client',
-              email: 'client@react',
-              name: 'reactClient',
-            })
-          )
-          dispatch(fetchAllUsers())
-        }}
-      >
-        addUser
-      </button>
-      <ul>
-        {users.users.map((user) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
+      <Container centerContent>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/register' element={<Register />} />
+          </Route>
+
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Container>
     </>
   )
 }
