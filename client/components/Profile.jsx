@@ -1,5 +1,5 @@
 import React from 'react'
-import { AddItemForm } from '@/Components/AddItemForm'
+import { AddItemForm } from '../components/AddItemForm'
 
 export default function Profile() {
   return (
