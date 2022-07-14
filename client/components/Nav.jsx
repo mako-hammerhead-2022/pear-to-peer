@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link as ReactLink } from 'react-router-dom'
-import { Link } from '@chakra-ui/react'
+import { Link, VStack } from '@chakra-ui/react'
 
 import { useAuth0 } from '@auth0/auth0-react'
 
@@ -26,19 +26,30 @@ export default function Nav() {
   }
   return (
     <>
-      <IfAuthenticated>
-        <Link as={ReactLink} to='/' onClick={handleLogoff}>
-          Log Off
-        </Link>
-      </IfAuthenticated>
-      <IfNotAuthenticated>
-        <Link as={ReactLink} to='/' onClick={handleRegister}>
-          Register
-        </Link>
-        <Link as={ReactLink} to='/' onClick={handleSignIn}>
-          Sign In
-        </Link>
-      </IfNotAuthenticated>
+      <VStack>
+        <IfAuthenticated>
+          <Link as={ReactLink} to='/aboutus'>
+            About Us
+          </Link>
+          <Link as={ReactLink} to='/'>
+            Home
+          </Link>
+          <Link as={ReactLink} to='/profile'>
+            Profile
+          </Link>
+          <Link as={ReactLink} to='/' onClick={handleLogoff}>
+            Log Off
+          </Link>
+        </IfAuthenticated>
+        <IfNotAuthenticated>
+          <Link as={ReactLink} to='/' onClick={handleRegister}>
+            Register
+          </Link>
+          <Link as={ReactLink} to='/' onClick={handleSignIn}>
+            Sign In
+          </Link>
+        </IfNotAuthenticated>
+      </VStack>
     </>
   )
 }

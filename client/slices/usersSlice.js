@@ -1,15 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getAllUsers, addUser } from '@/apiClient/users'
 
-const initialState = { users: [], loading: false, error: null }
-
-//TODO: loading state
-
-export const fetchAllUsers = createAsyncThunk('users/fetchAll', async () => {
-  const response = await getAllUsers()
-  console.log('response', response)
-  return response
-})
+const initialState = {
+  auth0Id: '',
+  email: '',
+  token: '',
+}
 
 export const postNewUser = createAsyncThunk('users/postNew', async (user) => {
   console.log('dispatched postNewUser')
@@ -19,19 +15,23 @@ export const postNewUser = createAsyncThunk('users/postNew', async (user) => {
 })
 
 export const usersSlice = createSlice({
-  name: 'users',
+  name: 'userData',
   initialState,
-  reducers: {},
+  reducers: {
+    setLoggedInUser: (state, { payload }) => {
+      return { ...state, ...payload.userToSave }
+    },
+  },
 
   extraReducers: {
-    [fetchAllUsers.fulfilled]: (state, { payload }) => {
-      console.log('payload', payload)
-      return { ...state, users: payload }
+    [postNewUser.fulfilled]: (state, { payload }) => {
+      console.log('newUser details', payload)
+      return { ...state, ...payload }
     },
   },
 })
 
-export const {} = usersSlice.actions
+export const { setLoggedInUser } = usersSlice.actions
 
 export default usersSlice.reducer
 

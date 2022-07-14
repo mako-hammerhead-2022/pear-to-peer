@@ -14,8 +14,11 @@ router.get('/', (req, res) => {
 })
 
 // POST /api/users
+// TODO: add checkJwt
 router.post('/', async (req, res) => {
   const newUser = req.body
+  // TODO: const auth0Id = req.user?.sub
+  // TODO: get fields you want
   const { auth0Id, email, name } = newUser
   const user = {
     auth0Id,
