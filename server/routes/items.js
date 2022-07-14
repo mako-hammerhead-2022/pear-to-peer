@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 
-
 const db = require('../db/items')
 // const {checkJwt} = require('../utils')
 
@@ -24,6 +23,7 @@ router.get('/:Id', (req, res) => {
   // const { userId } = req.body
   db.getItemsByUserId(userId)
     .then((userItems) => {
+      console.log('user items is', userItems)
       res.json(userItems)
     })
     .catch((err) => {
@@ -32,36 +32,34 @@ router.get('/:Id', (req, res) => {
 })
 
 // GET items by user ID
-router.get('/', (req, res) => {
-  const userId = req.user?.sub
-  db.getItemsByUserId(userId)
-    .then((userItems) => {
-      res.json(userItems)
+// router.get('/', (req, res) => {
+//   const userId = req.user?.sub
+//   db.getItemsByUserId(userId)
+//     .then((userItems) => {
+//       res.json(userItems)
+//     })
+//     .catch((err) => {
+//       res.status(500).send({ message: 'Something went wrong' })
+//     })
+// })
+
+// POST items (by the user)
+//checkJwt
+router.post('/', (req, res) => {
+  const newItem = req.body
+  console.log(newItem)
+  return db
+    .insertItem(newItem)
+    .then((newItem) => {
+      return res.json(newItem)
     })
     .catch((err) => {
-      res.status(500).send({ message: 'Something went wrong' })
+      res.status(500).send(err.message)
     })
 })
 
-// POST items (by the user)
-//router.post('/', checkJwt, (req, res) => {
-// const {userId, content} = req.body
-// const auth0Id = req.user?.sub
-// const newItem = {
-// userId,
-// ((from pets n pats authorId: auth0Id -- unsure what to change it to this second))
-// content,
-//}
-// db.insertItem(newItem)
-//.then(() => {
-//  return res.status(200).send({message: 'Successful})
-//})
-//.catch((err) => {
-// res.status(500).send(err.message)
-//})
-//})
-
 // PATCH item
+//checkJwt
 // router.patch('/', checkJwt, (req, res) => {})
 
 // DELETE item
