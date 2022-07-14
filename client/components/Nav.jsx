@@ -31,7 +31,7 @@ export default function Nav() {
         <Link as={ReactLink} to='/aboutus'>
           About Us
         </Link>
-        <Link as={ReactLink} to='/home'>
+        <Link as={ReactLink} to='/'>
           Home
         </Link>
         <Link as={ReactLink} to='/profile'>
