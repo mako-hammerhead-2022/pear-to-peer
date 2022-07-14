@@ -18,24 +18,29 @@ function getItemsByUserId(userId, db = connection) {
       'allergens',
       'description',
       'imageUrl',
-      'dateCreated',
       'expiry',
       'availability'
     )
     .where('users.id', userId)
 }
 
-function insertItem(items, db = connection) {
+function getItemById(id, db = connection) {
+  return db('items').select().where({ id }).first()
+}
+
+async function insertItem(items, db = connection) {
   const newItem = {
     itemName: items.itemName,
     allergens: items.allergens,
     description: items.description,
-    dateCreated: items.dateCreated,
     expiry: items.expiry,
     availability: items.availability,
     userId: items.userId,
+    imageUrl: items.imageUrl,
   }
-  return db('items').insert(newItem)
+  const newIds = await db('items').insert(newItem)
+
+  return getItemById(newIds[0], db)
 }
 
 function updateItem(items, id, db = connection) {

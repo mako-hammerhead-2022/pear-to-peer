@@ -16,9 +16,8 @@ exports.seed = async function (knex) {
         '["https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3252&q=80"]',
       //expiry: new Date().setDate(new Date().getDate() + 7),
       //Hard-coded for seed data,
-      dateCreated: '2022-07-11 06:38:14',
       expiry: '2022-07-18 06:38:14',
-      availability: 'yes',
+      availability: 'Yes',
       userId: '1',
     },
 
@@ -31,9 +30,8 @@ exports.seed = async function (knex) {
       imageUrl:
         '["https://images.unsplash.com/photo-1589114471223-dec0d8d572c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"]',
       //Hard-coded for seed data,
-      dateCreated: '2022-07-12 06:38:14',
       expiry: '2022-07-19 06:38:14',
-      availability: 'yes',
+      availability: 'Yes',
       userId: '2',
     },
 
@@ -46,9 +44,8 @@ exports.seed = async function (knex) {
       imageUrl:
         '["https://images.themodernproper.com/billowy-turkey/production/posts/2020/Chicken-Empanada-14.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1599768574&s=e3b5e8fe53c559c704cad71e33d367e5"]',
       //Hard-coded for seed data,
-      dateCreated: '2022-07-13 06:38:14',
       expiry: '2022-07-20 06:38:14',
-      availability: 'no',
+      availability: 'No',
       userId: '3',
     },
   ])
