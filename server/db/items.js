@@ -25,22 +25,39 @@ function getItemsByUserId(userId, db = connection) {
     .where('users.id', userId)
 }
 
-// //name location allergens posted expiry description availability
-// function insertItem(item, db = connection) {
-//   return db('items').insert({
-//     itemName,
-//     allergens,
-//     description,
-//     dateCreated,
-//     expiry,
-//     availability,
-//   })
-// }
+function insertItem(items, db = connection) {
+  const newItem = {
+    itemName: items.itemName,
+    allergens: items.allergens,
+    description: items.description,
+    dateCreated: items.dateCreated,
+    expiry: items.expiry,
+    availability: items.availability,
+    userId: items.userId,
+  }
+  return db('items').insert(newItem)
+}
 
-// getItemsWithUserDetails()
+function updateItem(items, id, db = connection) {
+  const updatedItem = {
+    itemName: items.itemName,
+    allergens: items.allergens,
+    description: items.description,
+    dateCreated: items.dateCreated,
+    expiry: items.expiry,
+    availability: items.availability,
+  }
+  return db('items').update(updatedItem).where('id', id)
+}
+
+function deleteItem(id, db = connection) {
+  return db('items').del().where({ id })
+}
 
 module.exports = {
   getAllItems,
   getItemsByUserId,
-  // insertItem,
+  insertItem,
+  updateItem,
+  deleteItem,
 }

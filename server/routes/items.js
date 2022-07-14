@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 
-
 const db = require('../db/items')
 // const {checkJwt} = require('../utils')
 
@@ -12,28 +11,13 @@ router.get('/', (req, res) => {
       res.json(items)
     })
     .catch((err) => {
-      console.log(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })
 
 // GET an item by the user ID
 router.get('/:Id', (req, res) => {
-  // const userId = req.user?.sub
   const userId = req.params.Id
-  // const { userId } = req.body
-  db.getItemsByUserId(userId)
-    .then((userItems) => {
-      res.json(userItems)
-    })
-    .catch((err) => {
-      res.status(500).send({ message: 'Something went wrong' })
-    })
-})
-
-// GET items by user ID
-router.get('/', (req, res) => {
-  const userId = req.user?.sub
   db.getItemsByUserId(userId)
     .then((userItems) => {
       res.json(userItems)
@@ -44,27 +28,45 @@ router.get('/', (req, res) => {
 })
 
 // POST items (by the user)
-//router.post('/', checkJwt, (req, res) => {
-// const {userId, content} = req.body
-// const auth0Id = req.user?.sub
-// const newItem = {
-// userId,
-// ((from pets n pats authorId: auth0Id -- unsure what to change it to this second))
-// content,
-//}
-// db.insertItem(newItem)
-//.then(() => {
-//  return res.status(200).send({message: 'Successful})
-//})
-//.catch((err) => {
-// res.status(500).send(err.message)
-//})
-//})
+//checkJwt
+router.post('/', (req, res) => {
+  const newItem = req.body
+  return db
+    .insertItem(newItem)
+    .then((newItem) => {
+      return res.json(newItem)
+    })
+    .catch((err) => {
+      res.status(500).send({ message: 'Something went wrong' })
+    })
+})
 
 // PATCH item
-// router.patch('/', checkJwt, (req, res) => {})
+//checkJwt
+router.patch('/', (req, res) => {
+  const { id, ...updatedItem } = req.body
+  return db
+    .updateItem(updatedItem, id)
+    .then((patchItem) => {
+      return res.json(patchItem)
+    })
+    .catch((err) => {
+      res.status(500).send({ message: 'Something went wrong' })
+    })
+})
 
 // DELETE item
-// router.delete('/', checkJwt, (req, res) => {})
+//checkJwt
+router.delete('/', (req, res) => {
+  const { id } = req.body
+  return db
+    .deleteItem(id)
+    .then(() => {
+      res.status(200).send('Deleted')
+    })
+    .catch((err) => {
+      res.status(500).send('err' + err.message)
+    })
+})
 
 module.exports = router
