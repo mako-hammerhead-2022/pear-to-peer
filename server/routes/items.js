@@ -61,32 +61,30 @@ router.post('/', (req, res) => {
 // PATCH item
 //checkJwt
 
-// router.patch('/', (req, res) => {
-//   const itemUpdated = req.body
-//   // const updatedItem = {
-//   //   availability,
-//   // }
-//   console.log('this is route', itemUpdated)
-//   return db
-//     .updateItem(itemUpdated)
-//     .then((itemUpdated) => {
-//       return res.json(itemUpdated)
-//       return null
-//     })
-//     .catch((err) => {
-//       res.status(500).send(err.message)
-//     })
-// })
-
-router.patch('/:id', (req, res) => {
-  const itemId = req.params.id
-  const item = req.body
-  db.updateItem(itemId, item).catch((err) => {
-    res.status(500).send(err.message)
-  })
+router.patch('/', (req, res) => {
+  const { id, ...updatedItem } = req.body
+  return db
+    .updateItem(updatedItem, id)
+    .then((patchItem) => {
+      return res.json(patchItem)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send(err.message)
+    })
 })
 
+// PATCH TRIAL NUMBER 2
+// router.patch('/:id', (req, res) => {
+//   const itemId = req.params.id
+//   const item = req.body
+//   db.updateItem(itemId, item).catch((err) => {
+//     res.status(500).send(err.message)
+//   })
+// })
+
 // DELETE item
-// router.delete('/', checkJwt, (req, res) => {})
+//checkJwt
+// router.patch('/', (req, res) => {})
 
 module.exports = router
