@@ -19,14 +19,17 @@ router.post('/', async (req, res) => {
   const newUser = req.body
   // TODO: const auth0Id = req.user?.sub
   // TODO: get fields you want
-  const { auth0Id, email, name } = newUser
+  const { auth0Id, email, name, username, postcode } = newUser
   const user = {
     auth0Id,
     email,
     name,
+    username,
+    postcode,
   }
   try {
-    await db.createUser(user)
+    const created = await db.createUser(user)
+    console.log('created', created)
     res.sendStatus(201)
   } catch (err) {
     console.error(err)

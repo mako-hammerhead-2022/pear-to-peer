@@ -7,12 +7,15 @@ const initialState = {
   token: '',
 }
 
-export const postNewUser = createAsyncThunk('users/postNew', async (user) => {
-  console.log('dispatched postNewUser')
-  const response = await addUser(user)
-  console.log('addUser response', response)
-  return response
-})
+export const postNewUser = createAsyncThunk(
+  'userData/postNew',
+  async (user) => {
+    console.log('dispatched postNewUser')
+    const response = await addUser(user)
+    console.log('addUser response', response)
+    return response
+  }
+)
 
 export const usersSlice = createSlice({
   name: 'userData',
