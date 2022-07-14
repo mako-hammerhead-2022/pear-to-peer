@@ -27,19 +27,28 @@ export default function Nav() {
   return (
     <>
       <VStack>
-        <IfAuthenticated>
-          <Link as={ReactLink} to='/' onClick={handleLogoff}>
-            Log Off
-          </Link>
-        </IfAuthenticated>
-        <IfNotAuthenticated>
-          <Link as={ReactLink} to='/' onClick={handleRegister}>
-            Register
-          </Link>
-          <Link as={ReactLink} to='/' onClick={handleSignIn}>
-            Sign In
-          </Link>
-        </IfNotAuthenticated>
+        {/* <IfAuthenticated> */}
+        <Link as={ReactLink} to='/aboutus'>
+          About Us
+        </Link>
+        <Link as={ReactLink} to='/home'>
+          Home
+        </Link>
+        <Link as={ReactLink} to='/profile'>
+          Profile
+        </Link>
+        <Link as={ReactLink} to='/' onClick={handleLogoff}>
+          Log Off
+        </Link>
+        {/* </IfAuthenticated>
+        <IfNotAuthenticated> */}
+        <Link as={ReactLink} to='/' onClick={handleRegister}>
+          Register
+        </Link>
+        <Link as={ReactLink} to='/' onClick={handleSignIn}>
+          Sign In
+        </Link>
+        {/* </IfNotAuthenticated> */}
       </VStack>
     </>
   )
