@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../apiClient/items'
 import { Formik, Form, Field } from 'formik'
 import {
@@ -11,8 +11,10 @@ import {
   Textarea,
   FormControl,
 } from '@chakra-ui/react'
+import { postNewItem } from '../slices/itemSlice'
 
 export function AddItemForm() {
+  const dispatch = useDispatch()
   const item = useSelector((state) => state.itemData)
   //const [itemForm, setItemForm] = useState([])
 
@@ -23,16 +25,17 @@ export function AddItemForm() {
   //   [item]
   // )
 
-  async function handleSubmit(formData) {
+  function handleSubmit(formData) {
     console.log('submitting', formData)
-    // const itemToAdd = {
-    //   itemName: item.itemName,
-    //   allergens: item.allergens,
-    //   descripton: item.description,
-    //   expiry: item.expiry,
-    //   availability: item.availability,
-    // }
-    // await addNewItem(itemForm)
+    const itemToAdd = {
+      itemName: formData.itemName,
+      allergens: formData.allergens,
+      descripton: formData.description,
+      image: formData.image,
+      expiry: formData.expiry,
+      availability: formData.availability,
+    }
+    dispatch(postNewItem(itemToAdd))
   }
 
   return (
@@ -41,7 +44,7 @@ export function AddItemForm() {
         itemName: '',
         allergens: '',
         description: '',
-        image: '',
+        image: null,
         availability: 'yes',
       }}
       onSubmit={(values) => {
@@ -49,8 +52,7 @@ export function AddItemForm() {
       }}
     >
       {(props) => {
-        const { itemName, allergens, description, image, availability } =
-          props.values
+        const { availability } = props.values
         return (
           <Form>
             <Field name='itemName'>
@@ -80,17 +82,18 @@ export function AddItemForm() {
               )}
             </Field>
             <Field name='image'>
-              {({ field }) => (
+              {() => (
                 <FormControl>
                   <FormLabel htmlFor='image'>Upload image:</FormLabel>
                   <Input
-                    {...field}
                     type='file'
                     name='image'
                     id='image'
                     accept='image/*'
                     multiple
-                    // onChange={handleFileChange}
+                    onChange={(e) =>
+                      props.setFieldValue('image', e.currentTarget.files[0])
+                    }
                   />
                 </FormControl>
               )}
@@ -99,21 +102,18 @@ export function AddItemForm() {
             <FormLabel htmlFor='availability'>
               Is this item available?
             </FormLabel>
-            <Field name='itemName'>
+            <Field name='availability'>
               {({ field }) => (
                 <FormControl>
                   <Select
+                    {...field}
                     name='availability'
                     id='availability'
-                    defaultValue={availability}
+                    value={availability}
                     required
                   >
-                    <option {...field} value='yes'>
-                      Yes
-                    </option>
-                    <option {...field} value='no'>
-                      No
-                    </option>
+                    <option value='yes'>Yes</option>
+                    <option value='no'>No</option>
                   </Select>
                 </FormControl>
               )}
