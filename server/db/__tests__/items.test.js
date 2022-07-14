@@ -41,7 +41,6 @@ describe('addNewItem', () => {
       allergens: JSON.stringify(['None']),
       description: 'Spicy jalapenos yum yum',
       expiry: new Date().setDate(new Date().getDate() + 7), // timestamp
-      //expiry: new Date(new Date().setDate(new Date().getDate() + 7)), // date
       imageUrl: JSON.stringify([
         'https://images.themodernproper.com/billowy-turkey/production/posts/2020/Chicken-Empanada-14.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1599768574&s=e3b5e8fe53c559c704cad71e33d367e5',
       ]),
@@ -55,10 +54,10 @@ describe('addNewItem', () => {
         updatedAt: expect.anything(),
         id: 4,
       })
-
-      // Object.keys(dbNewItem).forEach((key) => {
-      //   expect(acutalItem[key]).toEqual(dbNewItem[key])
-      // })
     })
   })
+})
+
+describe('updateItemAvailability', () => {
+  it('updates the availability of an item')
 })
