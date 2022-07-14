@@ -13,6 +13,7 @@ const db = require('../../db/items')
 
 vi.spyOn(db, 'getAllItems')
 vi.spyOn(db, 'getItemsByUserId')
+vi.spyOn(db, 'insertItem')
 
 afterAll(() => {
   vi.restoreAllMocks()
@@ -43,6 +44,34 @@ describe('GET /api/items/userId', () => {
     )
 
     const res = await request(server).get('/api/items/1')
+
+    expect(res.status).toBe(200)
+    expect(res.body).toHaveLength(1)
+    expect(res.body[0].userId).toBe(1)
+  })
+})
+
+describe('POST /api/items/', () => {
+  it('adds a new item from the user', async () => {
+    db.insertItem.mockReturnValue(
+      Promise.resolve([
+        {
+          itemsId: 2,
+          userId: 2,
+          username: 'testUser',
+          postcode: 8000,
+          itemName: 'testItem',
+          allergens: 'testAllergen',
+          description: 'testDescription',
+          imageUrl: 'testURL.co.nz',
+          dateCreated: '2022-03-10 08:24:03',
+          expiry: '2022-31-12 00:00:00',
+          availability: 'yes',
+        },
+      ])
+    )
+
+    const res = await request(server).get('/api/items/:id')
 
     expect(res.status).toBe(200)
   })
