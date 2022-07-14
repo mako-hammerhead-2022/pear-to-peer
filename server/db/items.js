@@ -26,7 +26,6 @@ function getItemsByUserId(userId, db = connection) {
 }
 
 function insertItem(items, db = connection) {
-  console.log('insertedItem is', items)
   const newItem = {
     itemName: items.itemName,
     allergens: items.allergens,
@@ -40,7 +39,6 @@ function insertItem(items, db = connection) {
 }
 
 function updateItem(items, id, db = connection) {
-  console.log('items is', items, id)
   const updatedItem = {
     itemName: items.itemName,
     allergens: items.allergens,
@@ -49,15 +47,17 @@ function updateItem(items, id, db = connection) {
     expiry: items.expiry,
     availability: items.availability,
   }
-  console.log('item updated is', updatedItem)
   return db('items').update(updatedItem).where('id', id)
 }
 
-// getItemsWithUserDetails()
+function deleteItem(id, db = connection) {
+  return db('items').del().where({ id })
+}
 
 module.exports = {
   getAllItems,
   getItemsByUserId,
   insertItem,
   updateItem,
+  deleteItem,
 }

@@ -11,19 +11,15 @@ router.get('/', (req, res) => {
       res.json(items)
     })
     .catch((err) => {
-      console.log(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })
 
 // GET an item by the user ID
 router.get('/:Id', (req, res) => {
-  // const userId = req.user?.sub
   const userId = req.params.Id
-  // const { userId } = req.body
   db.getItemsByUserId(userId)
     .then((userItems) => {
-      console.log('user items is', userItems)
       res.json(userItems)
     })
     .catch((err) => {
@@ -31,36 +27,22 @@ router.get('/:Id', (req, res) => {
     })
 })
 
-// GET items by user ID
-// router.get('/', (req, res) => {
-//   const userId = req.user?.sub
-//   db.getItemsByUserId(userId)
-//     .then((userItems) => {
-//       res.json(userItems)
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: 'Something went wrong' })
-//     })
-// })
-
 // POST items (by the user)
 //checkJwt
 router.post('/', (req, res) => {
   const newItem = req.body
-  console.log(newItem)
   return db
     .insertItem(newItem)
     .then((newItem) => {
       return res.json(newItem)
     })
     .catch((err) => {
-      res.status(500).send(err.message)
+      res.status(500).send({ message: 'Something went wrong' })
     })
 })
 
 // PATCH item
 //checkJwt
-
 router.patch('/', (req, res) => {
   const { id, ...updatedItem } = req.body
   return db
@@ -69,22 +51,22 @@ router.patch('/', (req, res) => {
       return res.json(patchItem)
     })
     .catch((err) => {
-      console.log(err)
-      res.status(500).send(err.message)
+      res.status(500).send({ message: 'Something went wrong' })
     })
 })
 
-// PATCH TRIAL NUMBER 2
-// router.patch('/:id', (req, res) => {
-//   const itemId = req.params.id
-//   const item = req.body
-//   db.updateItem(itemId, item).catch((err) => {
-//     res.status(500).send(err.message)
-//   })
-// })
-
 // DELETE item
 //checkJwt
-// router.patch('/', (req, res) => {})
+router.delete('/', (req, res) => {
+  const { id } = req.body
+  return db
+    .deleteItem(id)
+    .then(() => {
+      res.status(200).send('Deleted')
+    })
+    .catch((err) => {
+      res.status(500).send('err' + err.message)
+    })
+})
 
 module.exports = router
