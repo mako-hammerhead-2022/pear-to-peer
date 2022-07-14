@@ -5,7 +5,6 @@ export function getAllUsers() {
 }
 
 export function addUser(user) {
-  console.log('apiClient', user)
   return request.post(`/api/users/`).send(user).catch(logError)
 }
 
