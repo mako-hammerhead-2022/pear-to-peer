@@ -4,17 +4,26 @@ const request = require('supertest')
 const server = require('../../server')
 const db = require('../../db/items')
 
-vi.spyOn(db, 'getAllItems')
+vi.spyOn(db, 'getAllItemsWithUserInfo')
 vi.spyOn(db, 'getItemsByUserId')
 vi.spyOn(db, 'insertItem')
 
+beforeAll(() => {
+  vi.spyOn(console, 'error')
+  console.error.mockImplementation(() => {})
+  // checkJwt.mockImplementation((req, res, next) => {
+  //   next()
+  // })
+})
+
 afterAll(() => {
+  console.error.mockRestore()
   vi.restoreAllMocks()
 })
 
 describe('GET /api/items', () => {
   it('returns an array of items', async () => {
-    db.getAllItems.mockReturnValue(
+    db.getAllItemsWithUserInfo.mockReturnValue(
       Promise.resolve([
         { id: 1, itemName: 'Hummus' },
         { id: 2, itemName: 'Scones' },

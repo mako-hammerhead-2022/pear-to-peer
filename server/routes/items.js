@@ -33,6 +33,7 @@ router.get('/', (req, res) => {
       res.json(items)
     })
     .catch((err) => {
+      console.error(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })
