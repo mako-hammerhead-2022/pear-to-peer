@@ -11,7 +11,7 @@ const REGION = 'ap-southeast-2'
 const URL_EXPIRATION_TIME = 60 // in seconds
 
 const myBucket = new AWS.S3({
-  params: {Bucket: S3_BUCKET },
+  params: { ACL: 'public-read', Bucket: S3_BUCKET },
   region: REGION,
 })
 

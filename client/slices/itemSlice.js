@@ -20,9 +20,10 @@ export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
 })
 
 export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
+  console.log('itemToPost', item)
   const response = await addItem(item)
   console.log('addItem response', response)
-  return response
+  return response.body
 })
 
 export const itemSlice = createSlice({
@@ -44,7 +45,7 @@ export const itemSlice = createSlice({
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
       console.log('postItemPayload', payload)
-      return { ...state, items: payload }
+      return { ...state, items: [...state.items, payload] }
     },
   },
 })

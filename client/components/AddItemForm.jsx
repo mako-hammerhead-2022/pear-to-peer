@@ -10,6 +10,8 @@ import {
   Select,
   Textarea,
   FormControl,
+  NumberInputField,
+  NumberInput,
 } from '@chakra-ui/react'
 import { postNewItem } from '../slices/itemSlice'
 
@@ -26,9 +28,9 @@ export function AddItemForm() {
     console.log('imageUrl', imageUrl)
     const itemToAdd = {
       itemName: formData.itemName,
-      allergens: formData.allergens,
-      descripton: formData.description,
-      image: JSON.stringify([imageUrl]),
+      allergens: JSON.stringify([formData.allergens]),
+      description: formData.description,
+      image: imageUrl,
       expiry: formData.expiry,
       availability: formData.availability,
     }
@@ -39,10 +41,11 @@ export function AddItemForm() {
     <Formik
       initialValues={{
         itemName: '',
+        expiry: null,
         allergens: '',
         description: '',
         image: null,
-        availability: 'yes',
+        availability: 'Yes',
       }}
       onSubmit={(values) => {
         handleSubmit(values)
@@ -57,6 +60,16 @@ export function AddItemForm() {
                 <FormControl>
                   <FormLabel htmlFor='itemName'>Item Name:</FormLabel>
                   <Input {...field} type='text' id='itemName' required />
+                </FormControl>
+              )}
+            </Field>
+            <Field name='expiry'>
+              {({ field }) => (
+                <FormControl isRequired>
+                  <FormLabel htmlFor='expiry'>Expires after (days):</FormLabel>
+                  <NumberInput id='expiry' min={1} max={14}>
+                    <NumberInputField {...field} id='expiry' required />
+                  </NumberInput>
                 </FormControl>
               )}
             </Field>
@@ -108,8 +121,8 @@ export function AddItemForm() {
                     value={availability}
                     required
                   >
-                    <option value='yes'>Yes</option>
-                    <option value='no'>No</option>
+                    <option value='Yes'>Yes</option>
+                    <option value='No'>No</option>
                   </Select>
                 </FormControl>
               )}
