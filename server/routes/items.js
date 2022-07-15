@@ -15,6 +15,18 @@ const db = require('../db/items')
 //     })
 // })
 
+// GET single item with user info
+// router.get('/', (req, res) => {
+//   db.getItemByIdWithUserInfo()
+//     .then((item) => {
+//       res.json(item)
+//     })
+//     .catch((err) => {
+//       res.status(500).send({ message: 'Something went wrong' })
+//     })
+// })
+
+// GET all items with user info
 router.get('/', (req, res) => {
   db.getAllItemsWithUserInfo()
     .then((items) => {
@@ -66,7 +78,7 @@ router.patch('/', (req, res) => {
 })
 
 // DELETE item
-//checkJwt
+// checkJwt
 router.delete('/', (req, res) => {
   const { id } = req.body
   return db

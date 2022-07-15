@@ -1,16 +1,18 @@
 import React from 'react'
 import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
+import { Link as ReactLink } from 'react-router-dom'
 
 export default function FoodItemTile(props) {
   const {
+    itemsId,
     imageUrl,
     itemName,
     allergens,
     username,
     // description,
     postcode,
-    expiry,
-    availability,
+    // expiry,
+    // availability,
   } = props.data
 
   return (
@@ -21,7 +23,9 @@ export default function FoodItemTile(props) {
         <Text>Allergens: {JSON.parse(allergens).join(', ')}</Text>
         <Text>Posted By: {username}</Text>
         <Text>Location: {postcode}</Text>
-        <Button>View More</Button>
+        <ReactLink to={`/item/${itemsId}`}>
+          <Button>View More</Button>
+        </ReactLink>
         {/* <Text>{expiry}</Text> */}
         {/* <Text>{availability}</Text> */}
       </Box>
