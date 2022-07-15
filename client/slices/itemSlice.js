@@ -45,7 +45,7 @@ export const itemSlice = createSlice({
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
       console.log('postItemPayload', payload)
-      return [...state, payload]
+      return { ...state, items: [...state.items, payload] }
     },
   },
 })

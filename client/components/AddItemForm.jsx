@@ -28,9 +28,9 @@ export function AddItemForm() {
     console.log('imageUrl', imageUrl)
     const itemToAdd = {
       itemName: formData.itemName,
-      allergens: JSON.stringify(formData.allergens),
+      allergens: JSON.stringify([formData.allergens]),
       description: formData.description,
-      image: JSON.stringify([imageUrl]),
+      image: imageUrl,
       expiry: formData.expiry,
       availability: formData.availability,
     }
