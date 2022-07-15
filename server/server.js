@@ -11,6 +11,9 @@ server.use(express.json())
 server.use('/api/items', require('./routes/items'))
 server.use('/api/users', require('./routes/users'))
 server.use('/api/image', require('./routes/image'))
+server.use('/api/*', (req, res) =>
+  res.status(400).send('API route does not exist')
+)
 
 server.get('*', (req, res) => {
   try {

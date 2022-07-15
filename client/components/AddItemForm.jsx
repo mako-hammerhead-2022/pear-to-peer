@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 import { addItem, getImageUrl } from '../apiClient/items'
 import { Formik, Form, Field } from 'formik'
 import {
@@ -18,12 +19,16 @@ import { postNewItem } from '../slices/itemSlice'
 export function AddItemForm() {
   const dispatch = useDispatch()
   const item = useSelector((state) => state.itemData)
+  const { getAccessTokenSilently } = useAuth0()
 
   async function handleSubmit(formData) {
     console.log('formData', formData)
     console.log('file', formData.image)
 
-    const imageUrl = await getImageUrl(formData.image)
+    const imageUrl = await getImageUrl(
+      formData.image,
+      await getAccessTokenSilently()
+    )
 
     console.log('imageUrl', imageUrl)
     const itemToAdd = {

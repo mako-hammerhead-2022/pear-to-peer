@@ -11,8 +11,7 @@ export function getAllItemsWithUserInfo() {
 export function addItem(item) {
   return request.post(`/api/items`).send(item).catch(logError)
 }
-// export async function getImageUrl(file, token) {
-export async function getImageUrl(file) {
+export async function getImageUrl(file, token) {
   const fileObject = {
     fileName: file.name,
     fileType: file.type,
@@ -20,7 +19,7 @@ export async function getImageUrl(file) {
   console.log('getImageUrl', fileObject)
   const { signedUrl } = await request
     .post('/api/image')
-    //.set('authorization', `Bearer ${token})
+    .set('authorization', `Bearer ${token}`)
     .send(fileObject)
     .then((res) => res.body)
 
