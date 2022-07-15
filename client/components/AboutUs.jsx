@@ -1,17 +1,12 @@
 import React from 'react'
 import { Heading, Text, Box, Image, Spacer } from '@chakra-ui/react'
+import pear from '@/images/pear.png'
 
 export default function AboutUs() {
   return (
     <Box w='60%'>
       <Heading>About Us</Heading>
-      <Image
-        borderRadius='full'
-        src={
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Pears.jpg/220px-Pears.jpg'
-        }
-        alt={'Pear Tree'}
-      />
+      <Image borderRadius='full' src={pear} alt={'Pear Tree'} />
       <Text>
         Pear 2 Peer is a community focused food sharing initiative which was
         established to help those in need and bring people in the community
