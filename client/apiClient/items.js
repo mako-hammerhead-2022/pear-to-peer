@@ -1,6 +1,10 @@
 import request from 'superagent'
 
-export function getAllItems() {
+// export function getAllItems() {
+//   return request.get('/api/items/').then((res) => res.body)
+// }
+
+export function getAllItemsWithUserInfo() {
   return request.get('/api/items/').then((res) => res.body)
 }
 

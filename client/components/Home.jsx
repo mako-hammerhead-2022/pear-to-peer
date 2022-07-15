@@ -11,7 +11,6 @@ export default function Home() {
   const items = useSelector((state) => state.itemData.items)
 
   const dispatch = useDispatch()
-  console.log('items', items)
 
   useEffect(() => {
     dispatch(fetchAllItems())
@@ -20,10 +19,10 @@ export default function Home() {
   return (
     <Container>
       <Heading>ITEMS ARE HERE</Heading>
-      <Grid templateColumns='repeat(4, 1fr)'>
+      <Grid templateColumns='repeat(4, 1fr)' gap={6}>
         {items.map((item) => {
           return (
-            <GridItem gap='50px'>
+            <GridItem>
               <FoodItemTile key={item.id} data={item} />
             </GridItem>
           )

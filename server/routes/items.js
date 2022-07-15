@@ -5,8 +5,18 @@ const db = require('../db/items')
 // const {checkJwt} = require('../utils')
 
 // GET all items
+// router.get('/', (req, res) => {
+//   db.getAllItems()
+//     .then((items) => {
+//       res.json(items)
+//     })
+//     .catch((err) => {
+//       res.status(500).send({ message: 'Something went wrong' })
+//     })
+// })
+
 router.get('/', (req, res) => {
-  db.getAllItems()
+  db.getAllItemsWithUserInfo()
     .then((items) => {
       res.json(items)
     })

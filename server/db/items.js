@@ -6,6 +6,23 @@ function getAllItems(db = connection) {
   return db('items').select()
 }
 
+function getAllItemsWithUserInfo(db = connection) {
+  return db('items')
+    .join('users', 'items.userId', 'users.id')
+    .select(
+      'items.id as itemsId',
+      'users.id as userId',
+      'username',
+      'postcode',
+      'itemName',
+      'allergens',
+      'description',
+      'imageUrl',
+      'expiry',
+      'availability'
+    )
+}
+
 function getItemsByUserId(userId, db = connection) {
   return db('items')
     .join('users', 'items.userId', 'users.id')
@@ -65,4 +82,5 @@ module.exports = {
   insertItem,
   updateItem,
   deleteItem,
+  getAllItemsWithUserInfo,
 }

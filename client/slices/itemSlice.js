@@ -1,10 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getAllItems, addItem } from '@/apiClient/items'
+import {
+  // getAllItems,
+  addItem,
+  getAllItemsWithUserInfo,
+} from '@/apiClient/items'
 
 const initialState = { items: [] }
 
+// export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
+//   const response = await getAllItems()
+//   console.log('response is', response)
+//   return response
+// })
+
 export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
-  const response = await getAllItems()
+  const response = await getAllItemsWithUserInfo()
   console.log('response is', response)
   return response
 })
