@@ -31,7 +31,6 @@ export default function Register() {
   }, [user])
 
   function handleSubmit(formData) {
-    console.log('handleSubmit', formData)
     const userToSave = {
       ...formData,
       auth0Id: user.auth0Id,
@@ -69,7 +68,6 @@ export default function Register() {
         >
           {(props) => (
             <Form>
-              {console.log('props', props)}
               <Field name='auth0Id'>
                 {({ field, form }) => (
                   <FormControl>
