@@ -13,7 +13,7 @@ export const postNewUser = createAsyncThunk(
     console.log('dispatched postNewUser')
     const response = await addUser(user)
     console.log('addUser response', response)
-    return response
+    return response.body
   }
 )
 

@@ -30,7 +30,16 @@ router.get('/:Id', (req, res) => {
 // POST items (by the user)
 //checkJwt
 router.post('/', (req, res) => {
-  const newItem = req.body
+  const newItem = {
+    itemName: req.body.itemName,
+    allergens: req.body.allergens,
+    description: req.body.description,
+    imageUrl: req.body.image,
+    expiry: req.body.expiry,
+    availability: req.body.availability,
+    userId: 1, //TODO: change this
+  }
+  console.log('adding item to db', newItem)
   return db
     .insertItem(newItem)
     .then((newItem) => {

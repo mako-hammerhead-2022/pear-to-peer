@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { addItem } from '@/apiClient/items'
 
-const initialState = {}
+const initialState = []
 
 export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
+  console.log('itemToPost', item)
   const response = await addItem(item)
   console.log('addItem response', response)
-  return response
+  return response.body
 })
 
 export const itemSlice = createSlice({
@@ -21,7 +22,7 @@ export const itemSlice = createSlice({
   extraReducers: {
     [postNewItem.fulfilled]: (state, { payload }) => {
       console.log('postItemPayload', payload)
-      return { ...state, items: payload }
+      return [...state, payload]
     },
   },
 })
