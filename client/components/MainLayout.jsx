@@ -18,13 +18,13 @@ export default function MainLayout() {
       w='100vw'
       gap='1'
     >
-      <GridItem pl='2' bg='green.300' area={'header'}>
+      <GridItem pl='2' bg='#f2f2f2' area={'header'}>
         <Header />
       </GridItem>
-      <GridItem pl='2' bg='blue.300' area={'nav'}>
+      <GridItem pl='2' bg='#7DA97A' area={'nav'}>
         <Nav />
       </GridItem>
-      <GridItem pl='2' bg='red.300' area={'main'}>
+      <GridItem pl='2' bg='#1D6638' area={'main'}>
         <Outlet />
       </GridItem>
       {/* <h1>Pear to Peer</h1> */}
