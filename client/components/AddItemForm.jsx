@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../apiClient/items'
+import { addItem, getImageUrl } from '../apiClient/items'
 import { Formik, Form, Field } from 'formik'
 import {
   FormLabel,
@@ -16,22 +16,19 @@ import { postNewItem } from '../slices/itemSlice'
 export function AddItemForm() {
   const dispatch = useDispatch()
   const item = useSelector((state) => state.itemData)
-  //const [itemForm, setItemForm] = useState([])
 
-  // useEffect(
-  //   (items) => {
-  //     setItemForm(items)
-  //   },
-  //   [item]
-  // )
+  async function handleSubmit(formData) {
+    console.log('formData', formData)
+    console.log('file', formData.image)
 
-  function handleSubmit(formData) {
-    console.log('submitting', formData)
+    const imageUrl = await getImageUrl(formData.image)
+
+    console.log('imageUrl', imageUrl)
     const itemToAdd = {
       itemName: formData.itemName,
       allergens: formData.allergens,
       descripton: formData.description,
-      image: formData.image,
+      image: JSON.stringify([imageUrl]),
       expiry: formData.expiry,
       availability: formData.availability,
     }
@@ -90,7 +87,6 @@ export function AddItemForm() {
                     name='image'
                     id='image'
                     accept='image/*'
-                    multiple
                     onChange={(e) =>
                       props.setFieldValue('image', e.currentTarget.files[0])
                     }

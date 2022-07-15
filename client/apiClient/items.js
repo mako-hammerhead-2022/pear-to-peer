@@ -7,6 +7,26 @@ export function getAllItems() {
 export function addItem(item) {
   return request.post(`/api/items`).send(item).catch(logError)
 }
+// export async function getImageUrl(file, token) {
+export async function getImageUrl(file) {
+  const fileObject = {
+    fileName: file.name,
+    fileType: file.type,
+  }
+  console.log('getImageUrl', fileObject)
+  const { signedUrl } = await request
+    .post('/api/image')
+    //.set('authorization', `Bearer ${token})
+    .send(fileObject)
+    .then((res) => res.body)
+
+  return request
+    .put(signedUrl)
+    .send(file)
+    .then(() => {
+      return signedUrl.split('?')[0]
+    })
+}
 
 function logError(err) {
   if (err.message === 'Forbidden') {
