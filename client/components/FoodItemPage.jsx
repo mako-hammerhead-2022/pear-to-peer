@@ -17,18 +17,18 @@ export default function FoodItemPage(props) {
   const item = items.find((item) => {
     return item.itemsId == productId.id
   })
-
+  if (!item) return <p>Loading...</p>
   return (
     <>
-      <h1>Food Item</h1>
-
       <Container>
-        <Image src={item.imageUrl} />
-        <Heading>{item.itemName}</Heading>
-        <Text>Allergens: {JSON.parse(item.allergens).join(', ')}</Text>
-        <Text>Description: {item.description}</Text>
-        <Text>Expiry: {item.expiry}</Text>
-        <Text>Availability: {item.availability}</Text>
+        <Image src={item?.imageUrl} />
+        <Heading>{item?.itemName}</Heading>
+        <Text>Allergens: {JSON.parse(item?.allergens).join(', ')}</Text>
+        <Text>Description: {item?.description}</Text>
+        <Text>Expiry: {item?.expiry}</Text>
+        <Text>Availability: {item?.availability}</Text>
+        <Text>Location: {item?.postcode}</Text>
+        <Text>User: {item?.username}</Text>
         <Button>Add Comment</Button>
       </Container>
     </>
