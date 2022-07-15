@@ -6,6 +6,23 @@ function getAllItems(db = connection) {
   return db('items').select()
 }
 
+function getAllItemsWithUserInfo(db = connection) {
+  return db('items')
+    .join('users', 'items.userId', 'users.id')
+    .select(
+      'items.id as itemsId',
+      'users.id as userId',
+      'username',
+      'postcode',
+      'itemName',
+      'allergens',
+      'description',
+      'imageUrl',
+      'expiry',
+      'availability'
+    )
+}
+
 function getItemsByUserId(userId, db = connection) {
   return db('items')
     .join('users', 'items.userId', 'users.id')
@@ -22,6 +39,24 @@ function getItemsByUserId(userId, db = connection) {
       'availability'
     )
     .where('users.id', userId)
+}
+
+function getItemByIdWithUserInfo(itemId, db = connection) {
+  return db('items')
+    .join('users', 'items.userId', 'users.id')
+    .select(
+      'items.id as itemsId',
+      'users.id as userId',
+      'username',
+      'postcode',
+      'itemName',
+      'allergens',
+      'description',
+      'imageUrl',
+      'expiry',
+      'availability'
+    )
+    .where('item.id', itemId)
 }
 
 function getItemById(id, db = connection) {
@@ -65,4 +100,6 @@ module.exports = {
   insertItem,
   updateItem,
   deleteItem,
+  getAllItemsWithUserInfo,
+  getItemByIdWithUserInfo,
 }
