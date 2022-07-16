@@ -8,17 +8,17 @@ import { fetchComments } from '../slices/itemSlice'
 import AddCommentForm from './AddCommentForm'
 
 export default function Comments() {
-  const { id: itemId } = useParams()
+  const { id: itemsId } = useParams()
   const dispatch = useDispatch()
   const allItems = useSelector((state) => state.itemData.items)
   const [comments, setComments] = useState(null)
 
   useEffect(() => {
-    dispatch(fetchComments(itemId))
+    dispatch(fetchComments(itemsId))
   }, [])
 
   useEffect(() => {
-    setComments(allItems.find((item) => item.itemsId == itemId).comments)
+    setComments(allItems.find((item) => item.itemsId == itemsId).comments)
   }, [allItems])
 
   return (
@@ -36,7 +36,7 @@ export default function Comments() {
           })}
         </ul>
       )}
-      <AddCommentForm itemId={itemId} />
+      <AddCommentForm itemId={itemsId} />
     </>
   )
 }
