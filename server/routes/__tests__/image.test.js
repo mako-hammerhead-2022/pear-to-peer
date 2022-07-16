@@ -1,9 +1,13 @@
 import { vi } from 'vitest'
-import * as utils from '../../utils'
+const { checkJwt, generatePreSignedPutUrl } = require('../../utils')
 
 const request = require('supertest')
 const server = require('../../server')
 
+const checkJWT = { checkJwt }
+const generate = { generatePreSignedPutUrl }
+
+// const utils = { checkJwt, generatePreSignedPutUrl }
 //export function checkJwt(req, res, next) {}
 
 // vi.mock('../../utils', () => {
@@ -14,17 +18,17 @@ const server = require('../../server')
 //   }
 // })
 
-vi.spyOn(utils, 'checkJwt').mockImplementation((req, res, next) => {
+vi.spyOn(checkJWT, 'checkJwt').mockImplementation((req, res, next) => {
   next()
 })
 
-vi.spyOn(utils, 'generatePreSignedUrl').mockReturnValue(
-  Promise.resolve('http://aws/image.jpg')
+vi.spyOn(generate, 'generatePreSignedPutUrl').mockImplementation(
+  Promise.resolve('image.jpg')
 )
 
 beforeAll(() => {
-  //   vi.spyOn(console, 'error')
-  //   console.error.mockImplementation(() => {})
+  // vi.spyOn(console, 'error')
+  // console.error.mockImplementation(() => {})
   // checkJwt.mockImplementation((req, res, next) => {
   //   next()
   // })
@@ -36,11 +40,12 @@ afterAll(() => {
 })
 
 describe('POST /api/image', () => {
-  it.skip('should return a url for the client to upload their image', async () => {
+  it('should return a url for the client to upload their image', async () => {
     const res = await request(server)
       .post('/api/image')
       .send({ fileName: 'image.jpg', fileType: 'jpg' })
+    console.log('test res is', res.body.signedUrl)
 
-    expect(res.body.signedUrl).toBe('image.jpg')
+    expect(Object.keys(res.body)).toContain('image.jpg')
   })
 })

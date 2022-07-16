@@ -25,7 +25,7 @@ export function AddItemForm() {
 
   const navigate = useNavigate()
   const { getAccessTokenSilently } = useAuth0()
-  console.log('user', id)
+
   useEffect(() => {
     dispatch(fetchUserByAuth0Id(auth0Id))
   }, [auth0Id])

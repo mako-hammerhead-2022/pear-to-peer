@@ -4,7 +4,8 @@ import {
   addItem,
   getAllItemsWithUserInfo,
   getAllItemsByUserId,
-  getItemByUserId,
+  updateItemAvailability,
+  // getItemById,
 } from '@/apiClient/items'
 import { getCommentsByItemId } from '@/apiClient/comments'
 // import {
@@ -46,8 +47,14 @@ export const fetchItemsByUserId = createAsyncThunk(
   }
 )
 
-export const updateItem = createAsyncThunk('items/updateItem', async (id) => {
-  const response = await getItemByUserId(id)
+// export const updateItem = createAsyncThunk('items/updateItem', async (item) => {
+//   const response = await getItemById(item)
+//   return response
+// })
+
+export const patchItem = createAsyncThunk('items/patchItem', async (item) => {
+  const response = await updateItemAvailability(item)
+
   return response
 })
 
@@ -104,6 +111,15 @@ export const itemSlice = createSlice({
                   : [payload],
               }
             : item
+        }),
+      }
+    },
+    [patchItem.fulfilled]: (state, { payload }) => {
+      console.log('pathc item fulfilled payload', payload)
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          return item.itemsId == payload.itemsId ? payload : item
         }),
       }
     },
