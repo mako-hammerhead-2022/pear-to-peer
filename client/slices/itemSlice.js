@@ -4,8 +4,13 @@ import {
   addItem,
   getAllItemsWithUserInfo,
   getAllItemsByUserId,
+  getItemByUserId,
 } from '@/apiClient/items'
 import { getCommentsByItemId } from '@/apiClient/comments'
+// import {
+//   getItemByIdWithUserInfo,
+//   getItemsByUserId,
+// } from '../../server/db/items'
 
 const initialState = { items: [] }
 
@@ -17,7 +22,6 @@ const initialState = { items: [] }
 
 export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
   const response = await getAllItemsWithUserInfo()
-  // console.log('response is', response)
   return response
 })
 
@@ -27,9 +31,7 @@ export const fetchComments = createAsyncThunk(
 )
 
 export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
-  // console.log('itemToPost', item)
   const response = await addItem(item)
-  // console.log('addItem response', response)
   return response.body
 })
 
@@ -38,10 +40,14 @@ export const fetchItemsByUserId = createAsyncThunk(
   'items/fetchUserItems',
   async (id) => {
     const response = await getAllItemsByUserId(id)
-    console.log('getitemsbyuserid', response)
     return response
   }
 )
+
+export const updateItem = createAsyncThunk('items/updateItem', async (id) => {
+  const response = await getItemByUserId(id)
+  return response
+})
 
 export const itemSlice = createSlice({
   name: 'itemData',
@@ -57,15 +63,12 @@ export const itemSlice = createSlice({
 
   extraReducers: {
     [fetchAllItems.fulfilled]: (state, { payload }) => {
-      console.log('payload', payload)
       return { ...state, items: payload }
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
-      console.log('postItemPayload', payload)
       return { ...state, items: [...state.items, payload] }
     },
     [fetchComments.fulfilled]: (state, { payload }) => {
-      console.log('fetchComments payload', payload)
       return {
         ...state,
         items: state.items.map((item) => {
@@ -76,7 +79,6 @@ export const itemSlice = createSlice({
       }
     },
     [fetchItemsByUserId.fulfilled]: (state, { payload }) => {
-      console.log('payload', payload)
       return { ...state, items: payload }
     },
   },

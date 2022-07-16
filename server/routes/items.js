@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
 
 // PATCH item
 //checkJwt
-router.patch('/', (req, res) => {
+router.patch('/:id', (req, res) => {
   const { id, ...updatedItem } = req.body
   return db
     .updateItem(updatedItem, id)

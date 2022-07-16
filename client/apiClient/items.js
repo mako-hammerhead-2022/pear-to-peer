@@ -16,6 +16,10 @@ export function getAllItemsByUserId(id) {
   return request.get(`/api/items/${id}`).then((res) => res.body)
 }
 
+export function getItemByUserId(id) {
+  return request.patch(`/api/items/update/${id}`).then((res) => res.body)
+}
+
 export async function getImageUrl(file, token) {
   const fileObject = {
     fileName: file.name,
