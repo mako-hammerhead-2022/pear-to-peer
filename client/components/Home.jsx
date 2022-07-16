@@ -9,7 +9,7 @@ import FoodItemTile from './FoodItemTile'
 
 export default function Home() {
   const items = useSelector((state) => state.itemData.items)
-  console.log(items, 'items')
+  // console.log(items, 'items')
 
   const dispatch = useDispatch()
 

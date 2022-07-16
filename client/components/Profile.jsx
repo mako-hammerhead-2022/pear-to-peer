@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchUserByAuth0Id } from '../slices/usersSlice'
 
 export default function Profile() {
-  const { auth0Id, email, postcode, name, username } = useSelector(
+  const { auth0Id, email, postcode, name, username, id } = useSelector(
     (state) => state.userData
   )
   // console.log(userInfo)
   // console.log('franks food', auth0Id)
 
   const dispatch = useDispatch()
+  console.log('user:', id)
 
   useEffect(() => {
     dispatch(fetchUserByAuth0Id(auth0Id))
