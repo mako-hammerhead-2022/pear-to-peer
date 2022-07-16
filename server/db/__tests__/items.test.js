@@ -40,7 +40,7 @@ describe('addNewItem', () => {
       itemName: 'Jalapenos',
       allergens: JSON.stringify(['None']),
       description: 'Spicy jalapenos yum yum',
-      expiry: new Date().setDate(new Date().getDate() + 7), // timestamp
+      expiry: 7, // days from creation
       imageUrl: JSON.stringify([
         'https://images.themodernproper.com/billowy-turkey/production/posts/2020/Chicken-Empanada-14.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1599768574&s=e3b5e8fe53c559c704cad71e33d367e5',
       ]),
@@ -50,6 +50,7 @@ describe('addNewItem', () => {
     return db.insertItem(dbNewItem, testDb).then((actualItem) => {
       expect(actualItem).toEqual({
         ...dbNewItem,
+        expiry: expect.anything(),
         createdAt: expect.anything(),
         updatedAt: expect.anything(),
         id: 4,
