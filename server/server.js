@@ -1,3 +1,7 @@
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  const envConfig = require('dotenv').config()
+  if (envConfig.error) throw envConfig.error
+}
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
@@ -8,8 +12,17 @@ server.use(express.static(path.resolve(__dirname, '../dist')))
 
 server.use(express.json())
 
+server.use('/api/items', require('./routes/items'))
+server.use('/api/users', require('./routes/users'))
+server.use('/api/image', require('./routes/image'))
+server.use('/api/comments', require('./routes/comments'))
+server.use('/api/*', (req, res) =>
+  res.status(400).send('API route does not exist')
+)
+
 server.get('*', (req, res) => {
   try {
+    //res.sendFile(path.join(__dirname, 'public/index.html')) // benjamin's change
     const html = fs.readFileSync(
       path.resolve(__dirname, '../dist/index.html'),
       'utf8'
