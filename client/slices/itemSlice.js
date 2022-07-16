@@ -4,6 +4,7 @@ import {
   addItem,
   getAllItemsWithUserInfo,
 } from '@/apiClient/items'
+import { getCommentsByItemId } from '@/apiClient/comments'
 
 const initialState = { items: [] }
 
@@ -18,6 +19,11 @@ export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
   console.log('response is', response)
   return response
 })
+
+export const fetchComments = createAsyncThunk(
+  'items/fetchComments',
+  async (itemId) => await getCommentsByItemId(itemId)
+)
 
 export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
   console.log('itemToPost', item)
@@ -46,6 +52,18 @@ export const itemSlice = createSlice({
     [postNewItem.fulfilled]: (state, { payload }) => {
       console.log('postItemPayload', payload)
       return { ...state, items: [...state.items, payload] }
+    },
+    [fetchComments.fulfilled]: (state, { payload }) => {
+      console.log('fetchComments payload', payload)
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          console.log('itemsId', item.itemsId, 'payload.id', payload.id)
+          return item.itemsId == payload.id
+            ? { ...item, comments: payload.comments }
+            : item
+        }),
+      }
     },
   },
 })
