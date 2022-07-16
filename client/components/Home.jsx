@@ -22,11 +22,12 @@ export default function Home() {
       <Heading>Food Items</Heading>
       <Grid templateColumns='repeat(4, 1fr)' gap={6}>
         {items.map((item) => {
-          return (
-            <GridItem key={item.itemsId}>
-              <FoodItemTile data={item} />
-            </GridItem>
-          )
+          if (item.availability === 'Yes')
+            return (
+              <GridItem key={item.itemsId}>
+                <FoodItemTile data={item} />
+              </GridItem>
+            )
         })}
       </Grid>
     </Container>
