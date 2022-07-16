@@ -9,7 +9,7 @@ import FoodItemTile from './FoodItemTile'
 
 export default function Home() {
   const items = useSelector((state) => state.itemData.items)
-  console.log(items, 'items')
+  // console.log(items, 'items')
 
   const dispatch = useDispatch()
 
@@ -22,11 +22,12 @@ export default function Home() {
       <Heading>Food Items</Heading>
       <Grid templateColumns='repeat(4, 1fr)' gap={6}>
         {items.map((item) => {
-          return (
-            <GridItem key={item.itemsId}>
-              <FoodItemTile data={item} />
-            </GridItem>
-          )
+          if (item.availability === 'Yes')
+            return (
+              <GridItem key={item.itemsId}>
+                <FoodItemTile data={item} />
+              </GridItem>
+            )
         })}
       </Grid>
     </Container>
