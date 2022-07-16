@@ -8,25 +8,27 @@ export default function PageItemTile(props) {
     imageUrl,
     itemName,
     allergens,
-    username,
+    // username,
     description,
     expiry,
-    availability,
+    // availability,
   } = props.data
 
-  const [availabilityState, setAvailabilityState] = useState(availability)
+  // const [availabilityState, setAvailabilityState] = useState(availability)
+  const [updatedItem, setUpdatedItem] = useState(props.data)
+  console.log('updatedItem', updatedItem)
 
   const handleAvailability = () => {
-    if (availabilityState === 'Yes') {
-      setAvailabilityState('No')
+    if (updatedItem.availability === 'Yes') {
+      setUpdatedItem({ ...updatedItem, availability: 'No' })
     } else {
-      setAvailabilityState('Yes')
+      setUpdatedItem({ ...updatedItem, availability: 'Yes' })
     }
   }
 
-  console.log(availabilityState)
-
-  useEffect(() => {})
+  useEffect(() => {
+    dispatch(patchItem(updatedItem))
+  }, [updatedItem])
 
   return (
     <>
@@ -36,7 +38,7 @@ export default function PageItemTile(props) {
         <Text>Allergens: {JSON.parse(allergens).join(', ')}</Text>
         <Text>Description: {description}</Text>
         <Text>Expiry: {expiry}</Text>
-        {availabilityState === 'Yes' ? (
+        {updatedItem.availability === 'Yes' ? (
           <Button onClick={handleAvailability}>Make Unavailable</Button>
         ) : (
           <Button onClick={handleAvailability}>Make Available</Button>

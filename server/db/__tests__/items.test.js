@@ -25,12 +25,39 @@ describe('getAllItems', () => {
   })
 })
 
-describe('getItemsByUsers', () => {
+describe('getAllItemsWithUserInfo', () => {
+  it('should return items along with the users info', async () => {
+    const items = await db.getAllItemsWithUserInfo(testDb)
+
+    expect(items).toHaveLength(3)
+    expect(items[0]).toHaveProperty('itemsId')
+    expect(items[1]).toHaveProperty('userId')
+    expect(items[1].itemsId).toBe(2)
+    expect(items[2].userId).toBe(3)
+  })
+})
+
+describe('getItemsByUserId', () => {
   it('returns an array of items for a given user', async () => {
     const userItems = await db.getItemsByUserId(1, testDb)
     expect(userItems).toHaveLength(1)
     expect(userItems[0].userId).toBe(1)
     expect(userItems[0].itemName).toBe('Hummus')
+  })
+})
+
+// describe('getItemByIdWithUserInfo', () => {
+//   it('returns item with the user info', async () => {
+//     const item = await db.getItemByIdWithUserInfo(2, testDb)
+//     console.log('This is the item: ', item)
+//   })
+// })
+
+describe('getItemByIdWithUserInfo', () => {
+  it.skip('returns item with the user info', () => {
+    return db.getItemByIdWithUserInfo(2, testDb).then((userItem) => {
+      expect(Object.keys(userItem[0])).toHaveLength(10)
+    })
   })
 })
 
