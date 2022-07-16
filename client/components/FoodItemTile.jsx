@@ -24,7 +24,7 @@ export default function FoodItemTile(props) {
         <Text>Posted By: {username}</Text>
         <Text>Location: {postcode}</Text>
         <ReactLink to={`/item/${itemsId}`}>
-          <Button>View More</Button>
+          <Button colorScheme='teal'>View More</Button>
         </ReactLink>
         {/* <Text>{expiry}</Text> */}
         {/* <Text>{availability}</Text> */}

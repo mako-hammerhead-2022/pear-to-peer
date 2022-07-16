@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
-import { Link as ReactLink } from 'react-router-dom'
+import { Link as ReactLink, useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { patchItem } from '../slices/itemSlice'
 
 export default function PageItemTile(props) {
+  const dispatch = useDispatch()
   const {
     itemsId,
     imageUrl,
@@ -11,19 +14,19 @@ export default function PageItemTile(props) {
     // username,
     description,
     expiry,
-    // availability,
+    availability,
   } = props.data
 
-  // const [availabilityState, setAvailabilityState] = useState(availability)
   const [updatedItem, setUpdatedItem] = useState(props.data)
-  console.log('updatedItem', updatedItem)
 
-  const handleAvailability = () => {
+  function handleAvailability() {
     if (updatedItem.availability === 'Yes') {
       setUpdatedItem({ ...updatedItem, availability: 'No' })
     } else {
       setUpdatedItem({ ...updatedItem, availability: 'Yes' })
     }
+    console.log('updatedItem', updatedItem)
+    // await dispatch(patchItem({ ...updatedItem }))
   }
 
   useEffect(() => {
@@ -39,13 +42,19 @@ export default function PageItemTile(props) {
         <Text>Description: {description}</Text>
         <Text>Expiry: {expiry}</Text>
         {updatedItem.availability === 'Yes' ? (
-          <Button onClick={handleAvailability}>Make Unavailable</Button>
+          <Button onClick={handleAvailability} colorScheme='teal'>
+            Make Unavailable
+          </Button>
         ) : (
-          <Button onClick={handleAvailability}>Make Available</Button>
+          <Button onClick={handleAvailability} colorScheme='teal'>
+            Make Available
+          </Button>
         )}
-        <Button>Edit Item</Button>
+        <ReactLink to={`/item/update/${itemsId}`}>
+          <Button colorScheme='teal'>Edit Item</Button>
+        </ReactLink>
         <ReactLink to={`/item/${itemsId}`}>
-          <Button>View Item</Button>
+          <Button colorScheme='teal'>View Item</Button>
         </ReactLink>
       </Box>
     </>

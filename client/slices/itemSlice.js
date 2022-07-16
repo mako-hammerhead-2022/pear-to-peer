@@ -4,8 +4,16 @@ import {
   addItem,
   getAllItemsWithUserInfo,
   getAllItemsByUserId,
+  updateItemAvailability,
+  // getItemById,
 } from '@/apiClient/items'
 import { getCommentsByItemId } from '@/apiClient/comments'
+// import {
+//   getItemByIdWithUserInfo,
+//   getItemsByUserId,
+// } from '../../server/db/items'
+
+import { addComment } from '../apiClient/comments'
 
 const initialState = { items: [] }
 
@@ -17,7 +25,6 @@ const initialState = { items: [] }
 
 export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
   const response = await getAllItemsWithUserInfo()
-  // console.log('response is', response)
   return response
 })
 
@@ -27,9 +34,7 @@ export const fetchComments = createAsyncThunk(
 )
 
 export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
-  // console.log('itemToPost', item)
   const response = await addItem(item)
-  // console.log('addItem response', response)
   return response.body
 })
 
@@ -38,7 +43,25 @@ export const fetchItemsByUserId = createAsyncThunk(
   'items/fetchUserItems',
   async (id) => {
     const response = await getAllItemsByUserId(id)
-    console.log('getitemsbyuserid', response)
+    return response
+  }
+)
+
+// export const updateItem = createAsyncThunk('items/updateItem', async (item) => {
+//   const response = await getItemById(item)
+//   return response
+// })
+
+export const patchItem = createAsyncThunk('items/patchItem', async (item) => {
+  const response = await updateItemAvailability(item)
+
+  return response
+})
+
+export const postComment = createAsyncThunk(
+  'items/postComment',
+  async (newComment) => {
+    const response = await addComment(newComment)
     return response
   }
 )
@@ -57,15 +80,12 @@ export const itemSlice = createSlice({
 
   extraReducers: {
     [fetchAllItems.fulfilled]: (state, { payload }) => {
-      console.log('payload', payload)
       return { ...state, items: payload }
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
-      console.log('postItemPayload', payload)
       return { ...state, items: [...state.items, payload] }
     },
     [fetchComments.fulfilled]: (state, { payload }) => {
-      console.log('fetchComments payload', payload)
       return {
         ...state,
         items: state.items.map((item) => {
@@ -76,8 +96,27 @@ export const itemSlice = createSlice({
       }
     },
     [fetchItemsByUserId.fulfilled]: (state, { payload }) => {
-      console.log('payload', payload)
       return { ...state, items: payload }
+    },
+    [postComment.fulfilled]: (state, { payload }) => {
+      console.log('postCommentPayload', payload)
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          return item.itemsId == payload.itemId
+            ? { ...item, comments: [...item.comments, payload] }
+            : item
+        }),
+      }
+    },
+    [patchItem.fulfilled]: (state, { payload }) => {
+      console.log('pathc item fulfilled payload', payload)
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          return item.itemsId == payload.itemsId ? payload : item
+        }),
+      }
     },
   },
 })

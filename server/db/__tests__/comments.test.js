@@ -28,9 +28,9 @@ describe('getCommentsByItemIdWithAuthor', () => {
     const comments = await db.getCommentsByItemIdWithAuthor(1, testDb)
 
     expect(comments[0].authorId).toBe(2)
-    expect(comments[0].authorName).toBe('Sally Slippers')
+    expect(comments[0].authorName).toBe('SlipsAllDay')
     expect(comments[1].authorId).toBe(1)
-    expect(comments[1].authorName).toBe('Harry Horatio')
+    expect(comments[1].authorName).toBe('HairyHarry123')
   })
 })
 
@@ -45,9 +45,12 @@ describe('addComment', () => {
 
     expect(actual).toEqual({
       ...newComment,
-      id: 4,
-      createdAt: expect.anything(),
-      updatedAt: expect.anything(),
+      // id: 4,
+      authorName: expect.anything(),
+      commentId: expect.anything(),
+      // createdAt: expect.anything(),
+      // updatedAt: expect.anything(),
+      timestamp: expect.anything(),
     })
   })
 })

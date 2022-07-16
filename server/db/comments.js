@@ -9,7 +9,7 @@ function getCommentsByItemIdWithAuthor(itemId, db = connection) {
       'comments.id as commentId',
       'authorId',
       'itemId',
-      'name as authorName',
+      'username as authorName',
       'comment',
       'comments.createdAt as timestamp'
     )
@@ -25,7 +25,7 @@ async function addComment(newComment, db = connection) {
   }
   const newIds = await db('comments').insert(toAdd)
 
-  return getCommentById(newIds[0], db)
+  return getCommentByIdWithAuthor(newIds[0], db)
 }
 
 module.exports = {
@@ -34,6 +34,17 @@ module.exports = {
 }
 
 // Helpers
-function getCommentById(id, db = connection) {
-  return db('comments').select().where({ id }).first()
+function getCommentByIdWithAuthor(id, db = connection) {
+  return db('comments')
+    .join('users', 'comments.authorId', 'users.id')
+    .select(
+      'comments.id as commentId',
+      'authorId',
+      'itemId',
+      'username as authorName',
+      'comment',
+      'comments.createdAt as timestamp'
+    )
+    .where({ commentId: id })
+    .first()
 }

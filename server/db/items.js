@@ -2,9 +2,9 @@ const environment = process.env.NODE_ENV || 'development'
 const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
-function getAllItems(db = connection) {
-  return db('items').select()
-}
+// function getAllItems(db = connection) {
+//   return db('items').select()
+// }
 
 function getAllItemsWithUserInfo(db = connection) {
   return db('items')
@@ -78,16 +78,25 @@ async function insertItem(items, db = connection) {
   return getItemById(newIds[0], db)
 }
 
-function updateItem(items, id, db = connection) {
-  const updatedItem = {
-    itemName: items.itemName,
-    allergens: items.allergens,
-    description: items.description,
-    dateCreated: items.dateCreated,
-    expiry: items.expiry,
-    availability: items.availability,
-  }
-  return db('items').update(updatedItem).where('id', id)
+// function updateItem(items, id, db = connection) {
+//   const updatedItem = {
+//     itemName: items.itemName,
+//     allergens: items.allergens,
+//     description: items.description,
+//     dateCreated: items.dateCreated,
+//     expiry: items.expiry,
+//     availability: items.availability,
+//   }
+//   return db('items').update(updatedItem).where('id', id)
+// }
+
+async function updateItem(updatedItem, db = connection) {
+  console.log('db updated', updatedItem)
+  await db('items')
+    .update({ availability: updatedItem.availability })
+    .where('id', updatedItem.itemsId)
+
+  return getItemById(updatedItem.itemsId, db)
 }
 
 function deleteItem(id, db = connection) {
@@ -95,7 +104,7 @@ function deleteItem(id, db = connection) {
 }
 
 module.exports = {
-  getAllItems,
+  // getAllItems,
   getItemsByUserId,
   insertItem,
   updateItem,

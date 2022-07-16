@@ -62,7 +62,6 @@ router.post('/', async (req, res) => {
     availability: req.body.availability,
     userId: req.body.userId,
   }
-  console.log('adding item to db', newItem)
   return db
     .insertItem(newItem)
     .then((newItem) => {
@@ -75,14 +74,16 @@ router.post('/', async (req, res) => {
 
 // PATCH item
 //checkJwt
-router.patch('/', (req, res) => {
-  const { id, ...updatedItem } = req.body
+router.patch('/:id', (req, res) => {
+  const updatedItem = req.body
+  console.log('what is this', updatedItem)
   return db
-    .updateItem(updatedItem, id)
+    .updateItem(updatedItem)
     .then((patchItem) => {
       return res.json(patchItem)
     })
     .catch((err) => {
+      console.error(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })
