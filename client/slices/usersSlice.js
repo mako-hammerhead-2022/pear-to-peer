@@ -12,7 +12,7 @@ export const fetchUserByAuth0Id = createAsyncThunk(
   'users/fetchByAuth0Id',
   async (auth0Id) => {
     const response = await getUserByAuth0Id(auth0Id)
-    console.log(response, 'auth0Id call response')
+    // console.log(response, 'auth0Id call response')
     return response
   }
 )

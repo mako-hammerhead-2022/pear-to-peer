@@ -37,6 +37,9 @@ export default function Nav() {
           <Link as={ReactLink} to='/profile'>
             Profile
           </Link>
+          <Link as={ReactLink} to='/addfooditem'>
+            Add Food
+          </Link>
           <Link as={ReactLink} to='/' onClick={handleLogoff}>
             Log Off
           </Link>

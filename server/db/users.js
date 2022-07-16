@@ -9,7 +9,7 @@ function createUser(user, db = connection) {
 }
 
 function getUserByAuth0Id(auth0Id, db = connection) {
-  return db('users').select().where('auth0Id', auth0Id)
+  return db('users').select().where('auth0Id', auth0Id).first()
 }
 
 module.exports = {

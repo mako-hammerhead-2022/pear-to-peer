@@ -10,7 +10,7 @@ export function addUser(user) {
 
 export function getUserByAuth0Id(auth0Id) {
   if (!auth0Id) {
-    return 'error'
+    return undefined
   }
   return request.get(`/api/users/${auth0Id}`).then((res) => res.body)
 }

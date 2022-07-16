@@ -1,11 +1,15 @@
+import { Heading, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-// import { AddItemForm } from '../components/AddItemForm'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchUserByAuth0Id } from '../slices/usersSlice'
 
 export default function Profile() {
-  const auth0Id = useSelector((state) => state.userData.auth0Id)
-  console.log('franks food', auth0Id)
+  const { auth0Id, email, postcode, name, username } = useSelector(
+    (state) => state.userData
+  )
+  // console.log(userInfo)
+  // console.log('franks food', auth0Id)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -14,8 +18,13 @@ export default function Profile() {
 
   return (
     <>
-      {/* <AddItemForm /> */}
-      <h1>Hey this is a profile page</h1>
+      <Heading>Your Profile</Heading>
+      <Text>Name: {name}</Text>
+      <Text>Username: {username}</Text>
+      <Text>email: {email} </Text>
+      <Text>Postal Code: {postcode} </Text>
+
+      <Heading>Your Posts</Heading>
     </>
   )
 }
