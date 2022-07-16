@@ -8,7 +8,7 @@ export function getAllItemsWithUserInfo() {
   return request.get('/api/items/').then((res) => res.body)
 }
 
-export function addItem(item) {
+export async function addItem(item) {
   return request.post(`/api/items`).send(item).catch(logError)
 }
 export async function getImageUrl(file, token) {

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../db/items')
-// const {checkJwt} = require('../utils')
+const { checkJwt } = require('../utils')
 
 // GET all items
 // router.get('/', (req, res) => {
@@ -52,7 +52,7 @@ router.get('/:Id', (req, res) => {
 
 // POST items (by the user)
 //checkJwt
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const newItem = {
     itemName: req.body.itemName,
     allergens: req.body.allergens,
@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
     imageUrl: req.body.image,
     expiry: req.body.expiry,
     availability: req.body.availability,
-    userId: 1, //TODO: change this
+    userId: req.body.userId,
   }
   console.log('adding item to db', newItem)
   return db

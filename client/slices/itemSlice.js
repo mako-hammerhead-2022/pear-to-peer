@@ -15,14 +15,14 @@ const initialState = { items: [] }
 
 export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
   const response = await getAllItemsWithUserInfo()
-  console.log('response is', response)
+  // console.log('response is', response)
   return response
 })
 
 export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
-  console.log('itemToPost', item)
+  // console.log('itemToPost', item)
   const response = await addItem(item)
-  console.log('addItem response', response)
+  // console.log('addItem response', response)
   return response.body
 })
 

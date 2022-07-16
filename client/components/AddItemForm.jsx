@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addItem, getImageUrl } from '../apiClient/items'
@@ -15,13 +15,20 @@ import {
   NumberInput,
 } from '@chakra-ui/react'
 import { postNewItem } from '../slices/itemSlice'
+import { fetchUserByAuth0Id } from '../slices/usersSlice'
 import { useNavigate } from 'react-router-dom'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
   const item = useSelector((state) => state.itemData)
+  const { auth0Id, id } = useSelector((state) => state.userData)
+
   const navigate = useNavigate()
   const { getAccessTokenSilently } = useAuth0()
+  console.log('user', id)
+  useEffect(() => {
+    dispatch(fetchUserByAuth0Id(auth0Id))
+  }, [auth0Id])
 
   async function handleSubmit(formData) {
     console.log('formData', formData)
@@ -40,6 +47,7 @@ export function AddItemForm() {
       image: imageUrl,
       expiry: formData.expiry,
       availability: formData.availability,
+      userId: id,
     }
     dispatch(postNewItem(itemToAdd))
     navigate('/')
@@ -54,6 +62,7 @@ export function AddItemForm() {
         description: '',
         image: null,
         availability: 'Yes',
+        userId: id,
       }}
       onSubmit={(values) => {
         handleSubmit(values)
@@ -155,9 +164,5 @@ export function AddItemForm() {
     </Formik>
   )
 }
-
-// addItem.defaultProps = {
-//   onSubmit: () => {},
-// }
 
 export default AddItemForm
