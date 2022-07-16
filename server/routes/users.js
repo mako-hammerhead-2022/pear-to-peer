@@ -3,16 +3,6 @@ const router = express.Router()
 
 const db = require('../db')
 
-router.get('/', (req, res) => {
-  db.getAllUsers()
-    .then((users) => {
-      res.json(users)
-    })
-    .catch((err) => {
-      res.status(500).send({ message: 'Something went wrong' })
-    })
-})
-
 // POST /api/users
 // TODO: add checkJwt
 router.post('/', async (req, res) => {
@@ -37,4 +27,43 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.get('/:auth0Id', (req, res) => {
+  const auth0Id = req.params.auth0Id
+  console.log('auth', auth0Id)
+  db.getUserByAuth0Id(auth0Id)
+    .then((user) => {
+      console.log(user, 'user')
+      res.json(user)
+    })
+    .catch((err) => {
+      res.status(500).send({ message: 'Something went wrong' })
+    })
+})
+
+// router.get('/', (req, res) => {
+//   db.getAllUsers()
+//     .then((users) => {
+//       res.json(users)
+//     })
+//     .catch((err) => {
+//       res.status(500).send({ message: 'Something went wrong' })
+//     })
+// })
+
 module.exports = router
+
+// router.post('/', (req, res) => {
+//   const todo = req.body
+//   // console.log('todo is', todo)
+//   db.addTodo(todo)
+//     .then((id) => {
+//       // console.log(id)
+//       db.getTodoById(id[0]).then((todoData) => {
+//         // console.log('TodoDataIs', todoData)
+//         res.json(todoData)
+//       })
+//     })
+//     .catch((err) => {
+//       res.status(500).send('DATABASE ERROR: ' + err.message)
+//     })
+// })

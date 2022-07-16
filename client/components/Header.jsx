@@ -7,9 +7,9 @@ export default function Header() {
   return (
     <Center>
       <HStack>
-        <Image src={logol} />
-        <Heading>Pear-To-Peer</Heading>
-        <Image src={logor} />
+        <Image h={150} src={logol} />
+        <Heading color='#1D6638'>Pear-To-Peer</Heading>
+        <Image h={150} src={logor} />
       </HStack>
     </Center>
   )
