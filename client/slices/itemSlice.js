@@ -14,7 +14,6 @@ import { getCommentsByItemId } from '@/apiClient/comments'
 
 import { addComment } from '../apiClient/comments'
 
-
 const initialState = { items: [] }
 
 // export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
@@ -98,7 +97,12 @@ export const itemSlice = createSlice({
         ...state,
         items: state.items.map((item) => {
           return item.itemsId == payload.itemId
-            ? { ...item, comments: [...item.comments, payload] }
+            ? {
+                ...item,
+                comments: item.comments
+                  ? [...item.comments, payload]
+                  : [payload],
+              }
             : item
         }),
       }
