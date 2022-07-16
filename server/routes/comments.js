@@ -21,4 +21,17 @@ router.post('/', (req, res) => {
     })
 })
 
+router.get('/:itemId', (req, res) => {
+  const itemId = Number(req.params.itemId)
+
+  db.getCommentsByItemIdWithAuthor(itemId)
+    .then((comments) => {
+      res.json(comments)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.status(500).send({ message: 'Something went wrong' })
+    })
+})
+
 module.exports = router
