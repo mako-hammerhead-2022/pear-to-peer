@@ -7,7 +7,6 @@ exports.seed = async function (knex) {
   await knex('items').del()
   await knex('items').insert([
     {
-      id: 1,
       itemName: 'Hummus',
       allergens: JSON.stringify(['nuts']),
       description:
@@ -22,7 +21,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 2,
       itemName: 'Scones',
       allergens: JSON.stringify(['eggs', 'nuts', 'dairy']),
       description:
@@ -36,7 +34,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 3,
       itemName: 'Chicken Empanadas',
       allergens: JSON.stringify(['poultry', 'eggs', 'dairy']),
       description:
@@ -50,7 +47,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 6,
       itemName: 'Fish and Chips',
       allergens: JSON.stringify(['fish']),
       description:
@@ -63,7 +59,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 7,
       itemName: 'Chicken Curry',
       allergens: JSON.stringify(['poultry, dairy, soya, spices']),
       description:
@@ -76,7 +71,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 8,
       itemName: 'Haggis',
       allergens: JSON.stringify(['nutmeg, oatmeal, meat, spices']),
       description:
@@ -89,7 +83,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 9,
       itemName: 'Bananas',
       allergens: JSON.stringify(['Bananas']),
       description:
@@ -102,7 +95,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 10,
       itemName: 'Feijoas',
       allergens: JSON.stringify(['Feijoas']),
       description:
@@ -115,7 +107,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 11,
       itemName: 'Fried Chicken',
       allergens: JSON.stringify(['poultry']),
       description:
@@ -128,7 +119,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 12,
       itemName: 'Margherita Pizza',
       allergens: JSON.stringify(['dairy, gluten, milk']),
       description:
@@ -141,7 +131,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 13,
       itemName: 'Blueberry Muffins',
       allergens: JSON.stringify(['eggs, dairy, gluten, cereal']),
       description:
@@ -154,7 +143,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 14,
       itemName: 'Pears',
       allergens: JSON.stringify(['Pears']),
       description:
@@ -167,7 +155,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 15,
       itemName: 'Beef Lasagna',
       allergens: JSON.stringify(['dairy, eggs, herbs, spices']),
       description:
@@ -180,7 +167,6 @@ exports.seed = async function (knex) {
     },
 
     {
-      id: 16,
       itemName: 'Fixer Elixir',
       allergens: JSON.stringify(['dairy, eggs, nuts, spices']),
       description:
