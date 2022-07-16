@@ -15,10 +15,12 @@ import {
   NumberInput,
 } from '@chakra-ui/react'
 import { postNewItem } from '../slices/itemSlice'
+import { useNavigate } from 'react-router-dom'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
   const item = useSelector((state) => state.itemData)
+  const navigate = useNavigate()
   const { getAccessTokenSilently } = useAuth0()
 
   async function handleSubmit(formData) {
@@ -40,6 +42,7 @@ export function AddItemForm() {
       availability: formData.availability,
     }
     dispatch(postNewItem(itemToAdd))
+    navigate('/')
   }
 
   return (
