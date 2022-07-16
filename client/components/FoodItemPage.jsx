@@ -3,6 +3,7 @@ import { Heading, Text, Image, Container, Button } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchAllItems } from '../slices/itemSlice'
+import Comments from './Comments'
 
 export default function FoodItemPage(props) {
   const items = useSelector((state) => state.itemData.items)
@@ -29,7 +30,8 @@ export default function FoodItemPage(props) {
         <Text>Availability: {item?.availability}</Text>
         <Text>Location: {item?.postcode}</Text>
         <Text>User: {item?.username}</Text>
-        <Button>Add Comment</Button>
+        {/* <Button>Add Comment</Button> */}
+        <Comments />
       </Container>
     </>
   )
