@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchUserByAuth0Id } from '../slices/usersSlice'
 import { fetchItemsByUserId } from '../slices/itemSlice'
-import FoodItemTile from './FoodItemTile'
+import PageItemTile from './UserItem'
 
 export default function Profile() {
   const { auth0Id, email, postcode, name, username, id } = useSelector(
@@ -38,7 +38,7 @@ export default function Profile() {
           if (item.availability == 'Yes')
             return (
               <GridItem key={item.itemsId}>
-                <FoodItemTile data={item} />
+                <PageItemTile data={item} />
               </GridItem>
             )
         })}
@@ -49,7 +49,7 @@ export default function Profile() {
           if (item.availability == 'No')
             return (
               <GridItem key={item.itemsId}>
-                <FoodItemTile data={item} />
+                <PageItemTile data={item} />
               </GridItem>
             )
         })}
