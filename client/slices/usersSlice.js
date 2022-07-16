@@ -1,11 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getAllUsers, addUser } from '@/apiClient/users'
+import { addUser } from '@/apiClient/users'
+import { getUserByAuth0Id } from '../apiClient/users'
 
 const initialState = {
   auth0Id: '',
   email: '',
   token: '',
 }
+
+export const fetchUserByAuth0Id = createAsyncThunk(
+  'users/fetchByAuth0Id',
+  async (auth0Id) => {
+    const response = await getUserByAuth0Id(auth0Id)
+    console.log(response, 'auth0Id call response')
+    return response
+  }
+)
 
 export const postNewUser = createAsyncThunk(
   'userData/postNew',
@@ -29,6 +39,10 @@ export const usersSlice = createSlice({
   extraReducers: {
     [postNewUser.fulfilled]: (state, { payload }) => {
       console.log('newUser details', payload)
+      return { ...state, ...payload }
+    },
+    [fetchUserByAuth0Id.fulfilled]: (state, { payload }) => {
+      console.log('userDetails', payload)
       return { ...state, ...payload }
     },
   },

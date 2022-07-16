@@ -8,7 +8,12 @@ function createUser(user, db = connection) {
   return db('users').insert(user)
 }
 
+function getUserByAuth0Id(auth0Id, db = connection) {
+  return db('users').select().where('auth0Id', auth0Id)
+}
+
 module.exports = {
   getAllUsers,
   createUser,
+  getUserByAuth0Id,
 }
