@@ -10,12 +10,8 @@ export default function Profile() {
     (state) => state.userData
   )
   const { items } = useSelector((state) => state.itemData)
-  console.log(items, 'itemsinprofile')
-  // console.log(userInfo)
-  // console.log('franks food', auth0Id)
 
   const dispatch = useDispatch()
-  console.log('user:', id)
 
   useEffect(() => {
     dispatch(fetchUserByAuth0Id(auth0Id))

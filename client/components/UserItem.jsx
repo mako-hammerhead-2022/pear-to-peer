@@ -24,8 +24,6 @@ export default function PageItemTile(props) {
     }
   }
 
-  console.log(availabilityState)
-
   useEffect(() => {})
 
   return (
@@ -41,7 +39,9 @@ export default function PageItemTile(props) {
         ) : (
           <Button onClick={handleAvailability}>Make Available</Button>
         )}
-        <Button>Edit Item</Button>
+        <ReactLink to={`/item/update/${itemsId}`}>
+          <Button>Edit Item</Button>
+        </ReactLink>
         <ReactLink to={`/item/${itemsId}`}>
           <Button>View Item</Button>
         </ReactLink>
