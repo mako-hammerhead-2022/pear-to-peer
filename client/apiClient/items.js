@@ -16,8 +16,19 @@ export function getAllItemsByUserId(id) {
   return request.get(`/api/items/${id}`).then((res) => res.body)
 }
 
-export function getItemByUserId(id) {
-  return request.patch(`/api/items/update/${id}`).then((res) => res.body)
+export function updateItem(id, item) {
+  return request.patch(`/api/items/update/${id}`).send(item).catch(logError)
+}
+
+export function updateItemAvailability(item) {
+  if (!item) {
+    return undefined
+  }
+  return request
+    .patch(`/api/items/${item.itemsId}`)
+    .send(item)
+    .then((res) => ({ ...res.body, itemsId: res.body.id }))
+    .catch(logError)
 }
 
 export async function getImageUrl(file, token) {

@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
   }
   try {
     const created = await db.createUser(user)
-    console.log('created', created)
     res.sendStatus(201)
   } catch (err) {
     console.error(err)
@@ -32,7 +31,6 @@ router.get('/:auth0Id', (req, res) => {
   console.log('auth', auth0Id)
   db.getUserByAuth0Id(auth0Id)
     .then((user) => {
-      console.log(user, 'user')
       res.json(user)
     })
     .catch((err) => {
