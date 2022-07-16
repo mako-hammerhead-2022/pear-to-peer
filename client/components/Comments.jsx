@@ -19,7 +19,6 @@ export default function Comments() {
 
   useEffect(() => {
     setComments(allItems.find((item) => item.itemsId == itemId).comments)
-    console.log('use effect comments', comments)
   }, [allItems])
 
   return (
@@ -27,8 +26,7 @@ export default function Comments() {
       <Heading>Comments</Heading>
       {comments && (
         <ul>
-          {comments?.map((commentObj) => {
-            console.log('cObj', commentObj)
+          {comments.map((commentObj) => {
             return (
               <li key={commentObj.commentId}>
                 <strong>{commentObj.authorName}</strong>:&nbsp;
@@ -38,7 +36,7 @@ export default function Comments() {
           })}
         </ul>
       )}
-      <AddCommentForm />
+      <AddCommentForm itemId={itemId} />
     </>
   )
 }

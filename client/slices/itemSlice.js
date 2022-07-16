@@ -58,7 +58,6 @@ export const itemSlice = createSlice({
       return {
         ...state,
         items: state.items.map((item) => {
-          console.log('itemsId', item.itemsId, 'payload.id', payload.id)
           return item.itemsId == payload.id
             ? { ...item, comments: payload.comments }
             : item
