@@ -10,7 +10,7 @@ export default function Nav() {
   const { logout, loginWithRedirect } = useAuth0()
   function handleLogoff(e) {
     e.preventDefault()
-    logout()
+    logout({ returnTo: window.location.origin })
   }
 
   function handleRegister(e) {

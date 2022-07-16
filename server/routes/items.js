@@ -69,6 +69,7 @@ router.post('/', async (req, res) => {
       return res.json(newItem)
     })
     .catch((err) => {
+      console.error(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })

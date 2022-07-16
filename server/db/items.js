@@ -64,11 +64,13 @@ function getItemById(id, db = connection) {
 }
 
 async function insertItem(items, db = connection) {
+  const now = new Date()
+  now.setDate(now.getDate() + Number(items.expiry))
   const newItem = {
     itemName: items.itemName,
     allergens: items.allergens,
     description: items.description,
-    expiry: items.expiry,
+    expiry: now,
     availability: items.availability,
     userId: items.userId,
     imageUrl: items.imageUrl,

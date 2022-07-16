@@ -1,3 +1,7 @@
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  const envConfig = require('dotenv').config()
+  if (envConfig.error) throw envConfig.error
+}
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
