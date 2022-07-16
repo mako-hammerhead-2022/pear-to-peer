@@ -16,6 +16,24 @@ function getCommentsByItemIdWithAuthor(itemId, db = connection) {
     .where({ itemId })
 }
 
+// newComment: authorId, itemId, comment
+async function addComment(newComment, db = connection) {
+  const toAdd = {
+    authorId: newComment.authorId,
+    itemId: newComment.itemId,
+    comment: newComment.comment,
+  }
+  const newIds = await db('comments').insert(toAdd)
+
+  return getCommentById(newIds[0], db)
+}
+
 module.exports = {
   getCommentsByItemIdWithAuthor,
+  addComment,
+}
+
+// Helpers
+function getCommentById(id, db = connection) {
+  return db('comments').select().where({ id }).first()
 }

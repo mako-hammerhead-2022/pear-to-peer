@@ -33,3 +33,21 @@ describe('getCommentsByItemIdWithAuthor', () => {
     expect(comments[1].authorName).toBe('Harry Horatio')
   })
 })
+
+describe('addComment', () => {
+  it('adds a comment to the db and returns the new comment object', async () => {
+    const newComment = {
+      authorId: 1,
+      itemId: 2,
+      comment: 'Colourful Comment',
+    }
+    const actual = await db.addComment(newComment, testDb)
+
+    expect(actual).toEqual({
+      ...newComment,
+      id: 4,
+      createdAt: expect.anything(),
+      updatedAt: expect.anything(),
+    })
+  })
+})
