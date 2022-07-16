@@ -3,6 +3,7 @@ import {
   // getAllItems,
   addItem,
   getAllItemsWithUserInfo,
+  getAllItemsByUserId,
 } from '@/apiClient/items'
 
 const initialState = { items: [] }
@@ -26,6 +27,16 @@ export const postNewItem = createAsyncThunk('items/postNew', async (item) => {
   return response.body
 })
 
+//What is the string for? Should we be changing the name in the slice?
+export const fetchItemsByUserId = createAsyncThunk(
+  'items/fetchUserItems',
+  async (id) => {
+    const response = await getAllItemsByUserId(id)
+    console.log('getitemsbyuserid', response)
+    return response
+  }
+)
+
 export const itemSlice = createSlice({
   name: 'itemData',
   initialState,
@@ -46,6 +57,10 @@ export const itemSlice = createSlice({
     [postNewItem.fulfilled]: (state, { payload }) => {
       console.log('postItemPayload', payload)
       return { ...state, items: [...state.items, payload] }
+    },
+    [fetchItemsByUserId.fulfilled]: (state, { payload }) => {
+      console.log('payload', payload)
+      return { ...state, items: payload }
     },
   },
 })

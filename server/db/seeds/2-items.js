@@ -124,7 +124,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
       expiry: '2022-10-03, 14:30:30',
       availability: 'Yes',
-      userId: '6',
+      userId: '14',
     },
 
     {
@@ -137,7 +137,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
       expiry: '2022-08-01, 18:10:22',
       availability: 'Yes',
-      userId: '7',
+      userId: '14',
     },
 
     {
@@ -149,8 +149,8 @@ exports.seed = async function (knex) {
       imageUrl:
         'https://images.unsplash.com/photo-1607958996333-41aef7caefaa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZWJlcnJ5JTIwbXVmZmlufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       expiry: '2022-07-31, 15:15:15',
-      availability: 'Yes',
-      userId: '8',
+      availability: 'No',
+      userId: '14',
     },
 
     {
@@ -163,7 +163,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1631160299919-6a175aa6d189?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1036&q=80',
       expiry: '2022-07-25, 14:58:54',
       availability: 'Yes',
-      userId: '12',
+      userId: '13',
     },
 
     {
@@ -176,7 +176,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1629115916087-7e8c114a24ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80',
       expiry: '2022-10-03, 23:00:23',
       availability: 'No',
-      userId: '11',
+      userId: '13',
     },
 
     {
@@ -189,7 +189,7 @@ exports.seed = async function (knex) {
         'https://townsquare.media/site/398/files/2014/03/stinson-hangover-fixer.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89',
       expiry: '2032-12-31, 23:59:59',
       availability: 'Yes',
-      userId: '12',
+      userId: '13',
     },
   ])
 }

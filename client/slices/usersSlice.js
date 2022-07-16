@@ -20,9 +20,9 @@ export const fetchUserByAuth0Id = createAsyncThunk(
 export const postNewUser = createAsyncThunk(
   'userData/postNew',
   async (user) => {
-    console.log('dispatched postNewUser')
+    // console.log('dispatched postNewUser')
     const response = await addUser(user)
-    console.log('addUser response', response)
+    // console.log('addUser response', response)
     return response.body
   }
 )
@@ -42,7 +42,6 @@ export const usersSlice = createSlice({
       return { ...state, ...payload }
     },
     [fetchUserByAuth0Id.fulfilled]: (state, { payload }) => {
-      console.log('userDetails', payload)
       return { ...state, ...payload }
     },
   },

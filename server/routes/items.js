@@ -39,8 +39,8 @@ router.get('/', (req, res) => {
 })
 
 // GET an item by the user ID
-router.get('/:Id', (req, res) => {
-  const userId = req.params.Id
+router.get('/:id', (req, res) => {
+  const userId = req.params.id
   db.getItemsByUserId(userId)
     .then((userItems) => {
       res.json(userItems)

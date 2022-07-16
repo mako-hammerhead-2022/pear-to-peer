@@ -24,7 +24,7 @@ export default function MainLayout() {
       <GridItem pl='2' bg='#7DA97A' area={'nav'}>
         <Nav />
       </GridItem>
-      <GridItem pl='2' bg='#1D6638' area={'main'}>
+      <GridItem pl='2' bg='#f2f2f2' area={'main'}>
         <Outlet />
       </GridItem>
       {/* <h1>Pear to Peer</h1> */}
