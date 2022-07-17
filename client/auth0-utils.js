@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoggedInUser } from './slices/usersSlice'
+import { setLoggedInUser } from '@/slices/userData'
 
 // eslint-disable-next-line no-unused-vars
 export async function cacheUser(useAuth0) {

@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import usersReducer from '@/slices/usersSlice'
-import itemsReducer from '@/slices/itemSlice'
+import allAvailableItemsReducer from '@/slices/allAvailableItems'
+import userItemsReducer from '@/slices/userItems'
+import userDataReducer from '@/slices/userData'
+import currentItemReducer from '@/slices/currentItem'
 
 const store = configureStore({
   reducer: {
-    userData: usersReducer,
-    itemData: itemsReducer,
+    allAvailableItems: allAvailableItemsReducer,
+    userItems: userItemsReducer,
+    userData: userDataReducer,
+    currentItem: currentItemReducer,
   },
 })
 

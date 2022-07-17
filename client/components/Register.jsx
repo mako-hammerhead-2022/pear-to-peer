@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Field, Form, Formik } from 'formik'
 import {
@@ -10,9 +10,10 @@ import {
   Input,
   NumberInput,
   NumberInputField,
+  FormErrorMessage,
 } from '@chakra-ui/react'
 import * as Yup from 'yup'
-import { postNewUser } from '../slices/usersSlice'
+import { postNewUser } from '@/slices/userData'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -40,20 +41,48 @@ export default function Register() {
     navigate('/')
   }
 
-  const RegisterSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(32, 'Too Long!')
-      .required('Required'),
-    username: Yup.string()
-      .min(2, 'Too Short!')
-      .max(16, 'Too Long!')
-      .required('Required'),
-    postcode: Yup.number()
-      .min(110, 'Too low for a postcode!')
-      .max(9999, 'Too high for a postcode!')
-      .required('Required'), //0110 - 9999
-  })
+  // const RegisterSchema = Yup.object().shape({
+  //   name: Yup.string()
+  //     .min(2, 'Too Short!')
+  //     .max(32, 'Too Long!')
+  //     .required('Required'),
+  //   username: Yup.string()
+  //     .min(2, 'Too Short!')
+  //     .max(16, 'Too Long!')
+  //     .required('Required'),
+  //   postcode: Yup.number()
+  //     .min(110, 'Too low for a postcode!')
+  //     .max(9999, 'Too high for a postcode!')
+  //     .required('Required'), //0110 - 9999
+  // })
+
+  function validateName(value) {
+    let error
+    if (!value) {
+      error = 'Name is required'
+    } else if (value.length < 2 || value.length > 32) {
+      error = 'Please enter a name between 2 and 32 characters'
+    }
+    return error
+  }
+  function validateUsername(value) {
+    let error
+    if (!value) {
+      error = 'Username is required'
+    } else if (value.length < 2 || value.length > 16) {
+      error = 'Please create a username between 2 and 16 characters'
+    }
+    return error
+  }
+  function validatePostcode(value) {
+    let error
+    if (!value) {
+      error = 'Postcode is required'
+    } else if (value.length !== 4) {
+      error = 'Please provide a valid postcode'
+    }
+    return error
+  }
 
   //TODO: handle loading state
 
@@ -63,26 +92,12 @@ export default function Register() {
       {form.auth0Id != '' ? (
         <Formik
           initialValues={{ ...form, name: '', username: '', postcode: '' }}
-          validationSchema={RegisterSchema}
           onSubmit={(values) => handleSubmit(values)}
         >
           {(props) => (
             <Form>
-              <Field name='auth0Id'>
-                {({ field, form }) => (
-                  <FormControl>
-                    <FormLabel htmlFor='auth0Id'>Auth0 ID:</FormLabel>
-                    <Input
-                      {...field}
-                      id='auth0Id'
-                      value={props.values.auth0Id}
-                      disabled
-                    ></Input>
-                  </FormControl>
-                )}
-              </Field>
               <Field name='email'>
-                {({ field, form }) => (
+                {({ field }) => (
                   <FormControl>
                     <FormLabel htmlFor='email'>Email:</FormLabel>
                     <Input
@@ -94,38 +109,48 @@ export default function Register() {
                   </FormControl>
                 )}
               </Field>
-              <Field name='name'>
+              <Field name='name' validate={validateName}>
                 {({ field, form }) => (
-                  <FormControl isRequired>
+                  <FormControl
+                    isRequired
+                    isInvalid={form.errors.name && form.touched.name}
+                  >
                     <FormLabel htmlFor='name'>Your name:</FormLabel>
                     <Input {...field} id='name'></Input>
+                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
-              <Field name='username'>
+              <Field name='username' validate={validateUsername}>
                 {({ field, form }) => (
-                  <FormControl isRequired>
+                  <FormControl
+                    isRequired
+                    isInvalid={form.errors.username && form.touched.username}
+                  >
                     <FormLabel htmlFor='username'>Display name:</FormLabel>
                     <Input {...field} id='username'></Input>
+                    <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
               {/* TODO: validate postcode, only allow numbers */}
-              <Field name='postcode'>
-                {props.errors.postcode && props.touched.postcode ? (
-                  <div>{props.errors.postcode}</div>
-                ) : (
-                  ({ field, form }) => (
-                    <FormControl isRequired>
-                      <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
-                      <NumberInput id='postcode' max={9999} min={100}>
-                        <NumberInputField
-                          {...field}
-                          id='postcode'
-                        ></NumberInputField>
-                      </NumberInput>
-                    </FormControl>
-                  )
+              <Field name='postcode' validate={validatePostcode}>
+                {({ field, form }) => (
+                  <FormControl
+                    isRequired
+                    isInvalid={form.errors.postcode && form.touched.postcode}
+                  >
+                    <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
+                    <NumberInput id='postcode' max={9999} min={100}>
+                      <FormErrorMessage>
+                        {form.errors.postcode}
+                      </FormErrorMessage>
+                      <NumberInputField
+                        {...field}
+                        id='postcode'
+                      ></NumberInputField>
+                    </NumberInput>
+                  </FormControl>
                 )}
               </Field>
               <Button mt={4} colorScheme='teal' type='submit'>
@@ -137,23 +162,6 @@ export default function Register() {
       ) : (
         <p>Loading..</p>
       )}
-      {/* <label htmlFor='auth0Id'>Auth0 Id:</label>
-        <input
-          type='text'
-          id='auth0Id'
-          name='auth0Id'
-          value={form.auth0Id}
-          disabled
-        />
-        <label htmlFor='email'>Email:</label>
-        <input
-          type='text'
-          id='email'
-          name='email'
-          value={form.email}
-          disabled
-        />
-        <button onClick={handleClick}>Register</button> */}
     </div>
   )
 }

@@ -1,9 +1,13 @@
 import { vi } from 'vitest'
-import * as utils from '../../utils'
+const { checkJwt, generatePreSignedPutUrl } = require('../../utils')
 
 const request = require('supertest')
 const server = require('../../server')
 
+const checkJWT = { checkJwt }
+const generate = { generatePreSignedPutUrl }
+
+// const utils = { checkJwt, generatePreSignedPutUrl }
 //export function checkJwt(req, res, next) {}
 
 // vi.mock('../../utils', () => {
@@ -14,17 +18,17 @@ const server = require('../../server')
 //   }
 // })
 
-vi.spyOn(utils, 'checkJwt').mockImplementation((req, res, next) => {
+vi.spyOn(checkJWT, 'checkJwt').mockImplementation((req, res, next) => {
   next()
 })
 
-vi.spyOn(utils, 'generatePreSignedUrl').mockReturnValue(
-  Promise.resolve('http://aws/image.jpg')
+vi.spyOn(generate, 'generatePreSignedPutUrl').mockImplementation(
+  Promise.resolve('image.jpg')
 )
 
 beforeAll(() => {
-  //   vi.spyOn(console, 'error')
-  //   console.error.mockImplementation(() => {})
+  // vi.spyOn(console, 'error')
+  // console.error.mockImplementation(() => {})
   // checkJwt.mockImplementation((req, res, next) => {
   //   next()
   // })
@@ -41,6 +45,6 @@ describe('POST /api/image', () => {
       .post('/api/image')
       .send({ fileName: 'image.jpg', fileType: 'jpg' })
 
-    expect(res.body.signedUrl).toBe('image.jpg')
+    expect(Object.keys(res.body)).toContain('image.jpg')
   })
 })

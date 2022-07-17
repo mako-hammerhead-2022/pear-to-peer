@@ -8,7 +8,7 @@ export default function NotFound() {
       <Center>
         <Heading>404 - Page Not Found</Heading>
       </Center>
-      <Button>
+      <Button colorScheme='teal'>
         <Link to='/'>Back to Home</Link>
       </Button>
     </div>

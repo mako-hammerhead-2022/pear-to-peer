@@ -1,49 +1,63 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
 import { Link as ReactLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { patchItem } from '@/slices/currentItem'
 
 export default function PageItemTile(props) {
+  const dispatch = useDispatch()
   const {
     itemsId,
     imageUrl,
     itemName,
     allergens,
-    username,
+    // username,
     description,
     expiry,
     availability,
   } = props.data
 
-  const [availabilityState, setAvailabilityState] = useState(availability)
+  const [updatedItem, setUpdatedItem] = useState(props.data)
+  const [shouldUpdate, setShouldUpdate] = useState(false)
 
-  const handleAvailability = () => {
-    if (availabilityState === 'Yes') {
-      setAvailabilityState('No')
+  function handleAvailability() {
+    setShouldUpdate(true)
+    if (updatedItem.availability === 'Yes') {
+      setUpdatedItem({ ...updatedItem, availability: 'No' })
     } else {
-      setAvailabilityState('Yes')
+      setUpdatedItem({ ...updatedItem, availability: 'Yes' })
     }
+    // await dispatch(patchItem({ ...updatedItem }))
   }
 
-  useEffect(() => {})
+  useEffect(() => {
+    if (shouldUpdate) {
+      dispatch(patchItem(updatedItem))
+    }
+  }, [updatedItem])
 
   return (
     <>
       <Box>
         <Image h='100px' src={imageUrl} />
         <Heading>{itemName}</Heading>
-        <Text>Allergens: {JSON.parse(allergens).join(', ')}</Text>
+        <Text>Allergens: {allergens}</Text>
         <Text>Description: {description}</Text>
         <Text>Expiry: {expiry}</Text>
-        {availabilityState === 'Yes' ? (
-          <Button onClick={handleAvailability}>Make Unavailable</Button>
+        {updatedItem.availability === 'Yes' ? (
+          <Button onClick={handleAvailability} colorScheme='teal'>
+            Make Unavailable
+          </Button>
         ) : (
-          <Button onClick={handleAvailability}>Make Available</Button>
+          <Button onClick={handleAvailability} colorScheme='teal'>
+            Make Available
+          </Button>
         )}
         <ReactLink to={`/item/update/${itemsId}`}>
-          <Button>Edit Item</Button>
+          <Button colorScheme='teal'>Edit Item</Button>
         </ReactLink>
         <ReactLink to={`/item/${itemsId}`}>
-          <Button>View Item</Button>
+          <Button colorScheme='teal'>View Item</Button>
         </ReactLink>
       </Box>
     </>

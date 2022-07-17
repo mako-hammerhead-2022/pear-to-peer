@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
-import { addItem, getImageUrl } from '../apiClient/items'
+import { getImageUrl } from '@/apiClient/items'
 import { Formik, Form, Field } from 'formik'
 import {
   FormLabel,
@@ -14,43 +14,35 @@ import {
   NumberInputField,
   NumberInput,
 } from '@chakra-ui/react'
-import { postNewItem } from '../slices/itemSlice'
-import { fetchUserByAuth0Id } from '../slices/usersSlice'
+import { postNewItem } from '@/slices/userItems'
+import { fetchUserByAuth0Id } from '@/slices/userData'
 import { useNavigate } from 'react-router-dom'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
-  const item = useSelector((state) => state.itemData)
   const { auth0Id, id } = useSelector((state) => state.userData)
 
   const navigate = useNavigate()
-  const { getAccessTokenSilently } = useAuth0()
-  console.log('user', id)
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0()
+
   useEffect(() => {
     dispatch(fetchUserByAuth0Id(auth0Id))
   }, [auth0Id])
 
   async function handleSubmit(formData) {
-    console.log('formData', formData)
-    console.log('file', formData.image)
-
-    const imageUrl = await getImageUrl(
-      formData.image,
-      await getAccessTokenSilently()
-    )
-
-    console.log('imageUrl', imageUrl)
+    const token = await getAccessTokenSilently()
+    const imageUrl = await getImageUrl(formData.image, token)
     const itemToAdd = {
       itemName: formData.itemName,
-      allergens: JSON.stringify([formData.allergens]),
+      allergens: formData.allergens,
       description: formData.description,
       image: imageUrl,
       expiry: formData.expiry,
       availability: formData.availability,
       userId: id,
     }
-    dispatch(postNewItem(itemToAdd))
-    navigate('/')
+    dispatch(postNewItem({ item: itemToAdd, token }))
+    navigate('/profile')
   }
 
   return (
@@ -147,15 +139,17 @@ export function AddItemForm() {
 
             <Container centerContent>
               <div>
-                <Button
-                  type='submit'
-                  isLoading={props.isSubmitting}
-                  colorScheme='teal'
-                  m={2}
-                  onClick={props.handleSubmit}
-                >
-                  Add Item
-                </Button>
+                {isAuthenticated && (
+                  <Button
+                    type='submit'
+                    isLoading={props.isSubmitting}
+                    colorScheme='teal'
+                    m={2}
+                    onClick={props.handleSubmit}
+                  >
+                    Add Item
+                  </Button>
+                )}
               </div>
             </Container>
           </Form>

@@ -1,11 +1,8 @@
 const knex = require('knex')
 const testConfig = require('../knexfile').test
-// Ask Mat how this testConfig works :D
 const testDb = knex(testConfig)
 
 const db = require('../users')
-
-import dbNewUser from '../../../test/fake-data'
 
 beforeAll(async () => {
   await testDb.migrate.latest()
@@ -41,35 +38,21 @@ describe('getUserByAuth0Id', () => {
   })
 })
 
-// describe('createUser', () => {
-//   it('should add a user', async () => {
-//     const newUser = await db.createUser(dbNewUser, testDb)
-
-//     expect(newUser).toEqual({
-//       ...dbNewUser,
-//       name: expect.anything(),
-//       username: expect.anything(),
-//       postcode: expect(postcode).toBeGreaterThanOrEqual(110),
-//       postcode: expect(postcode).toBeLessThan(9999),
-//     })
-//   })
-// })
-
 describe('createUser', () => {
-  it.skip('should add a new user', () => {
-    return db
-      .createUser(dbNewUser, testDb)
-      .then(([{ auth0Id }]) => {
-        return db.getUserByAuth0Id(auth0Id, testDb)
-      })
-      .then((user) => {
-        expect(user).toEqual({
-          ...dbNewUser,
-          name: expect.anything(),
-          username: expect.anything(),
-          postcode: expect(postcode).toBeGreaterThanOrEqual(110),
-          postcode: expect(postcode).toBeLessThan(9999),
-        })
-      })
+  it.skip('should add a user', async () => {
+    const dbNewUser = {
+      id: 9,
+      auth0Id: '54321george',
+      name: 'Curious George',
+      username: 'curiosityFTW',
+      email: 'whatIsThat@example.com',
+      postcode: 5019,
+    }
+
+    const newUser = await db.createUser(dbNewUser, testDb)
+
+    expect(newUser.auth0Id).toBe('54321george')
+    expect(newUser.postcode).toBeGreaterThanOrEqual(110)
+    expect(newUser.postcode).toBeLessThan(9999)
   })
 })

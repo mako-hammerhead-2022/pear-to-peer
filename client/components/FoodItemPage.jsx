@@ -1,38 +1,42 @@
 import React, { useEffect } from 'react'
-import { Heading, Text, Image, Container, Button } from '@chakra-ui/react'
+import { Heading, Text, Image, Container } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { fetchAllItems } from '../slices/itemSlice'
-import Comments from './Comments'
+import { useAuth0 } from '@auth0/auth0-react'
+import Comments from '@/components/Comments'
+import { clearCurrentItem, fetchItemById } from '@/slices/currentItem'
 
-export default function FoodItemPage(props) {
-  const items = useSelector((state) => state.itemData.items)
-  let productId = useParams()
-
+export default function FoodItemPage() {
+  const item = useSelector((state) => state.currentItem)
+  const { isAuthenticated } = useAuth0()
+  const productId = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllItems())
+    dispatch(fetchItemById(productId.id))
+
+    return () => {
+      dispatch(clearCurrentItem())
+    }
   }, [])
 
-  const item = items.find((item) => {
-    return item.itemsId == productId.id
-  })
   if (!item) return <p>Loading...</p>
+
   return (
     <>
-      <Container>
-        <Image src={item?.imageUrl} />
-        <Heading>{item?.itemName}</Heading>
-        <Text>Allergens: {JSON.parse(item?.allergens).join(', ')}</Text>
-        <Text>Description: {item?.description}</Text>
-        <Text>Expiry: {item?.expiry}</Text>
-        <Text>Availability: {item?.availability}</Text>
-        <Text>Location: {item?.postcode}</Text>
-        <Text>User: {item?.username}</Text>
-        {/* <Button>Add Comment</Button> */}
-        <Comments />
-      </Container>
+      {isAuthenticated && item.allergens && (
+        <Container>
+          <Image src={item?.imageUrl} />
+          <Heading>{item?.itemName}</Heading>
+          <Text>Allergens: {item?.allergens}</Text>
+          <Text>Description: {item?.description}</Text>
+          <Text>Expiry: {item?.expiry}</Text>
+          <Text>Availability: {item?.availability}</Text>
+          <Text>Location: {item?.postcode}</Text>
+          <Text>User: {item?.username}</Text>
+          <Comments itemId={productId.id} />
+        </Container>
+      )}
     </>
   )
 }
