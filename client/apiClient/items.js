@@ -4,10 +4,10 @@ export function getAllItemsWithUserInfo() {
   return request.get('/api/items/').then((res) => res.body)
 }
 
-export async function addItem(item) {
+export async function addItem(item, token) {
   return request
     .post(`/api/items`)
-    .set('authorization', `Bearer ${token}`)
+    .set('Authorization', `Bearer ${token}`)
     .send(item)
     .catch((err) => console.error(err))
 }

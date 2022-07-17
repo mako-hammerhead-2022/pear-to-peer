@@ -13,8 +13,8 @@ export const fetchItemsByUserId = createAsyncThunk(
 
 export const postNewItem = createAsyncThunk(
   'userItems/postNew',
-  async (item) => {
-    const response = await addItem(item)
+  async ({ item, token }) => {
+    const response = await addItem(item, token)
     return response.body
   }
 )
@@ -28,7 +28,7 @@ export const userItemsSlice = createSlice({
       return payload
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
-      return { ...state, items: [...state.items, payload] }
+      return [...state, payload]
     },
   },
 })
