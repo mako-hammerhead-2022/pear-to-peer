@@ -15,9 +15,10 @@ import {
   NumberInputField,
   NumberInput,
 } from '@chakra-ui/react'
+import { patchItem } from '@/slices/currentItem'
 
 export default function UpdateFoodItem() {
-  const { itemName, allergens, description, expiry, availability } =
+  const { itemName, allergens, description, expiry, availability, imageUrl } =
     useSelector((state) => state.currentItem)
 
   const itemId = useParams()
@@ -30,20 +31,19 @@ export default function UpdateFoodItem() {
     }
   }, [])
 
-  // return (
-  //   dispatch(clearCurrentItem())
-  // )
-
-  // async function handleUpdate(formData) {
-  //   const updateItem = {
-  //     itemName: formData.itemName,
-  //     allergens: formData.allergens,
-  //     description: formData.description,
-  //     expiry: formData.expiry,
-  //     availability: formData.availability,
-  //   }
-
-  // }
+  function handleUpdate(formData) {
+    const itemToUpdate = {
+      ...formData,
+      itemName: formData.itemName,
+      allergens: formData.allergens,
+      description: formData.description,
+      // expiry: formData.expiry,
+      availability: formData.availability,
+      // imageUrl: imageUrl,
+      itemsId: itemId.id,
+    }
+    dispatch(patchItem(itemToUpdate))
+  }
 
   return (
     <>
@@ -57,13 +57,15 @@ export default function UpdateFoodItem() {
               allergens: allergens,
               description: description,
               availability: availability,
+              imageUrl: imageUrl,
             }}
             onSubmit={(values) => {
+              // console.log(values, 'submitted values')
               handleUpdate(values)
             }}
           >
             {(props) => {
-              console.log(props.values, 'is props')
+              // console.log(props.values, 'is props')
               return (
                 <Form>
                   <Field name='itemName'>
@@ -74,7 +76,7 @@ export default function UpdateFoodItem() {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name='expiry'>
+                  {/* <Field name='expiry'>
                     {({ field }) => (
                       <FormControl isRequired>
                         <FormLabel htmlFor='expiry'>
@@ -85,7 +87,7 @@ export default function UpdateFoodItem() {
                         </NumberInput>
                       </FormControl>
                     )}
-                  </Field>
+                  </Field> */}
                   <Field name='allergens'>
                     {({ field }) => (
                       <FormControl>
@@ -109,6 +111,25 @@ export default function UpdateFoodItem() {
                       </FormControl>
                     )}
                   </Field>
+                  {/* <Field name='image'>
+                    {() => (
+                      <FormControl>
+                        <FormLabel htmlFor='image'>Upload image:</FormLabel>
+                        <Input
+                          type='file'
+                          name='image'
+                          id='image'
+                          accept='image/*'
+                          onChange={(e) =>
+                            props.setFieldValue(
+                              'image',
+                              e.currentTarget.files[0]
+                            )
+                          }
+                        />
+                      </FormControl>
+                    )}
+                  </Field> */}
                   <FormLabel htmlFor='availability'>
                     Is this item available?
                   </FormLabel>
@@ -119,7 +140,7 @@ export default function UpdateFoodItem() {
                           {...field}
                           name='availability'
                           id='availability'
-                          value={availability}
+                          // value={availability}
                           required
                         >
                           <option value='Yes'>Yes</option>
