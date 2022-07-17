@@ -37,7 +37,7 @@ export default function UpdateFoodItem() {
   // async function handleUpdate(formData) {
   //   const updateItem = {
   //     itemName: formData.itemName,
-  //     allergens: JSON.stringify([formData.allergens]),
+  //     allergens: formData.allergens,
   //     description: formData.description,
   //     expiry: formData.expiry,
   //     availability: formData.availability,

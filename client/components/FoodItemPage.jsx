@@ -28,7 +28,7 @@ export default function FoodItemPage() {
         <Container>
           <Image src={item?.imageUrl} />
           <Heading>{item?.itemName}</Heading>
-          <Text>Allergens: {JSON.parse(item?.allergens).join(', ')}</Text>
+          <Text>Allergens: {item?.allergens}</Text>
           <Text>Description: {item?.description}</Text>
           <Text>Expiry: {item?.expiry}</Text>
           <Text>Availability: {item?.availability}</Text>

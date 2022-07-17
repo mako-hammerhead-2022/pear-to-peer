@@ -11,7 +11,7 @@ export default function FoodItemTile(props) {
       <Box>
         <Image h='100px' src={imageUrl} />
         <Heading>{itemName}</Heading>
-        <Text>Allergens: {JSON.parse(allergens).join(', ')}</Text>
+        <Text>Allergens: {allergens}</Text>
         <Text>Posted By: {username}</Text>
         <Text>Location: {postcode}</Text>
         <ReactLink to={`/item/${itemsId}`}>

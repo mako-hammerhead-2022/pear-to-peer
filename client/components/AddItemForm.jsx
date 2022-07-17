@@ -34,7 +34,7 @@ export function AddItemForm() {
     const imageUrl = await getImageUrl(formData.image, token)
     const itemToAdd = {
       itemName: formData.itemName,
-      allergens: JSON.stringify([formData.allergens]),
+      allergens: formData.allergens,
       description: formData.description,
       image: imageUrl,
       expiry: formData.expiry,

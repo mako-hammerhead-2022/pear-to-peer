@@ -8,7 +8,7 @@ exports.seed = async function (knex) {
   await knex('items').insert([
     {
       itemName: 'Hummus',
-      allergens: JSON.stringify(['nuts']),
+      allergens: 'nuts',
       description:
         'Home-cooked Hummus that is both filling and healthy! Cooked with chickpeas, tahini, lemon juice, garlic, cumin, salt and olive oil.',
       imageUrl:
@@ -22,7 +22,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Scones',
-      allergens: JSON.stringify(['eggs', 'nuts', 'dairy']),
+      allergens: 'eggs', 'nuts', 'dairy',
       description:
         'Scones with love! Made with flour, sugar, baking powder, salt, butter, cream, eggs, and cashews',
       imageUrl:
@@ -35,7 +35,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Chicken Empanadas',
-      allergens: JSON.stringify(['poultry', 'eggs', 'dairy']),
+      allergens: 'poultry', 'eggs', 'dairy',
       description:
         'Empanadas are a type of pastry that is filled with meat and cooked vegetables. Made with chicken, eggs, butter, carrots, green peas, potato, and raisins',
       imageUrl:
@@ -48,7 +48,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Fish and Chips',
-      allergens: JSON.stringify(['fish']),
+      allergens: 'fish',
       description:
         'Fish and chips is one of the most famous comfort foods in New Zealand and this particular batch is made from beer-battered hoki and homegrown potatoes.',
       imageUrl:
@@ -60,7 +60,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Chicken Curry',
-      allergens: JSON.stringify(['poultry, dairy, soya, spices']),
+      allergens: 'poultry, dairy, soya, spices',
       description:
         'This curry has been made with a mixture of herbs and spices including garam masala, coriander, turmeric, cayenne pepper to nae a few. This is a classic Indian main dish that curry lovers would surely enjoy!',
       imageUrl:
@@ -72,7 +72,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Haggis',
-      allergens: JSON.stringify(['nutmeg, oatmeal, meat, spices']),
+      allergens: 'nutmeg, oatmeal, meat, spices',
       description:
         "A savoury pudding that contains sheep's pluck, onion, spices, and stock and encased in animal stomach",
       imageUrl:
@@ -84,7 +84,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Bananas',
-      allergens: JSON.stringify(['Bananas']),
+      allergens: 'Bananas',
       description:
         'A healthy fruit that is rich in nutrients which include vitamin C, Potassium, and Magnesium to name a few',
       imageUrl:
@@ -96,7 +96,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Feijoas',
-      allergens: JSON.stringify(['Feijoas']),
+      allergens: 'Feijoas',
       description:
         'Feijoas are a favourite fruit among kiwis and they are packed with fiber and vitamin C',
       imageUrl:
@@ -108,7 +108,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Fried Chicken',
-      allergens: JSON.stringify(['poultry']),
+      allergens: 'poultry',
       description:
         'Fried chicken is almost always a favourite among children and adults and this one should not disappoint. :)',
       imageUrl:
@@ -120,7 +120,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Margherita Pizza',
-      allergens: JSON.stringify(['dairy, gluten, milk']),
+      allergens: 'dairy, gluten, milk',
       description:
         'A delicious dish of Italian origin, with a dough base, mozzarella cheese, basil, and tomatoes.',
       imageUrl:
@@ -132,7 +132,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Blueberry Muffins',
-      allergens: JSON.stringify(['eggs, dairy, gluten, cereal']),
+      allergens: 'eggs, dairy, gluten, cereal',
       description:
         'These were made with extra blueberries and is a traditional family recipe of ours',
       imageUrl:
@@ -144,7 +144,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Pears',
-      allergens: JSON.stringify(['Pears']),
+      allergens: 'Pears',
       description:
         'Pears are rich in folate, vitamin C and potassium. They are a great source of antioxidants',
       imageUrl:
@@ -156,7 +156,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Beef Lasagna',
-      allergens: JSON.stringify(['dairy, eggs, herbs, spices']),
+      allergens: 'dairy, eggs, herbs, spices',
       description:
         'This lasagna was made by my very special friend, Monica and it is so delicious!',
       imageUrl:
@@ -168,7 +168,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Fixer Elixir',
-      allergens: JSON.stringify(['dairy, eggs, nuts, spices']),
+      allergens: 'dairy, eggs, nuts, spices',
       description:
         "This is the most effective post-bender, head's-too-tender ender from here to Denver",
       imageUrl:
