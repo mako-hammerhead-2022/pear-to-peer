@@ -42,7 +42,7 @@ export function AddItemForm() {
       userId: id,
     }
     dispatch(postNewItem({ item: itemToAdd, token }))
-    navigate('/')
+    navigate('/profile')
   }
 
   return (
