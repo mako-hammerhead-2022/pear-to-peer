@@ -24,19 +24,20 @@ export default function FoodItemPage() {
 
   return (
     <>
-      {isAuthenticated && item && (
-        <Container>
-          <Image src={item?.imageUrl} />
-          <Heading>{item?.itemName}</Heading>
-          <Text>Allergens: {JSON.parse(item?.allergens).join(', ')}</Text>
-          <Text>Description: {item?.description}</Text>
-          <Text>Expiry: {item?.expiry}</Text>
-          <Text>Availability: {item?.availability}</Text>
-          <Text>Location: {item?.postcode}</Text>
-          <Text>User: {item?.username}</Text>
-          <Comments itemId={productId.id} />
-        </Container>
-      )}
+      {isAuthenticated &&
+        item.allergens && ( // just 'item' would trigger a render with only comments
+          <Container>
+            <Image src={item?.imageUrl} />
+            <Heading>{item?.itemName}</Heading>
+            <Text>Allergens: {JSON.parse(item?.allergens).join(', ')}</Text>
+            <Text>Description: {item?.description}</Text>
+            <Text>Expiry: {item?.expiry}</Text>
+            <Text>Availability: {item?.availability}</Text>
+            <Text>Location: {item?.postcode}</Text>
+            <Text>User: {item?.username}</Text>
+            <Comments itemId={productId.id} />
+          </Container>
+        )}
     </>
   )
 }
