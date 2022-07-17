@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-import { Heading, Text, Image, Container, Button } from '@chakra-ui/react'
+import { Heading, Text, Image, Container } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 import { fetchAllItems } from '@/slices/itemSlice'
 import Comments from '@/components/Comments'
 
 export default function FoodItemPage() {
   const items = useSelector((state) => state.itemData.items)
+  const { isAuthenticated } = useAuth0()
   const productId = useParams()
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -23,17 +24,19 @@ export default function FoodItemPage() {
 
   return (
     <>
-      <Container>
-        <Image src={item?.imageUrl} />
-        <Heading>{item?.itemName}</Heading>
-        <Text>Allergens: {JSON.parse(item?.allergens).join(', ')}</Text>
-        <Text>Description: {item?.description}</Text>
-        <Text>Expiry: {item?.expiry}</Text>
-        <Text>Availability: {item?.availability}</Text>
-        <Text>Location: {item?.postcode}</Text>
-        <Text>User: {item?.username}</Text>
-        <Comments />
-      </Container>
+      {isAuthenticated && (
+        <Container>
+          <Image src={item?.imageUrl} />
+          <Heading>{item?.itemName}</Heading>
+          <Text>Allergens: {JSON.parse(item?.allergens).join(', ')}</Text>
+          <Text>Description: {item?.description}</Text>
+          <Text>Expiry: {item?.expiry}</Text>
+          <Text>Availability: {item?.availability}</Text>
+          <Text>Location: {item?.postcode}</Text>
+          <Text>User: {item?.username}</Text>
+          <Comments />
+        </Container>
+      )}
     </>
   )
 }
