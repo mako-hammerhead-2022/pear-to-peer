@@ -7,6 +7,7 @@ export function getAllItemsWithUserInfo() {
 export async function addItem(item) {
   return request
     .post(`/api/items`)
+    .set('authorization', `Bearer ${token}`)
     .send(item)
     .catch((err) => console.error(err))
 }

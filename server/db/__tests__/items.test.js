@@ -96,7 +96,6 @@ describe('addNewItem', () => {
         expiry: expect.anything(),
         createdAt: expect.anything(),
         updatedAt: expect.anything(),
-        id: 4,
       })
     })
   })
