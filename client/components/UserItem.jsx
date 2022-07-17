@@ -41,7 +41,7 @@ export default function PageItemTile(props) {
       <Box>
         <Image h='100px' src={imageUrl} />
         <Heading>{itemName}</Heading>
-        <Text>Allergens: {JSON.parse(allergens).join(', ')}</Text>
+        <Text>Allergens: {allergens}</Text>
         <Text>Description: {description}</Text>
         <Text>Expiry: {expiry}</Text>
         {updatedItem.availability === 'Yes' ? (

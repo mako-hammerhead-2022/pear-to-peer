@@ -82,7 +82,7 @@ describe('addNewItem', () => {
   it('adds a new item and then returns new item', () => {
     const dbNewItem = {
       itemName: 'Jalapenos',
-      allergens: JSON.stringify(['None']),
+      allergens: 'None',
       description: 'Spicy jalapenos yum yum',
       expiry: 7, // days from creation
       imageUrl:
