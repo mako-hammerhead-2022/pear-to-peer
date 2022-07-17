@@ -18,8 +18,10 @@ export default function PageItemTile(props) {
   } = props.data
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
+  const [shouldUpdate, setShouldUpdate] = useState(false)
 
   function handleAvailability() {
+    setShouldUpdate(true)
     if (updatedItem.availability === 'Yes') {
       setUpdatedItem({ ...updatedItem, availability: 'No' })
     } else {
@@ -29,7 +31,9 @@ export default function PageItemTile(props) {
   }
 
   useEffect(() => {
-    dispatch(patchItem(updatedItem))
+    if (shouldUpdate) {
+      dispatch(patchItem(updatedItem))
+    }
   }, [updatedItem])
 
   return (

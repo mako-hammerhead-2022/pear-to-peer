@@ -30,10 +30,8 @@ export function AddItemForm() {
   }, [auth0Id])
 
   async function handleSubmit(formData) {
-    const imageUrl = await getImageUrl(
-      formData.image,
-      await getAccessTokenSilently()
-    )
+    const token = await getAccessTokenSilently()
+    const imageUrl = await getImageUrl(formData.image, token)
     const itemToAdd = {
       itemName: formData.itemName,
       allergens: JSON.stringify([formData.allergens]),
@@ -43,8 +41,8 @@ export function AddItemForm() {
       availability: formData.availability,
       userId: id,
     }
-    dispatch(postNewItem(itemToAdd))
-    navigate('/')
+    dispatch(postNewItem({ item: itemToAdd, token }))
+    navigate('/profile')
   }
 
   return (
