@@ -53,9 +53,6 @@ export default function Nav() {
           <Link as={ReactLink} to='/' onClick={handleSignIn}>
             Sign In
           </Link>
-          <Link as={ReactLink} to='/'>
-            About Us
-          </Link>
         </IfNotAuthenticated>
       </VStack>
     </>

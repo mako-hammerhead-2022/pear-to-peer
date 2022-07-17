@@ -43,27 +43,27 @@ export default function Register() {
   function validateName(value) {
     let error
     if (!value) {
-      error = 'Name is required'
+      error = 'Name is required.'
     } else if (value.length < 2 || value.length > 32) {
-      error = 'Please enter a name between 2 and 32 characters'
+      error = 'Please enter a name between 2 and 32 characters.'
     }
     return error
   }
   function validateUsername(value) {
     let error
     if (!value) {
-      error = 'Username is required'
+      error = 'Username is required.'
     } else if (value.length < 2 || value.length > 16) {
-      error = 'Please create a username between 2 and 16 characters'
+      error = 'Please create a username between 2 and 16 characters.'
     }
     return error
   }
   function validatePostcode(value) {
     let error
     if (!value) {
-      error = 'Postcode is required'
+      error = 'Postcode is required.'
     } else if (value.length !== 4) {
-      error = 'Please provide a valid postcode'
+      error = 'Please provide a valid postcode.'
     }
     return error
   }
