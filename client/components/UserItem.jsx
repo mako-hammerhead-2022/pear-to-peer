@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
 import { Link as ReactLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { patchItem } from '@/slices/itemSlice'
+import { patchItem } from '@/slices/currentItem'
 
 export default function PageItemTile(props) {
   const dispatch = useDispatch()

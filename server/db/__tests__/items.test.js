@@ -51,7 +51,7 @@ describe('getItemsByUserId', () => {
 // TEST TO GET ITEM BY ID WITH USER INFO
 // ATTEMPT TO TEST 1
 describe('getItemByIdWithUserInfo', () => {
-  it.skip('returns item with the user info', async () => {
+  it('returns item with the user info', async () => {
     const item = await db.getItemByIdWithUserInfo(2, testDb)
     console.log('This is the item: ', item)
   })

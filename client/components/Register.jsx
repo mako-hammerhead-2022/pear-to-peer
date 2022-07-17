@@ -12,7 +12,7 @@ import {
   NumberInputField,
 } from '@chakra-ui/react'
 import * as Yup from 'yup'
-import { postNewUser } from '@/slices/usersSlice'
+import { postNewUser } from '@/slices/userData'
 
 export default function Register() {
   const navigate = useNavigate()

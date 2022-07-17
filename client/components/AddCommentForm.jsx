@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
 
-import { fetchUserByAuth0Id } from '../slices/usersSlice'
-import { postComment } from '../slices/itemSlice'
+import { fetchUserByAuth0Id } from '@/slices/userData'
+import { postComment } from '@/slices/currentItem'
 
 export default function AddCommentForm({ itemId }) {
   const dispatch = useDispatch()
