@@ -26,6 +26,7 @@ export function updateItem(item) {
   return request
     .patch(`/api/items/update/${item.itemsId}`)
     .send(item)
+    .then((res) => res.body)
     .catch((err) => console.error(err))
 }
 

@@ -16,6 +16,7 @@ import {
   NumberInput,
 } from '@chakra-ui/react'
 import { patchItem } from '@/slices/currentItem'
+import { useNavigate } from 'react-router-dom'
 
 export default function UpdateFoodItem() {
   const { itemName, allergens, description, expiry, availability, imageUrl } =
@@ -23,6 +24,7 @@ export default function UpdateFoodItem() {
 
   const itemId = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(fetchItemById(itemId.id))
@@ -31,7 +33,7 @@ export default function UpdateFoodItem() {
     }
   }, [])
 
-  function handleUpdate(formData) {
+  async function handleUpdate(formData) {
     const itemToUpdate = {
       ...formData,
       itemName: formData.itemName,
@@ -43,6 +45,7 @@ export default function UpdateFoodItem() {
       itemsId: itemId.id,
     }
     dispatch(patchItem(itemToUpdate))
+    navigate('/profile')
   }
 
   return (
