@@ -71,7 +71,7 @@ export const currentItemSlice = createSlice({
       }
     },
     [patchItem.fulfilled]: (state, { payload }) => {
-      return payload
+      return initialState
     },
   },
 })
