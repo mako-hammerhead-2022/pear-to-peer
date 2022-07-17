@@ -22,7 +22,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Scones',
-      allergens: 'eggs', 'nuts', 'dairy',
+      allergens: 'eggs, nuts, dairy',
       description:
         'Scones with love! Made with flour, sugar, baking powder, salt, butter, cream, eggs, and cashews',
       imageUrl:
