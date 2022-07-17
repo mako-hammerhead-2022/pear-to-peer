@@ -28,7 +28,6 @@ export const userItemsSlice = createSlice({
       return payload
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
-      console.log('adding to userItems', payload)
       return [...state, payload]
     },
   },
