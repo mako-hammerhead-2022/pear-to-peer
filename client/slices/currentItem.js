@@ -24,7 +24,7 @@ export const postComment = createAsyncThunk(
 )
 
 export const patchItem = createAsyncThunk(
-  'userItems/patchItem',
+  'currentItem/patchItem',
   async (item) => {
     const response = await updateItemAvailability(item)
     return response
@@ -34,7 +34,12 @@ export const patchItem = createAsyncThunk(
 export const currentItemSlice = createSlice({
   name: 'currentItem',
   initialState,
-  reducers: {},
+  reducers: {
+    // reset: () => initialState,
+    clearCurrentItem: (state, action) => {
+      return initialState
+    },
+  },
   extraReducers: {
     [fetchComments.fulfilled]: (state, { payload }) => {
       return {
@@ -57,6 +62,6 @@ export const currentItemSlice = createSlice({
   },
 })
 
-export const {} = currentItemSlice.actions
+export const { clearCurrentItem } = currentItemSlice.actions
 
 export default currentItemSlice.reducer
