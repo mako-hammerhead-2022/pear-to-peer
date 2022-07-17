@@ -3,28 +3,28 @@ import { Heading, Text, Image, Container } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
-import { fetchAllItems } from '@/slices/itemSlice'
 import Comments from '@/components/Comments'
+import { fetchItemById } from '@/slices/currentItem'
 
 export default function FoodItemPage() {
-  const items = useSelector((state) => state.itemData.items)
+  const item = useSelector((state) => state.currentItem)
   const { isAuthenticated } = useAuth0()
   const productId = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllItems())
-  }, [])
+    dispatch(fetchItemById(productId.id))
 
-  const item = items.find((item) => {
-    return item.itemsId == productId.id
-  })
+    // return (
+    //   dispatch(clearCurrentItem())
+    // )
+  }, [])
 
   if (!item) return <p>Loading...</p>
 
   return (
     <>
-      {isAuthenticated && (
+      {isAuthenticated && item && (
         <Container>
           <Image src={item?.imageUrl} />
           <Heading>{item?.itemName}</Heading>
@@ -34,7 +34,7 @@ export default function FoodItemPage() {
           <Text>Availability: {item?.availability}</Text>
           <Text>Location: {item?.postcode}</Text>
           <Text>User: {item?.username}</Text>
-          <Comments />
+          <Comments itemId={productId.id} />
         </Container>
       )}
     </>

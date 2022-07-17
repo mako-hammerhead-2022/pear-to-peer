@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
+import { fetchAllItems } from '@/slices/allAvailableItems'
 import { useAuth0 } from '@auth0/auth0-react'
-import { fetchAllItems } from '@/slices/itemSlice'
 
 import { Container, Grid, GridItem, Heading } from '@chakra-ui/react'
 import FoodItemTile from '@/components/FoodItemTile'
 
 export default function Home() {
-  const items = useSelector((state) => state.itemData.items)
+  const items = useSelector((state) => state.allAvailableItems)
   const { isAuthenticated } = useAuth0()
   const dispatch = useDispatch()
 

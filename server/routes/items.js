@@ -38,8 +38,8 @@ router.get('/', (req, res) => {
     })
 })
 
-// GET an item by the user ID
-router.get('/:id', (req, res) => {
+// GET items by the user ID
+router.get('/byUser/:id', (req, res) => {
   const userId = req.params.id
   db.getItemsByUserId(userId)
     .then((userItems) => {
@@ -47,6 +47,20 @@ router.get('/:id', (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({ message: 'Something went wrong' })
+    })
+})
+
+// Get an item by it's id
+router.get('/:id', (req, res) => {
+  const id = Number(req.params.id)
+  db.getItemByIdWithUserInfo(id)
+    .then((item) => {
+      res.json(item)
+    })
+    .catch((err) => {
+      console.error(err)
+      // res.status(500).send({ message: 'Something went wrong' })
+      res.status(500).send(err.message)
     })
 })
 

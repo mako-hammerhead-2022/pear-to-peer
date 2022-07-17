@@ -14,8 +14,8 @@ import {
   NumberInputField,
   NumberInput,
 } from '@chakra-ui/react'
-import { postNewItem } from '@/slices/itemSlice'
-import { fetchUserByAuth0Id } from '@/slices/usersSlice'
+import { postNewItem } from '@/slices/userItems'
+import { fetchUserByAuth0Id } from '@/slices/userData'
 import { useNavigate } from 'react-router-dom'
 
 export function AddItemForm() {

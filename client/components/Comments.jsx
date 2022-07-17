@@ -3,23 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Heading } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 
-import { fetchComments } from '@/slices/itemSlice'
+import { fetchComments } from '@/slices/currentItem'
 
 import AddCommentForm from '@/components/AddCommentForm'
 
-export default function Comments() {
-  const { id: itemsId } = useParams()
+export default function Comments({ itemId }) {
   const dispatch = useDispatch()
-  const allItems = useSelector((state) => state.itemData.items)
-  const [comments, setComments] = useState(null)
+  const comments = useSelector((state) => state.currentItem.comments)
 
   useEffect(() => {
-    dispatch(fetchComments(itemsId))
+    dispatch(fetchComments(itemId))
   }, [])
-
-  useEffect(() => {
-    setComments(allItems.find((item) => item.itemsId == itemsId).comments)
-  }, [allItems])
 
   return (
     <>
@@ -36,7 +30,7 @@ export default function Comments() {
           })}
         </ul>
       )}
-      <AddCommentForm itemId={itemsId} />
+      <AddCommentForm itemId={itemId} />
     </>
   )
 }

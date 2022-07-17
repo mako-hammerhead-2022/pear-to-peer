@@ -12,8 +12,12 @@ export async function addItem(item) {
     .catch((err) => console.error(err))
 }
 
-export function getAllItemsByUserId(id) {
+export function getItemById(id) {
   return request.get(`/api/items/${id}`).then((res) => res.body)
+}
+
+export function getAllItemsByUserId(id) {
+  return request.get(`/api/items/byUser/${id}`).then((res) => res.body)
 }
 
 export function updateItem(id, item) {

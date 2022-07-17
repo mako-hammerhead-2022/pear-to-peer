@@ -52,7 +52,8 @@ function getItemByIdWithUserInfo(itemId, db = connection) {
       'expiry',
       'availability'
     )
-    .where('item.id', itemId)
+    .where('items.id', itemId)
+    .first()
 }
 
 //helper
