@@ -11,11 +11,12 @@ export default function PageItemTile(props) {
     imageUrl,
     itemName,
     allergens,
-    // username,
+    createdAt,
     description,
     expiry,
     availability,
   } = props.data
+  console.log(props, 'is props')
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
   const [shouldUpdate, setShouldUpdate] = useState(false)
@@ -43,7 +44,7 @@ export default function PageItemTile(props) {
         <Heading>{itemName}</Heading>
         <Text>Allergens: {allergens}</Text>
         <Text>Description: {description}</Text>
-        <Text>Expiry: {expiry}</Text>
+        <Text>Date Posted: {createdAt}</Text>
         {updatedItem.availability === 'Yes' ? (
           <Button onClick={handleAvailability} colorScheme='teal'>
             Make Unavailable

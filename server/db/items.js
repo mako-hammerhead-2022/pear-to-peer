@@ -33,7 +33,8 @@ function getItemsByUserId(userId, db = connection) {
       'description',
       'imageUrl',
       'expiry',
-      'availability'
+      'availability',
+      'createdAt'
     )
     .where('users.id', userId)
 }
