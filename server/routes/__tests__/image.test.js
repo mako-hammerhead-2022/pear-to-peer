@@ -40,11 +40,13 @@ afterAll(() => {
 })
 
 describe('POST /api/image', () => {
-  it.skip('should return a url for the client to upload their image', async () => {
+  it('should return a url for the client to upload their image', async () => {
+    expect.assertions(1)
+
     const res = await request(server)
       .post('/api/image')
       .send({ fileName: 'image.jpg', fileType: 'jpg' })
 
-    expect(Object.keys(res.body)).toContain('image.jpg')
+    expect(Object.keys(res.body)).toContain('image.url')
   })
 })
