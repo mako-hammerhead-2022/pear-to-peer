@@ -9,6 +9,7 @@ export async function addItem(item, token) {
     .post(`/api/items`)
     .set('Authorization', `Bearer ${token}`)
     .send(item)
+    .then((res) => res.body)
     .catch((err) => console.error(err))
 }
 

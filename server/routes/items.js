@@ -78,8 +78,8 @@ router.post('/', checkJwt, async (req, res) => {
   }
   return db
     .insertItem(newItem)
-    .then(() => {
-      res.sendStatus(201)
+    .then((dbItem) => {
+      res.json(dbItem)
     })
     .catch((err) => {
       console.error(err)

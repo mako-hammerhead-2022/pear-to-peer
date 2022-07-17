@@ -15,7 +15,7 @@ export const postNewItem = createAsyncThunk(
   'userItems/postNew',
   async ({ item, token }) => {
     const response = await addItem(item, token)
-    return response.body
+    return response
   }
 )
 
@@ -28,6 +28,7 @@ export const userItemsSlice = createSlice({
       return payload
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
+      console.log('adding to userItems', payload)
       return [...state, payload]
     },
   },
