@@ -60,8 +60,26 @@ export default function Register() {
     let error
     if (!value) {
       error = 'Name is required'
-    } else if (value.length < 2 || 32) {
-      error = "Jeez! You're not a fan 😱"
+    } else if (value.length < 2 || value.length > 32) {
+      error = 'Please enter a name between 2 and 32 characters'
+    }
+    return error
+  }
+  function validateUsername(value) {
+    let error
+    if (!value) {
+      error = 'Username is required'
+    } else if (value.length < 2 || value.length > 16) {
+      error = 'Please create a username between 2 and 16 characters'
+    }
+    return error
+  }
+  function validatePostcode(value) {
+    let error
+    if (!value) {
+      error = 'Postcode is required'
+    } else if (value.length !== 4) {
+      error = 'Please provide a valid postcode'
     }
     return error
   }
@@ -103,30 +121,36 @@ export default function Register() {
                   </FormControl>
                 )}
               </Field>
-              <Field name='username'>
-                {({ field }) => (
-                  <FormControl isRequired>
+              <Field name='username' validate={validateUsername}>
+                {({ field, form }) => (
+                  <FormControl
+                    isRequired
+                    isInvalid={form.errors.username && form.touched.username}
+                  >
                     <FormLabel htmlFor='username'>Display name:</FormLabel>
                     <Input {...field} id='username'></Input>
+                    <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
               {/* TODO: validate postcode, only allow numbers */}
-              <Field name='postcode'>
-                {props.errors.postcode && props.touched.postcode ? (
-                  <div>{props.errors.postcode}</div>
-                ) : (
-                  ({ field }) => (
-                    <FormControl isRequired>
-                      <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
-                      <NumberInput id='postcode' max={9999} min={100}>
-                        <NumberInputField
-                          {...field}
-                          id='postcode'
-                        ></NumberInputField>
-                      </NumberInput>
-                    </FormControl>
-                  )
+              <Field name='postcode' validate={validatePostcode}>
+                {({ field, form }) => (
+                  <FormControl
+                    isRequired
+                    isInvalid={form.errors.postcode && form.touched.postcode}
+                  >
+                    <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
+                    <NumberInput id='postcode' max={9999} min={100}>
+                      <FormErrorMessage>
+                        {form.errors.postcode}
+                      </FormErrorMessage>
+                      <NumberInputField
+                        {...field}
+                        id='postcode'
+                      ></NumberInputField>
+                    </NumberInput>
+                  </FormControl>
                 )}
               </Field>
               <Button mt={4} colorScheme='teal' type='submit'>
