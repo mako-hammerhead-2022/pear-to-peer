@@ -20,10 +20,10 @@ function App() {
       <Container centerContent>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route exact path='/' element={<Home />} />
+            <Route exact path='/home' element={<Home />} />
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/profile' element={<Profile />} />
-            <Route exact path='/aboutus' element={<AboutUs />} />
+            <Route exact path='/' element={<AboutUs />} />
             <Route exact path='/addfooditem' element={<AddItemForm />} />
             <Route exact path='/item/:id' element={<FoodItemPage />} />
           </Route>

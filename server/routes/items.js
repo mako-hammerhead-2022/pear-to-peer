@@ -52,7 +52,7 @@ router.get('/:id', (req, res) => {
 
 // POST items (by the user)
 //checkJwt
-router.post('/', async (req, res) => {
+router.post('/', checkJwt, async (req, res) => {
   const newItem = {
     itemName: req.body.itemName,
     allergens: req.body.allergens,
@@ -64,8 +64,8 @@ router.post('/', async (req, res) => {
   }
   return db
     .insertItem(newItem)
-    .then((newItem) => {
-      return res.json(newItem)
+    .then(() => {
+      res.sendStatus(201)
     })
     .catch((err) => {
       console.error(err)
@@ -77,7 +77,6 @@ router.post('/', async (req, res) => {
 //checkJwt
 router.patch('/:id', (req, res) => {
   const updatedItem = req.body
-  console.log('what is this', updatedItem)
   return db
     .updateItem(updatedItem)
     .then((patchItem) => {

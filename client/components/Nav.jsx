@@ -30,10 +30,10 @@ export default function Nav() {
     <>
       <VStack>
         <IfAuthenticated>
-          <Link as={ReactLink} to='/aboutus'>
+          <Link as={ReactLink} to='/'>
             About Us
           </Link>
-          <Link as={ReactLink} to='/'>
+          <Link as={ReactLink} to='/home'>
             Home
           </Link>
           <Link as={ReactLink} to='/profile'>
@@ -52,6 +52,9 @@ export default function Nav() {
           </Link>
           <Link as={ReactLink} to='/' onClick={handleSignIn}>
             Sign In
+          </Link>
+          <Link as={ReactLink} to='/'>
+            About Us
           </Link>
         </IfNotAuthenticated>
       </VStack>

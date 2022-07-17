@@ -23,7 +23,7 @@ export function AddItemForm() {
   const { auth0Id, id } = useSelector((state) => state.userData)
 
   const navigate = useNavigate()
-  const { getAccessTokenSilently } = useAuth0()
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0()
 
   useEffect(() => {
     dispatch(fetchUserByAuth0Id(auth0Id))
@@ -141,15 +141,17 @@ export function AddItemForm() {
 
             <Container centerContent>
               <div>
-                <Button
-                  type='submit'
-                  isLoading={props.isSubmitting}
-                  colorScheme='teal'
-                  m={2}
-                  onClick={props.handleSubmit}
-                >
-                  Add Item
-                </Button>
+                {isAuthenticated && (
+                  <Button
+                    type='submit'
+                    isLoading={props.isSubmitting}
+                    colorScheme='teal'
+                    m={2}
+                    onClick={props.handleSubmit}
+                  >
+                    Add Item
+                  </Button>
+                )}
               </div>
             </Container>
           </Form>
