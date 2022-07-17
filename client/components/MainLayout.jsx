@@ -2,8 +2,8 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Grid, GridItem } from '@chakra-ui/react'
 
-import Header from './Header'
-import Nav from './Nav'
+import Header from '@/components/Header'
+import Nav from '@/components/Nav'
 
 export default function MainLayout() {
   return (
@@ -27,7 +27,6 @@ export default function MainLayout() {
       <GridItem pl='2' bg='#f2f2f2' area={'main'}>
         <Outlet />
       </GridItem>
-      {/* <h1>Pear to Peer</h1> */}
     </Grid>
   )
 }

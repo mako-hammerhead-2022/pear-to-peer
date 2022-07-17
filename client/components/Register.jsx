@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Field, Form, Formik } from 'formik'
 import {
@@ -12,7 +12,7 @@ import {
   NumberInputField,
 } from '@chakra-ui/react'
 import * as Yup from 'yup'
-import { postNewUser } from '../slices/usersSlice'
+import { postNewUser } from '@/slices/usersSlice'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -68,21 +68,8 @@ export default function Register() {
         >
           {(props) => (
             <Form>
-              <Field name='auth0Id'>
-                {({ field, form }) => (
-                  <FormControl>
-                    <FormLabel htmlFor='auth0Id'>Auth0 ID:</FormLabel>
-                    <Input
-                      {...field}
-                      id='auth0Id'
-                      value={props.values.auth0Id}
-                      disabled
-                    ></Input>
-                  </FormControl>
-                )}
-              </Field>
               <Field name='email'>
-                {({ field, form }) => (
+                {({ field }) => (
                   <FormControl>
                     <FormLabel htmlFor='email'>Email:</FormLabel>
                     <Input
@@ -95,7 +82,7 @@ export default function Register() {
                 )}
               </Field>
               <Field name='name'>
-                {({ field, form }) => (
+                {({ field }) => (
                   <FormControl isRequired>
                     <FormLabel htmlFor='name'>Your name:</FormLabel>
                     <Input {...field} id='name'></Input>
@@ -103,7 +90,7 @@ export default function Register() {
                 )}
               </Field>
               <Field name='username'>
-                {({ field, form }) => (
+                {({ field }) => (
                   <FormControl isRequired>
                     <FormLabel htmlFor='username'>Display name:</FormLabel>
                     <Input {...field} id='username'></Input>
@@ -115,7 +102,7 @@ export default function Register() {
                 {props.errors.postcode && props.touched.postcode ? (
                   <div>{props.errors.postcode}</div>
                 ) : (
-                  ({ field, form }) => (
+                  ({ field }) => (
                     <FormControl isRequired>
                       <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
                       <NumberInput id='postcode' max={9999} min={100}>
@@ -137,23 +124,6 @@ export default function Register() {
       ) : (
         <p>Loading..</p>
       )}
-      {/* <label htmlFor='auth0Id'>Auth0 Id:</label>
-        <input
-          type='text'
-          id='auth0Id'
-          name='auth0Id'
-          value={form.auth0Id}
-          disabled
-        />
-        <label htmlFor='email'>Email:</label>
-        <input
-          type='text'
-          id='email'
-          name='email'
-          value={form.email}
-          disabled
-        />
-        <button onClick={handleClick}>Register</button> */}
     </div>
   )
 }

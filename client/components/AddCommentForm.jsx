@@ -7,7 +7,7 @@ import { postComment } from '../slices/itemSlice'
 
 export default function AddCommentForm({ itemId }) {
   const dispatch = useDispatch()
-  const { user, getAccessTokenSilently } = useAuth0()
+  const { user } = useAuth0()
   const [input, setInput] = useState('')
   const { id: userId } = useSelector((state) => state.userData)
   const auth0Id = user?.sub
@@ -23,7 +23,6 @@ export default function AddCommentForm({ itemId }) {
         itemId,
         comment: input,
       }
-      console.log('dipatching comment', newComment)
       dispatch(postComment(newComment))
       setInput('')
     }

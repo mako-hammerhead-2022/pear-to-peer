@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Heading } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 
-import { fetchComments } from '../slices/itemSlice'
+import { fetchComments } from '@/slices/itemSlice'
 
-import AddCommentForm from './AddCommentForm'
+import AddCommentForm from '@/components/AddCommentForm'
 
 export default function Comments() {
   const { id: itemsId } = useParams()

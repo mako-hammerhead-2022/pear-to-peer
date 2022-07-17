@@ -1,27 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
-  // getAllItems,
   addItem,
   getAllItemsWithUserInfo,
   getAllItemsByUserId,
   updateItemAvailability,
-  // getItemById,
 } from '@/apiClient/items'
-import { getCommentsByItemId } from '@/apiClient/comments'
-// import {
-//   getItemByIdWithUserInfo,
-//   getItemsByUserId,
-// } from '../../server/db/items'
-
-import { addComment } from '../apiClient/comments'
+import { getCommentsByItemId, addComment } from '@/apiClient/comments'
 
 const initialState = { items: [] }
-
-// export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
-//   const response = await getAllItems()
-//   console.log('response is', response)
-//   return response
-// })
 
 export const fetchAllItems = createAsyncThunk('items/fetchAll', async () => {
   const response = await getAllItemsWithUserInfo()
@@ -47,14 +33,8 @@ export const fetchItemsByUserId = createAsyncThunk(
   }
 )
 
-// export const updateItem = createAsyncThunk('items/updateItem', async (item) => {
-//   const response = await getItemById(item)
-//   return response
-// })
-
 export const patchItem = createAsyncThunk('items/patchItem', async (item) => {
   const response = await updateItemAvailability(item)
-
   return response
 })
 
@@ -69,15 +49,7 @@ export const postComment = createAsyncThunk(
 export const itemSlice = createSlice({
   name: 'itemData',
   initialState,
-  reducers: {
-    // setAllItems: (state, {payload}) => {
-    //   return {...state, }
-    // },
-    setNewItem: (state, { payload }) => {
-      return { ...state, ...payload.userToSave }
-    },
-  },
-
+  reducers: {},
   extraReducers: {
     [fetchAllItems.fulfilled]: (state, { payload }) => {
       return { ...state, items: payload }
@@ -99,7 +71,6 @@ export const itemSlice = createSlice({
       return { ...state, items: payload }
     },
     [postComment.fulfilled]: (state, { payload }) => {
-      console.log('postCommentPayload', payload)
       return {
         ...state,
         items: state.items.map((item) => {
@@ -115,7 +86,6 @@ export const itemSlice = createSlice({
       }
     },
     [patchItem.fulfilled]: (state, { payload }) => {
-      console.log('pathc item fulfilled payload', payload)
       return {
         ...state,
         items: state.items.map((item) => {
@@ -125,6 +95,6 @@ export const itemSlice = createSlice({
     },
   },
 })
-export const { setNewItem } = itemSlice.actions
+export const {} = itemSlice.actions
 
 export default itemSlice.reducer

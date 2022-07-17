@@ -4,10 +4,11 @@ import { Link, VStack } from '@chakra-ui/react'
 
 import { useAuth0 } from '@auth0/auth0-react'
 
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import { IfAuthenticated, IfNotAuthenticated } from '@/components/Authenticated'
 
 export default function Nav() {
   const { logout, loginWithRedirect } = useAuth0()
+
   function handleLogoff(e) {
     e.preventDefault()
     logout({ returnTo: window.location.origin })
@@ -24,6 +25,7 @@ export default function Nav() {
     e.preventDefault()
     loginWithRedirect()
   }
+
   return (
     <>
       <VStack>
@@ -55,13 +57,4 @@ export default function Nav() {
       </VStack>
     </>
   )
-}
-
-// 1. import { Link as ReachLink } from "@reach/router"
-
-// 2. Then use it like this
-{
-  /* <Link as={ReachLink} to='/home'>
-  Home
-</Link> */
 }

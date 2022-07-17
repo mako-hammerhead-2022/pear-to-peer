@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
-import { addItem, getImageUrl } from '../apiClient/items'
+import { getImageUrl } from '@/apiClient/items'
 import { Formik, Form, Field } from 'formik'
 import {
   FormLabel,
@@ -14,13 +14,12 @@ import {
   NumberInputField,
   NumberInput,
 } from '@chakra-ui/react'
-import { postNewItem } from '../slices/itemSlice'
-import { fetchUserByAuth0Id } from '../slices/usersSlice'
+import { postNewItem } from '@/slices/itemSlice'
+import { fetchUserByAuth0Id } from '@/slices/usersSlice'
 import { useNavigate } from 'react-router-dom'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
-  const item = useSelector((state) => state.itemData)
   const { auth0Id, id } = useSelector((state) => state.userData)
 
   const navigate = useNavigate()
@@ -31,15 +30,10 @@ export function AddItemForm() {
   }, [auth0Id])
 
   async function handleSubmit(formData) {
-    console.log('formData', formData)
-    console.log('file', formData.image)
-
     const imageUrl = await getImageUrl(
       formData.image,
       await getAccessTokenSilently()
     )
-
-    console.log('imageUrl', imageUrl)
     const itemToAdd = {
       itemName: formData.itemName,
       allergens: JSON.stringify([formData.allergens]),

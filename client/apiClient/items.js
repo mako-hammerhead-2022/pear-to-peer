@@ -1,15 +1,14 @@
 import request from 'superagent'
 
-// export function getAllItems() {
-//   return request.get('/api/items/').then((res) => res.body)
-// }
-
 export function getAllItemsWithUserInfo() {
   return request.get('/api/items/').then((res) => res.body)
 }
 
 export async function addItem(item) {
-  return request.post(`/api/items`).send(item).catch(logError)
+  return request
+    .post(`/api/items`)
+    .send(item)
+    .catch((err) => console.error(err))
 }
 
 export function getAllItemsByUserId(id) {
@@ -17,7 +16,10 @@ export function getAllItemsByUserId(id) {
 }
 
 export function updateItem(id, item) {
-  return request.patch(`/api/items/update/${id}`).send(item).catch(logError)
+  return request
+    .patch(`/api/items/update/${id}`)
+    .send(item)
+    .catch((err) => console.error(err))
 }
 
 export function updateItemAvailability(item) {
@@ -28,7 +30,7 @@ export function updateItemAvailability(item) {
     .patch(`/api/items/${item.itemsId}`)
     .send(item)
     .then((res) => ({ ...res.body, itemsId: res.body.id }))
-    .catch(logError)
+    .catch((err) => console.error(err))
 }
 
 export async function getImageUrl(file, token) {
@@ -36,7 +38,6 @@ export async function getImageUrl(file, token) {
     fileName: file.name,
     fileType: file.type,
   }
-  console.log('getImageUrl', fileObject)
   const { signedUrl } = await request
     .post('/api/image')
     .set('authorization', `Bearer ${token}`)
@@ -49,16 +50,4 @@ export async function getImageUrl(file, token) {
     .then(() => {
       return signedUrl.split('?')[0]
     })
-}
-
-function logError(err) {
-  if (err.message === 'Forbidden') {
-    //   throw new Error(
-    //     'Only the user who added the fruit may update and delete it'
-    //   )
-    // } else {
-    // eslint-disable-next-line no-console
-    console.error('Error consuming the API (in client/api.js):', err.message)
-    throw err
-  }
 }

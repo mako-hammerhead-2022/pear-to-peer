@@ -16,15 +16,6 @@ afterAll(async () => {
   await testDb.destroy()
 })
 
-// describe('getAllItems', () => {
-//   it('should return an array of all items', async () => {
-//     const items = await db.getAllItems(testDb)
-
-//     expect(items).toHaveLength(3)
-//     expect(items[0].itemName).toBe('Hummus')
-//   })
-// })
-
 describe('getAllItemsWithUserInfo', () => {
   it('should return items along with the users info', async () => {
     const items = await db.getAllItemsWithUserInfo(testDb)
@@ -94,9 +85,8 @@ describe('addNewItem', () => {
       allergens: JSON.stringify(['None']),
       description: 'Spicy jalapenos yum yum',
       expiry: 7, // days from creation
-      imageUrl: JSON.stringify([
+      imageUrl:
         'https://images.themodernproper.com/billowy-turkey/production/posts/2020/Chicken-Empanada-14.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1599768574&s=e3b5e8fe53c559c704cad71e33d367e5',
-      ]),
       availability: 'Yes',
       userId: 2,
     }
@@ -113,5 +103,5 @@ describe('addNewItem', () => {
 })
 
 describe('updateItemAvailability', () => {
-  it('updates the availability of an item')
+  it.todo('updates the availability of an item')
 })

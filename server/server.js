@@ -22,7 +22,6 @@ server.use('/api/*', (req, res) =>
 
 server.get('*', (req, res) => {
   try {
-    //res.sendFile(path.join(__dirname, 'public/index.html')) // benjamin's change
     const html = fs.readFileSync(
       path.resolve(__dirname, '../dist/index.html'),
       'utf8'

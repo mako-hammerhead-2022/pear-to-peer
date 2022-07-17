@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
-import { Link as ReactLink, useLocation } from 'react-router-dom'
+import { Link as ReactLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { patchItem } from '../slices/itemSlice'
+import { patchItem } from '@/slices/itemSlice'
 
 export default function PageItemTile(props) {
   const dispatch = useDispatch()
@@ -25,7 +25,6 @@ export default function PageItemTile(props) {
     } else {
       setUpdatedItem({ ...updatedItem, availability: 'Yes' })
     }
-    console.log('updatedItem', updatedItem)
     // await dispatch(patchItem({ ...updatedItem }))
   }
 

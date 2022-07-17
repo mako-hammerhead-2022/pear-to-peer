@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { Heading, Text, Image, Container, Button } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { fetchAllItems } from '../slices/itemSlice'
-import Comments from './Comments'
+import { fetchAllItems } from '@/slices/itemSlice'
+import Comments from '@/components/Comments'
 
-export default function FoodItemPage(props) {
+export default function FoodItemPage() {
   const items = useSelector((state) => state.itemData.items)
-  let productId = useParams()
+  const productId = useParams()
 
   const dispatch = useDispatch()
 
@@ -18,7 +18,9 @@ export default function FoodItemPage(props) {
   const item = items.find((item) => {
     return item.itemsId == productId.id
   })
+
   if (!item) return <p>Loading...</p>
+
   return (
     <>
       <Container>
@@ -30,7 +32,6 @@ export default function FoodItemPage(props) {
         <Text>Availability: {item?.availability}</Text>
         <Text>Location: {item?.postcode}</Text>
         <Text>User: {item?.username}</Text>
-        {/* <Button>Add Comment</Button> */}
         <Comments />
       </Container>
     </>

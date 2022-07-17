@@ -44,7 +44,6 @@ describe('POST /api/image', () => {
     const res = await request(server)
       .post('/api/image')
       .send({ fileName: 'image.jpg', fileType: 'jpg' })
-    console.log('test res is', res.body.signedUrl)
 
     expect(Object.keys(res.body)).toContain('image.jpg')
   })

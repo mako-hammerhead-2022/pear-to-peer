@@ -1,11 +1,8 @@
 const knex = require('knex')
 const testConfig = require('../knexfile').test
-// Ask Mat how this testConfig works :D
 const testDb = knex(testConfig)
 
 const db = require('../users')
-
-// import dbNewUser from '../../../test/fake-data'
 
 beforeAll(async () => {
   await testDb.migrate.latest()
@@ -59,30 +56,3 @@ describe('createUser', () => {
     expect(newUser.postcode).toBeLessThan(9999)
   })
 })
-
-// describe('createUser', () => {
-//   it('should add a new user', () => {
-//     const dbNewUser = {
-//       id: 9,
-//       auth0Id: '',
-//       name: 'Curious George',
-//       username: 'curiosityFTW',
-//       email: 'whatIsThat@example.com',
-//       postcode: 5019,
-//     }
-//     return db
-//       .createUser(dbNewUser, testDb)
-//       .then(([{ auth0Id }]) => {
-//         return db.getUserByAuth0Id(auth0Id, testDb)
-//       })
-//       .then((user) => {
-//         expect(user).toEqual({
-//           ...dbNewUser,
-//           name: expect.anything(),
-//           username: expect.anything(),
-//           postcode: expect(postcode).toBeGreaterThanOrEqual(110),
-//           postcode: expect(postcode).toBeLessThan(9999),
-//         })
-//       })
-//   })
-// })

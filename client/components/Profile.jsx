@@ -1,9 +1,9 @@
 import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchUserByAuth0Id } from '../slices/usersSlice'
-import { fetchItemsByUserId } from '../slices/itemSlice'
-import PageItemTile from './UserItem'
+import { fetchUserByAuth0Id } from '@/slices/usersSlice'
+import { fetchItemsByUserId } from '@/slices/itemSlice'
+import PageItemTile from '@/components/UserItem'
 
 export default function Profile() {
   const { auth0Id, email, postcode, name, username, id } = useSelector(
