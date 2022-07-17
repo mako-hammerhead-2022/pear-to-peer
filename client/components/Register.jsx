@@ -10,6 +10,7 @@ import {
   Input,
   NumberInput,
   NumberInputField,
+  FormErrorMessage,
 } from '@chakra-ui/react'
 import * as Yup from 'yup'
 import { postNewUser } from '@/slices/userData'
@@ -40,20 +41,30 @@ export default function Register() {
     navigate('/')
   }
 
-  const RegisterSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(32, 'Too Long!')
-      .required('Required'),
-    username: Yup.string()
-      .min(2, 'Too Short!')
-      .max(16, 'Too Long!')
-      .required('Required'),
-    postcode: Yup.number()
-      .min(110, 'Too low for a postcode!')
-      .max(9999, 'Too high for a postcode!')
-      .required('Required'), //0110 - 9999
-  })
+  // const RegisterSchema = Yup.object().shape({
+  //   name: Yup.string()
+  //     .min(2, 'Too Short!')
+  //     .max(32, 'Too Long!')
+  //     .required('Required'),
+  //   username: Yup.string()
+  //     .min(2, 'Too Short!')
+  //     .max(16, 'Too Long!')
+  //     .required('Required'),
+  //   postcode: Yup.number()
+  //     .min(110, 'Too low for a postcode!')
+  //     .max(9999, 'Too high for a postcode!')
+  //     .required('Required'), //0110 - 9999
+  // })
+
+  function validateName(value) {
+    let error
+    if (!value) {
+      error = 'Name is required'
+    } else if (value.length < 2 || 32) {
+      error = "Jeez! You're not a fan 😱"
+    }
+    return error
+  }
 
   //TODO: handle loading state
 
@@ -63,7 +74,6 @@ export default function Register() {
       {form.auth0Id != '' ? (
         <Formik
           initialValues={{ ...form, name: '', username: '', postcode: '' }}
-          validationSchema={RegisterSchema}
           onSubmit={(values) => handleSubmit(values)}
         >
           {(props) => (
@@ -81,11 +91,15 @@ export default function Register() {
                   </FormControl>
                 )}
               </Field>
-              <Field name='name'>
-                {({ field }) => (
-                  <FormControl isRequired>
+              <Field name='name' validate={validateName}>
+                {({ field, form }) => (
+                  <FormControl
+                    isRequired
+                    isInvalid={form.errors.name && form.touched.name}
+                  >
                     <FormLabel htmlFor='name'>Your name:</FormLabel>
                     <Input {...field} id='name'></Input>
+                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
