@@ -35,7 +35,7 @@ exports.seed = async function (knex) {
 
     {
       itemName: 'Chicken Empanadas',
-      allergens: 'poultry', 'eggs', 'dairy',
+      allergens: 'poultry, eggs, dairy',
       description:
         'Empanadas are a type of pastry that is filled with meat and cooked vegetables. Made with chicken, eggs, butter, carrots, green peas, potato, and raisins',
       imageUrl:

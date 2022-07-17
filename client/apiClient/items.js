@@ -21,10 +21,12 @@ export function getAllItemsByUserId(id) {
   return request.get(`/api/items/byUser/${id}`).then((res) => res.body)
 }
 
-export function updateItem(id, item) {
+export function updateItem(item) {
+  console.log('api item', item)
   return request
-    .patch(`/api/items/update/${id}`)
+    .patch(`/api/items/update/${item.itemsId}`)
     .send(item)
+    .then((res) => res.body)
     .catch((err) => console.error(err))
 }
 
