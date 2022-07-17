@@ -12,7 +12,6 @@ import {
   NumberInputField,
   FormErrorMessage,
 } from '@chakra-ui/react'
-import * as Yup from 'yup'
 import { postNewUser } from '@/slices/userData'
 
 export default function Register() {
@@ -40,21 +39,6 @@ export default function Register() {
     dispatch(postNewUser(userToSave))
     navigate('/')
   }
-
-  // const RegisterSchema = Yup.object().shape({
-  //   name: Yup.string()
-  //     .min(2, 'Too Short!')
-  //     .max(32, 'Too Long!')
-  //     .required('Required'),
-  //   username: Yup.string()
-  //     .min(2, 'Too Short!')
-  //     .max(16, 'Too Long!')
-  //     .required('Required'),
-  //   postcode: Yup.number()
-  //     .min(110, 'Too low for a postcode!')
-  //     .max(9999, 'Too high for a postcode!')
-  //     .required('Required'), //0110 - 9999
-  // })
 
   function validateName(value) {
     let error
