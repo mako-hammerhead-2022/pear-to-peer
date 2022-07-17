@@ -9,6 +9,7 @@ import NotFound from '@/components/NotFound'
 import AboutUs from '@/components/AboutUs'
 import FoodItemPage from '@/components/FoodItemPage'
 import AddItemForm from '@/components/AddItemForm'
+import UpdateFoodItem from '@/components/UpdateFoodItem'
 import { Container } from '@chakra-ui/react'
 import { cacheUser } from '@/auth0-utils'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -26,6 +27,7 @@ function App() {
             <Route exact path='/' element={<AboutUs />} />
             <Route exact path='/addfooditem' element={<AddItemForm />} />
             <Route exact path='/item/:id' element={<FoodItemPage />} />
+            <Route exact path='/item/update/:id' element={<UpdateFoodItem />} />
           </Route>
 
           <Route path='*' element={<NotFound />} />
