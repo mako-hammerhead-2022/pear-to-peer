@@ -37,15 +37,17 @@ describe('getCommentsByItemIdWithAuthor', () => {
 describe('addComment', () => {
   it('adds a comment to the db and returns the new comment object', async () => {
     const newComment = {
-      authorId: 1,
+      auth0Id: 'auth0|1',
       itemId: 2,
       comment: 'Colourful Comment',
     }
     const actual = await db.addComment(newComment, testDb)
 
     expect(actual).toEqual({
-      ...newComment,
-      commentId: 4,
+      itemId: 2,
+      comment: 'Colourful Comment',
+      authorId: 1,
+      commentId: 5,
       timestamp: expect.anything(),
       authorName: 'HairyHarry123',
     })

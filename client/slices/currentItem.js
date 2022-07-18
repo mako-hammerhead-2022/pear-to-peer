@@ -17,8 +17,8 @@ export const fetchComments = createAsyncThunk(
 
 export const postComment = createAsyncThunk(
   'currentItem/postComment',
-  async (newComment) => {
-    const response = await addComment(newComment)
+  async ({ newComment, token }) => {
+    const response = await addComment(newComment, token)
     return response
   }
 )
@@ -26,7 +26,6 @@ export const postComment = createAsyncThunk(
 export const patchItem = createAsyncThunk(
   'currentItem/patchItem',
   async (item) => {
-    console.log('currentitem for redux thingy is', item)
     const response = await updateItem(item)
 
     return response

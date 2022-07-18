@@ -4,11 +4,11 @@
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex('users').del()
+  await knex('users').truncate()
   await knex('users').insert([
     {
       id: 1,
-      auth0Id: '',
+      auth0Id: 'auth0|1',
       name: 'Harry Horatio',
       username: 'HairyHarry123',
       email: 'heyharry@example.com',
@@ -17,7 +17,7 @@ exports.seed = async function (knex) {
 
     {
       id: 2,
-      auth0Id: '',
+      auth0Id: 'auth0|2',
       name: 'Sally Slippers',
       username: 'SlipsAllDay',
       email: 'sandals1@example.com',
@@ -26,7 +26,7 @@ exports.seed = async function (knex) {
 
     {
       id: 3,
-      auth0Id: '',
+      auth0Id: 'auth0|3',
       name: 'Edward Clippers',
       username: 'E-clips-E',
       email: 'clippityclap_3@example.com',
@@ -35,7 +35,7 @@ exports.seed = async function (knex) {
 
     {
       id: 4,
-      auth0Id: '',
+      auth0Id: 'auth0|4',
       name: 'L.A. Leh',
       username: 'la.la.la',
       email: 'la.la.la@example.com',
@@ -44,7 +44,7 @@ exports.seed = async function (knex) {
 
     {
       id: 5,
-      auth0Id: '',
+      auth0Id: 'auth0|5',
       name: 'Scott Carew',
       username: 'carooo.scott',
       email: 'scott.caroo@example.com',
@@ -53,7 +53,7 @@ exports.seed = async function (knex) {
 
     {
       id: 6,
-      auth0Id: '',
+      auth0Id: 'auth0|6',
       name: 'Charlotte Greatbatch',
       username: 'charleeeey',
       email: 'charl.great@example.com',
@@ -62,7 +62,7 @@ exports.seed = async function (knex) {
 
     {
       id: 7,
-      auth0Id: '',
+      auth0Id: 'auth0|7',
       name: 'Jojo Mepham',
       username: 'jooojooo',
       email: 'jo.jo@example.com',
@@ -71,7 +71,7 @@ exports.seed = async function (knex) {
 
     {
       id: 8,
-      auth0Id: '',
+      auth0Id: 'auth0|8',
       name: 'Mat Ruane',
       username: '_mat_',
       email: 'matDman@example.com',
@@ -80,7 +80,7 @@ exports.seed = async function (knex) {
 
     {
       id: 9,
-      auth0Id: '',
+      auth0Id: 'auth0|9',
       name: 'Curious George',
       username: 'curiosityFTW',
       email: 'whatIsThat@example.com',
@@ -89,7 +89,7 @@ exports.seed = async function (knex) {
 
     {
       id: 10,
-      auth0Id: '',
+      auth0Id: 'auth0|10',
       name: 'Draco Malfoy',
       username: 'notThatBadDraco',
       email: 'notMyDad@example.com',
@@ -98,7 +98,7 @@ exports.seed = async function (knex) {
 
     {
       id: 11,
-      auth0Id: '',
+      auth0Id: 'auth0|11',
       name: 'Joey Tribbiani',
       username: 'iLoveFood143',
       email: 'howYouDoin@example.com',
@@ -107,7 +107,7 @@ exports.seed = async function (knex) {
 
     {
       id: 12,
-      auth0Id: '',
+      auth0Id: 'auth0|12',
       name: 'Barney Stinson',
       username: 'legendWait4',
       email: '8Dairy@example.com',

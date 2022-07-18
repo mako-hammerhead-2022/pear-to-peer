@@ -2,24 +2,29 @@ const environment = process.env.NODE_ENV || 'development'
 const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
-function getCommentsByItemIdWithAuthor(itemId, db = connection) {
-  return db('comments')
-    .join('users', 'comments.authorId', 'users.id')
-    .select(
-      'comments.id as commentId',
-      'authorId',
-      'itemId',
-      'username as authorName',
-      'comment',
-      'comments.createdAt as timestamp'
-    )
-    .where({ itemId })
+async function getCommentsByItemIdWithAuthor(itemId, db = connection) {
+  try {
+    const comments = await db('comments')
+      .join('users', 'comments.auth0Id', 'users.auth0Id')
+      .select(
+        'comments.id as commentId',
+        'users.id as authorId',
+        'itemId',
+        'username as authorName',
+        'comment',
+        'comments.createdAt as timestamp'
+      )
+      .where({ itemId })
+    return comments
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 // newComment: authorId, itemId, comment
 async function addComment(newComment, db = connection) {
   const toAdd = {
-    authorId: newComment.authorId,
+    auth0Id: newComment.auth0Id,
     itemId: newComment.itemId,
     comment: newComment.comment,
   }
@@ -34,17 +39,19 @@ module.exports = {
 }
 
 // Helpers
-function getCommentByIdWithAuthor(id, db = connection) {
-  return db('comments')
-    .join('users', 'comments.authorId', 'users.id')
+async function getCommentByIdWithAuthor(id, db = connection) {
+  const comment = await db('comments')
+    .join('users', 'comments.auth0Id', 'users.auth0Id')
+    .select()
     .select(
       'comments.id as commentId',
-      'authorId',
+      'users.id as authorId',
       'itemId',
       'username as authorName',
       'comment',
       'comments.createdAt as timestamp'
     )
-    .where({ commentId: id })
+    .where('comments.id', id)
     .first()
+  return comment
 }

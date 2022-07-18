@@ -19,7 +19,7 @@ describe('getAllItemsWithUserInfo', () => {
   it('should return items along with the users info', async () => {
     expect.assertions(5)
     const items = await db.getAllItemsWithUserInfo(testDb)
-    expect(items).toHaveLength(3)
+    expect(items).toHaveLength(8)
     expect(items[0]).toHaveProperty('itemsId')
     expect(items[1]).toHaveProperty('userId')
     expect(items[1].itemsId).toBe(2)
