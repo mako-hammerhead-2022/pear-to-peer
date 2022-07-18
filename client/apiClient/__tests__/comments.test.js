@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-import { addComment } from '../comments'
+import { addComment, getCommentsByItemId } from '../comments'
 
 describe('POST /api/comments', () => {
   expect.assertions(1)

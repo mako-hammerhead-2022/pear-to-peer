@@ -1,13 +1,6 @@
 import nock from 'nock'
 
-import {
-  addItem,
-  getAllItemsByUserId,
-  getAllItemsWithUserInfo,
-  getImageUrl,
-  getItemById,
-  updateItem,
-} from '../items'
+import { addItem, getAllItemsWithUserInfo } from '../items'
 
 // GET ALL ITEMS WITH USER INFO
 describe('GET /api/items/:userId', () => {
