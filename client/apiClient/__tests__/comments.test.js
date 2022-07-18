@@ -1,4 +1,5 @@
 import nock from 'nock'
+
 import { addComment, getCommentsByItemId } from '../comments'
 
 describe('POST /api/comments', () => {
@@ -18,3 +19,4 @@ describe('POST /api/comments', () => {
     expect(commentRes.content).toBe(testComment.content)
     scope.done()
   })
+})

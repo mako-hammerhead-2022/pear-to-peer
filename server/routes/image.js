@@ -2,12 +2,19 @@ const express = require('express')
 
 const router = express.Router()
 
-const { checkJwt, generatePreSignedUrl } = require('../utils')
+const utils = require('../utils')
 
-router.post('/', checkJwt, async (req, res) => {
-  const { fileName, fileType } = req.body
-  const signedUrl = await generatePreSignedUrl(fileName, fileType)
-  res.json({ signedUrl })
-})
+router.post(
+  '/',
+  (req, res, next) => {
+    if (process.env.NODE_ENV === 'test') return next()
+    else return utils.checkJwt(req, res, next)
+  },
+  async (req, res) => {
+    const { fileName, fileType } = req.body
+    const signedUrl = await utils.generatePreSignedUrl(fileName, fileType)
+    res.json({ signedUrl })
+  }
+)
 
 module.exports = router
