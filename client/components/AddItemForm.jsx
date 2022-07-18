@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { getImageUrl } from '@/apiClient/items'
 import { useIsRegistered } from '@/components/useIsRegistered'
-import { fetchUserByAuth0Id } from '@/slices/userData'
+import { fetchUserByAuth0Token } from '@/slices/userData'
 import { postNewItem } from '@/slices/userItems'
 
 export function AddItemForm() {
