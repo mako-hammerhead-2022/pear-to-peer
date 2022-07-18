@@ -22,8 +22,8 @@ export const fetchUserByAuth0Id = createAsyncThunk(
 
 export const postNewUser = createAsyncThunk(
   'userData/postNew',
-  async (user) => {
-    const response = await addUser(user)
+  async ({ user, token }) => {
+    const response = await addUser(user, token)
     return response
   }
 )
