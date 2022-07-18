@@ -3,6 +3,7 @@ import nock from 'nock'
 import { addComment } from '../comments'
 
 describe('POST /api/comments', () => {
+  expect.assertions(1)
   test('post request to api route to add comment', async () => {
     const testComment = {
       authorId: 1,
@@ -17,6 +18,30 @@ describe('POST /api/comments', () => {
     const commentRes = await addComment(testComment, token)
 
     expect(commentRes.content).toBe(testComment.content)
+    scope.done()
+  })
+})
+
+describe('GET /api/comments/:itemId', () => {
+  test('get comments by item Id', async () => {
+    expect.assertions(3)
+    const testComment = {
+      authorId: 2,
+      itemId: 2,
+      comment: 'This too!',
+    }
+
+    const itemId = testComment.itemId
+
+    const scope = nock('http://localhost')
+      .get(`/api/comments/${itemId}`)
+      .reply(200, testComment)
+
+    const commentRes = await getCommentsByItemId(itemId)
+
+    expect(commentRes.itemId).toBe(2)
+    expect(commentRes.authorId).toBe(2)
+    expect(commentRes.comment).toContain('This too!')
     scope.done()
   })
 })
