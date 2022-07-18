@@ -5,8 +5,8 @@ import { addUser, getUserByAuth0Id } from '../users'
 // ADD A USER
 
 describe('POST /api/users', () => {
-  expect.assertions(5)
-  test.skip('inserts a new user', async () => {
+  // expect.assertions(5)
+  test('inserts a new user', async () => {
     const newUser = {
       auth0Id: 'auth0|4',
       name: 'Perry Platipus',
@@ -15,28 +15,14 @@ describe('POST /api/users', () => {
       postcode: 6011,
     }
 
-    const resUser = {
-      id: 13,
-      auth0Id: 'auth0|4',
-      name: 'Perry Platipus',
-      username: 'PTP123',
-      email: 'ptp123@doofenshmirtz.com',
-      postcode: 6011,
-    }
-
     const scope = nock('http://localhost')
-      .post('/api/users', newUser)
-      .reply(201, resUser)
+      .post('/api/users/')
+      .reply(201, newUser)
 
-    const token = 'auth0|something'
+    const userRes = await addUser(newUser)
+    console.log('THIS IS USER RES: ', userRes)
+    expect(userRes.content).toBe(newUser.content)
 
-    const userRes = await addUser(newUser, token)
-
-    expect(userRes).toEqual({ newUser })
-    expect(userRes.id).toBe(13)
-    expect(userRes.auth0Id).toContain('auth0|4')
-    expect(userRes.name).toContain('Perry Platipus')
-    expect(userRes.postcode).toBe(6011)
     scope.done()
   })
 })
