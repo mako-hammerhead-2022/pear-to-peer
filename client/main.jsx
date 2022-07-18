@@ -8,6 +8,8 @@ import { BrowserRouter } from 'react-router-dom'
 import App from '@/App'
 import store from '@/store'
 
+import theme from './theme'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -17,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         redirectUri={window.location.origin}
         audience='https://pear2peer/api'
       >
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Provider store={store}>
             <App />
           </Provider>
