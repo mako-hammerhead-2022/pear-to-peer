@@ -4,16 +4,17 @@ const connection = require('knex')(config)
 
 function getCommentsByItemIdWithAuthor(itemId, db = connection) {
   return db('comments')
-    .join('users', 'comments.authorId', 'users.id')
+    .join('users', 'comments.authorId', 'users.auth0Id')
     .select(
       'comments.id as commentId',
-      'authorId',
+      'users.id as authorId',
       'itemId',
       'username as authorName',
       'comment',
       'comments.createdAt as timestamp'
     )
     .where({ itemId })
+    .orderBy('commentId', 'asc')
 }
 
 // newComment: authorId, itemId, comment
@@ -36,10 +37,10 @@ module.exports = {
 // Helpers
 function getCommentByIdWithAuthor(id, db = connection) {
   return db('comments')
-    .join('users', 'comments.authorId', 'users.id')
+    .join('users', 'comments.authorId', 'users.auth0Id')
     .select(
       'comments.id as commentId',
-      'authorId',
+      'users.id as authorId',
       'itemId',
       'username as authorName',
       'comment',
