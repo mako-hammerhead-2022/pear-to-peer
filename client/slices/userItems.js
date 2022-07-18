@@ -22,9 +22,7 @@ export const postNewItem = createAsyncThunk(
 export const patchItem = createAsyncThunk(
   'currentItem/patchItem',
   async (item) => {
-    console.log('currentitem for redux thingy is', item)
     const response = await updateItem(item)
-    console.log('patch item response', response)
     return response
   }
 )
