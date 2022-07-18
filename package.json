@@ -40,7 +40,6 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
     "superagent": "^8.0.0"
-
   },
   "devDependencies": {
     "@chakra-ui/icons": "^2.0.4",
@@ -61,6 +60,6 @@
     "prettier": "^2.7.1",
     "supertest": "^6.2.4",
     "vite": "^2.9.9",
-    "vitest": "^0.18.0"
+    "vitest": "^0.18.1"
   }
 }
