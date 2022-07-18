@@ -25,8 +25,6 @@ describe('GET /api/items/:userId', () => {
       userId: 3,
     }
 
-    const userId = item.userId
-
     const scope = nock('http://localhost').get(`/api/items/`).reply(200, item)
 
     const itemRes = await getAllItemsWithUserInfo()
