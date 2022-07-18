@@ -22,7 +22,11 @@ export const postNewItem = createAsyncThunk(
 export const userItemsSlice = createSlice({
   name: 'userItems',
   initialState,
-  reducers: {},
+  reducers: {
+    clearCurrentItem: (state, action) => {
+      return initialState
+    },
+  },
   extraReducers: {
     [fetchItemsByUserId.fulfilled]: (state, { payload }) => {
       return payload

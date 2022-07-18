@@ -22,7 +22,6 @@ export function getAllItemsByUserId(id) {
 }
 
 export function updateItem(item) {
-  console.log('api item', item)
   return request
     .patch(`/api/items/update/${item.itemsId}`)
     .send(item)

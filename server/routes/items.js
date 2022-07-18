@@ -92,8 +92,6 @@ router.post('/', checkJwt, async (req, res) => {
 router.patch('/update/:id', (req, res) => {
   const updatedItem = req.body
   const id = Number(updatedItem.itemsId)
-  console.log(id)
-  console.log(updatedItem, 'routes')
   return db
     .updateItem(id, updatedItem)
     .then((patchItem) => {
