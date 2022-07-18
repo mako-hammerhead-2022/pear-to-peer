@@ -44,10 +44,10 @@ export const userDataSlice = createSlice({
     [postNewUser.fulfilled]: (state, { payload }) => {
       return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
     },
-    [fetchUserByAuth0Id.pending]: (state) => {
+    [fetchUserByAuth0Token.pending]: (state) => {
       return { ...state, loading: 'pending' }
     },
-    [fetchUserByAuth0Id.fulfilled]: (state, { payload }) => {
+    [fetchUserByAuth0Token.fulfilled]: (state, { payload }) => {
       return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
     },
   },

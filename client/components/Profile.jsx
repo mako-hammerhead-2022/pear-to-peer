@@ -1,12 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { useIsRegistered } from '@/components/useIsRegistered'
 import PageItemTile from '@/components/UserItem'
-import { fetchUserByAuth0Id } from '@/slices/userData'
+import { fetchUserByAuth0Token } from '@/slices/userData'
 import { fetchItemsByUserId } from '@/slices/userItems'
 
 export default function Profile() {
@@ -16,15 +16,25 @@ export default function Profile() {
     (state) => state.userData.data
   )
   const items = useSelector((state) => state.userItems)
+  const [token, setToken] = useState(null)
 
   const dispatch = useDispatch()
   const isRegistered = useIsRegistered()
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = getAccessTokenSilently()
-    dispatch(fetchUserByAuth0Id(token))
+    async function getToken() {
+      const fetchedToken = await getAccessTokenSilently()
+      setToken(fetchedToken)
+    }
+    getToken()
   }, [])
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchUserByAuth0Token(token))
+    }
+  }, [token])
 
   useEffect(() => {
     dispatch(fetchItemsByUserId(id))
