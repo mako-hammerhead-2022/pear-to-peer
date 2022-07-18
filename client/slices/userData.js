@@ -2,9 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { addUser, getUserByAuth0Id } from '@/apiClient/users'
 
 const initialState = {
-  auth0Id: '',
-  email: '',
-  token: '',
+  data: {
+    auth0Id: '',
+    email: '',
+    token: '',
+  },
+  loading: null,
+  error: null,
 }
 
 export const fetchUserByAuth0Id = createAsyncThunk(
@@ -19,7 +23,7 @@ export const postNewUser = createAsyncThunk(
   'userData/postNew',
   async (user) => {
     const response = await addUser(user)
-    return response.body
+    return response
   }
 )
 
@@ -28,16 +32,22 @@ export const userDataSlice = createSlice({
   initialState,
   reducers: {
     setLoggedInUser: (state, { payload }) => {
-      return { ...state, ...payload.userToSave }
+      return { ...state, data: { ...state.data, ...payload.userToSave } }
     },
   },
 
   extraReducers: {
+    [postNewUser.pending]: (state, { payload }) => {
+      return { ...state, loading: 'pending' }
+    },
     [postNewUser.fulfilled]: (state, { payload }) => {
-      return { ...state, ...payload }
+      return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
+    },
+    [fetchUserByAuth0Id.pending]: (state, { payload }) => {
+      return { ...state, loading: 'pending' }
     },
     [fetchUserByAuth0Id.fulfilled]: (state, { payload }) => {
-      return { ...state, ...payload }
+      return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
     },
   },
 })

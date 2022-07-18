@@ -17,7 +17,7 @@ import { postNewUser } from '@/slices/userData'
 export default function Register() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.userData)
+  const user = useSelector((state) => state.userData.data)
   const [form, setForm] = useState({
     auth0Id: '',
     email: '',
@@ -37,7 +37,7 @@ export default function Register() {
       email: user.email,
     }
     dispatch(postNewUser(userToSave))
-    navigate('/')
+    navigate('/profile')
   }
 
   function validateName(value) {

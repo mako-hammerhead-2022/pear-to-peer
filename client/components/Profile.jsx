@@ -1,17 +1,22 @@
 import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useIsRegistered } from '@/components/useIsRegistered'
 import { fetchUserByAuth0Id } from '@/slices/userData'
 import { fetchItemsByUserId } from '@/slices/userItems'
 import PageItemTile from '@/components/UserItem'
 
 export default function Profile() {
+  const { loading } = useSelector((state) => state.userData)
   const { auth0Id, email, postcode, name, username, id } = useSelector(
-    (state) => state.userData
+    (state) => state.userData.data
   )
   const items = useSelector((state) => state.userItems)
 
   const dispatch = useDispatch()
+  const isRegistered = useIsRegistered()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(fetchUserByAuth0Id(auth0Id))
@@ -20,6 +25,14 @@ export default function Profile() {
   useEffect(() => {
     dispatch(fetchItemsByUserId(id))
   }, [id])
+
+  if (loading !== 'done') {
+    return <p>Loading...</p>
+  }
+
+  if (isRegistered === false) {
+    navigate('/register')
+  }
 
   return (
     <>
