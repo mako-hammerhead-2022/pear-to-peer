@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddCommentForm from '@/components/AddCommentForm'
 import { fetchComments } from '@/slices/currentItem'
 
-export default function Comments({ itemId }) {
+export default function Comments(props) {
   const dispatch = useDispatch()
   const comments = useSelector((state) => state.currentItem.comments)
+  console.log(props, 'props')
 
   useEffect(() => {
-    dispatch(fetchComments(itemId))
+    dispatch(fetchComments(props.id))
   }, [])
 
   return (
@@ -28,7 +29,7 @@ export default function Comments({ itemId }) {
           })}
         </ul>
       )}
-      <AddCommentForm itemId={itemId} />
+      <AddCommentForm itemId={props.id} />
     </>
   )
 }
