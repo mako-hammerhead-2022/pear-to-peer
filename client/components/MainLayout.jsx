@@ -16,12 +16,17 @@ export default function MainLayout() {
       gridTemplateColumns='1fr 6fr'
       h='100vh'
       w='100vw'
-      gap='1'
+      // gap='1'
     >
       <GridItem pl='2' bg='#f2f2f2' area={'header'}>
         <Header />
       </GridItem>
-      <GridItem pl='2' bg='#7DA97A' area={'nav'}>
+      <GridItem
+        pl='2'
+        bg='#7DA97A'
+        bgGradient='linear(to-t, #7DA97A, #e5eee4)'
+        area={'nav'}
+      >
         <Nav />
       </GridItem>
       <GridItem pl='2' bg='#f2f2f2' area={'main'}>

@@ -29,27 +29,27 @@ export default function Nav() {
     <>
       <VStack>
         <IfAuthenticated>
-          <Link as={ReactLink} to='/'>
+          <Link fontSize='2xl' as={ReactLink} to='/'>
             About Us
           </Link>
-          <Link as={ReactLink} to='/home'>
+          <Link fontSize='2xl' as={ReactLink} to='/home'>
             Home
           </Link>
-          <Link as={ReactLink} to='/profile'>
+          <Link fontSize='2xl' as={ReactLink} to='/profile'>
             Profile
           </Link>
-          <Link as={ReactLink} to='/addfooditem'>
+          <Link fontSize='2xl' as={ReactLink} to='/addfooditem'>
             Add Food
           </Link>
-          <Link as={ReactLink} to='/' onClick={handleLogoff}>
+          <Link fontSize='2xl' as={ReactLink} to='/' onClick={handleLogoff}>
             Log Off
           </Link>
         </IfAuthenticated>
         <IfNotAuthenticated>
-          <Link as={ReactLink} to='/' onClick={handleRegister}>
+          <Link fontSize='2xl' as={ReactLink} to='/' onClick={handleRegister}>
             Register
           </Link>
-          <Link as={ReactLink} to='/' onClick={handleSignIn}>
+          <Link fontSize='2xl' as={ReactLink} to='/' onClick={handleSignIn}>
             Sign In
           </Link>
         </IfNotAuthenticated>
