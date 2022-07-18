@@ -13,29 +13,39 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { getImageUrl } from '@/apiClient/items'
 import { useIsRegistered } from '@/components/useIsRegistered'
-import { fetchUserByAuth0Id } from '@/slices/userData'
+import { fetchUserByAuth0Token } from '@/slices/userData'
 import { postNewItem } from '@/slices/userItems'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
   const isRegistered = useIsRegistered()
-  const { auth0Id, id } = useSelector((state) => state.userData.data)
+  const { id } = useSelector((state) => state.userData.data)
+  const [token, setToken] = useState(null)
 
   const navigate = useNavigate()
   const { getAccessTokenSilently, isAuthenticated } = useAuth0()
 
   useEffect(() => {
-    dispatch(fetchUserByAuth0Id(auth0Id))
-  }, [auth0Id])
+    async function getToken() {
+      const fetchedToken = await getAccessTokenSilently()
+      setToken(fetchedToken)
+    }
+    getToken()
+  }, [])
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchUserByAuth0Token(token))
+    }
+  }, [token])
 
   async function handleSubmit(formData) {
-    const token = await getAccessTokenSilently()
     const imageUrl = await getImageUrl(formData.image, token)
     const itemToAdd = {
       itemName: formData.itemName,

@@ -9,12 +9,9 @@ export function addUser(user, token) {
     .catch((err) => console.error(err))
 }
 
-export function getUserByAuth0Id(token) {
-  if (!token) {
-    return undefined
-  }
+export function getUserByAuth0Token(token) {
   return request
-    .get(`/api/users/${token}`)
+    .get(`/api/users/`)
     .set('authorization', `Bearer ${token}`)
     .then((res) => res.body)
     .catch((err) => console.error(err))
