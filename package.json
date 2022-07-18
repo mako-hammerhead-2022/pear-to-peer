@@ -40,7 +40,6 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
     "superagent": "^8.0.0"
-
   },
   "devDependencies": {
     "@chakra-ui/icons": "^2.0.4",
@@ -49,11 +48,15 @@
     "@testing-library/user-event": "^14.2.1",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "@vitejs/plugin-react": "^1.3.0",
     "eslint": "^8.19.0",
     "eslint-config-eda": "^1.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-vitest-globals": "^1.1.0",
     "jsdom": "^20.0.0",
     "nock": "^13.2.8",
     "nodemon": "^2.0.19",
