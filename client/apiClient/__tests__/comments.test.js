@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-import { addComment, getCommentsByItemId } from '../comments'
+import { addComment } from '../comments'
 
 describe('POST /api/comments', () => {
   test('post request to api route to add comment', async () => {

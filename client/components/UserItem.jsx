@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
-import { Link as ReactLink } from 'react-router-dom'
+import { Box, Button, Heading, Image, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link as ReactLink } from 'react-router-dom'
+
 import { patchItem } from '@/slices/userItems'
 
 export default function PageItemTile(props) {
   const dispatch = useDispatch()
-  const {
-    itemsId,
-    imageUrl,
-    itemName,
-    allergens,
-    createdAt,
-    description,
-    expiry,
-    availability,
-  } = props.data
+  const { itemsId, imageUrl, itemName, allergens, createdAt, description } =
+    props.data
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
   const [shouldUpdate, setShouldUpdate] = useState(false)

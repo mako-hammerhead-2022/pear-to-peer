@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
-import { getImageUrl } from '@/apiClient/items'
-import { Formik, Form, Field } from 'formik'
 import {
-  FormLabel,
-  Input,
   Button,
   Container,
-  Select,
-  Textarea,
   FormControl,
-  NumberInputField,
-  NumberInput,
   FormErrorMessage,
   FormHelperText,
+  FormLabel,
+  Input,
+  NumberInput,
+  NumberInputField,
+  Select,
+  Textarea,
 } from '@chakra-ui/react'
-import { postNewItem } from '@/slices/userItems'
-import { fetchUserByAuth0Id } from '@/slices/userData'
+import { Field, Form, Formik } from 'formik'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+import { getImageUrl } from '@/apiClient/items'
 import { useIsRegistered } from '@/components/useIsRegistered'
+import { fetchUserByAuth0Id } from '@/slices/userData'
+import { postNewItem } from '@/slices/userItems'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
@@ -175,7 +176,7 @@ export function AddItemForm() {
               )}
             </Field>
             <Field name='image'>
-              {(form) => (
+              {() => (
                 <FormControl isRequired>
                   <FormLabel htmlFor='image'>Upload image:</FormLabel>
                   <Input

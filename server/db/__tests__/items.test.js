@@ -1,5 +1,4 @@
 const knex = require('knex')
-const request = require('superagent')
 const testConfig = require('../knexfile').test
 const testDb = knex(testConfig)
 const db = require('../items')
@@ -25,15 +24,6 @@ describe('getAllItemsWithUserInfo', () => {
     expect(items[1]).toHaveProperty('userId')
     expect(items[1].itemsId).toBe(2)
     expect(items[2].userId).toBe(3)
-  })
-  it.skip("should return status 500 and error when database doesn't work", async () => {
-    expect.assertions(2)
-    db.getAllItemsWithUserInfo.mockImplementation(() =>
-      Promise.reject(new Error('Something went wrong'))
-    )
-    const res = await request(server).get('/api/items')
-    expect(res.status).toBe(500)
-    expect(res.text).toContain('Something went wrong')
   })
 })
 
@@ -83,18 +73,6 @@ describe('addNewItem', () => {
         id: 15,
       })
     })
-  })
-  it.skip('should return status 500 and error when database fails', () => {
-    expect.assertions(2)
-    db.insertItem(dbNewItem, testDb).mockImplementation(() =>
-      Promise.reject(new Error('Something went wrong'))
-    )
-    return request(server)
-      .post('/api/items')
-      .then((res) => {
-        expect(res.status).toBe(500)
-        expect(res.text).toContain('Something went wrong')
-      })
   })
 })
 

@@ -10,10 +10,8 @@ vi.spyOn(db, 'insertItem')
 
 beforeAll(() => {
   vi.spyOn(console, 'error')
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   console.error.mockImplementation(() => {})
-  // checkJwt.mockImplementation((req, res, next) => {
-  //   next()
-  // })
 })
 
 afterAll(() => {

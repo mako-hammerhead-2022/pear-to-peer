@@ -1,8 +1,9 @@
+import { useAuth0 } from '@auth0/auth0-react'
+import { Container, Heading, Image, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { Heading, Text, Image, Container } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useAuth0 } from '@auth0/auth0-react'
+
 import Comments from '@/components/Comments'
 import { clearCurrentItem, fetchItemById } from '@/slices/currentItem'
 

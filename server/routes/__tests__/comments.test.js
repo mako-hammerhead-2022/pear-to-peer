@@ -9,6 +9,7 @@ vi.spyOn(db, 'addComment')
 
 beforeAll(() => {
   vi.spyOn(console, 'error')
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   console.error.mockImplementation(() => {})
 })
 
@@ -54,9 +55,7 @@ describe('POST /api/comments', () => {
       comment: 'This one!',
     }
 
-    const dbFunction = db.addComment.mockReturnValue(
-      Promise.resolve(testComment)
-    )
+    db.addComment.mockReturnValue(Promise.resolve(testComment))
 
     const res = await request(server).post('/api/comments')
     expect(res.status).toBe(200)

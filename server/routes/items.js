@@ -48,6 +48,7 @@ router.get('/byUser/:id', (req, res) => {
       res.json(userItems)
     })
     .catch((err) => {
+      console.error(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })

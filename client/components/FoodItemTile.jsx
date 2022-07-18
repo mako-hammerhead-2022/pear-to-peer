@@ -1,5 +1,5 @@
+import { Box, Button, Heading, Image, Text } from '@chakra-ui/react'
 import React from 'react'
-import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
 import { Link as ReactLink } from 'react-router-dom'
 
 export default function FoodItemTile(props) {

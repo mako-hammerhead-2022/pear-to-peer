@@ -1,18 +1,18 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-
-import MainLayout from '@/components/MainLayout'
-import Home from '@/components/Home'
-import Register from '@/components/Register'
-import Profile from '@/components/Profile'
-import NotFound from '@/components/NotFound'
-import AboutUs from '@/components/AboutUs'
-import FoodItemPage from '@/components/FoodItemPage'
-import AddItemForm from '@/components/AddItemForm'
-import UpdateFoodItem from '@/components/UpdateFoodItem'
-import { Container } from '@chakra-ui/react'
-import { cacheUser } from '@/auth0-utils'
 import { useAuth0 } from '@auth0/auth0-react'
+import { Container } from '@chakra-ui/react'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+
+import { cacheUser } from '@/auth0-utils'
+import AboutUs from '@/components/AboutUs'
+import AddItemForm from '@/components/AddItemForm'
+import FoodItemPage from '@/components/FoodItemPage'
+import Home from '@/components/Home'
+import MainLayout from '@/components/MainLayout'
+import NotFound from '@/components/NotFound'
+import Profile from '@/components/Profile'
+import Register from '@/components/Register'
+import UpdateFoodItem from '@/components/UpdateFoodItem'
 
 function App() {
   cacheUser(useAuth0)

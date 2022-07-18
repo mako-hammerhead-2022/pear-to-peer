@@ -1,11 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getCommentsByItemId, addComment } from '@/apiClient/comments'
-import {
-  getItemById,
-  // updateItemAvailability,
-  updateItem,
-} from '@/apiClient/items'
+import { addComment, getCommentsByItemId } from '@/apiClient/comments'
+import { getItemById, updateItem } from '@/apiClient/items'
 
 const initialState = {}
 
@@ -41,8 +37,7 @@ export const currentItemSlice = createSlice({
   name: 'currentItem',
   initialState,
   reducers: {
-    // reset: () => initialState,
-    clearCurrentItem: (state, action) => {
+    clearCurrentItem: () => {
       return initialState
     },
   },
@@ -62,7 +57,7 @@ export const currentItemSlice = createSlice({
         comments: [...state.comments, payload],
       }
     },
-    [patchItem.fulfilled]: (state, { payload }) => {
+    [patchItem.fulfilled]: () => {
       return initialState
     },
   },

@@ -1,8 +1,7 @@
+import { useAuth0 } from '@auth0/auth0-react'
+import { Link, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { Link as ReactLink } from 'react-router-dom'
-import { Link, VStack } from '@chakra-ui/react'
-
-import { useAuth0 } from '@auth0/auth0-react'
 
 import { IfAuthenticated, IfNotAuthenticated } from '@/components/Authenticated'
 
