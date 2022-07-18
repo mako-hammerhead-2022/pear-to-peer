@@ -9,7 +9,7 @@ export default function Header() {
     <Center>
       <HStack>
         <Image h={150} src={logol} />
-        <Heading fontFamily='headerFont' color='#1D6638' size='3xl'>
+        <Heading fontFamily='pacifico' color='#1D6638' size='3xl'>
           Pear-To-Peer
         </Heading>
         <Image h={150} src={logor} />

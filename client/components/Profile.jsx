@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,8 +10,9 @@ import { fetchUserByAuth0Id } from '@/slices/userData'
 import { fetchItemsByUserId } from '@/slices/userItems'
 
 export default function Profile() {
+  const { getAccessTokenSilently } = useAuth0()
   const { loading } = useSelector((state) => state.userData)
-  const { auth0Id, email, postcode, name, username, id } = useSelector(
+  const { email, postcode, name, username, id } = useSelector(
     (state) => state.userData.data
   )
   const items = useSelector((state) => state.userItems)
@@ -20,8 +22,9 @@ export default function Profile() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(fetchUserByAuth0Id(auth0Id))
-  }, [auth0Id])
+    const token = getAccessTokenSilently()
+    dispatch(fetchUserByAuth0Id(token))
+  }, [])
 
   useEffect(() => {
     dispatch(fetchItemsByUserId(id))
