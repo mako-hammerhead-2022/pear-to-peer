@@ -1,10 +1,25 @@
 import React from 'react'
-import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
+import {
+  Box,
+  Heading,
+  Text,
+  Image,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { Link as ReactLink } from 'react-router-dom'
 
 export default function FoodItemTile(props) {
   const { itemsId, imageUrl, itemName, allergens, username, postcode } =
     props.data
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -15,7 +30,9 @@ export default function FoodItemTile(props) {
         <Text>Posted By: {username}</Text>
         <Text>Location: {postcode}</Text>
         <ReactLink to={`/item/${itemsId}`}>
-          <Button colorScheme='teal'>View More</Button>
+          <Button onClick={onOpen} colorScheme='teal'>
+            View More
+          </Button>
         </ReactLink>
       </Box>
     </>
