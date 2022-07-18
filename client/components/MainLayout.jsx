@@ -16,7 +16,7 @@ export default function MainLayout() {
       gridTemplateColumns='1fr 6fr'
       h='100vh'
       w='100vw'
-      gap='1'
+      // gap='1'
     >
       <GridItem pl='2' bg='#f2f2f2' area={'header'}>
         <Header />

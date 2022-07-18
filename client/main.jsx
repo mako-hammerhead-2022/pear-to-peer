@@ -8,8 +8,9 @@ import { BrowserRouter } from 'react-router-dom'
 import App from '@/App'
 import store from '@/store'
 
+import theme from './theme'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
   <BrowserRouter>
     <Auth0Provider
       domain={'mako-2022-scott.au.auth0.com'}
@@ -24,5 +25,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </ChakraProvider>
     </Auth0Provider>
   </BrowserRouter>
-  // {/* </React.StrictMode> */}
 )
