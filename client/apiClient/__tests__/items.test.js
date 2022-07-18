@@ -12,7 +12,7 @@ import {
 
 // GET ALL ITEMS WITH USER INFO
 describe('GET /api/items/:userId', () => {
-  test.skip('get request for all items with user info', async () => {
+  test('get request for all items with user info', async () => {
     expect.assertions(7)
     const item = {
       id: 3,
@@ -27,11 +27,9 @@ describe('GET /api/items/:userId', () => {
 
     const userId = item.userId
 
-    const scope = nock('http://localhost')
-      .get(`/api/items/${userId}`)
-      .reply(200, item)
+    const scope = nock('http://localhost').get(`/api/items/`).reply(200, item)
 
-    const itemRes = await getAllItemsWithUserInfo(userId)
+    const itemRes = await getAllItemsWithUserInfo()
 
     expect(itemRes.itemName).toContain('apple')
     expect(itemRes.allergens).toContain('apple')
