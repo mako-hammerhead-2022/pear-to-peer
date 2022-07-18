@@ -1,4 +1,3 @@
-import { DocDB } from 'aws-sdk'
 import { vi } from 'vitest'
 
 const request = require('supertest')
