@@ -26,6 +26,15 @@ describe('getAllUsers', () => {
     expect(users[1].username).toBe('SlipsAllDay')
     expect(users[2].email).toBe('clippityclap_3@example.com')
   })
+  // it("should return status 500 and error when database doesn't work", async () => {
+  //   expect.assertions(2)
+  //   db.getAllUsers.mockImplementation(() =>
+  //     Promise.reject(new Error('Something went wrong'))
+  //   )
+  //   const res = await request(server).get('/api/users')
+  //   expect(res.status).toBe(500)
+  //   expect(res.text).toContain('Something went wrong')
+  // })
 })
 
 describe('getUserByAuth0Id', () => {
