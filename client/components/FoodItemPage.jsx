@@ -43,10 +43,9 @@ export default function FoodItemPage() {
           <Heading>{item?.itemName}</Heading>
           <Text>Allergens: {item?.allergens}</Text>
           <Text>Description: {item?.description}</Text>
-          <Text>Expiry: {item?.expiry}</Text>
-          <Text>Availability: {item?.availability}</Text>
           <Text>Location: {item?.postcode}</Text>
           <Text>User: {item?.username}</Text>
+          <Text>Date Posted: {item?.createdAt}</Text>
           <Comments itemId={productId.id} />
         </Container>
       )}

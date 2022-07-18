@@ -29,17 +29,6 @@ export function updateItem(item) {
     .catch((err) => console.error(err))
 }
 
-export function updateItemAvailability(item) {
-  if (!item) {
-    return undefined
-  }
-  return request
-    .patch(`/api/items/${item.itemsId}`)
-    .send(item)
-    .then((res) => ({ ...res.body, itemsId: res.body.id }))
-    .catch((err) => console.error(err))
-}
-
 export async function getImageUrl(file, token) {
   const fileObject = {
     fileName: file.name,

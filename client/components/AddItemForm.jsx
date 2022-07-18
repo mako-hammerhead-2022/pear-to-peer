@@ -46,6 +46,7 @@ export function AddItemForm() {
       userId: id,
     }
     dispatch(postNewItem({ item: itemToAdd, token }))
+    //nice, passing the auth0token to through to the api call is the way I would do it everywhere
     navigate('/profile')
   }
 

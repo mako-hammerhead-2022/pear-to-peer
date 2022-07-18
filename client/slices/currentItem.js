@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getCommentsByItemId, addComment } from '@/apiClient/comments'
 import {
   getItemById,
-  updateItemAvailability,
+  // updateItemAvailability,
   updateItem,
 } from '@/apiClient/items'
 
@@ -27,17 +27,10 @@ export const postComment = createAsyncThunk(
   }
 )
 
-// export const patchItem = createAsyncThunk(
-//   'currentItem/patchItem',
-//   async (item) => {
-//     const response = await updateItemAvailability(item)
-//     return response
-//   }
-// )
-
 export const patchItem = createAsyncThunk(
   'currentItem/patchItem',
   async (item) => {
+    console.log('currentitem for redux thingy is', item)
     const response = await updateItem(item)
 
     return response
