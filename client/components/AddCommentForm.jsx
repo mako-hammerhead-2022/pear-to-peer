@@ -14,6 +14,8 @@ export default function AddCommentForm({ itemId }) {
 
   useEffect(() => {
     dispatch(fetchUserByAuth0Id(auth0Id))
+      //JV instead of loading the whole user object you can just add the auth0 token to the postcomment api call
+      //this will work but it's a bit convoluted
   }, [auth0Id])
 
   function handleEnter(evt) {

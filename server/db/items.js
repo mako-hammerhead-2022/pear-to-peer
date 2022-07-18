@@ -86,6 +86,8 @@ async function insertItem(items, db = connection) {
 //   return getItemById(updatedItem.itemsId, db)
 // }
 
+//JV remove commented out code
+
 async function updateItem(id, updatedItem, db = connection) {
   const itemToUpdate = {
     itemName: updatedItem.itemName,
