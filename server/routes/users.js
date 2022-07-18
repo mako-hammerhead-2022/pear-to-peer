@@ -30,16 +30,23 @@ router.post(
   }
 )
 
-router.get('/:auth0Id', (req, res) => {
-  const auth0Id = req.params.auth0Id
-  db.getUserByAuth0Id(auth0Id)
-    .then((user) => {
-      res.json(user)
-    })
-    .catch((err) => {
-      console.error(err)
-      res.status(500).send({ message: 'Something went wrong' })
-    })
-})
+router.get(
+  '/:auth0Id',
+  (req, res, next) => {
+    if (process.env.NODE_ENV === 'test') return next()
+    else return utils.checkJwt(req, res, next)
+  },
+  (req, res) => {
+    const auth0Id = req.auth?.sub
+    db.getUserByAuth0Id(auth0Id)
+      .then((user) => {
+        res.json(user)
+      })
+      .catch((err) => {
+        console.error(err)
+        res.status(500).send({ message: 'Something went wrong' })
+      })
+  }
+)
 
 module.exports = router

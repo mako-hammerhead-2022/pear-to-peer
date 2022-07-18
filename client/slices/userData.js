@@ -14,8 +14,8 @@ const initialState = {
 
 export const fetchUserByAuth0Id = createAsyncThunk(
   'userData/fetchByAuth0Id',
-  async (auth0Id) => {
-    const response = await getUserByAuth0Id(auth0Id)
+  async ({ token }) => {
+    const response = await getUserByAuth0Id({ token })
     return response
   }
 )
