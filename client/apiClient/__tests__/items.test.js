@@ -12,8 +12,8 @@ import {
 
 // GET ALL ITEMS WITH USER INFO
 describe('GET /api/items/:userId', () => {
+  expect.assertions(8)
   test('get request for all items with user info', async () => {
-    expect.assertions(7)
     const item = {
       id: 3,
       itemName: 'apple',
@@ -36,8 +36,19 @@ describe('GET /api/items/:userId', () => {
     expect(itemRes.expiry).toContain('expiryDate')
     expect(itemRes.availability).toContain('Yes')
     expect(itemRes.userId).toBe(3)
+    expect(scope.isDone()).toBe(true)
+  })
 
-    scope.done()
+  test('returns an error message when the request fails', () => {
+    const scope = nock('http://localhost')
+      .get(`/api/items/`)
+      .reply(500, 'Server Error')
+    
+      const error = await getAllItemsWithUserInfo()
+
+      expect(error).not.toBeNull()
+      expect(scope.isDone()).toBe(true)
+
   })
 })
 
