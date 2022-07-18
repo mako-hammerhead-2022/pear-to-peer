@@ -15,7 +15,8 @@ function getAllItemsWithUserInfo(db = connection) {
       'description',
       'imageUrl',
       'expiry',
-      'availability'
+      'availability',
+      'createdAt'
     )
 }
 
@@ -32,7 +33,8 @@ function getItemsByUserId(userId, db = connection) {
       'description',
       'imageUrl',
       'expiry',
-      'availability'
+      'availability',
+      'createdAt'
     )
     .where('users.id', userId)
 }
@@ -50,7 +52,8 @@ function getItemByIdWithUserInfo(itemId, db = connection) {
       'description',
       'imageUrl',
       'expiry',
-      'availability'
+      'availability',
+      'createdAt'
     )
     .where('items.id', itemId)
     .first()
@@ -78,12 +81,28 @@ async function insertItem(items, db = connection) {
   return getItemById(newIds[0], db)
 }
 
-async function updateItem(updatedItem, db = connection) {
-  await db('items')
-    .update({ availability: updatedItem.availability })
-    .where('id', updatedItem.itemsId)
+// async function updateItem(updatedItem, db = connection) {
+//   await db('items')
+//     .update({ availability: updatedItem.availability })
+//     .where('id', updatedItem.itemsId)
 
-  return getItemById(updatedItem.itemsId, db)
+//   return getItemById(updatedItem.itemsId, db)
+// }
+
+//JV remove commented out code
+
+async function updateItem(id, updatedItem, db = connection) {
+  const itemToUpdate = {
+    itemName: updatedItem.itemName,
+    allergens: updatedItem.allergens,
+    description: updatedItem.description,
+    availability: updatedItem.availability,
+    userId: updatedItem.userId,
+    imageUrl: updatedItem.imageUrl,
+  }
+  await db('items').update(itemToUpdate).where('id', id)
+
+  return getItemById(id, db)
 }
 
 function deleteItem(id, db = connection) {

@@ -26,6 +26,8 @@ const { checkJwt } = require('../utils')
 //     })
 // })
 
+//JV: remove commented out code
+
 // GET all items with user info
 router.get('/', (req, res) => {
   db.getAllItemsWithUserInfo()
@@ -46,6 +48,7 @@ router.get('/byUser/:id', (req, res) => {
       res.json(userItems)
     })
     .catch((err) => {
+      console.error(err)
       res.status(500).send({ message: 'Something went wrong' })
     })
 })
@@ -76,6 +79,7 @@ router.post('/', checkJwt, async (req, res) => {
     availability: req.body.availability,
     userId: req.body.userId,
   }
+  //JV - this is trusting the userId that came in from the post, instead of the data from checkJWT on req.user
   return db
     .insertItem(newItem)
     .then((dbItem) => {
@@ -89,10 +93,12 @@ router.post('/', checkJwt, async (req, res) => {
 
 // PATCH item
 //checkJwt
-router.patch('/:id', (req, res) => {
+router.patch('/update/:id', (req, res) => {
   const updatedItem = req.body
+  const id = Number(updatedItem.itemsId)
+  //this lets any user update any item, you probably want a check so user's can only edit their own
   return db
-    .updateItem(updatedItem)
+    .updateItem(id, updatedItem)
     .then((patchItem) => {
       return res.json(patchItem)
     })
@@ -106,6 +112,7 @@ router.patch('/:id', (req, res) => {
 // checkJwt
 router.delete('/', (req, res) => {
   const { id } = req.body
+  //this lets any user delete any item, is that what you want?
   return db
     .deleteItem(id)
     .then(() => {

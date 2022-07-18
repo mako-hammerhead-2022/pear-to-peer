@@ -21,21 +21,11 @@ export function getAllItemsByUserId(id) {
   return request.get(`/api/items/byUser/${id}`).then((res) => res.body)
 }
 
-export function updateItem(id, item) {
+export function updateItem(item) {
   return request
-    .patch(`/api/items/update/${id}`)
+    .patch(`/api/items/update/${item.itemsId}`)
     .send(item)
-    .catch((err) => console.error(err))
-}
-
-export function updateItemAvailability(item) {
-  if (!item) {
-    return undefined
-  }
-  return request
-    .patch(`/api/items/${item.itemsId}`)
-    .send(item)
-    .then((res) => ({ ...res.body, itemsId: res.body.id }))
+    .then((res) => res.body)
     .catch((err) => console.error(err))
 }
 

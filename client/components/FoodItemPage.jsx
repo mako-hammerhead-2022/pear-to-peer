@@ -1,8 +1,9 @@
+import { useAuth0 } from '@auth0/auth0-react'
+import { Container, Heading, Image, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { Heading, Text, Image, Container } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useAuth0 } from '@auth0/auth0-react'
+
 import Comments from '@/components/Comments'
 import { clearCurrentItem, fetchItemById } from '@/slices/currentItem'
 
@@ -30,10 +31,9 @@ export default function FoodItemPage() {
           <Heading>{item?.itemName}</Heading>
           <Text>Allergens: {item?.allergens}</Text>
           <Text>Description: {item?.description}</Text>
-          <Text>Expiry: {item?.expiry}</Text>
-          <Text>Availability: {item?.availability}</Text>
           <Text>Location: {item?.postcode}</Text>
           <Text>User: {item?.username}</Text>
+          <Text>Date Posted: {item?.createdAt}</Text>
           <Comments itemId={productId.id} />
         </Container>
       )}

@@ -13,7 +13,8 @@
     "knex": "knex --knexfile server/db/knexfile.js",
     "lint": "eslint --ext .js,.jsx .",
     "format": "prettier --write .",
-    "test": "vitest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "engines": {
     "node": "16.x"
@@ -39,8 +40,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
-    "superagent": "^8.0.0",
-    "yup": "^0.32.11"
+    "superagent": "^8.0.0"
   },
   "devDependencies": {
     "@chakra-ui/icons": "^2.0.4",
@@ -49,11 +49,16 @@
     "@testing-library/user-event": "^14.2.1",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "@vitejs/plugin-react": "^1.3.0",
+    "c8": "^7.11.3",
     "eslint": "^8.19.0",
     "eslint-config-eda": "^1.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-vitest-globals": "^1.1.0",
     "jsdom": "^20.0.0",
     "nock": "^13.2.8",
     "nodemon": "^2.0.19",
@@ -61,6 +66,6 @@
     "prettier": "^2.7.1",
     "supertest": "^6.2.4",
     "vite": "^2.9.9",
-    "vitest": "^0.18.0"
+    "vitest": "^0.18.1"
   }
 }

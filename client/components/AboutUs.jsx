@@ -1,5 +1,6 @@
+import { Box, Heading, Image, Spacer, Text } from '@chakra-ui/react'
 import React from 'react'
-import { Heading, Text, Box, Image, Spacer } from '@chakra-ui/react'
+
 import pear from '@/images/p2pgreen.png'
 
 export default function AboutUs() {

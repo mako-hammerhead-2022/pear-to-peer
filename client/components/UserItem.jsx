@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
-import { Link as ReactLink } from 'react-router-dom'
+import { Box, Button, Heading, Image, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { patchItem } from '@/slices/currentItem'
+import { Link as ReactLink } from 'react-router-dom'
+
+import { patchItem } from '@/slices/userItems'
 
 export default function PageItemTile(props) {
   const dispatch = useDispatch()
-  const {
-    itemsId,
-    imageUrl,
-    itemName,
-    allergens,
-    // username,
-    description,
-    expiry,
-    availability,
-  } = props.data
+  const { itemsId, imageUrl, itemName, allergens, createdAt, description } =
+    props.data
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
   const [shouldUpdate, setShouldUpdate] = useState(false)
@@ -27,7 +20,6 @@ export default function PageItemTile(props) {
     } else {
       setUpdatedItem({ ...updatedItem, availability: 'Yes' })
     }
-    // await dispatch(patchItem({ ...updatedItem }))
   }
 
   useEffect(() => {
@@ -43,7 +35,7 @@ export default function PageItemTile(props) {
         <Heading>{itemName}</Heading>
         <Text>Allergens: {allergens}</Text>
         <Text>Description: {description}</Text>
-        <Text>Expiry: {expiry}</Text>
+        <Text>Date Posted: {createdAt}</Text>
         {updatedItem.availability === 'Yes' ? (
           <Button onClick={handleAvailability} colorScheme='teal'>
             Make Unavailable

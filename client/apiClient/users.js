@@ -4,6 +4,7 @@ export function addUser(user) {
   return request
     .post(`/api/users/`)
     .send(user)
+    .then((res) => res.body)
     .catch((err) => console.error(err))
 }
 

@@ -1,7 +1,6 @@
 const knex = require('knex')
 const testConfig = require('../knexfile').test
 const testDb = knex(testConfig)
-
 const db = require('../items')
 
 beforeAll(async () => {
@@ -18,24 +17,13 @@ afterAll(async () => {
 
 describe('getAllItemsWithUserInfo', () => {
   it('should return items along with the users info', async () => {
+    expect.assertions(5)
     const items = await db.getAllItemsWithUserInfo(testDb)
-
     expect(items).toHaveLength(3)
     expect(items[0]).toHaveProperty('itemsId')
     expect(items[1]).toHaveProperty('userId')
     expect(items[1].itemsId).toBe(2)
     expect(items[2].userId).toBe(3)
-  })
-  it.skip('should return a status of 500 when it doesnt connect to the db', () => {
-    db.getAllItemsWithUserInfo.mockImplementation(() =>
-      Promise.reject(new Error('Something went wrong'))
-    )
-    return request(server)
-      .get('/api/items')
-      .then((res) => {
-        expect(res.status).toBe(500)
-        expect(res.text).toContain('Something went wrong')
-      })
   })
 })
 
@@ -48,27 +36,12 @@ describe('getItemsByUserId', () => {
   })
 })
 
-// TEST TO GET ITEM BY ID WITH USER INFO
-// ATTEMPT TO TEST 1
 describe('getItemByIdWithUserInfo', () => {
   it.skip('returns item with the user info', async () => {
     const item = await db.getItemByIdWithUserInfo(2, testDb)
     console.log('This is the item: ', item)
   })
 })
-// ATTEMPT TO TEST 2
-// describe('getItemsByIdWithUserInfo', () => {
-//   it('returns item by id with the user info', () => {
-//     return db
-//       .getItemByIdWithUserInfo(1, testDb)
-//       .then(() => {
-//         return testDb('items').select().first().where(1, itemId)
-//       })
-//       .then(() => {
-//         expect(username).toBe()
-//       })
-//   })
-// })
 
 describe('getItemById', () => {
   it.skip('returns an item by its id', async () => {
@@ -80,6 +53,7 @@ describe('getItemById', () => {
 
 describe('addNewItem', () => {
   it('adds a new item and then returns new item', () => {
+    expect.assertions(1)
     const dbNewItem = {
       itemName: 'Jalapenos',
       allergens: 'None',
