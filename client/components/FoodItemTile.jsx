@@ -46,11 +46,7 @@ export default function FoodItemTile(props) {
         {/* </ReactLink> */}
 
         <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay
-            bgGradient='linear(to-t, #7DA97A, #e5eee4)'
-            backdropFilter='auto'
-            backdropBlur='10px'
-          />
+          <ModalOverlay bgGradient='linear(to-t, #7DA97A, #e5eee4)' />
           <ModalContent>
             <ModalHeader bg='#e5eee4' color='#1d6638'>
               {itemName}
@@ -63,7 +59,7 @@ export default function FoodItemTile(props) {
               <Text>Location: {postcode}</Text>
               <Text>Posted By: {username}</Text>
               <Text>Date Posted: {createdAt}</Text>
-              <Comments></Comments>
+              <Comments id={itemsId}></Comments>
             </ModalBody>
 
             <ModalFooter bg='#e5eee4'>

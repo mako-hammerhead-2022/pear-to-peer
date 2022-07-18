@@ -7,12 +7,13 @@ import { fetchComments } from '@/slices/currentItem'
 
 import AddCommentForm from '@/components/AddCommentForm'
 
-export default function Comments({ itemId }) {
+export default function Comments(props) {
   const dispatch = useDispatch()
   const comments = useSelector((state) => state.currentItem.comments)
+  console.log(props, 'props')
 
   useEffect(() => {
-    dispatch(fetchComments(itemId))
+    dispatch(fetchComments(props.id))
   }, [])
 
   return (
@@ -30,7 +31,7 @@ export default function Comments({ itemId }) {
           })}
         </ul>
       )}
-      <AddCommentForm itemId={itemId} />
+      <AddCommentForm itemId={props.id} />
     </>
   )
 }
