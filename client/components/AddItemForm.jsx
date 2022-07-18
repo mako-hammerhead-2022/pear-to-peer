@@ -19,9 +19,11 @@ import {
 import { postNewItem } from '@/slices/userItems'
 import { fetchUserByAuth0Id } from '@/slices/userData'
 import { useNavigate } from 'react-router-dom'
+import { useIsRegistered } from '@/components/useIsRegistered'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
+  const isRegistered = useIsRegistered()
   const { auth0Id, id } = useSelector((state) => state.userData.data)
 
   const navigate = useNavigate()
@@ -91,6 +93,10 @@ export function AddItemForm() {
   //   }
   //   return error
   // }
+
+  if (isRegistered === false) {
+    navigate('/register')
+  }
 
   return (
     <Formik

@@ -26,17 +26,12 @@ export default function Profile() {
     dispatch(fetchItemsByUserId(id))
   }, [id])
 
-  console.log('isRegistered', isRegistered)
   if (loading !== 'done') {
-    console.log('doing a loading')
     return <p>Loading...</p>
   }
 
-  if (isRegistered) {
-    console.log('is registered')
-  } else if (isRegistered === false) {
+  if (isRegistered === false) {
     navigate('/register')
-    console.log('not registered')
   }
 
   return (
