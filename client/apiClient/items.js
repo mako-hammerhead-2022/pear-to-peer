@@ -22,22 +22,10 @@ export function getAllItemsByUserId(id) {
 }
 
 export function updateItem(item) {
-  console.log('api item', item)
   return request
     .patch(`/api/items/update/${item.itemsId}`)
     .send(item)
     .then((res) => res.body)
-    .catch((err) => console.error(err))
-}
-
-export function updateItemAvailability(item) {
-  if (!item) {
-    return undefined
-  }
-  return request
-    .patch(`/api/items/${item.itemsId}`)
-    .send(item)
-    .then((res) => ({ ...res.body, itemsId: res.body.id }))
     .catch((err) => console.error(err))
 }
 

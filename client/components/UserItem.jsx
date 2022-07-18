@@ -19,7 +19,6 @@ export default function PageItemTile(props) {
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
   const [shouldUpdate, setShouldUpdate] = useState(false)
-  console.log(updatedItem, 'updatedItem')
 
   function handleAvailability() {
     setShouldUpdate(true)

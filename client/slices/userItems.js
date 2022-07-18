@@ -41,7 +41,15 @@ export const userItemsSlice = createSlice({
       return [...state, payload]
     },
     [patchItem.fulfilled]: (state, { payload }) => {
-      return initialState
+      const updatedItemArray = state.map((item) => {
+        if (item.itemsId === payload.id) {
+          return {
+            ...item,
+            availability: payload.availability,
+          }
+        } else return item
+      })
+      return [...updatedItemArray]
     },
   },
 })
