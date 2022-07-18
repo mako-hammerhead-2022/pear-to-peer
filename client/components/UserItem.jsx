@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Box, Heading, Text, Image, Button } from '@chakra-ui/react'
 import { Link as ReactLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { patchItem } from '@/slices/currentItem'
+import { patchItem } from '@/slices/userItems'
 
 export default function PageItemTile(props) {
   const dispatch = useDispatch()
@@ -18,11 +18,11 @@ export default function PageItemTile(props) {
   } = props.data
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
-  // // const [shouldUpdate, setShouldUpdate] = useState(false)
+  const [shouldUpdate, setShouldUpdate] = useState(false)
   console.log(updatedItem, 'updatedItem')
 
   function handleAvailability() {
-    // setShouldUpdate(true)
+    setShouldUpdate(true)
     if (updatedItem.availability === 'Yes') {
       setUpdatedItem({ ...updatedItem, availability: 'No' })
     } else {
@@ -31,7 +31,7 @@ export default function PageItemTile(props) {
   }
 
   useEffect(() => {
-    if (handleAvailability) {
+    if (shouldUpdate) {
       dispatch(patchItem(updatedItem))
     }
   }, [updatedItem])
