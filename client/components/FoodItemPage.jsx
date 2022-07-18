@@ -1,5 +1,18 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Container, Heading, Image, Text } from '@chakra-ui/react'
+import {
+  Container,
+  Heading,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
