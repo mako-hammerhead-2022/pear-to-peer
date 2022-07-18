@@ -28,7 +28,6 @@ export default function Profile() {
       <Text>Username: {username}</Text>
       <Text>email: {email} </Text>
       <Text>Postal Code: {postcode} </Text>
-
       <Heading>Your Current Items:</Heading>
       <Grid templateColumns='repeat(4, 1fr)' gap={6}>
         {items.map((item) => {

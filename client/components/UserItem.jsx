@@ -16,23 +16,22 @@ export default function PageItemTile(props) {
     expiry,
     availability,
   } = props.data
-  console.log(props, 'is props')
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
-  const [shouldUpdate, setShouldUpdate] = useState(false)
+  // // const [shouldUpdate, setShouldUpdate] = useState(false)
+  console.log(updatedItem, 'updatedItem')
 
   function handleAvailability() {
-    setShouldUpdate(true)
+    // setShouldUpdate(true)
     if (updatedItem.availability === 'Yes') {
       setUpdatedItem({ ...updatedItem, availability: 'No' })
     } else {
       setUpdatedItem({ ...updatedItem, availability: 'Yes' })
     }
-    // await dispatch(patchItem({ ...updatedItem }))
   }
 
   useEffect(() => {
-    if (shouldUpdate) {
+    if (handleAvailability) {
       dispatch(patchItem(updatedItem))
     }
   }, [updatedItem])
