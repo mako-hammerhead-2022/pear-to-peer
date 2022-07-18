@@ -1,19 +1,20 @@
-import React from 'react'
 import {
   Box,
-  Heading,
-  Text,
-  Image,
   Button,
+  Heading,
+  Image,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import React from 'react'
+
 import Comments from '@/components/Comments'
 // import { Link as ReactLink } from 'react-router-dom'
 

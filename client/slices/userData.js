@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import { addUser, getUserByAuth0Id } from '@/apiClient/users'
 
 const initialState = {
@@ -37,13 +38,13 @@ export const userDataSlice = createSlice({
   },
 
   extraReducers: {
-    [postNewUser.pending]: (state, { payload }) => {
+    [postNewUser.pending]: (state) => {
       return { ...state, loading: 'pending' }
     },
     [postNewUser.fulfilled]: (state, { payload }) => {
       return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
     },
-    [fetchUserByAuth0Id.pending]: (state, { payload }) => {
+    [fetchUserByAuth0Id.pending]: (state) => {
       return { ...state, loading: 'pending' }
     },
     [fetchUserByAuth0Id.fulfilled]: (state, { payload }) => {

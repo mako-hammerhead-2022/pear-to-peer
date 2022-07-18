@@ -1,6 +1,6 @@
+import { Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Grid, GridItem } from '@chakra-ui/react'
 
 import Header from '@/components/Header'
 import Nav from '@/components/Nav'

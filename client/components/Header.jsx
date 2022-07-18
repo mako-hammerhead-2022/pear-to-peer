@@ -1,5 +1,6 @@
+import { Center, Heading, HStack, Image } from '@chakra-ui/react'
 import React from 'react'
-import { HStack, Heading, Image, Center } from '@chakra-ui/react'
+
 import logol from '@/images/logol.png'
 import logor from '@/images/logor.png'
 

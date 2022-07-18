@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import { addItem, getAllItemsByUserId, updateItem } from '@/apiClient/items'
 
 const initialState = []
@@ -52,6 +53,7 @@ export const userItemsSlice = createSlice({
   },
 })
 
+// eslint-disable-next-line no-empty-pattern
 export const {} = userItemsSlice.actions
 
 export default userItemsSlice.reducer

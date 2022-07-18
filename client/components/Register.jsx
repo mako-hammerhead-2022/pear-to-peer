@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { Field, Form, Formik } from 'formik'
 import {
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   Input,
   NumberInput,
   NumberInputField,
-  FormErrorMessage,
 } from '@chakra-ui/react'
+import { Field, Form, Formik } from 'formik'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 import { postNewUser } from '@/slices/userData'
 
 export default function Register() {

@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchItemById, clearCurrentItem } from '@/slices/currentItem'
-import { Formik, Form, Field } from 'formik'
 import {
-  Heading,
-  FormLabel,
-  Input,
   Button,
   Container,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
   Select,
   Textarea,
-  FormControl,
-  NumberInputField,
-  NumberInput,
-  FormErrorMessage,
 } from '@chakra-ui/react'
-import { patchItem } from '@/slices/currentItem'
+import { Field, Form, Formik } from 'formik'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+
+import { clearCurrentItem, fetchItemById } from '@/slices/currentItem'
+import { patchItem } from '@/slices/currentItem'
 
 export default function UpdateFoodItem() {
   const { itemName, allergens, description, expiry, availability, imageUrl } =

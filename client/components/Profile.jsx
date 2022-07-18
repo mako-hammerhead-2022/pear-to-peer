@@ -1,11 +1,12 @@
 import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
 import { useIsRegistered } from '@/components/useIsRegistered'
+import PageItemTile from '@/components/UserItem'
 import { fetchUserByAuth0Id } from '@/slices/userData'
 import { fetchItemsByUserId } from '@/slices/userItems'
-import PageItemTile from '@/components/UserItem'
 
 export default function Profile() {
   const { loading } = useSelector((state) => state.userData)

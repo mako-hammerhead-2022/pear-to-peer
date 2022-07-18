@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import { getAllItemsWithUserInfo } from '@/apiClient/items'
 
 const initialState = []
@@ -21,6 +22,7 @@ export const allAvailableItemsSlice = createSlice({
     },
   },
 })
+// eslint-disable-next-line no-empty-pattern
 export const {} = allAvailableItemsSlice.actions
 
 export default allAvailableItemsSlice.reducer

@@ -1,35 +1,28 @@
-import React, { useState, useEffect } from 'react'
 import {
   Box,
-  Heading,
-  Text,
-  Image,
   Button,
+  Heading,
+  Image,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { Link as ReactLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link as ReactLink } from 'react-router-dom'
+
 import { patchItem } from '@/slices/userItems'
 
 export default function PageItemTile(props) {
   const dispatch = useDispatch()
-  const {
-    itemsId,
-    imageUrl,
-    itemName,
-    allergens,
-    createdAt,
-    description,
-    expiry,
-    availability,
-  } = props.data
+  const { itemsId, imageUrl, itemName, allergens, createdAt, description } =
+    props.data
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
