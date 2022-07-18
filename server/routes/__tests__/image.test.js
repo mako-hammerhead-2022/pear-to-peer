@@ -45,6 +45,6 @@ describe('POST /api/image', () => {
       .post('/api/image')
       .send({ fileName: 'image.jpg', fileType: 'jpg' })
 
-    expect(Object.keys(res.body)).toContain('image.jpg')
+    expect(res.body).toContain('image.jpg')
   })
 })
