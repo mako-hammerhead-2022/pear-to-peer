@@ -18,5 +18,3 @@ describe('POST /api/comments', () => {
     expect(commentRes.content).toBe(testComment.content)
     scope.done()
   })
-  test('should return error ')
-}))
