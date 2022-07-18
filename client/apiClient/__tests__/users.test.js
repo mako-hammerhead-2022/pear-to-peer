@@ -34,7 +34,7 @@ describe("GET user by the user's auth token", () => {
   test("gets a user by the user's auth token", async () => {
     const testUser = {
       id: 13,
-      auth0Id: 'auth0|4token',
+      auth0Id: 'auth0|4test',
       name: 'Perry Platipus',
       username: 'PTP123',
       email: 'ptp123@doofenshmirtz.com',
@@ -44,10 +44,12 @@ describe("GET user by the user's auth token", () => {
     const authId = testUser.auth0Id
 
     const scope = nock('http://localhost')
-      .get(`/api/users/${authId}`)
+      .get(`/api/users/`)
       .reply(200, testUser)
 
-    const userRes = await getUserByAuth0Token(authId)
+    const token = 'auth0|something'
+
+    const userRes = await getUserByAuth0Token(authId, token)
     expect(userRes.id).toBe(13)
     expect(userRes.name).toContain('Perry Platipus')
     expect(userRes.username).toContain('PTP123')
