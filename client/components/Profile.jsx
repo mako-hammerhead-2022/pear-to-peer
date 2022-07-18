@@ -8,8 +8,9 @@ import { fetchItemsByUserId } from '@/slices/userItems'
 import PageItemTile from '@/components/UserItem'
 
 export default function Profile() {
+  const { loading } = useSelector((state) => state.userData)
   const { auth0Id, email, postcode, name, username, id } = useSelector(
-    (state) => state.userData
+    (state) => state.userData.data
   )
   const items = useSelector((state) => state.userItems)
 
@@ -25,17 +26,16 @@ export default function Profile() {
     dispatch(fetchItemsByUserId(id))
   }, [id])
 
-  if (isRegistered === null) {
+  console.log('isRegistered', isRegistered)
+  if (loading !== 'done') {
     console.log('doing a loading')
     return <p>Loading...</p>
   }
 
   if (isRegistered) {
     console.log('is registered')
-  } else {
-    if (isRegistered === false)
-      // auth0 details have loaded
-      navigate('/register')
+  } else if (isRegistered === false) {
+    navigate('/register')
     console.log('not registered')
   }
 

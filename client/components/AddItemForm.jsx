@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom'
 
 export function AddItemForm() {
   const dispatch = useDispatch()
-  const { auth0Id, id } = useSelector((state) => state.userData)
+  const { auth0Id, id } = useSelector((state) => state.userData.data)
 
   const navigate = useNavigate()
   const { getAccessTokenSilently, isAuthenticated } = useAuth0()

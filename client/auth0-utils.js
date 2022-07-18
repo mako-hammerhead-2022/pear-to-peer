@@ -4,7 +4,7 @@ import { setLoggedInUser } from '@/slices/userData'
 // eslint-disable-next-line no-unused-vars
 export async function cacheUser(useAuth0) {
   const dispatch = useDispatch()
-  const currentUser = useSelector((state) => state.userData)
+  const currentUser = useSelector((state) => state.userData.data)
 
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
 
