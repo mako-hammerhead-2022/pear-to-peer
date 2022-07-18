@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import {
   Button,
   FormControl,
@@ -10,34 +11,34 @@ import {
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { postNewUser } from '@/slices/userData'
 
 export default function Register() {
+  const { user, getAccessTokenSilently } = useAuth0()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.userData.data)
   const [form, setForm] = useState({
-    auth0Id: '',
     email: '',
   })
 
   useEffect(() => {
-    setForm({
-      auth0Id: user?.auth0Id,
-      email: user?.email,
-    })
+    if (user) {
+      setForm({
+        email: user?.email,
+      })
+    }
   }, [user])
 
-  function handleSubmit(formData) {
+  async function handleSubmit(formData) {
+    const token = await getAccessTokenSilently()
     const userToSave = {
       ...formData,
-      auth0Id: user.auth0Id,
-      email: user.email,
+      email: user?.email,
     }
-    dispatch(postNewUser(userToSave))
+    dispatch(postNewUser({ user: userToSave, token }))
     navigate('/profile')
   }
 
@@ -74,7 +75,7 @@ export default function Register() {
   return (
     <div>
       <Heading>Register Your Details</Heading>
-      {form.auth0Id != '' ? (
+      {form.email != '' ? (
         <Formik
           initialValues={{ ...form, name: '', username: '', postcode: '' }}
           onSubmit={(values) => handleSubmit(values)}
