@@ -11,9 +11,14 @@ router.post(
     else return utils.checkJwt(req, res, next)
   },
   async (req, res) => {
-    const { fileName, fileType } = req.body
-    const signedUrl = await utils.generatePreSignedUrl(fileName, fileType)
-    res.json({ signedUrl })
+    try {
+      const { fileName, fileType } = req.body
+      const signedUrl = await utils.generatePreSignedUrl(fileName, fileType)
+      res.json({ signedUrl })
+    } catch (err) {
+      console.error(err)
+      res.status(500).send({ message: 'Something went wrong' })
+    }
   }
 )
 
