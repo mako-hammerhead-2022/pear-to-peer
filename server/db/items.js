@@ -15,7 +15,8 @@ function getAllItemsWithUserInfo(db = connection) {
       'description',
       'imageUrl',
       'expiry',
-      'availability'
+      'availability',
+      'createdAt'
     )
 }
 
@@ -32,7 +33,8 @@ function getItemsByUserId(userId, db = connection) {
       'description',
       'imageUrl',
       'expiry',
-      'availability'
+      'availability',
+      'createdAt'
     )
     .where('users.id', userId)
 }
@@ -50,7 +52,8 @@ function getItemByIdWithUserInfo(itemId, db = connection) {
       'description',
       'imageUrl',
       'expiry',
-      'availability'
+      'availability',
+      'createdAt'
     )
     .where('items.id', itemId)
     .first()

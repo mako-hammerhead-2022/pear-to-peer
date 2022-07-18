@@ -91,7 +91,6 @@ export default function UpdateFoodItem() {
               imageUrl: imageUrl,
             }}
             onSubmit={(values) => {
-              // console.log(values, 'submitted values')
               handleUpdate(values)
             }}
           >

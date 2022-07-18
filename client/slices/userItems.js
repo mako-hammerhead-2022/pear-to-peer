@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { addItem, getAllItemsByUserId } from '@/apiClient/items'
+import { addItem, getAllItemsByUserId, updateItem } from '@/apiClient/items'
 
 const initialState = []
 
@@ -19,20 +19,35 @@ export const postNewItem = createAsyncThunk(
   }
 )
 
+export const patchItem = createAsyncThunk(
+  'currentItem/patchItem',
+  async (item) => {
+    const response = await updateItem(item)
+    return response
+  }
+)
+
 export const userItemsSlice = createSlice({
   name: 'userItems',
   initialState,
-  reducers: {
-    clearCurrentItem: (state, action) => {
-      return initialState
-    },
-  },
+  reducers: {},
   extraReducers: {
     [fetchItemsByUserId.fulfilled]: (state, { payload }) => {
       return payload
     },
     [postNewItem.fulfilled]: (state, { payload }) => {
       return [...state, payload]
+    },
+    [patchItem.fulfilled]: (state, { payload }) => {
+      const updatedItemArray = state.map((item) => {
+        if (item.itemsId === payload.id) {
+          return {
+            ...item,
+            availability: payload.availability,
+          }
+        } else return item
+      })
+      return [...updatedItemArray]
     },
   },
 })
