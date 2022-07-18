@@ -21,7 +21,7 @@ describe('getAllUsers', () => {
     expect.assertions(4)
     const users = await db.getAllUsers(testDb)
 
-    expect(users).toHaveLength(3)
+    expect(users).toHaveLength(12)
     expect(users[0].name).toBe('Harry Horatio')
     expect(users[1].username).toBe('SlipsAllDay')
     expect(users[2].email).toBe('clippityclap_3@example.com')
@@ -39,7 +39,7 @@ describe('getAllUsers', () => {
 
 describe('getUserByAuth0Id', () => {
   it('returns a user using their auth0Id', async () => {
-    const user = await db.getUserByAuth0Id('ghi789', testDb)
+    const user = await db.getUserByAuth0Id('auth0|3', testDb)
 
     expect(user.username).toBe('E-clips-E')
     expect(user.postcode).toBe(5012)

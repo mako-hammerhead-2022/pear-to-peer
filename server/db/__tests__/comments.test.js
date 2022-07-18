@@ -27,6 +27,7 @@ describe('getCommentsByItemIdWithAuthor', () => {
   it('returns comment objects that contain the authors name', async () => {
     const comments = await db.getCommentsByItemIdWithAuthor(1, testDb)
 
+    console.log(comments)
     expect(comments[0].authorId).toBe(2)
     expect(comments[0].authorName).toBe('SlipsAllDay')
     expect(comments[1].authorId).toBe(1)
@@ -37,16 +38,17 @@ describe('getCommentsByItemIdWithAuthor', () => {
 describe('addComment', () => {
   it('adds a comment to the db and returns the new comment object', async () => {
     const newComment = {
-      authorId: 'abc123',
+      auth0Id: 'auth0|1',
       itemId: 2,
       comment: 'Colourful Comment',
     }
     const actual = await db.addComment(newComment, testDb)
 
     expect(actual).toEqual({
-      ...newComment,
+      itemId: 2,
+      comment: 'Colourful Comment',
       authorId: 1,
-      commentId: 4,
+      commentId: 5,
       timestamp: expect.anything(),
       authorName: 'HairyHarry123',
     })
