@@ -17,8 +17,8 @@ router.post('/', async (req, res) => {
     postcode,
   }
   try {
-    await db.createUser(user)
-    res.sendStatus(201)
+    const newUser = await db.createUser(user)
+    res.json(newUser)
   } catch (err) {
     console.error(err)
     res.status(500).send(err.message)

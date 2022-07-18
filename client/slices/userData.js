@@ -23,8 +23,7 @@ export const postNewUser = createAsyncThunk(
   'userData/postNew',
   async (user) => {
     const response = await addUser(user)
-    // not being used???
-    return response.body
+    return response
   }
 )
 
@@ -38,10 +37,12 @@ export const userDataSlice = createSlice({
   },
 
   extraReducers: {
-    // not in use???
-    // [postNewUser.fulfilled]: (state, { payload }) => {
-    //   return { ...state, ...payload }
-    // },
+    [postNewUser.pending]: (state, { payload }) => {
+      return { ...state, loading: 'pending' }
+    },
+    [postNewUser.fulfilled]: (state, { payload }) => {
+      return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
+    },
     [fetchUserByAuth0Id.pending]: (state, { payload }) => {
       return { ...state, loading: 'pending' }
     },

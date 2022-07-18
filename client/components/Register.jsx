@@ -37,7 +37,7 @@ export default function Register() {
       email: user.email,
     }
     dispatch(postNewUser(userToSave))
-    navigate('/')
+    navigate('/profile')
   }
 
   function validateName(value) {

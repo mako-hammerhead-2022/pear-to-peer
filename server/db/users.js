@@ -5,8 +5,9 @@ const connection = require('knex')(config)
 // for possible admin feature
 const getAllUsers = (db = connection) => db('users').select()
 
-function createUser(user, db = connection) {
-  return db('users').insert(user)
+async function createUser(user, db = connection) {
+  await db('users').insert(user)
+  return getUserByAuth0Id(user.auth0Id, db)
 }
 
 function getUserByAuth0Id(auth0Id, db = connection) {
