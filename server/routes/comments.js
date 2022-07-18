@@ -20,7 +20,6 @@ router.post(
 
     db.addComment(newComment)
       .then((dbComment) => {
-        console.log('post dbComment', dbComment)
         res.json(dbComment)
       })
       .catch((err) => {
@@ -35,7 +34,6 @@ router.get('/:itemId', (req, res) => {
 
   db.getCommentsByItemIdWithAuthor(itemId)
     .then((comments) => {
-      console.log('get dbComments', comments)
       res.json(comments)
     })
     .catch((err) => {

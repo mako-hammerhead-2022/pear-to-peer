@@ -40,7 +40,6 @@ module.exports = {
 
 // Helpers
 async function getCommentByIdWithAuthor(id, db = connection) {
-  console.log('id', id)
   const comment = await db('comments')
     .join('users', 'comments.auth0Id', 'users.auth0Id')
     .select()
@@ -54,6 +53,5 @@ async function getCommentByIdWithAuthor(id, db = connection) {
     )
     .where('comments.id', id)
     .first()
-  console.log('db single comment', comment)
   return comment
 }

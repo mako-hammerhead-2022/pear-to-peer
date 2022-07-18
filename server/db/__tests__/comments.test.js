@@ -27,7 +27,6 @@ describe('getCommentsByItemIdWithAuthor', () => {
   it('returns comment objects that contain the authors name', async () => {
     const comments = await db.getCommentsByItemIdWithAuthor(1, testDb)
 
-    console.log(comments)
     expect(comments[0].authorId).toBe(2)
     expect(comments[0].authorName).toBe('SlipsAllDay')
     expect(comments[1].authorId).toBe(1)
