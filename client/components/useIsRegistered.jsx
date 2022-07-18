@@ -2,19 +2,28 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchUserByAuth0Id } from '@/slices/userData'
+import { fetchUserByAuth0Token } from '@/slices/userData'
 
 export function useIsRegistered() {
   const dispatch = useDispatch()
   const [isRegistered, setIsRegistered] = useState(null)
-  const { user } = useAuth0()
+  const [token, setToken] = useState(null)
+  const { getAccessTokenSilently } = useAuth0()
   const { loading, data: userData } = useSelector((state) => state.userData)
 
   useEffect(() => {
-    if (user) {
-      dispatch(fetchUserByAuth0Id(user.sub))
+    async function getToken() {
+      const fetchedToken = await getAccessTokenSilently()
+      setToken(fetchedToken)
     }
-  }, [user])
+    getToken()
+  }, [])
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchUserByAuth0Token(token))
+    }
+  }, [token])
 
   useEffect(() => {
     // if the extra userData from the db has loaded

@@ -12,8 +12,8 @@ import {
 
 // GET ALL ITEMS WITH USER INFO
 describe('GET /api/items/:userId', () => {
+  expect.assertions(8)
   test('get request for all items with user info', async () => {
-    expect.assertions(7)
     const item = {
       id: 3,
       itemName: 'apple',
@@ -36,8 +36,7 @@ describe('GET /api/items/:userId', () => {
     expect(itemRes.expiry).toContain('expiryDate')
     expect(itemRes.availability).toContain('Yes')
     expect(itemRes.userId).toBe(3)
-
-    scope.done()
+    expect(scope.isDone()).toBe(true)
   })
 })
 
@@ -151,36 +150,38 @@ describe('GET /api/items/byUser/:userId', () => {
 
 // UPDATES ITEM
 describe('PATCH /api/items/update/itemId', () => {
-  test.skip('updates item by item Id', async () => {
+  test('updates item by item Id', async () => {
     const item = {
       id: 3,
       itemName: 'apple',
     }
 
-    const itemId = item.id
-    const action = updateItem({ id: 3, itemName: 'good apple' })
-    const newState = patchItem(item, action)
+    const scope = nock('http://localhost')
+      .patch(`/api/items/update/${item.id}`)
+      .reply(200, item)
+
+    const action = await updateItem({ itemsId: 3, itemName: 'good apple' })
+
+    expect(action.content).toBe(item.content)
+    scope.done()
+  })
+  test('returns with error', async () => {
+    const item = {
+      id: 3,
+      itemName: 'apple',
+    }
 
     const scope = nock('http://localhost')
-      .patch(`/api/items/update/${itemId}`)
-      .reply(200, newState)
-
-    expect(item[0].itemName).toContain('apple')
+      .patch(`/api/items/update/${item.id}`)
+      .reply(500, {})
+    try {
+      await updateItem({ itemsId: 3, itemName: 'good apple' })
+    } catch (err) {
+      expect(err).toBe('internal server error')
+    }
     scope.done()
   })
 })
-
-// it('updates fruit data', () => {
-//   const oldState = [
-//     { id: 1, name: 'pear' },
-//     { id: 2, name: 'orange' },
-//   ]
-//   const action = updateFruit({ id: 2, name: 'apple' })
-//   const newState = fruits(oldState, action)
-//   expect(newState[1].name).toBe('apple')
-//   expect(newState[0].name).toBe('pear')
-//   expect(newState).toHaveLength(2)
-// })
 
 // GET IMAGE URL
 describe('GET /api/image', () => {

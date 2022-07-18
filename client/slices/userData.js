@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { addUser, getUserByAuth0Id } from '@/apiClient/users'
+import { addUser, getUserByAuth0Token } from '@/apiClient/users'
 
 const initialState = {
   data: {
@@ -12,18 +12,18 @@ const initialState = {
   error: null,
 }
 
-export const fetchUserByAuth0Id = createAsyncThunk(
+export const fetchUserByAuth0Token = createAsyncThunk(
   'userData/fetchByAuth0Id',
-  async (auth0Id) => {
-    const response = await getUserByAuth0Id(auth0Id)
+  async (token) => {
+    const response = await getUserByAuth0Token(token)
     return response
   }
 )
 
 export const postNewUser = createAsyncThunk(
   'userData/postNew',
-  async (user) => {
-    const response = await addUser(user)
+  async ({ user, token }) => {
+    const response = await addUser(user, token)
     return response
   }
 )
@@ -44,10 +44,10 @@ export const userDataSlice = createSlice({
     [postNewUser.fulfilled]: (state, { payload }) => {
       return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
     },
-    [fetchUserByAuth0Id.pending]: (state) => {
+    [fetchUserByAuth0Token.pending]: (state) => {
       return { ...state, loading: 'pending' }
     },
-    [fetchUserByAuth0Id.fulfilled]: (state, { payload }) => {
+    [fetchUserByAuth0Token.fulfilled]: (state, { payload }) => {
       return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
     },
   },

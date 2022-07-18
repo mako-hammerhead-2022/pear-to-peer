@@ -8,7 +8,6 @@ import { fetchComments } from '@/slices/currentItem'
 export default function Comments(props) {
   const dispatch = useDispatch()
   const comments = useSelector((state) => state.currentItem.comments)
-  console.log(props, 'props')
 
   useEffect(() => {
     dispatch(fetchComments(props.id))
