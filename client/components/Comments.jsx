@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddCommentForm from '@/components/AddCommentForm'
 import { fetchComments } from '@/slices/currentItem'
 
+import { clearCurrentItem } from '../slices/currentItem'
+
 export default function Comments(props) {
   const dispatch = useDispatch()
   const comments = useSelector((state) => state.currentItem.comments)
 
   useEffect(() => {
     dispatch(fetchComments(props.id))
+
+    return () => dispatch(clearCurrentItem())
   }, [])
 
   return (
