@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { addComment, getCommentsByItemId } from '@/apiClient/comments'
 import { getItemById, updateItem } from '@/apiClient/items'
+import { fetchItemsByUserId } from '@/slices/userItems'
 
 const initialState = {}
 
@@ -23,11 +24,11 @@ export const postComment = createAsyncThunk(
   }
 )
 
+// when I edit an item, and when I change the availability
 export const patchItem = createAsyncThunk(
   'currentItem/patchItem',
   async ({ item, token }) => {
     const response = await updateItem(item, token)
-
     return response
   }
 )

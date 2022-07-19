@@ -20,7 +20,7 @@ export const postNewItem = createAsyncThunk(
     return response
   }
 )
-
+// race condition
 export const userItemsSlice = createSlice({
   name: 'userItems',
   initialState,
@@ -37,7 +37,7 @@ export const userItemsSlice = createSlice({
         if (item.itemsId === payload.id) {
           return {
             ...item,
-            availability: payload.availability,
+            ...payload,
           }
         } else return item
       })

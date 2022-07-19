@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import {
   Button,
   Container,
@@ -19,13 +20,13 @@ import {
 } from '@/slices/currentItem'
 
 export default function UpdateFoodItem(props) {
+  const { getAccessTokenSilently } = useAuth0()
+  // const token = awaitAccessTokenSilently
   console.log(props, 'updateItemProps')
   const { itemName, allergens, description, expiry, availability, imageUrl } =
     useSelector((state) => state.currentItem)
 
   const dispatch = useDispatch()
-  const [updatedItem, setUpdatedItem] = useState({})
-  const [shouldUpdate, setShouldUpdate] = useState(false)
 
   useEffect(() => {
     dispatch(fetchItemById(props.id))
@@ -35,24 +36,20 @@ export default function UpdateFoodItem(props) {
   }, [])
 
   async function handleUpdate(formData) {
-    setShouldUpdate(true)
-    setUpdatedItem({
+    const token = await getAccessTokenSilently()
+
+    const updatedItem = {
       ...formData,
       itemName: formData.itemName,
       allergens: formData.allergens,
       description: formData.description,
       availability: formData.availability,
       itemsId: props.id,
-    })
-    // dispatch(patchItem(itemToUpdate))
-  }
-  console.log(updatedItem, 'itu')
-
-  useEffect(() => {
-    if (shouldUpdate) {
-      dispatch(patchItem(updatedItem))
     }
-  }, [updatedItem])
+
+    dispatch(patchItem({ item: updatedItem, token }))
+    console.log(updatedItem, 'itu')
+  }
 
   function validateItemName(value) {
     let error
@@ -96,6 +93,7 @@ export default function UpdateFoodItem(props) {
               imageUrl: imageUrl,
             }}
             onSubmit={(values, actions) => {
+              // formData
               handleUpdate(values)
               setTimeout(() => {
                 actions.setSubmitting(false)
@@ -171,7 +169,6 @@ export default function UpdateFoodItem(props) {
                           {...field}
                           name='availability'
                           id='availability'
-                          // value={availability}
                           required
                         >
                           <option value='Yes'>Yes</option>
