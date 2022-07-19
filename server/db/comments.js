@@ -29,6 +29,7 @@ async function addComment(newComment, db = connection) {
     comment: newComment.comment,
   }
   const newIds = await db('comments').insert(toAdd)
+  console.log(JSON.stringify(newIds))
 
   return getCommentByIdWithAuthor(newIds[0], db)
 }
