@@ -52,10 +52,10 @@ describe('GET /api/users', () => {
 })
 
 describe('POST /api/users', () => {
-  it('creates a new user', async () => {
-    expect.assertions(2)
+  it('creates a new user', async (req) => {
+    expect.assertions(3)
     const newUser = {
-      auth0Id: 'auth0|4',
+      auth0Id: req.auth?.sub,
       email: 'name@example.com',
       name: 'Jerry Picker',
       username: 'JerryPikerz',
@@ -66,6 +66,7 @@ describe('POST /api/users', () => {
     const res = await request(server).post('/api/users').send(newUser)
     expect(res.status).toBe(200)
     expect(db.createUser).toHaveBeenCalledTimes(1)
+    expect(db.createUser).toHaveBeenCalledWith(newUser)
   })
   it("should return status 500 and error when DB doesn't work", async () => {
     expect.assertions(2)
