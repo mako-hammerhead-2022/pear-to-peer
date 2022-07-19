@@ -28,10 +28,10 @@ async function addComment(newComment, db = connection) {
     itemId: newComment.itemId,
     comment: newComment.comment,
   }
-  const newIds = await db('comments').insert(toAdd)
+  const newIds = await db('comments').returning('id').insert(toAdd)
   console.log(JSON.stringify(newIds))
 
-  return getCommentByIdWithAuthor(newIds[0], db)
+  return getCommentByIdWithAuthor(newIds[0].id, db)
 }
 
 module.exports = {
