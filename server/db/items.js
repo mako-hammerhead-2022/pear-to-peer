@@ -4,7 +4,7 @@ const connection = require('knex')(config)
 
 function getAllItemsWithUserInfo(db = connection) {
   return db('items')
-    .join('users', 'items.auth0Id', 'users.auth0id')
+    .join('users', 'items.auth0Id', 'users.auth0Id')
     .select(
       'items.id as itemsId',
       'users.id as userId',
