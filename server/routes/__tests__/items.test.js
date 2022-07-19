@@ -83,28 +83,8 @@ describe('POST /api/items/', () => {
       userId: 2,
     }
     db.insertItem.mockImplementation(Promise.resolve(newItem))
-    // db.insertItem.mockReturnValue(
-    //   Promise.resolve([
-    //     {
-    //       itemsId: 2,
-    //       userId: 2,
-    //       itemName: 'testItem',
-    //       allergens: 'testAllergen',
-    //       description: 'testDescription',
-    //       imageUrl: 'testURL.co.nz',
-    //       dateCreated: '2022-03-10 08:24:03',
-    //       expiry: '2022-31-12 00:00:00',
-    //       availability: 'yes',
-    //     },
-    //   ])
-    // )
 
     await request(server).post('/api/items').send(newItem)
     expect(db.insertItem).toHaveBeenCalledWith(newItem)
-
-    // const res = await request(server).get('/api/items/15')
-
-    // console.log(res.text)
-    // expect(res.status).toBe(200)
   })
 })

@@ -18,6 +18,7 @@ afterAll(async () => {
 
 describe('getCommentsByItemIdWithAuthor', () => {
   it('returns the comments for a given itemId', async () => {
+    expect.assertions(2)
     const comments = await db.getCommentsByItemIdWithAuthor(1, testDb)
 
     expect(comments).toHaveLength(3)
@@ -25,6 +26,7 @@ describe('getCommentsByItemIdWithAuthor', () => {
   })
 
   it('returns comment objects that contain the authors name', async () => {
+    expect.assertions(4)
     const comments = await db.getCommentsByItemIdWithAuthor(1, testDb)
 
     expect(comments[0].authorId).toBe(2)
@@ -32,9 +34,18 @@ describe('getCommentsByItemIdWithAuthor', () => {
     expect(comments[1].authorId).toBe(1)
     expect(comments[1].authorName).toBe('HairyHarry123')
   })
+  it('returns an error when database fails', async () => {
+    try {
+      await db.getCommentsByItemIdWithAuthor(1, testDb)
+    } catch (err) {
+      expect(err).toBe('internal server error')
+      expect(err).toBe(500)
+    }
+  })
 })
 
 describe('addComment', () => {
+  expect.assertions(1)
   it('adds a comment to the db and returns the new comment object', async () => {
     const newComment = {
       auth0Id: 'auth0|1',

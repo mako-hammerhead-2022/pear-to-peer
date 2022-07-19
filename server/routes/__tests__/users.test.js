@@ -52,13 +52,28 @@ describe('GET /api/users', () => {
 })
 
 describe('POST /api/users', () => {
-  it.skip('creates a new user', async () => {
+  it('creates a new user', async () => {
+    expect.assertions(3)
     const newUser = {
-      auth0Id: 'auth0|something',
       email: 'name@example.com',
       name: 'Jerry Picker',
       username: 'JerryPikerz',
+      postcode: 5230,
     }
-    db.createUser(newUser)
+    db.createUser.mockReturnValue(Promise.resolve(newUser))
+
+    const res = await request(server).post('/api/users').send(newUser)
+    expect(res.status).toBe(200)
+    expect(db.createUser).toHaveBeenCalledTimes(1)
+    expect(db.createUser).toHaveBeenCalledWith(newUser)
+  })
+  it("should return status 500 and error when DB doesn't work", async () => {
+    expect.assertions(2)
+    db.createUser.mockImplementation(() =>
+      Promise.reject(new Error('Something went wrong'))
+    )
+    const res = await request(server).post('/api/users')
+    expect(res.status).toBe(500)
+    expect(res.text).toContain('Something went wrong')
   })
 })

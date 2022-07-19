@@ -16,6 +16,7 @@ afterAll(async () => {
 })
 
 describe('getAllItemsWithUserInfo', () => {
+  expect.assertions(5)
   it('should return items along with the users info', async () => {
     expect.assertions(5)
     const items = await db.getAllItemsWithUserInfo(testDb)
@@ -28,6 +29,7 @@ describe('getAllItemsWithUserInfo', () => {
 })
 
 describe('getItemsByUserId', () => {
+  expect.assertions(3)
   it('returns an array of items for a given user', async () => {
     const userItems = await db.getItemsByUserId(1, testDb)
     expect(userItems).toHaveLength(2)
@@ -37,21 +39,30 @@ describe('getItemsByUserId', () => {
 })
 
 describe('getItemByIdWithUserInfo', () => {
-  it.skip('returns item with the user info', async () => {
+  expect.assertions(4)
+  it('returns item with the user info', async () => {
     const item = await db.getItemByIdWithUserInfo(2, testDb)
-    console.log('This is the item: ', item)
+    expect(item.itemName).toBe('Scones')
+    expect(item.allergens).toContain('eggs')
+    expect(item.availability).toBe('Yes')
+    expect(item).toHaveProperty('expiry')
   })
 })
 
 describe('getItemById', () => {
-  it.skip('returns an item by its id', async () => {
-    const items = await db.getItemById(1, testDb)
-    console.log('These are the items: ', items)
-    expect(items).toHaveLength(1)
+  expect.assertions(4)
+  it('should get the item by the item id', () => {
+    return db.getItemById('1', testDb).then((item) => {
+      expect(item).toBeDefined
+      expect(item).toHaveProperty('auth0Id')
+      expect(item.allergens).toContain('nuts')
+      expect(item.itemName).toBe('Hummus')
+    })
   })
 })
 
 describe('addNewItem', () => {
+  expect.assertions(1)
   it('adds a new item and then returns new item', () => {
     expect.assertions(1)
     const dbNewItem = {
@@ -76,6 +87,25 @@ describe('addNewItem', () => {
   })
 })
 
-describe('updateItemAvailability', () => {
-  it.todo('updates the availability of an item')
+describe('updateItem', () => {
+  it("updates an item's details", async () => {
+    expect.assertions(5)
+    const item = await db.getItemById(1, testDb)
+
+    const updatedItem = {
+      itemName: 'Joloponos',
+      allergens: 'SPICEYYY',
+      description: 'Spicy Joloponos yuck yuck',
+      availability: 'No',
+      imageUrl: 'http://localhost:4321',
+    }
+
+    return db.updateItem(1, updatedItem, testDb).then((newItem) => {
+      expect(item).not.toEqual(updatedItem)
+      expect(item.allergens).not.toEqual(newItem)
+      expect(item.auth0Id).toEqual(newItem.auth0Id)
+      expect(newItem.itemName).toContain('Joloponos')
+      expect(newItem.itemName).toEqual(updatedItem.itemName)
+    })
+  })
 })
