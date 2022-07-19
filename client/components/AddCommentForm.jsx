@@ -49,6 +49,7 @@ export default function AddCommentForm({ itemId }) {
                 >
                   <Input
                     {...field}
+                    mb={4}
                     type='text'
                     id='comment'
                     placeholder='Add a comment...'
@@ -58,9 +59,11 @@ export default function AddCommentForm({ itemId }) {
               )}
             </Field>
             <Button
+              mb={4}
               type='submit'
               isLoading={props.isSubmitting}
               onClick={props.handleSubmit}
+              bgColor='#7da97a'
             >
               Add
             </Button>

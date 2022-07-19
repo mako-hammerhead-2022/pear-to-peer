@@ -1,7 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import {
   Center,
-  Container,
   Grid,
   GridItem,
   Heading,
@@ -54,21 +53,18 @@ export default function Home() {
                     p={4}
                     w='25rem'
                     h='27rem'
-                    border='1px'
+                    border='2px'
                     borderStyle='solid'
                     borderRadius={'lg'}
                     key={item.itemsId}
                     justifyContent='center'
                   >
-                    {/* <Center> */}
                     <FoodItemTile data={item} />
-                    {/* </Center> */}
                   </WrapItem>
                 )
             })}
             {/* </Grid> */}
           </Wrap>
-          {/* </Container> */}
         </>
       )}
     </>

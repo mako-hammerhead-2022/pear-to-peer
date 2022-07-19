@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Center,
   Heading,
   HStack,
   Image,
@@ -37,9 +36,8 @@ export default function FoodItemTile(props) {
       {/* <Box> */}
       {/* <Box> */}
       <VStack>
-        {/* <Center> */}
         <Box h='150px' w='150px' overflow={'hidden'}>
-          <Image src={imageUrl} />
+          <Image borderRadius={'lg'} src={imageUrl} alt={itemName} />
         </Box>
         <Heading fontSize='3xl'>{itemName}</Heading>
         <HStack>
@@ -71,7 +69,7 @@ export default function FoodItemTile(props) {
           View More
         </Button>
       </VStack>
-      {/* </Center> */}
+
       {/* </Box> */}
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -82,20 +80,26 @@ export default function FoodItemTile(props) {
           </ModalHeader>
           <ModalCloseButton bg='#7da97a' />
           <ModalBody bg='#e5eee4'>
-            <Image src={imageUrl} />
-            <HStack>
-              <Text fontWeight={'bold'}>Allergens: </Text>
-              <Text>{allergens}</Text>
+            <Image mb={4} src={imageUrl} alt={itemName} />
+            <HStack mb={2}>
+              <Text fontSize='xl' fontWeight={'bold'}>
+                Allergens:{' '}
+              </Text>
+              <Text fontSize='xl'>{allergens}</Text>
             </HStack>
 
-            <Text fontWeight={'bold'}>Description: </Text>
-            <Text>{description}</Text>
+            <Text fontSize='xl' fontWeight={'bold'}>
+              Description:{' '}
+            </Text>
+            <Text mb={2} fontSize='xl'>
+              {description}
+            </Text>
 
-            <HStack>
+            <HStack mb={2}>
               <Text fontWeight={'bold'}>Location: </Text>
               <Text>{postcode}</Text>
             </HStack>
-            <HStack>
+            <HStack mb={2}>
               <Text fontWeight={'bold'}>Posted By: </Text>
               <Text>{username}</Text>
             </HStack>

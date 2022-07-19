@@ -223,7 +223,7 @@ export function AddItemForm() {
                   <Button
                     type='submit'
                     isLoading={props.isSubmitting}
-                    colorScheme='teal'
+                    bgColor='#7da97a'
                     m={2}
                     onClick={props.handleSubmit}
                   >
