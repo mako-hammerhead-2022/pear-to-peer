@@ -130,7 +130,16 @@ describe('currentItems thunks', () => {
       expect(result.type).toContain('/fulfilled')
       expect(result.payload).toEqual(testItem)
     })
-    it.todo('on rejected')
+    it('should return a /rejected action type on API client rejecting request', async () => {
+      getItemById.mockReturnValue(Promise.reject())
+      const dispatch = vi.fn()
+      const args = 1
+      const thunkFn = fetchItemById(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const result = await thunkFn(dispatch, () => {}, undefined)
+      expect(result.type).toContain('/rejected')
+      expect(result.payload).toBeUndefined()
+    })
   })
   describe('fetchComments', () => {
     it('should have a descriptive action prefix and types', () => {
@@ -177,7 +186,16 @@ describe('currentItems thunks', () => {
       expect(result.type).toContain('/fulfilled')
       expect(result.payload).toEqual(testComments)
     })
-    it.todo('on rejected')
+    it('should return a /rejected action type on API client rejecting request', async () => {
+      getCommentsByItemId.mockReturnValue(Promise.reject())
+      const dispatch = vi.fn()
+      const args = 1
+      const thunkFn = fetchComments(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const result = await thunkFn(dispatch, () => {}, undefined)
+      expect(result.type).toContain('/rejected')
+      expect(result.payload).toBeUndefined()
+    })
   })
   describe('postComment', () => {
     it('should have a descriptive action prefix and types', () => {
@@ -224,7 +242,16 @@ describe('currentItems thunks', () => {
       expect(result.type).toContain('/fulfilled')
       expect(result.payload).toEqual(testComments[0])
     })
-    it.todo('on rejected')
+    it('should return a /rejected action type on API client rejecting request', async () => {
+      addComment.mockReturnValue(Promise.reject())
+      const dispatch = vi.fn()
+      const args = { newComment: testComments[0], token: 'token' }
+      const thunkFn = postComment(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const result = await thunkFn(dispatch, () => {}, undefined)
+      expect(result.type).toContain('/rejected')
+      expect(result.payload).toBeUndefined()
+    })
   })
   describe('patchItem', () => {
     it('should have a descriptive action prefix and types', () => {
@@ -277,7 +304,16 @@ describe('currentItems thunks', () => {
       expect(result.type).toContain('/fulfilled')
       expect(result.payload).toEqual(args.item)
     })
-    it.todo('on rejected')
+    it('should return a /rejected action type on API client rejecting request', async () => {
+      updateItem.mockReturnValue(Promise.reject())
+      const dispatch = vi.fn()
+      const args = { ...testItem, description: 'shiny' }
+      const thunkFn = patchItem(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const result = await thunkFn(dispatch, () => {}, undefined)
+      expect(result.type).toContain('/rejected')
+      expect(result.payload).toBeUndefined()
+    })
   })
 })
 
