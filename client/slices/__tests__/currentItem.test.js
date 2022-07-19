@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 
-import { getCommentsByItemId } from '@/apiClient/comments'
+import { addComment, getCommentsByItemId } from '@/apiClient/comments'
 import { getItemById } from '@/apiClient/items'
 import reducer, { clearCurrentItem } from '@/slices/currentItem'
 import {
@@ -17,6 +17,7 @@ vi.mock('@/apiClient/items', () => ({
 }))
 
 vi.mock('@/apiClient/comments', () => ({
+  addComment: vi.fn(),
   getCommentsByItemId: vi.fn(),
 }))
 
@@ -205,7 +206,24 @@ describe('currentItems thunks', () => {
         })
       )
     })
-    it.todo('on fulfilled')
+    it('should call the api client function with expected args', async () => {
+      const dispatch = vi.fn()
+      const args = { newComment: testComments[0], token: 'token' }
+      const thunkFn = postComment(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      await thunkFn(dispatch, () => {}, undefined)
+      expect(addComment).toHaveBeenNthCalledWith(1, args.newComment, args.token)
+    })
+    it('should return data from the API client function as a payload', async () => {
+      addComment.mockReturnValue(testComments[0])
+      const dispatch = vi.fn()
+      const args = { newComment: testComments[0], token: 'token' }
+      const thunkFn = postComment(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const result = await thunkFn(dispatch, () => {}, undefined)
+      expect(result.type).toContain('/fulfilled')
+      expect(result.payload).toEqual(testComments[0])
+    })
     it.todo('on rejected')
   })
   describe('patchItem', () => {
