@@ -52,7 +52,7 @@ async function getCommentByIdWithAuthor(id, db = connection) {
       'comment',
       'comments.createdAt as timestamp'
     )
-    .where('commentId', id)
+    .where('comments.id', id)
     .first()
   return comment
 }
