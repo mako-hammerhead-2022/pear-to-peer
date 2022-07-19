@@ -20,13 +20,13 @@ export const postNewItem = createAsyncThunk(
   }
 )
 
-export const patchItem = createAsyncThunk(
-  'currentItem/patchItem',
-  async (item) => {
-    const response = await updateItem(item)
-    return response
-  }
-)
+// export const patchItem = createAsyncThunk(
+//   'currentItem/patchItem',
+//   async (item) => {
+//     const response = await updateItem(item)
+//     return response
+//   }
+// )
 
 export const userItemsSlice = createSlice({
   name: 'userItems',
@@ -39,17 +39,17 @@ export const userItemsSlice = createSlice({
     [postNewItem.fulfilled]: (state, { payload }) => {
       return [...state, payload]
     },
-    [patchItem.fulfilled]: (state, { payload }) => {
-      const updatedItemArray = state.map((item) => {
-        if (item.itemsId === payload.id) {
-          return {
-            ...item,
-            availability: payload.availability,
-          }
-        } else return item
-      })
-      return [...updatedItemArray]
-    },
+    // [patchItem.fulfilled]: (state, { payload }) => {
+    //   const updatedItemArray = state.map((item) => {
+    //     if (item.itemsId === payload.id) {
+    //       return {
+    //         ...item,
+    //         availability: payload.availability,
+    //       }
+    //     } else return item
+    //   })
+    //   return [...updatedItemArray]
+    // },
   },
 })
 

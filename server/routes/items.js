@@ -56,9 +56,8 @@ router.post('/', jwtWrapper, async (req, res) => {
     imageUrl: req.body.image,
     expiry: req.body.expiry,
     availability: req.body.availability,
-    userId: req.body.userId,
+    auth0Id: req.auth?.sub,
   }
-  //JV - this is trusting the userId that came in from the post, instead of the data from checkJWT on req.user
   return db
     .insertItem(newItem)
     .then((dbItem) => {
@@ -70,21 +69,26 @@ router.post('/', jwtWrapper, async (req, res) => {
     })
 })
 
-// PATCH item
-//checkJwt
-router.patch('/update/:id', (req, res) => {
+// PATCH /api/items/update/:id
+router.patch('/update/:id', jwtWrapper, async (req, res) => {
   const updatedItem = req.body
   const id = Number(updatedItem.itemsId)
   //this lets any user update any item, you probably want a check so user's can only edit their own
-  return db
-    .updateItem(id, updatedItem)
-    .then((patchItem) => {
-      return res.json(patchItem)
-    })
-    .catch((err) => {
-      console.error(err)
-      res.status(500).send({ message: 'Something went wrong' })
-    })
+  try {
+    const prevItem = await db.getItemByIdWithUserInfo(id)
+
+    if (prevItem.auth0Id !== req.auth?.sub) {
+      res
+        .status(401)
+        .send("You are not authorized to edit another user's items.")
+    } else {
+      const patched = await db.updateItem(id, updatedItem)
+      res.json(patched)
+    }
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ message: 'Something went wrong' })
+  }
 })
 
 // DELETE item

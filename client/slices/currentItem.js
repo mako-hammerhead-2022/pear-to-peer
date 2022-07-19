@@ -25,8 +25,8 @@ export const postComment = createAsyncThunk(
 
 export const patchItem = createAsyncThunk(
   'currentItem/patchItem',
-  async (item) => {
-    const response = await updateItem(item)
+  async ({ item, token }) => {
+    const response = await updateItem(item, token)
 
     return response
   }

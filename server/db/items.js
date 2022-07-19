@@ -4,7 +4,7 @@ const connection = require('knex')(config)
 
 function getAllItemsWithUserInfo(db = connection) {
   return db('items')
-    .join('users', 'items.userId', 'users.id')
+    .join('users', 'items.auth0Id', 'users.auth0id')
     .select(
       'items.id as itemsId',
       'users.id as userId',
@@ -22,7 +22,7 @@ function getAllItemsWithUserInfo(db = connection) {
 
 function getItemsByUserId(userId, db = connection) {
   return db('items')
-    .join('users', 'items.userId', 'users.id')
+    .join('users', 'items.auth0Id', 'users.auth0Id')
     .select(
       'items.id as itemsId',
       'users.id as userId',
@@ -41,7 +41,7 @@ function getItemsByUserId(userId, db = connection) {
 
 function getItemByIdWithUserInfo(itemId, db = connection) {
   return db('items')
-    .join('users', 'items.userId', 'users.id')
+    .join('users', 'items.auth0Id', 'users.auth0Id')
     .select(
       'items.id as itemsId',
       'users.id as userId',
@@ -53,7 +53,8 @@ function getItemByIdWithUserInfo(itemId, db = connection) {
       'imageUrl',
       'expiry',
       'availability',
-      'createdAt'
+      'createdAt',
+      'items.auth0Id as auth0Id'
     )
     .where('items.id', itemId)
     .first()
@@ -73,23 +74,13 @@ async function insertItem(items, db = connection) {
     description: items.description,
     expiry: now,
     availability: items.availability,
-    userId: items.userId,
     imageUrl: items.imageUrl,
+    auth0Id: items.auth0Id,
   }
   const newIds = await db('items').insert(newItem)
 
   return getItemById(newIds[0], db)
 }
-
-// async function updateItem(updatedItem, db = connection) {
-//   await db('items')
-//     .update({ availability: updatedItem.availability })
-//     .where('id', updatedItem.itemsId)
-
-//   return getItemById(updatedItem.itemsId, db)
-// }
-
-//JV remove commented out code
 
 async function updateItem(id, updatedItem, db = connection) {
   const itemToUpdate = {
@@ -97,7 +88,6 @@ async function updateItem(id, updatedItem, db = connection) {
     allergens: updatedItem.allergens,
     description: updatedItem.description,
     availability: updatedItem.availability,
-    userId: updatedItem.userId,
     imageUrl: updatedItem.imageUrl,
   }
   await db('items').update(itemToUpdate).where('id', id)

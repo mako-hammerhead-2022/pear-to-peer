@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import {
   Button,
   Container,
@@ -15,8 +16,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-import { clearCurrentItem, fetchItemById } from '@/slices/currentItem'
-import { patchItem } from '@/slices/currentItem'
+import {
+  clearCurrentItem,
+  fetchItemById,
+  patchItem,
+} from '@/slices/currentItem'
 
 export default function UpdateFoodItem() {
   const { itemName, allergens, description, expiry, availability, imageUrl } =
@@ -25,6 +29,7 @@ export default function UpdateFoodItem() {
   const itemId = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { getAccessTokenSilently } = useAuth0()
 
   useEffect(() => {
     dispatch(fetchItemById(itemId.id))
@@ -34,6 +39,7 @@ export default function UpdateFoodItem() {
   }, [])
 
   async function handleUpdate(formData) {
+    const token = await getAccessTokenSilently()
     const itemToUpdate = {
       ...formData,
       itemName: formData.itemName,
@@ -44,7 +50,7 @@ export default function UpdateFoodItem() {
       // imageUrl: imageUrl,
       itemsId: itemId.id,
     }
-    dispatch(patchItem(itemToUpdate))
+    dispatch(patchItem({ item: itemToUpdate, token }))
     navigate('/profile')
   }
 
