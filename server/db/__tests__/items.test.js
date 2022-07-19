@@ -16,6 +16,7 @@ afterAll(async () => {
 })
 
 describe('getAllItemsWithUserInfo', () => {
+  expect.assertions(5)
   it('should return items along with the users info', async () => {
     expect.assertions(5)
     const items = await db.getAllItemsWithUserInfo(testDb)
@@ -28,6 +29,7 @@ describe('getAllItemsWithUserInfo', () => {
 })
 
 describe('getItemsByUserId', () => {
+  expect.assertions(3)
   it('returns an array of items for a given user', async () => {
     const userItems = await db.getItemsByUserId(1, testDb)
     expect(userItems).toHaveLength(1)
@@ -37,21 +39,25 @@ describe('getItemsByUserId', () => {
 })
 
 describe('getItemByIdWithUserInfo', () => {
-  it.skip('returns item with the user info', async () => {
+  expect.assertions(4)
+  it('returns item with the user info', async () => {
     const item = await db.getItemByIdWithUserInfo(2, testDb)
-    console.log('This is the item: ', item)
+    expect(item.itemName).toBe('Scones')
+    expect(item.allergens).toContain('eggs')
+    expect(item.availability).toBe('Yes')
+    expect(item.userId).toBe(2)
   })
 })
 
 describe('getItemById', () => {
   it.skip('returns an item by its id', async () => {
     const items = await db.getItemById(1, testDb)
-    console.log('These are the items: ', items)
-    expect(items).toHaveLength(1)
+    expect(items.status).toBe(200)
   })
 })
 
 describe('addNewItem', () => {
+  expect.assertions(1)
   it('adds a new item and then returns new item', () => {
     expect.assertions(1)
     const dbNewItem = {

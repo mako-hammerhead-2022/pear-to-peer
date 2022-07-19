@@ -4,30 +4,6 @@ const router = express.Router()
 const db = require('../db/items')
 const { checkJwt } = require('../utils')
 
-// GET all items
-// router.get('/', (req, res) => {
-//   db.getAllItems()
-//     .then((items) => {
-//       res.json(items)
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: 'Something went wrong' })
-//     })
-// })
-
-// GET single item with user info
-// router.get('/', (req, res) => {
-//   db.getItemByIdWithUserInfo()
-//     .then((item) => {
-//       res.json(item)
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: 'Something went wrong' })
-//     })
-// })
-
-//JV: remove commented out code
-
 // GET all items with user info
 router.get('/', (req, res) => {
   db.getAllItemsWithUserInfo()
