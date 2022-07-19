@@ -1,6 +1,5 @@
 import nock from 'nock'
 
-import { patchItem } from '../../slices/currentItem'
 import {
   addItem,
   getAllItemsByUserId,
@@ -9,6 +8,17 @@ import {
   getItemById,
   updateItem,
 } from '../items'
+
+beforeAll(() => {
+  vi.spyOn(console, 'error')
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  console.error.mockImplementation(() => {})
+})
+
+afterAll(() => {
+  console.error.mockRestore()
+  vi.restoreAllMocks()
+})
 
 // GET ALL ITEMS WITH USER INFO
 describe('GET /api/items/:userId', () => {
@@ -62,6 +72,25 @@ describe('POST /api/items', () => {
     const itemRes = await addItem(testItem, token)
 
     expect(itemRes.content).toBe(testItem.content)
+    scope.done()
+  })
+  test('returns with an error', async () => {
+    const testItem = {
+      id: 3,
+      itemName: 'apple',
+      allergens: 'apple',
+      description: 'juicy and crunchy',
+      imageUrl: 'appleImage.co.nz',
+      expiry: 'expiryDate',
+      availability: 'Yes',
+      userId: 3,
+    }
+    const scope = nock('http://localhost').post('/api/items').reply(500, {})
+    try {
+      await addItem(testItem)
+    } catch (err) {
+      expect(err).toBe('internal server error')
+    }
     scope.done()
   })
 })

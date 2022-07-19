@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import {
   Box,
   Button,
@@ -18,7 +19,7 @@ import { useDispatch } from 'react-redux'
 import { Link as ReactLink } from 'react-router-dom'
 
 import UpdateItemModal from '@/components/UpdateItemModal'
-import { patchItem } from '@/slices/userItems'
+import { patchItem } from '@/slices/currentItem'
 
 export default function PageItemTile(props) {
   const dispatch = useDispatch()
@@ -26,11 +27,15 @@ export default function PageItemTile(props) {
     props.data
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { getAccessTokenSilently } = useAuth0()
 
   const [updatedItem, setUpdatedItem] = useState(props.data)
   const [shouldUpdate, setShouldUpdate] = useState(false)
+  const [token, setToken] = useState(null)
 
-  function handleAvailability() {
+  async function handleAvailability() {
+    const fetchToken = await getAccessTokenSilently()
+    setToken(fetchToken)
     setShouldUpdate(true)
     if (updatedItem.availability === 'Yes') {
       setUpdatedItem({ ...updatedItem, availability: 'No' })
@@ -41,7 +46,7 @@ export default function PageItemTile(props) {
 
   useEffect(() => {
     if (shouldUpdate) {
-      dispatch(patchItem(updatedItem))
+      dispatch(patchItem({ item: updatedItem, token }))
     }
   }, [updatedItem])
 

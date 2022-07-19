@@ -1,37 +1,72 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import React, { useState } from 'react'
+import { Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
+import { Field, Form, Formik } from 'formik'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { postComment } from '@/slices/currentItem'
 
 export default function AddCommentForm({ itemId }) {
   const dispatch = useDispatch()
-  const [input, setInput] = useState('')
   const { getAccessTokenSilently } = useAuth0()
 
-  async function handleEnter(evt) {
-    if (evt.key === 'Enter') {
-      const token = await getAccessTokenSilently()
-      const newComment = {
-        itemId,
-        comment: input,
-      }
-      dispatch(postComment({ newComment, token }))
-      setInput('')
+  async function handleSubmit(formData) {
+    const token = await getAccessTokenSilently()
+    const newComment = {
+      itemId,
+      comment: formData.comment,
     }
+    dispatch(postComment({ newComment, token }))
   }
 
-  function handleChange(evt) {
-    setInput(evt.target.value)
+  function validateComment(value) {
+    let error
+    if (!value) {
+      error = `Please enter a comment.`
+    }
+    return error
   }
 
   return (
-    <input
-      type='text'
-      placeholder='Add a comment...'
-      value={input}
-      onChange={handleChange}
-      onKeyDown={handleEnter}
-    />
+    <Formik
+      initialValues={{ comment: '' }}
+      onSubmit={(values, actions) => {
+        handleSubmit(values)
+        setTimeout(() => {
+          actions.setSubmitting(false)
+        }, 400)
+        actions.resetForm()
+      }}
+    >
+      {(props) => {
+        return (
+          <Form>
+            <Field name='comment' validate={validateComment}>
+              {({ field, form }) => (
+                <FormControl
+                  isRequired
+                  isInvalid={form.errors.comment && form.touched.comment}
+                >
+                  <Input
+                    {...field}
+                    type='text'
+                    id='comment'
+                    placeholder='Add a comment...'
+                  />
+                  <FormErrorMessage>{form.errors.comment}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button
+              type='submit'
+              isLoading={props.isSubmitting}
+              onClick={props.handleSubmit}
+            >
+              Add
+            </Button>
+          </Form>
+        )
+      }}
+    </Formik>
   )
 }

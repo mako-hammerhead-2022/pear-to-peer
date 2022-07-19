@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { addItem, getAllItemsByUserId, updateItem } from '@/apiClient/items'
+import { addItem, getAllItemsByUserId } from '@/apiClient/items'
+import { patchItem } from '@/slices/currentItem'
 
 const initialState = []
 
@@ -16,14 +17,6 @@ export const postNewItem = createAsyncThunk(
   'userItems/postNew',
   async ({ item, token }) => {
     const response = await addItem(item, token)
-    return response
-  }
-)
-
-export const patchItem = createAsyncThunk(
-  'currentItem/patchItem',
-  async (item) => {
-    const response = await updateItem(item)
     return response
   }
 )
