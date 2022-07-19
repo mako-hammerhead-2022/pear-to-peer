@@ -10,7 +10,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -19,9 +19,8 @@ import {
   patchItem,
 } from '@/slices/currentItem'
 
-export default function UpdateFoodItem(props) {
+export default function UpdateItem(props) {
   const { getAccessTokenSilently } = useAuth0()
-  // const token = awaitAccessTokenSilently
   console.log(props, 'updateItemProps')
   const { itemName, allergens, description, expiry, availability, imageUrl } =
     useSelector((state) => state.currentItem)

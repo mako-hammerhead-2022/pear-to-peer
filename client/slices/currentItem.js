@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { addComment, getCommentsByItemId } from '@/apiClient/comments'
 import { getItemById, updateItem } from '@/apiClient/items'
-import { fetchItemsByUserId } from '@/slices/userItems'
 
 const initialState = {}
 

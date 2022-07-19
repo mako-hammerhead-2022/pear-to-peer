@@ -16,8 +16,8 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link as ReactLink } from 'react-router-dom'
 
+import Comments from '@/components/Comments'
 import UpdateItemModal from '@/components/UpdateItemModal'
 import { patchItem } from '@/slices/currentItem'
 
@@ -67,12 +67,9 @@ export default function PageItemTile(props) {
             Make Available
           </Button>
         )}
-        <ReactLink to={`/item/update/${itemsId}`}>
-          <Button colorScheme='teal'>Edit Item</Button>
-        </ReactLink>
+
         <UpdateItemModal data={props.data} />
 
-        {/* <ReactLink to={`/item/${itemsId}`}> */}
         <Button onClick={onOpen} colorScheme='teal'>
           View Item
         </Button>
@@ -93,6 +90,7 @@ export default function PageItemTile(props) {
               <Text>Allergens: {allergens}</Text>
               <Text>Description: {description}</Text>
               <Text>Date Posted: {createdAt}</Text>
+              <Comments id={itemsId}></Comments>
             </ModalBody>
 
             <ModalFooter bg='#e5eee4'>
@@ -102,7 +100,6 @@ export default function PageItemTile(props) {
             </ModalFooter>
           </ModalContent>
         </Modal>
-        {/* </ReactLink> */}
       </Box>
     </>
   )

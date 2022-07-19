@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-import UpdateItem from '@/components/UpdateItem'
+import UpdateItem from '@/components/UpdateItemForm'
 
 export default function UpdateItemModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -21,7 +21,7 @@ export default function UpdateItemModal(props) {
   return (
     <>
       <Button onClick={onOpen} colorScheme='teal'>
-        ItemModal
+        Edit Item
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>

@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       redirectUri={window.location.origin}
       audience='https://pear2peer/api'
     >
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Provider store={store}>
           <App />
         </Provider>
