@@ -29,7 +29,6 @@ async function addComment(newComment, db = connection) {
     comment: newComment.comment,
   }
   const newIds = await db('comments').returning('id').insert(toAdd)
-  console.log(JSON.stringify(newIds))
 
   return getCommentByIdWithAuthor(newIds[0].id, db)
 }
@@ -41,7 +40,6 @@ module.exports = {
 
 // Helpers
 async function getCommentByIdWithAuthor(id, db = connection) {
-  console.log('db id', id)
   const comment = await db('comments')
     .join('users', 'comments.auth0Id', 'users.auth0Id')
     .select(

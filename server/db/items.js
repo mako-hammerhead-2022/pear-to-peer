@@ -77,9 +77,9 @@ async function insertItem(items, db = connection) {
     imageUrl: items.imageUrl,
     auth0Id: items.auth0Id,
   }
-  const newIds = await db('items').insert(newItem)
+  const newIds = await db('items').returning('id').insert(newItem)
 
-  return getItemById(newIds[0], db)
+  return getItemById(newIds[0].id, db)
 }
 
 async function updateItem(id, updatedItem, db = connection) {
