@@ -1,12 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import {
-  Center,
-  Grid,
-  GridItem,
-  Heading,
-  Wrap,
-  WrapItem,
-} from '@chakra-ui/react'
+import { Center, Heading, Wrap, WrapItem } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -34,18 +27,12 @@ export default function Home() {
     <>
       {isAuthenticated && (
         <>
-          {/* <Container m={0}> */}
           <Center>
-            <Heading py={10} mx={'auto'}>
+            <Heading fontFamily='pacifico' color='#1D6638' py={10}>
               Available Food Items
             </Heading>
           </Center>
           <Wrap spacing={10} justify='center'>
-            {/* <Grid
-              w={'80vw'}
-              templateColumns={{ base: `auto`, lg: 'repeat(3, 1fr)' }}
-              gap={6}
-            > */}
             {items.map((item) => {
               if (item.availability === 'Yes')
                 return (
@@ -63,7 +50,6 @@ export default function Home() {
                   </WrapItem>
                 )
             })}
-            {/* </Grid> */}
           </Wrap>
         </>
       )}

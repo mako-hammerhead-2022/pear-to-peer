@@ -17,7 +17,7 @@ export default function NotFound() {
         <Heading>Something went wrong.</Heading>
       </Center>
       <Center>
-        <Button colorScheme='teal'>
+        <Button bgColor='#7da97a'>
           <Link to='/'>Back to Home</Link>
         </Button>
       </Center>

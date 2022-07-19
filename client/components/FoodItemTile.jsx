@@ -39,27 +39,29 @@ export default function FoodItemTile(props) {
         <Box h='150px' w='150px' overflow={'hidden'}>
           <Image borderRadius={'lg'} src={imageUrl} alt={itemName} />
         </Box>
-        <Heading fontSize='3xl'>{itemName}</Heading>
+        <Heading fontFamily='pacifico' color='#1D6638' fontSize='3xl'>
+          {itemName}
+        </Heading>
         <HStack>
-          <Text fontSize='lg' fontWeight={'bold'}>
+          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
             Allergens:
           </Text>
           <Text fontSize='lg'>{allergens}</Text>
         </HStack>
         <HStack>
-          <Text fontSize='lg' fontWeight={'bold'}>
+          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
             Posted By:
           </Text>
           <Text fontSize='lg'>{username}</Text>
         </HStack>
         <HStack>
-          <Text fontSize='lg' fontWeight={'bold'}>
+          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
             Date Posted:{' '}
           </Text>
           <Text fontSize='lg'>{createdAt}</Text>
         </HStack>
         <HStack>
-          <Text fontSize='lg' fontWeight={'bold'}>
+          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
             Location:{' '}
           </Text>
           <Text fontSize='lg'>{postcode}</Text>
