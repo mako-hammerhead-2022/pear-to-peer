@@ -18,7 +18,6 @@ describe('<Register />', () => {
       email: 'floopy@whattheactualf.com',
       auth0Id: auth0Id,
     })
-    console.log(auth0Id)
 
     const handleSubmit = vi.fn()
     render(

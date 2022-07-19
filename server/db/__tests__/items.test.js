@@ -20,11 +20,11 @@ describe('getAllItemsWithUserInfo', () => {
   it('should return items along with the users info', async () => {
     expect.assertions(5)
     const items = await db.getAllItemsWithUserInfo(testDb)
-    expect(items).toHaveLength(8)
+    expect(items).toHaveLength(14)
     expect(items[0]).toHaveProperty('itemsId')
     expect(items[1]).toHaveProperty('userId')
     expect(items[1].itemsId).toBe(2)
-    expect(items[2].userId).toBe(3)
+    expect(items[2].userId).toBe(2)
   })
 })
 
@@ -32,7 +32,7 @@ describe('getItemsByUserId', () => {
   expect.assertions(3)
   it('returns an array of items for a given user', async () => {
     const userItems = await db.getItemsByUserId(1, testDb)
-    expect(userItems).toHaveLength(1)
+    expect(userItems).toHaveLength(2)
     expect(userItems[0].userId).toBe(1)
     expect(userItems[0].itemName).toBe('Hummus')
   })
@@ -68,7 +68,7 @@ describe('addNewItem', () => {
       imageUrl:
         'https://images.themodernproper.com/billowy-turkey/production/posts/2020/Chicken-Empanada-14.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1599768574&s=e3b5e8fe53c559c704cad71e33d367e5',
       availability: 'Yes',
-      userId: 2,
+      auth0Id: 'auth0|2',
     }
     return db.insertItem(dbNewItem, testDb).then((actualItem) => {
       expect(actualItem).toEqual({

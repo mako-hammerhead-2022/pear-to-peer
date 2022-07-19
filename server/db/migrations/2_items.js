@@ -12,7 +12,7 @@ exports.up = function (knex) {
     table.timestamps(true, true, true)
     table.date('expiry')
     table.enu('availability', ['Yes', 'No'])
-    table.integer('userId').notNullable()
+    table.string('auth0Id').notNullable()
   })
 }
 

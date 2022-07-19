@@ -96,14 +96,6 @@ export function AddItemForm() {
     }
     return error
   }
-  // function validateImage(value) {
-  //   let error
-  //   if (!value) {
-  //     error =
-  //       'Please attach an image of your beautiful food so we can admire it!'
-  //   }
-  //   return error
-  // }
 
   if (isRegistered === false) {
     navigate('/register')

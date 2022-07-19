@@ -2,8 +2,18 @@ import nock from 'nock'
 
 import { addUser, getUserByAuth0Token } from '../users'
 
-// ADD A USER
+beforeAll(() => {
+  vi.spyOn(console, 'error')
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  console.error.mockImplementation(() => {})
+})
 
+afterAll(() => {
+  console.error.mockRestore()
+  vi.restoreAllMocks()
+})
+
+// ADD A USER
 describe('POST /api/users', () => {
   expect.assertions(3)
   test('inserts a new user', async () => {

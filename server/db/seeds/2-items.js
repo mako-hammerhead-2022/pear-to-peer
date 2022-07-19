@@ -17,7 +17,7 @@ exports.seed = async function (knex) {
       //Hard-coded for seed data,
       expiry: '2022-07-18 06:38:14',
       availability: 'Yes',
-      userId: '1',
+      auth0Id: 'auth0|1',
     },
 
     {
@@ -30,7 +30,7 @@ exports.seed = async function (knex) {
       //Hard-coded for seed data,
       expiry: '2022-07-19 06:38:14',
       availability: 'Yes',
-      userId: '2',
+      auth0Id: 'auth0|1',
     },
 
     {
@@ -43,7 +43,7 @@ exports.seed = async function (knex) {
       //Hard-coded for seed data,
       expiry: '2022-07-20 06:38:14',
       availability: 'No',
-      userId: '3',
+      auth0Id: 'auth0|2',
     },
 
     {
@@ -55,7 +55,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1579208030886-b937da0925dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
       expiry: '2022-08-24, 08:24:02',
       availability: 'Yes',
-      userId: '5',
+      auth0Id: 'auth0|3',
     },
 
     {
@@ -67,7 +67,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1631292784640-2b24be784d5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
       expiry: '2022-08-18, 05:07:00',
       availability: 'Yes',
-      userId: '6',
+      auth0Id: 'auth0|4',
     },
 
     {
@@ -79,7 +79,7 @@ exports.seed = async function (knex) {
         'https://thepeskyvegan.com/wp-content/uploads/2020/01/vegan-haggis-feature.jpg',
       expiry: '2022-09-04, 07:09:00',
       availability: 'Yes',
-      userId: '10',
+      auth0Id: 'auth0|5',
     },
 
     {
@@ -91,7 +91,7 @@ exports.seed = async function (knex) {
         'https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bananas-218094b-scaled.jpg',
       expiry: '2022-07-27, 07:27:17',
       availability: 'No',
-      userId: '9',
+      auth0Id: 'auth0|6',
     },
 
     {
@@ -103,7 +103,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1541857754-557a44522bec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
       expiry: '2022-07-29, 12:20:54',
       availability: 'No',
-      userId: '10',
+      auth0Id: 'auth0|7',
     },
 
     {
@@ -115,7 +115,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
       expiry: '2022-10-03, 14:30:30',
       availability: 'Yes',
-      userId: '14',
+      auth0Id: 'auth0|8',
     },
 
     {
@@ -127,7 +127,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
       expiry: '2022-08-01, 18:10:22',
       availability: 'Yes',
-      userId: '14',
+      auth0Id: 'auth0|9',
     },
 
     {
@@ -139,7 +139,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1607958996333-41aef7caefaa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZWJlcnJ5JTIwbXVmZmlufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       expiry: '2022-07-31, 15:15:15',
       availability: 'No',
-      userId: '14',
+      auth0Id: 'auth0|10',
     },
 
     {
@@ -151,7 +151,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1631160299919-6a175aa6d189?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1036&q=80',
       expiry: '2022-07-25, 14:58:54',
       availability: 'Yes',
-      userId: '13',
+      auth0Id: 'auth0|10',
     },
 
     {
@@ -163,7 +163,7 @@ exports.seed = async function (knex) {
         'https://images.unsplash.com/photo-1629115916087-7e8c114a24ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80',
       expiry: '2022-10-03, 23:00:23',
       availability: 'No',
-      userId: '13',
+      auth0Id: 'auth0|11',
     },
 
     {
@@ -175,7 +175,7 @@ exports.seed = async function (knex) {
         'https://townsquare.media/site/398/files/2014/03/stinson-hangover-fixer.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89',
       expiry: '2032-12-31, 23:59:59',
       availability: 'Yes',
-      userId: '13',
+      auth0Id: 'auth0|12',
     },
   ])
 }
