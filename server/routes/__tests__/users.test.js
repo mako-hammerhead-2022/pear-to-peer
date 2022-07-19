@@ -52,7 +52,13 @@ describe('GET /api/users', () => {
 })
 
 describe('POST /api/users', () => {
-  it('creates a new user', async () => {
-    db.createUser
+  it.skip('creates a new user', async () => {
+    const newUser = {
+      auth0Id: 'auth0|something',
+      email: 'name@example.com',
+      name: 'Jerry Picker',
+      username: 'JerryPikerz',
+    }
+    db.createUser(newUser)
   })
 })
