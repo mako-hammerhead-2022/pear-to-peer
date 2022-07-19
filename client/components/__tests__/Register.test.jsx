@@ -12,7 +12,7 @@ vi.mock('@auth0/auth0-react')
 // const getAccessTokenSilently = vi.fn()
 
 describe('<Register />', () => {
-  it.todo('validates', async () => {
+  it('validates', async () => {
     const auth0Id = vi.fn()
     useAuth0.mockReturnValue({
       email: 'floopy@whattheactualf.com',
