@@ -9,6 +9,17 @@ import {
   updateItem,
 } from '../items'
 
+beforeAll(() => {
+  vi.spyOn(console, 'error')
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  console.error.mockImplementation(() => {})
+})
+
+afterAll(() => {
+  console.error.mockRestore()
+  vi.restoreAllMocks()
+})
+
 // GET ALL ITEMS WITH USER INFO
 describe('GET /api/items/:userId', () => {
   expect.assertions(8)
