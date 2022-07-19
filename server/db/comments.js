@@ -42,7 +42,6 @@ module.exports = {
 async function getCommentByIdWithAuthor(id, db = connection) {
   const comment = await db('comments')
     .join('users', 'comments.auth0Id', 'users.auth0Id')
-    .select()
     .select(
       'comments.id as commentId',
       'users.id as authorId',
