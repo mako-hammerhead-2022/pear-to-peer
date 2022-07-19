@@ -2,8 +2,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import {
   Box,
   Center,
-  Grid,
-  GridItem,
   Heading,
   HStack,
   Text,
@@ -68,28 +66,28 @@ export default function Profile() {
       </Center>
       <Box border='2px' borderStyle='solid' borderRadius={'lg'} p={4}>
         <HStack>
-          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
             Name:{' '}
           </Text>
-          <Text>{name}</Text>
+          <Text fontSize='xl'>{name}</Text>
         </HStack>
         <HStack>
-          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
             Username:{' '}
           </Text>
-          <Text>{username}</Text>
+          <Text fontSize='xl'>{username}</Text>
         </HStack>
         <HStack>
-          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
             Email:{' '}
           </Text>
-          <Text>{email} </Text>
+          <Text fontSize='xl'>{email} </Text>
         </HStack>
         <HStack>
-          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
             Postal Code:{' '}
           </Text>
-          <Text>{postcode} </Text>
+          <Text fontSize='xl'>{postcode} </Text>
         </HStack>
       </Box>
       <Center>
@@ -97,7 +95,7 @@ export default function Profile() {
           Your Current Items:
         </Heading>
       </Center>
-      {/* <Grid templateColumns='repeat(4, 1fr)' gap={6}> */}
+
       <Wrap spacing={10} justify='center'>
         {items.map((item) => {
           if (item.availability == 'Yes')
@@ -105,7 +103,7 @@ export default function Profile() {
               <WrapItem
                 p={4}
                 w='25rem'
-                h='27rem'
+                h='auto'
                 border='2px'
                 borderStyle='solid'
                 borderRadius={'lg'}
@@ -114,17 +112,16 @@ export default function Profile() {
               >
                 <PageItemTile data={item} />
               </WrapItem>
-              // {/* </GridItem> */}
             )
         })}
       </Wrap>
-      {/* </Grid> */}
+
       <Center>
         <Heading py={4} fontFamily='pacifico' color='#1D6638' fontSize='3xl'>
           Your Previous Items:
         </Heading>
       </Center>
-      {/* <Grid templateColumns='repeat(4, 1fr)' gap={6}> */}
+
       <Wrap spacing={10} justify='center'>
         {items.map((item) => {
           if (item.availability == 'No')
@@ -132,21 +129,18 @@ export default function Profile() {
               <WrapItem
                 p={4}
                 w='25rem'
-                h='27rem'
+                h='auto'
                 border='2px'
                 borderStyle='solid'
                 borderRadius={'lg'}
                 key={item.itemsId}
                 justifyContent='center'
               >
-                {/* <GridItem key={item.itemsId}> */}
                 <PageItemTile data={item} />
-                {/* </GridItem> */}
               </WrapItem>
             )
         })}
       </Wrap>
-      {/* </Grid> */}
     </>
   )
 }

@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Center,
   Heading,
   HStack,
   Image,
@@ -82,7 +83,9 @@ export default function FoodItemTile(props) {
           </ModalHeader>
           <ModalCloseButton bg='#7da97a' />
           <ModalBody bg='#e5eee4'>
-            <Image mb={4} src={imageUrl} alt={itemName} />
+            <Center>
+              <Image borderRadius={'lg'} mb={4} src={imageUrl} alt={itemName} />
+            </Center>
             <HStack mb={2}>
               <Text fontSize='xl' fontWeight={'bold'}>
                 Allergens:{' '}
@@ -105,7 +108,7 @@ export default function FoodItemTile(props) {
               <Text fontWeight={'bold'}>Posted By: </Text>
               <Text>{username}</Text>
             </HStack>
-            <HStack>
+            <HStack mb={2}>
               <Text fontWeight={'bold'}>Date Posted: </Text>
               <Text>{createdAt}</Text>
             </HStack>

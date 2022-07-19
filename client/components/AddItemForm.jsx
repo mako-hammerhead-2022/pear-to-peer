@@ -7,6 +7,7 @@ import {
   FormErrorMessage,
   FormHelperText,
   FormLabel,
+  Heading,
   Input,
   NumberInput,
   NumberInputField,
@@ -113,7 +114,10 @@ export function AddItemForm() {
         borderColor='#1D6638'
         borderRadius='10%'
       >
-        <Wrap marginBottom='5vw' marginTop='5vw' justify='center'>
+        <Wrap marginBottom='5vw' marginTop='1vw' justify='center'>
+          <Heading fontFamily='pacifico' color='#1D6638' py={10}>
+            Details of your Food
+          </Heading>
           <Formik
             initialValues={{
               itemName: '',

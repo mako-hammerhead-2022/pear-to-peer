@@ -1,5 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -8,6 +9,7 @@ import {
   Input,
   NumberInput,
   NumberInputField,
+  Wrap,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
@@ -73,81 +75,117 @@ export default function Register() {
   //TODO: handle loading state
 
   return (
-    <div>
-      <Heading>Register Your Details</Heading>
-      {form.email != '' ? (
-        <Formik
-          initialValues={{ ...form, name: '', username: '', postcode: '' }}
-          onSubmit={(values) => handleSubmit(values)}
-        >
-          {(props) => (
-            <Form>
-              <Field name='email'>
-                {({ field }) => (
-                  <FormControl>
-                    <FormLabel htmlFor='email'>Email:</FormLabel>
-                    <Input
-                      {...field}
-                      id='email'
-                      value={props.values.email}
-                      disabled
-                    ></Input>
-                  </FormControl>
-                )}
-              </Field>
-              <Field name='name' validate={validateName}>
-                {({ field, form }) => (
-                  <FormControl
-                    isRequired
-                    isInvalid={form.errors.name && form.touched.name}
-                  >
-                    <FormLabel htmlFor='name'>Your name:</FormLabel>
-                    <Input {...field} id='name'></Input>
-                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                  </FormControl>
-                )}
-              </Field>
-              <Field name='username' validate={validateUsername}>
-                {({ field, form }) => (
-                  <FormControl
-                    isRequired
-                    isInvalid={form.errors.username && form.touched.username}
-                  >
-                    <FormLabel htmlFor='username'>Display name:</FormLabel>
-                    <Input {...field} id='username'></Input>
-                    <FormErrorMessage>{form.errors.username}</FormErrorMessage>
-                  </FormControl>
-                )}
-              </Field>
-              {/* TODO: validate postcode, only allow numbers */}
-              <Field name='postcode' validate={validatePostcode}>
-                {({ field, form }) => (
-                  <FormControl
-                    isRequired
-                    isInvalid={form.errors.postcode && form.touched.postcode}
-                  >
-                    <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
-                    <NumberInput id='postcode' max={9999} min={100}>
-                      <FormErrorMessage>
-                        {form.errors.postcode}
-                      </FormErrorMessage>
-                      <NumberInputField
+    <Box
+      marginRight='20vw'
+      marginLeft='20vw'
+      border='2px'
+      borderWidth='5px'
+      borderColor='#1D6638'
+      borderRadius='7%'
+    >
+      <Heading align='center' fontFamily='pacifico' color='#1D6638' py={10}>
+        Register Your Details
+      </Heading>
+      <Wrap marginBottom='5vw' marginTop='1vw' justify='center'>
+        {form.email != '' ? (
+          <Formik
+            initialValues={{ ...form, name: '', username: '', postcode: '' }}
+            onSubmit={(values) => handleSubmit(values)}
+          >
+            {(props) => (
+              <Form>
+                <Field name='email'>
+                  {({ field }) => (
+                    <FormControl>
+                      <FormLabel
+                        color='#1D6638'
+                        fontWeight={'bold'}
+                        htmlFor='email'
+                      >
+                        Email:
+                      </FormLabel>
+                      <Input
                         {...field}
-                        id='postcode'
-                      ></NumberInputField>
-                    </NumberInput>
-                  </FormControl>
-                )}
-              </Field>
-              <Button mt={4} colorScheme='teal' type='submit'>
-                Submit
-              </Button>
-            </Form>
-          )}
-        </Formik>
-      ) : (
-        <p>Loading..</p>
-      )}
-    </div>
+                        id='email'
+                        value={props.values.email}
+                        disabled
+                      ></Input>
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name='name' validate={validateName}>
+                  {({ field, form }) => (
+                    <FormControl
+                      isRequired
+                      isInvalid={form.errors.name && form.touched.name}
+                    >
+                      <FormLabel
+                        color='#1D6638'
+                        fontWeight={'bold'}
+                        htmlFor='name'
+                      >
+                        Your name:
+                      </FormLabel>
+                      <Input {...field} id='name'></Input>
+                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name='username' validate={validateUsername}>
+                  {({ field, form }) => (
+                    <FormControl
+                      isRequired
+                      isInvalid={form.errors.username && form.touched.username}
+                    >
+                      <FormLabel
+                        color='#1D6638'
+                        fontWeight={'bold'}
+                        htmlFor='username'
+                      >
+                        Display name:
+                      </FormLabel>
+                      <Input {...field} id='username'></Input>
+                      <FormErrorMessage>
+                        {form.errors.username}
+                      </FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+                {/* TODO: validate postcode, only allow numbers */}
+                <Field
+                  color='#1D6638'
+                  fontWeight={'bold'}
+                  name='postcode'
+                  validate={validatePostcode}
+                >
+                  {({ field, form }) => (
+                    <FormControl
+                      isRequired
+                      isInvalid={form.errors.postcode && form.touched.postcode}
+                    >
+                      <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
+                      <NumberInput id='postcode' max={9999} min={100}>
+                        <FormErrorMessage>
+                          {form.errors.postcode}
+                        </FormErrorMessage>
+                        <NumberInputField
+                          {...field}
+                          id='postcode'
+                        ></NumberInputField>
+                      </NumberInput>
+                    </FormControl>
+                  )}
+                </Field>
+                <Button bgColor='#7da97a' mt={2} type='submit'>
+                  Submit
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        ) : (
+          <p>Loading..</p>
+        )}
+      </Wrap>
+    </Box>
   )
 }
