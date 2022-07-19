@@ -33,7 +33,7 @@ export default function FoodItemTile(props) {
     <>
       <Box>
         <Image h='100px' src={imageUrl} />
-        <Heading>{itemName}</Heading>
+        <Heading fontSize='xl'>{itemName}</Heading>
         <Text>Allergens: {allergens}</Text>
         <Text>Posted By: {username}</Text>
         <Text>Date Posted: {createdAt}</Text>
