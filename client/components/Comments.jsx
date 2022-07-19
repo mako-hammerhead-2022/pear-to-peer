@@ -19,7 +19,9 @@ export default function Comments(props) {
 
   return (
     <>
-      <Heading>Comments</Heading>
+      <Heading my={4} fontSize='2xl'>
+        Comments
+      </Heading>
       {comments && (
         <ul>
           {comments.map((commentObj) => {
