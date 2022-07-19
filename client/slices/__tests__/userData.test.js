@@ -2,13 +2,11 @@ import { vi } from 'vitest'
 
 import { addUser, getUserByAuth0Token } from '@/apiClient/users'
 import reducer, {
-  fetchByAuth0Token,
+  fetchUserByAuth0Token,
   postNewUser,
   setLoggedInUser,
 } from '@/slices/userData'
 import store from '@/store'
-
-import { fetchUserByAuth0Token } from '../userData'
 
 vi.mock('@/apiClient/users', () => ({
   addUser: vi.fn(),
