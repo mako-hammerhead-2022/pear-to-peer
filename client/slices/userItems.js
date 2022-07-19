@@ -20,7 +20,7 @@ export const postNewItem = createAsyncThunk(
     return response
   }
 )
-// race condition
+
 export const userItemsSlice = createSlice({
   name: 'userItems',
   initialState,
