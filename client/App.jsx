@@ -1,5 +1,4 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Container } from '@chakra-ui/react'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
@@ -16,19 +15,19 @@ function App() {
   cacheUser(useAuth0)
   return (
     <>
-      <Container centerContent w='100vw'>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route exact path='/home' element={<Home />} />
-            <Route exact path='/register' element={<Register />} />
-            <Route exact path='/profile' element={<Profile />} />
-            <Route exact path='/' element={<AboutUs />} />
-            <Route exact path='/addfooditem' element={<AddItemForm />} />
-          </Route>
+      {/* <Container centerContent w='100vw'> */}
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route exact path='/home' element={<Home />} />
+          <Route exact path='/register' element={<Register />} />
+          <Route exact path='/profile' element={<Profile />} />
+          <Route exact path='/' element={<AboutUs />} />
+          <Route exact path='/addfooditem' element={<AddItemForm />} />
+        </Route>
 
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </Container>
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+      {/* </Container> */}
     </>
   )
 }

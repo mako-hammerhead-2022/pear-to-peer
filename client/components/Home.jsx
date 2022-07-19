@@ -26,19 +26,26 @@ export default function Home() {
   return (
     <>
       {isAuthenticated && (
-        <Container>
-          <Heading>Food Items</Heading>
-          <Grid templateColumns='repeat(3, 1fr)' gap={6}>
-            {items.map((item) => {
-              if (item.availability === 'Yes')
-                return (
-                  <GridItem key={item.itemsId}>
-                    <FoodItemTile data={item} />
-                  </GridItem>
-                )
-            })}
-          </Grid>
-        </Container>
+        <>
+          <Container m={0}>
+            <Heading mx={'auto'}>Food Items</Heading>
+
+            <Grid
+              w={'80vw'}
+              templateColumns={{ base: `auto`, lg: 'repeat(3, 1fr)' }}
+              gap={6}
+            >
+              {items.map((item) => {
+                if (item.availability === 'Yes')
+                  return (
+                    <GridItem key={item.itemsId}>
+                      <FoodItemTile data={item} />
+                    </GridItem>
+                  )
+              })}
+            </Grid>
+          </Container>
+        </>
       )}
     </>
   )
