@@ -66,7 +66,6 @@ describe('POST /api/users', () => {
     const res = await request(server).post('/api/users').send(newUser)
     expect(res.status).toBe(200)
     expect(db.createUser).toHaveBeenCalledTimes(1)
-    // expect(db.createUser).toHaveBeenCalledWith(newUser)
   })
   it("should return status 500 and error when DB doesn't work", async () => {
     expect.assertions(2)
