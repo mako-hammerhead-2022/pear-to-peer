@@ -17,6 +17,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link as ReactLink } from 'react-router-dom'
 
+import UpdateItemModal from '@/components/UpdateItemModal'
 import { patchItem } from '@/slices/userItems'
 
 export default function PageItemTile(props) {
@@ -64,6 +65,7 @@ export default function PageItemTile(props) {
         <ReactLink to={`/item/update/${itemsId}`}>
           <Button colorScheme='teal'>Edit Item</Button>
         </ReactLink>
+        <UpdateItemModal data={props.data} />
 
         {/* <ReactLink to={`/item/${itemsId}`}> */}
         <Button onClick={onOpen} colorScheme='teal'>

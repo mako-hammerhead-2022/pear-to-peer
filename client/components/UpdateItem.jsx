@@ -4,47 +4,55 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Heading,
   Input,
   Select,
   Textarea,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 
-import { clearCurrentItem, fetchItemById } from '@/slices/currentItem'
-import { patchItem } from '@/slices/currentItem'
+import {
+  clearCurrentItem,
+  fetchItemById,
+  patchItem,
+} from '@/slices/currentItem'
 
-export default function UpdateFoodItem() {
+export default function UpdateFoodItem(props) {
+  console.log(props, 'updateItemProps')
   const { itemName, allergens, description, expiry, availability, imageUrl } =
     useSelector((state) => state.currentItem)
 
-  const itemId = useParams()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const [updatedItem, setUpdatedItem] = useState({})
+  const [shouldUpdate, setShouldUpdate] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchItemById(itemId.id))
+    dispatch(fetchItemById(props.id))
     return () => {
       dispatch(clearCurrentItem())
     }
   }, [])
 
   async function handleUpdate(formData) {
-    const itemToUpdate = {
+    setShouldUpdate(true)
+    setUpdatedItem({
       ...formData,
       itemName: formData.itemName,
       allergens: formData.allergens,
       description: formData.description,
       availability: formData.availability,
-      itemsId: itemId.id,
-    }
-    dispatch(patchItem(itemToUpdate))
-    navigate('/profile')
+      itemsId: props.id,
+    })
+    // dispatch(patchItem(itemToUpdate))
   }
+  console.log(updatedItem, 'itu')
+
+  useEffect(() => {
+    if (shouldUpdate) {
+      dispatch(patchItem(updatedItem))
+    }
+  }, [updatedItem])
 
   function validateItemName(value) {
     let error
@@ -77,9 +85,9 @@ export default function UpdateFoodItem() {
     <>
       {itemName && (
         <>
-          <Heading>Update Your Schnazzy FoodItem</Heading>
           <Formik
             initialValues={{
+              itemsId: props.Id,
               itemName: itemName,
               expiry: expiry,
               allergens: allergens,
@@ -87,8 +95,11 @@ export default function UpdateFoodItem() {
               availability: availability,
               imageUrl: imageUrl,
             }}
-            onSubmit={(values) => {
+            onSubmit={(values, actions) => {
               handleUpdate(values)
+              setTimeout(() => {
+                actions.setSubmitting(false)
+              }, 400)
             }}
           >
             {(props) => {

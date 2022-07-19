@@ -16,7 +16,6 @@ import {
 import React from 'react'
 
 import Comments from '@/components/Comments'
-// import { Link as ReactLink } from 'react-router-dom'
 
 export default function FoodItemTile(props) {
   const {
@@ -40,11 +39,10 @@ export default function FoodItemTile(props) {
         <Text>Posted By: {username}</Text>
         <Text>Date Posted: {createdAt}</Text>
         <Text>Location: {postcode}</Text>
-        {/* <ReactLink to={`/item/${itemsId}`}> */}
+
         <Button onClick={onOpen} colorScheme='teal'>
           View More
         </Button>
-        {/* </ReactLink> */}
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay bgGradient='linear(to-t, #7DA97A, #e5eee4)' />
