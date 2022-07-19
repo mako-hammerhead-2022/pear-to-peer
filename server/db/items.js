@@ -101,4 +101,5 @@ module.exports = {
   updateItem,
   getAllItemsWithUserInfo,
   getItemByIdWithUserInfo,
+  getItemById,
 }

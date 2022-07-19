@@ -45,14 +45,19 @@ describe('getItemByIdWithUserInfo', () => {
     expect(item.itemName).toBe('Scones')
     expect(item.allergens).toContain('eggs')
     expect(item.availability).toBe('Yes')
-    expect(item.userId).toBe(2)
+    expect(item).toHaveProperty('expiry')
   })
 })
 
 describe('getItemById', () => {
-  it.skip('returns an item by its id', async () => {
-    const items = await db.getItemById(1, testDb)
-    expect(items.status).toBe(200)
+  expect.assertions(4)
+  it('should get the item by the item id', () => {
+    return db.getItemById('1', testDb).then((item) => {
+      expect(item).toBeDefined
+      expect(item).toHaveProperty('auth0Id')
+      expect(item.allergens).toContain('nuts')
+      expect(item.itemName).toBe('Hummus')
+    })
   })
 })
 
