@@ -2,33 +2,14 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../db/items')
-const { checkJwt } = require('../utils')
+const utils = require('../utils')
 
-// GET all items
-// router.get('/', (req, res) => {
-//   db.getAllItems()
-//     .then((items) => {
-//       res.json(items)
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: 'Something went wrong' })
-//     })
-// })
+const jwtWrapper = (req, res, next) => {
+  if (process.env.NODE_ENV === 'test') return next()
+  else return utils.checkJwt(req, res, next)
+}
 
-// GET single item with user info
-// router.get('/', (req, res) => {
-//   db.getItemByIdWithUserInfo()
-//     .then((item) => {
-//       res.json(item)
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: 'Something went wrong' })
-//     })
-// })
-
-//JV: remove commented out code
-
-// GET all items with user info
+// GET /api/items
 router.get('/', (req, res) => {
   db.getAllItemsWithUserInfo()
     .then((items) => {
@@ -40,7 +21,7 @@ router.get('/', (req, res) => {
     })
 })
 
-// GET items by the user ID
+// GET /api/items/byUser/:id
 router.get('/byUser/:id', (req, res) => {
   const userId = req.params.id
   db.getItemsByUserId(userId)
@@ -53,7 +34,7 @@ router.get('/byUser/:id', (req, res) => {
     })
 })
 
-// Get an item by it's id
+// GET /api/items/:id
 router.get('/:id', (req, res) => {
   const id = Number(req.params.id)
   db.getItemByIdWithUserInfo(id)
@@ -62,14 +43,12 @@ router.get('/:id', (req, res) => {
     })
     .catch((err) => {
       console.error(err)
-      // res.status(500).send({ message: 'Something went wrong' })
-      res.status(500).send(err.message)
+      res.status(500).send({ message: 'Something went wrong' })
     })
 })
 
-// POST items (by the user)
-//checkJwt
-router.post('/', checkJwt, async (req, res) => {
+// POST /api/items
+router.post('/', jwtWrapper, async (req, res) => {
   const newItem = {
     itemName: req.body.itemName,
     allergens: req.body.allergens,
