@@ -21,9 +21,10 @@ export function getAllItemsByUserId(id) {
   return request.get(`/api/items/byUser/${id}`).then((res) => res.body)
 }
 
-export function updateItem(item) {
+export function updateItem(item, token) {
   return request
     .patch(`/api/items/update/${item.itemsId}`)
+    .set('Authorization', `Bearer ${token}`)
     .send(item)
     .then((res) => res.body)
     .catch((err) => console.error(err))
