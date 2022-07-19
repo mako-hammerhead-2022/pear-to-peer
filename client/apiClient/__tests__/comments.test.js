@@ -22,20 +22,6 @@ describe('POST /api/comments', () => {
   })
 })
 
-// NON ASYNC CODE FOR ABOVE
-
-describe('POST /api/comments', () => {
-  it('posts a request to api route to add a comment', () => {
-    const testComment = {
-      authorId: 1,
-      itemId: 1,
-      comment: 'This one!',
-    }
-
-    const scope = nock('http://localhost')
-  })
-})
-
 describe('GET /api/comments/:itemId', () => {
   test('get comments by item Id', async () => {
     expect.assertions(3)
