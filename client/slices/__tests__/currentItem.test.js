@@ -1,5 +1,6 @@
 import { vi } from 'vitest'
 
+import { getCommentsByItemId } from '@/apiClient/comments'
 import { getItemById } from '@/apiClient/items'
 import reducer, { clearCurrentItem } from '@/slices/currentItem'
 import {
@@ -12,11 +13,20 @@ import store from '@/store'
 
 vi.mock('@/apiClient/items', () => ({
   getItemById: vi.fn(),
+  getCommentsByItemId: vi.fn(),
+}))
+
+vi.mock('@/apiClient/comments', () => ({
+  getCommentsByItemId: vi.fn(),
 }))
 
 let state
 beforeEach(() => {
   state = store.getState().currentItem
+})
+
+afterEach(() => {
+  vi.resetAllMocks()
 })
 
 afterAll(() => {
@@ -101,10 +111,7 @@ describe('currentItems thunks', () => {
         })
       )
     })
-    it.todo('on fulfilled')
-    it.todo('on rejected')
     it('should call the api client function with expected args', async () => {
-      getItemById.mockReturnValue(testComments)
       const dispatch = vi.fn()
       const args = 1
       const thunkFn = fetchItemById(args)
@@ -112,6 +119,17 @@ describe('currentItems thunks', () => {
       await thunkFn(dispatch, () => {}, undefined)
       expect(getItemById).toHaveBeenNthCalledWith(1, args)
     })
+    it('should return data from the API client function as a payload', async () => {
+      getItemById.mockReturnValue(testItem)
+      const dispatch = vi.fn()
+      const args = 1
+      const thunkFn = fetchItemById(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const result = await thunkFn(dispatch, () => {}, undefined)
+      expect(result.type).toContain('/fulfilled')
+      expect(result.payload).toEqual(testItem)
+    })
+    it.todo('on rejected')
   })
   describe('fetchComments', () => {
     it('should have a descriptive action prefix and types', () => {
@@ -140,7 +158,24 @@ describe('currentItems thunks', () => {
         })
       )
     })
-    it.todo('on fulfilled')
+    it('should call the api client function with expected args', async () => {
+      const dispatch = vi.fn()
+      const args = 1
+      const thunkFn = fetchComments(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      await thunkFn(dispatch, () => {}, undefined)
+      expect(getCommentsByItemId).toHaveBeenNthCalledWith(1, args)
+    })
+    it('should return data from the API client function as a payload', async () => {
+      getCommentsByItemId.mockReturnValue(testComments)
+      const dispatch = vi.fn()
+      const args = 1
+      const thunkFn = fetchComments(args)
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const result = await thunkFn(dispatch, () => {}, undefined)
+      expect(result.type).toContain('/fulfilled')
+      expect(result.payload).toEqual(testComments)
+    })
     it.todo('on rejected')
   })
   describe('postComment', () => {
