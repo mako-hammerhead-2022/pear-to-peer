@@ -28,7 +28,10 @@ export default function Home() {
       {isAuthenticated && (
         <Container>
           <Heading>Food Items</Heading>
-          <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+          <Grid
+            templateColumns={{ base: `auto`, lg: 'repeat(3, 1fr)' }}
+            gap={6}
+          >
             {items.map((item) => {
               if (item.availability === 'Yes')
                 return (

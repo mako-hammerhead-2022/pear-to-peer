@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Link, VStack } from '@chakra-ui/react'
+import { Flex, Link, Spacer } from '@chakra-ui/react'
 import React from 'react'
 import { Link as ReactLink } from 'react-router-dom'
 
@@ -26,34 +26,69 @@ export default function Nav() {
   }
 
   return (
-    <>
-      <VStack>
-        <IfAuthenticated>
-          <Link fontSize='2xl' as={ReactLink} to='/'>
-            About Us
-          </Link>
-          <Link fontSize='2xl' as={ReactLink} to='/home'>
-            Home
-          </Link>
-          <Link fontSize='2xl' as={ReactLink} to='/profile'>
-            Profile
-          </Link>
-          <Link fontSize='2xl' as={ReactLink} to='/addfooditem'>
-            Add Food
-          </Link>
-          <Link fontSize='2xl' as={ReactLink} to='/' onClick={handleLogoff}>
-            Log Off
-          </Link>
-        </IfAuthenticated>
-        <IfNotAuthenticated>
-          <Link fontSize='2xl' as={ReactLink} to='/' onClick={handleRegister}>
-            Register
-          </Link>
-          <Link fontSize='2xl' as={ReactLink} to='/' onClick={handleSignIn}>
-            Sign In
-          </Link>
-        </IfNotAuthenticated>
-      </VStack>
-    </>
+    <Flex mx='10vw' align='center' justify='space-around'>
+      <IfAuthenticated>
+        <Link
+          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          as={ReactLink}
+          to='/'
+        >
+          About Us
+        </Link>
+        <Spacer />
+        <Link
+          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          as={ReactLink}
+          to='/home'
+        >
+          Home
+        </Link>
+        <Spacer />
+        <Link
+          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          as={ReactLink}
+          to='/profile'
+        >
+          Profile
+        </Link>
+        <Spacer />
+        <Link
+          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          as={ReactLink}
+          to='/addfooditem'
+        >
+          Add Food
+        </Link>
+        <Spacer />
+        <Link
+          mx={6}
+          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          as={ReactLink}
+          to='/'
+          onClick={handleLogoff}
+        >
+          Log Off
+        </Link>
+      </IfAuthenticated>
+      <IfNotAuthenticated>
+        <Link
+          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          as={ReactLink}
+          to='/'
+          onClick={handleRegister}
+        >
+          Register
+        </Link>
+        <Spacer />
+        <Link
+          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          as={ReactLink}
+          to='/'
+          onClick={handleSignIn}
+        >
+          Sign In
+        </Link>
+      </IfNotAuthenticated>
+    </Flex>
   )
 }
