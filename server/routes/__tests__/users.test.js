@@ -52,10 +52,9 @@ describe('GET /api/users', () => {
 })
 
 describe('POST /api/users', () => {
-  it('creates a new user', async (req) => {
+  it('creates a new user', async () => {
     expect.assertions(3)
     const newUser = {
-      auth0Id: req.auth?.sub,
       email: 'name@example.com',
       name: 'Jerry Picker',
       username: 'JerryPikerz',

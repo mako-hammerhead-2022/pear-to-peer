@@ -89,6 +89,7 @@ describe('addNewItem', () => {
 
 describe('updateItem', () => {
   it("updates an item's details", async () => {
+    expect.assertions(5)
     const item = await db.getItemById(1, testDb)
 
     const updatedItem = {
@@ -99,12 +100,12 @@ describe('updateItem', () => {
       imageUrl: 'http://localhost:4321',
     }
 
-    const newItem = await db.updateItem(1, updatedItem, testDb)
-
-    expect(item).not.toEqual(updatedItem)
-    expect(item.allergens).not.toEqual(newItem)
-    expect(item.auth0Id).toEqual(newItem.auth0Id)
-    expect(newItem.itemName).toContain('Joloponos')
-    expect(newItem.itemName).toEqual(updatedItem.itemName)
+    return db.updateItem(1, updatedItem, testDb).then((newItem) => {
+      expect(item).not.toEqual(updatedItem)
+      expect(item.allergens).not.toEqual(newItem)
+      expect(item.auth0Id).toEqual(newItem.auth0Id)
+      expect(newItem.itemName).toContain('Joloponos')
+      expect(newItem.itemName).toEqual(updatedItem.itemName)
+    })
   })
 })
