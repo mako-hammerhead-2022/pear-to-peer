@@ -1,6 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Button, Input } from '@chakra-ui/react'
-// import { Form, Formik } from 'formik'
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+} from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -10,6 +15,7 @@ export default function AddCommentForm({ itemId }) {
   const dispatch = useDispatch()
   const [input, setInput] = useState('')
   const { getAccessTokenSilently } = useAuth0()
+  const isError = input === ''
 
   // async function handleEnter(evt) {
   //   console.log(evt)
@@ -24,9 +30,8 @@ export default function AddCommentForm({ itemId }) {
   //   }
   // }
 
-  async function handleSubmit() {
-    // console.log(evt)
-    // if (evt.key === 'Enter' || evt.type === 'click') {
+  async function handleSubmit(evt) {
+    evt.preventDefault()
     const token = await getAccessTokenSilently()
     const newComment = {
       itemId,
@@ -34,35 +39,30 @@ export default function AddCommentForm({ itemId }) {
     }
     dispatch(postComment({ newComment, token }))
     setInput('')
-    // }
   }
 
   function handleChange(evt) {
     setInput(evt.target.value)
   }
 
-  // function validateComment(value) {
-  //   let error
-  //   if (!value) {
-  //     error = 'Comment is required.'
-  //   }
-  //   return error
-  // }
-
   return (
     <>
-      <form>
-        <Input
-          type='text'
-          placeholder='Add a comment...'
-          value={input}
-          onChange={handleChange}
-          // onKeyDown={handleEnter}
-          isRequired
-        />
-        <Button type='submit' onClick={handleSubmit}>
-          Add
-        </Button>
+      <form onSubmit={handleSubmit}>
+        <FormControl isRequired>
+          <Input
+            type='text'
+            placeholder='Add a comment...'
+            value={input}
+            onChange={handleChange}
+            required
+          />
+          {!isError ? (
+            <FormHelperText>Contact User</FormHelperText>
+          ) : (
+            <FormErrorMessage>Comment is required.</FormErrorMessage>
+          )}
+        </FormControl>
+        <Button type='submit'>Add</Button>
       </form>
     </>
   )
