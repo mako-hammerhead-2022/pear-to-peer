@@ -25,6 +25,22 @@ describe('POST /api/users', () => {
     expect(userRes.name).toContain('Perry Platipus')
     scope.done()
   })
+  test('returns with an error', async () => {
+    const newUser = {
+      auth0Id: 'auth0|4',
+      name: 'Perry Platipus',
+      username: 'PTP123',
+      email: 'ptp123@doofenshmirtz.com',
+      postcode: 6011,
+    }
+    const scope = nock('http://localhost').post('/api/users/').reply(500, {})
+    try {
+      await addUser(newUser)
+    } catch (err) {
+      expect(err).toBe('internal server error')
+    }
+    scope.done()
+  })
 })
 
 // GET USER BY AUTH ID
@@ -54,6 +70,23 @@ describe("GET user by the user's auth token", () => {
     expect(userRes.name).toContain('Perry Platipus')
     expect(userRes.username).toContain('PTP123')
     expect(userRes.email).toContain('ptp123@doofenshmirtz.com')
+    scope.done()
+  })
+  test('returns with an error', async () => {
+    const testUser = {
+      id: 13,
+      auth0Id: 'auth0|4test',
+      name: 'Perry Platipus',
+      username: 'PTP123',
+      email: 'ptp123@doofenshmirtz.com',
+      postcode: 6011,
+    }
+    const scope = nock('http://localhost').get('/api/users/').reply(500, {})
+    try {
+      await getUserByAuth0Token(testUser)
+    } catch (err) {
+      expect(err).toBe('internal server error')
+    }
     scope.done()
   })
 })
