@@ -6,12 +6,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('comments', (table) => {
     table.increments('id').primary()
     table.string('auth0Id').notNullable()
-    table
-      .integer('itemId')
-      .notNullable()
-      .references('id')
-      .inTable('items')
-      .onDelete('CASCADE')
+    table.integer('itemId').notNullable()
     table.text('comment').notNullable()
     table.timestamps(true, true, true)
   })
