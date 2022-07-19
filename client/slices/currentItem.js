@@ -23,11 +23,11 @@ export const postComment = createAsyncThunk(
   }
 )
 
+// when I edit an item, and when I change the availability
 export const patchItem = createAsyncThunk(
   'currentItem/patchItem',
   async ({ item, token }) => {
     const response = await updateItem(item, token)
-
     return response
   }
 )

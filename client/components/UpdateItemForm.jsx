@@ -5,7 +5,6 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Heading,
   Input,
   Select,
   Textarea,
@@ -13,8 +12,6 @@ import {
 import { Field, Form, Formik } from 'formik'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 
 import {
   clearCurrentItem,
@@ -22,17 +19,16 @@ import {
   patchItem,
 } from '@/slices/currentItem'
 
-export default function UpdateFoodItem() {
+export default function UpdateItem(props) {
+  const { getAccessTokenSilently } = useAuth0()
+  console.log(props, 'updateItemProps')
   const { itemName, allergens, description, expiry, availability, imageUrl } =
     useSelector((state) => state.currentItem)
 
-  const itemId = useParams()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { getAccessTokenSilently } = useAuth0()
 
   useEffect(() => {
-    dispatch(fetchItemById(itemId.id))
+    dispatch(fetchItemById(props.id))
     return () => {
       dispatch(clearCurrentItem())
     }
@@ -40,18 +36,18 @@ export default function UpdateFoodItem() {
 
   async function handleUpdate(formData) {
     const token = await getAccessTokenSilently()
-    const itemToUpdate = {
+
+    const updatedItem = {
       ...formData,
       itemName: formData.itemName,
       allergens: formData.allergens,
       description: formData.description,
-      // expiry: formData.expiry,
       availability: formData.availability,
-      // imageUrl: imageUrl,
-      itemsId: itemId.id,
+      itemsId: props.id,
     }
-    dispatch(patchItem({ item: itemToUpdate, token }))
-    navigate('/profile')
+
+    dispatch(patchItem({ item: updatedItem, token }))
+    console.log(updatedItem, 'itu')
   }
 
   function validateItemName(value) {
@@ -85,9 +81,9 @@ export default function UpdateFoodItem() {
     <>
       {itemName && (
         <>
-          <Heading>Update Your Schnazzy FoodItem</Heading>
           <Formik
             initialValues={{
+              itemsId: props.Id,
               itemName: itemName,
               expiry: expiry,
               allergens: allergens,
@@ -95,8 +91,12 @@ export default function UpdateFoodItem() {
               availability: availability,
               imageUrl: imageUrl,
             }}
-            onSubmit={(values) => {
+            onSubmit={(values, actions) => {
+              // formData
               handleUpdate(values)
+              setTimeout(() => {
+                actions.setSubmitting(false)
+              }, 400)
             }}
           >
             {(props) => {
@@ -118,18 +118,6 @@ export default function UpdateFoodItem() {
                       </FormControl>
                     )}
                   </Field>
-                  {/* <Field name='expiry'>
-                    {({ field }) => (
-                      <FormControl isRequired>
-                        <FormLabel htmlFor='expiry'>
-                          Expires after (days):
-                        </FormLabel>
-                        <NumberInput id='expiry' min={1} max={14}>
-                          <NumberInputField {...field} id='expiry' required />
-                        </NumberInput>
-                      </FormControl>
-                    )}
-                  </Field> */}
                   <Field name='allergens' validate={validateAllergens}>
                     {({ field, form }) => (
                       <FormControl
@@ -169,25 +157,7 @@ export default function UpdateFoodItem() {
                       </FormControl>
                     )}
                   </Field>
-                  {/* <Field name='image'>
-                    {() => (
-                      <FormControl>
-                        <FormLabel htmlFor='image'>Upload image:</FormLabel>
-                        <Input
-                          type='file'
-                          name='image'
-                          id='image'
-                          accept='image/*'
-                          onChange={(e) =>
-                            props.setFieldValue(
-                              'image',
-                              e.currentTarget.files[0]
-                            )
-                          }
-                        />
-                      </FormControl>
-                    )}
-                  </Field> */}
+
                   <FormLabel htmlFor='availability'>
                     Is this item available?
                   </FormLabel>
@@ -198,7 +168,6 @@ export default function UpdateFoodItem() {
                           {...field}
                           name='availability'
                           id='availability'
-                          // value={availability}
                           required
                         >
                           <option value='Yes'>Yes</option>

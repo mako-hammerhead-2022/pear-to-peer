@@ -15,6 +15,7 @@ export default function Profile() {
   const { email, postcode, name, username, id } = useSelector(
     (state) => state.userData.data
   )
+
   const items = useSelector((state) => state.userItems)
   const [token, setToken] = useState(null)
 

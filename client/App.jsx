@@ -6,13 +6,11 @@ import { Route, Routes } from 'react-router-dom'
 import { cacheUser } from '@/auth0-utils'
 import AboutUs from '@/components/AboutUs'
 import AddItemForm from '@/components/AddItemForm'
-import FoodItemPage from '@/components/FoodItemPage'
 import Home from '@/components/Home'
 import MainLayout from '@/components/MainLayout'
 import NotFound from '@/components/NotFound'
 import Profile from '@/components/Profile'
 import Register from '@/components/Register'
-import UpdateFoodItem from '@/components/UpdateFoodItem'
 
 function App() {
   cacheUser(useAuth0)
@@ -26,8 +24,6 @@ function App() {
             <Route exact path='/profile' element={<Profile />} />
             <Route exact path='/' element={<AboutUs />} />
             <Route exact path='/addfooditem' element={<AddItemForm />} />
-            <Route exact path='/item/:id' element={<FoodItemPage />} />
-            <Route exact path='/item/update/:id' element={<UpdateFoodItem />} />
           </Route>
 
           <Route path='*' element={<NotFound />} />
