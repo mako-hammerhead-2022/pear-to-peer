@@ -56,8 +56,8 @@ export const currentItemSlice = createSlice({
         comments: [...state.comments, payload],
       }
     },
-    [patchItem.fulfilled]: () => {
-      return initialState
+    [patchItem.fulfilled]: ({ payload }) => {
+      return payload
     },
   },
 })

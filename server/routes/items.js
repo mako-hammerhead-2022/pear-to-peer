@@ -73,7 +73,6 @@ router.post('/', jwtWrapper, async (req, res) => {
 router.patch('/update/:id', jwtWrapper, async (req, res) => {
   const updatedItem = req.body
   const id = Number(updatedItem.itemsId)
-  //this lets any user update any item, you probably want a check so user's can only edit their own
   try {
     const prevItem = await db.getItemByIdWithUserInfo(id)
 
@@ -89,21 +88,6 @@ router.patch('/update/:id', jwtWrapper, async (req, res) => {
     console.error(err)
     res.status(500).send({ message: 'Something went wrong' })
   }
-})
-
-// DELETE item
-// checkJwt
-router.delete('/', (req, res) => {
-  const { id } = req.body
-  //this lets any user delete any item, is that what you want?
-  return db
-    .deleteItem(id)
-    .then(() => {
-      res.status(200).send('Deleted')
-    })
-    .catch((err) => {
-      res.status(500).send('err' + err.message)
-    })
 })
 
 module.exports = router

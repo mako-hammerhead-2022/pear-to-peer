@@ -95,15 +95,10 @@ async function updateItem(id, updatedItem, db = connection) {
   return getItemById(id, db)
 }
 
-function deleteItem(id, db = connection) {
-  return db('items').del().where({ id })
-}
-
 module.exports = {
   getItemsByUserId,
   insertItem,
   updateItem,
-  deleteItem,
   getAllItemsWithUserInfo,
   getItemByIdWithUserInfo,
 }
