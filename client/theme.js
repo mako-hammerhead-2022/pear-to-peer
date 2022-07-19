@@ -13,7 +13,7 @@ const theme = extendTheme({
   //   },
   // },
   fonts: {
-    headerFont: 'Pacifico',
+    headerFont: 'pacifico',
   },
 })
 
