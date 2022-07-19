@@ -1,7 +1,9 @@
 import {
   Box,
   Button,
+  Center,
   Heading,
+  HStack,
   Image,
   Modal,
   ModalBody,
@@ -11,6 +13,7 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  VStack,
 } from '@chakra-ui/react'
 import React from 'react'
 
@@ -32,16 +35,34 @@ export default function FoodItemTile(props) {
   return (
     <>
       <Box>
-        <Image h='100px' src={imageUrl} />
-        <Heading fontSize='xl'>{itemName}</Heading>
-        <Text>Allergens: {allergens}</Text>
-        <Text>Posted By: {username}</Text>
-        <Text>Date Posted: {createdAt}</Text>
-        <Text>Location: {postcode}</Text>
+        <Box>
+          <Center>
+            <VStack>
+              <Image h='100px' src={imageUrl} />
+              <Heading fontSize='xl'>{itemName}</Heading>
+              <HStack>
+                <Text fontWeight={'bold'}>Allergens:</Text>
+                <Text>{allergens}</Text>
+              </HStack>
+              <HStack>
+                <Text fontWeight={'bold'}>Posted By:</Text>
+                <Text>{username}</Text>
+              </HStack>
+              <HStack>
+                <Text fontWeight={'bold'}>Date Posted: </Text>
+                <Text>{createdAt}</Text>
+              </HStack>
+              <HStack>
+                <Text fontWeight={'bold'}>Location: </Text>
+                <Text>{postcode}</Text>
+              </HStack>
 
-        <Button onClick={onOpen} colorScheme='teal'>
-          View More
-        </Button>
+              <Button w={'full'} onClick={onOpen} bgColor='#7da97a'>
+                View More
+              </Button>
+            </VStack>
+          </Center>
+        </Box>
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay bgGradient='linear(to-t, #7DA97A, #e5eee4)' />

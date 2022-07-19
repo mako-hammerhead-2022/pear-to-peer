@@ -1,15 +1,15 @@
 import { Center, Heading, HStack, Image } from '@chakra-ui/react'
 import React from 'react'
 
-import logol from '@/images/logol.png'
-import logor from '@/images/logor.png'
+import logor from '@/images/3.png'
+import logol from '@/images/6.png'
 
 import Nav from './Nav'
 
 export default function Header() {
   return (
     <>
-      <Center>
+      <Center mb={4}>
         <HStack>
           <Image h={{ base: 75, md: 100, lg: 150 }} src={logol} />
           <Heading

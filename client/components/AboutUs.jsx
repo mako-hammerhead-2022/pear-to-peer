@@ -32,6 +32,6 @@ export default function AboutUs() {
       </Box>
       {/* </Center> */}
     </VStack>
-    // </>
+    // </>s
   )
 }

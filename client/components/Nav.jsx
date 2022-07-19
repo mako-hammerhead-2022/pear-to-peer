@@ -1,5 +1,16 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Flex, Link, Spacer } from '@chakra-ui/react'
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
+import {
+  Box,
+  Flex,
+  IconButton,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Spacer,
+} from '@chakra-ui/react'
 import React from 'react'
 import { Link as ReactLink } from 'react-router-dom'
 
@@ -28,8 +39,89 @@ export default function Nav() {
   return (
     <Flex mx='10vw' align='center' justify='space-around'>
       <IfAuthenticated>
+        <Box>
+          <Menu
+            display={{ base: 'contents', md: 'none', lg: 'none' }}
+            backgroundColor='#7da97a'
+            color='#7da97a'
+            bg='#7da97a'
+            variant='solid'
+          >
+            <MenuButton
+              as={IconButton}
+              aria-label='Options'
+              icon={<HamburgerIcon color='#7da97a' />}
+              variant='outline'
+              backgroundColor='#1d6638'
+              display={{ base: 'display', md: 'none', lg: 'none' }}
+            />
+            <MenuList
+              variant='solid'
+              backgroundColor='#1d6638'
+              color='#7da97a'
+              bg='#7da97a'
+              display={{ base: 'contents', md: 'none', lg: 'none' }}
+            >
+              <MenuItem>
+                <Link
+                  fontWeight={'bold'}
+                  fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+                  as={ReactLink}
+                  to='/'
+                >
+                  About Us
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  fontWeight={'bold'}
+                  fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+                  as={ReactLink}
+                  to='/home'
+                >
+                  Home
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  fontWeight={'bold'}
+                  fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+                  as={ReactLink}
+                  to='/profile'
+                >
+                  Profile
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  fontWeight={'bold'}
+                  fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+                  as={ReactLink}
+                  to='/addfooditem'
+                >
+                  Add Food
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  fontWeight={'bold'}
+                  fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+                  as={ReactLink}
+                  to='/'
+                  onClick={handleLogoff}
+                >
+                  Log Off
+                </Link>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+
         <Link
+          fontWeight={'bold'}
+          color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
           to='/'
         >
@@ -37,7 +129,10 @@ export default function Nav() {
         </Link>
         <Spacer />
         <Link
+          fontWeight={'bold'}
+          color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
           to='/home'
         >
@@ -45,7 +140,10 @@ export default function Nav() {
         </Link>
         <Spacer />
         <Link
+          fontWeight={'bold'}
+          color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
           to='/profile'
         >
@@ -53,7 +151,10 @@ export default function Nav() {
         </Link>
         <Spacer />
         <Link
+          fontWeight={'bold'}
+          color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
           to='/addfooditem'
         >
@@ -61,8 +162,10 @@ export default function Nav() {
         </Link>
         <Spacer />
         <Link
-          mx={6}
+          fontWeight={'bold'}
+          color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
           to='/'
           onClick={handleLogoff}
@@ -70,9 +173,13 @@ export default function Nav() {
           Log Off
         </Link>
       </IfAuthenticated>
+
       <IfNotAuthenticated>
         <Link
+          fontWeight={'bold'}
+          color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
           to='/'
           onClick={handleRegister}
@@ -81,7 +188,9 @@ export default function Nav() {
         </Link>
         <Spacer />
         <Link
+          fontWeight={'bold'}
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
           to='/'
           onClick={handleSignIn}
