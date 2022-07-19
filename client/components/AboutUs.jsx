@@ -1,4 +1,4 @@
-import { Box, Center, Heading, Image, Text, VStack } from '@chakra-ui/react'
+import { Box, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 
 import pear from '@/images/p2pdarkg.png'

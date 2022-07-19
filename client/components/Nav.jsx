@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon } from '@chakra-ui/icons'
 import {
   Box,
   Flex,

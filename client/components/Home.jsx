@@ -1,13 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import {
-  Box,
-  Center,
-  Container,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-} from '@chakra-ui/react'
+import { Container, Grid, GridItem, Heading } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'

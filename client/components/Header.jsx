@@ -4,8 +4,6 @@ import React from 'react'
 import logor from '@/images/3.png'
 import logol from '@/images/6.png'
 
-import Nav from './Nav'
-
 export default function Header() {
   return (
     <>
