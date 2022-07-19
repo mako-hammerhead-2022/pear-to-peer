@@ -87,6 +87,24 @@ describe('addNewItem', () => {
   })
 })
 
-describe('updateItemAvailability', () => {
-  it.todo('updates the availability of an item')
+describe('updateItem', () => {
+  it("updates an item's details", async () => {
+    const item = await db.getItemById(1, testDb)
+
+    const updatedItem = {
+      itemName: 'Joloponos',
+      allergens: 'SPICEYYY',
+      description: 'Spicy Joloponos yuck yuck',
+      availability: 'No',
+      imageUrl: 'http://localhost:4321',
+    }
+
+    const newItem = await db.updateItem(1, updatedItem, testDb)
+
+    expect(item).not.toEqual(updatedItem)
+    expect(item.allergens).not.toEqual(newItem)
+    expect(item.auth0Id).toEqual(newItem.auth0Id)
+    expect(newItem.itemName).toContain('Joloponos')
+    expect(newItem.itemName).toEqual(updatedItem.itemName)
+  })
 })
