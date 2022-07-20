@@ -15,7 +15,6 @@ function App() {
   cacheUser(useAuth0)
   return (
     <>
-      {/* <Container centerContent w='100vw'> */}
       <Routes>
         <Route element={<MainLayout />}>
           <Route exact path='/home' element={<Home />} />
@@ -27,7 +26,6 @@ function App() {
 
         <Route path='*' element={<NotFound />} />
       </Routes>
-      {/* </Container> */}
     </>
   )
 }
