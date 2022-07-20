@@ -2,17 +2,19 @@ import { useAuth0 } from '@auth0/auth0-react'
 import {
   Box,
   Button,
+  Center,
   Heading,
+  HStack,
   Image,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
   useDisclosure,
+  VStack,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -53,28 +55,86 @@ export default function PageItemTile(props) {
   return (
     <>
       <Box>
-        <Image h='100px' src={imageUrl} />
-        <Heading>{itemName}</Heading>
-        <Text>Allergens: {allergens}</Text>
-        <Text>Description: {description}</Text>
-        <Text>Date Posted: {createdAt}</Text>
-        {updatedItem.availability === 'Yes' ? (
-          <Button onClick={handleAvailability} colorScheme='teal'>
-            Make Unavailable
-          </Button>
-        ) : (
-          <Button onClick={handleAvailability} colorScheme='teal'>
-            Make Available
-          </Button>
-        )}
+        <VStack>
+          <Box h='150px' w='150px' overflow={'hidden'}>
+            <Image borderRadius={'lg'} src={imageUrl} alt={itemName} />
+          </Box>
+          <Center>
+            <Heading fontFamily='pacifico' color='#1D6638' fontSize='3xl'>
+              {itemName}
+            </Heading>
+          </Center>
+          <HStack>
+            <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
+              Allergens:{' '}
+            </Text>
+            <Text as='i' fontSize='lg'>
+              {allergens}
+            </Text>
+          </HStack>
 
-        <UpdateItemModal data={props.data} />
+          <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
+            Description:{' '}
+          </Text>
+          <Text height={'18vh'} size={'md'} overflow='scroll' fontSize='lg'>
+            {description}
+          </Text>
 
-        <Button onClick={onOpen} colorScheme='teal'>
-          View Item
-        </Button>
+          <HStack>
+            <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
+              Date Posted:{' '}
+            </Text>
+            <Text fontSize='lg'>{createdAt}</Text>
+          </HStack>
+        </VStack>
+        <VStack mt={4}>
+          {updatedItem.availability === 'Yes' ? (
+            <Button
+              mb={4}
+              w={'60'}
+              onClick={handleAvailability}
+              border='2px'
+              color='#1D6638'
+              borderColor={'#1D6638'}
+              bgColor='#e5eee4'
+              _hover={{ background: '#1D6638', color: '#e5eee4' }}
+            >
+              Make Unavailable
+            </Button>
+          ) : (
+            <Button
+              mb={4}
+              w={'60'}
+              onClick={handleAvailability}
+              border='2px'
+              color='#1D6638'
+              borderColor={'#1D6638'}
+              bgColor='#e5eee4'
+              _hover={{ background: '#1D6638', color: '#e5eee4' }}
+            >
+              Make Available
+            </Button>
+          )}
+          <HStack my={4} justify={'space-around'}>
+            <Box>
+              <UpdateItemModal data={props.data} />
+            </Box>
+            <Box>
+              <Button
+                onClick={onOpen}
+                border='2px'
+                color='#1D6638'
+                borderColor={'#1D6638'}
+                bgColor='#e5eee4'
+                _hover={{ background: '#1D6638', color: '#e5eee4' }}
+              >
+                View Item
+              </Button>
+            </Box>
+          </HStack>
+        </VStack>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal size='xl' isOpen={isOpen} onClose={onClose}>
           <ModalOverlay
             bgGradient='linear(to-t, #7DA97A, #e5eee4)'
             backdropFilter='auto'
@@ -84,20 +144,44 @@ export default function PageItemTile(props) {
             <ModalHeader bg='#e5eee4' color='#1d6638'>
               {itemName}
             </ModalHeader>
-            <ModalCloseButton bg='#7da97a' />
+            <ModalCloseButton
+              border='2px'
+              color='#1D6638'
+              borderColor={'#1D6638'}
+              bgColor='#e5eee4'
+              _hover={{ background: '#1D6638', color: '#e5eee4' }}
+            />
             <ModalBody bg='#e5eee4'>
-              <Image src={imageUrl} />
-              <Text>Allergens: {allergens}</Text>
-              <Text>Description: {description}</Text>
-              <Text>Date Posted: {createdAt}</Text>
+              <Center>
+                <Image
+                  maxH={500}
+                  borderRadius={'lg'}
+                  mb={4}
+                  src={imageUrl}
+                  alt={itemName}
+                />
+              </Center>
+              <HStack mb={2}>
+                <Text fontSize='xl' fontWeight={'bold'}>
+                  Allergens:{' '}
+                </Text>
+                <Text as='i' fontSize='xl'>
+                  {allergens}
+                </Text>
+              </HStack>
+              <Text fontSize='xl' fontWeight={'bold'}>
+                Description:{' '}
+              </Text>
+              <Text mb={2} fontSize='xl'>
+                {description}
+              </Text>
+              <HStack>
+                <Text fontWeight={'bold'}>Date Posted: </Text>
+                <Text>{createdAt}</Text>
+              </HStack>
+
               <Comments id={itemsId}></Comments>
             </ModalBody>
-
-            <ModalFooter bg='#e5eee4'>
-              <Button bg='#7da97a' mr={3} onClick={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
           </ModalContent>
         </Modal>
       </Box>

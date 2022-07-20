@@ -8,6 +8,7 @@ import {
   Input,
   Select,
   Textarea,
+  useToast,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import React, { useEffect } from 'react'
@@ -26,6 +27,7 @@ export default function UpdateItem(props) {
     useSelector((state) => state.currentItem)
 
   const dispatch = useDispatch()
+  const toast = useToast()
 
   useEffect(() => {
     dispatch(fetchItemById(props.id))
@@ -47,7 +49,14 @@ export default function UpdateItem(props) {
     }
 
     dispatch(patchItem({ item: updatedItem, token }))
-    console.log(updatedItem, 'itu')
+    toast({
+      title: 'Item Updated',
+      description: 'Your item has been updated!',
+      status: 'success',
+      duration: 5000,
+
+      isClosable: true,
+    })
   }
 
   function validateItemName(value) {
@@ -110,8 +119,21 @@ export default function UpdateItem(props) {
                           form.errors.itemName && form.touched.itemName
                         }
                       >
-                        <FormLabel htmlFor='itemName'>Item Name:</FormLabel>
-                        <Input {...field} type='text' id='itemName' required />
+                        <FormLabel
+                          mt={3}
+                          color='#1D6638'
+                          fontWeight={'bold'}
+                          htmlFor='itemName'
+                        >
+                          Item Name:
+                        </FormLabel>
+                        <Input
+                          borderColor='#1D6638'
+                          {...field}
+                          type='text'
+                          id='itemName'
+                          required
+                        />
                         <FormErrorMessage>
                           {form.errors.itemName}
                         </FormErrorMessage>
@@ -126,8 +148,21 @@ export default function UpdateItem(props) {
                           form.errors.allergens && form.touched.allergens
                         }
                       >
-                        <FormLabel htmlFor='allergens'>Allergens:</FormLabel>
-                        <Input {...field} type='text' id='allergens' required />
+                        <FormLabel
+                          mt={3}
+                          color='#1D6638'
+                          fontWeight={'bold'}
+                          htmlFor='allergens'
+                        >
+                          Allergens:
+                        </FormLabel>
+                        <Input
+                          borderColor='#1D6638'
+                          {...field}
+                          type='text'
+                          id='allergens'
+                          required
+                        />
                         <FormErrorMessage>
                           {form.errors.allergens}
                         </FormErrorMessage>
@@ -142,10 +177,16 @@ export default function UpdateItem(props) {
                           form.errors.description && form.touched.description
                         }
                       >
-                        <FormLabel htmlFor='description'>
+                        <FormLabel
+                          mt={3}
+                          color='#1D6638'
+                          fontWeight={'bold'}
+                          htmlFor='description'
+                        >
                           Description of food item:
                         </FormLabel>
                         <Textarea
+                          borderColor='#1D6638'
                           {...field}
                           type='text'
                           id='description'
@@ -158,13 +199,19 @@ export default function UpdateItem(props) {
                     )}
                   </Field>
 
-                  <FormLabel htmlFor='availability'>
+                  <FormLabel
+                    mt={3}
+                    color='#1D6638'
+                    fontWeight={'bold'}
+                    htmlFor='availability'
+                  >
                     Is this item available?
                   </FormLabel>
                   <Field name='availability'>
                     {({ field }) => (
                       <FormControl>
                         <Select
+                          borderColor='#1D6638'
                           {...field}
                           name='availability'
                           id='availability'
@@ -182,8 +229,12 @@ export default function UpdateItem(props) {
                       <Button
                         type='submit'
                         isLoading={props.isSubmitting}
-                        colorScheme='teal'
-                        m={2}
+                        border='2px'
+                        color='#1D6638'
+                        borderColor={'#1D6638'}
+                        bgColor='#e5eee4'
+                        _hover={{ background: '#1D6638', color: '#e5eee4' }}
+                        m={4}
                         onClick={props.handleSubmit}
                       >
                         Update Item

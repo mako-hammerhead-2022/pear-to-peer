@@ -1,17 +1,16 @@
-import {useAuth0} from '@auth0/auth0-react'
-import {render, screen, waitFor} from '@testing-library/react'
+import { useAuth0 } from '@auth0/auth0-react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import {vi} from 'vitest'
+import { vi } from 'vitest'
 
 import AddCommentForm from '@/components/AddCommentForm'
 import store from '@/store'
-import {fakeComment} from '@/test/fakeData'
+import { fakeComment } from '@/test/fakeData'
 
 vi.mock('@auth0/auth0-react')
-
 
 describe('<AddCommentForm />', () => {
   it('lets a user leave a comment', async () => {
@@ -26,11 +25,13 @@ describe('<AddCommentForm />', () => {
     render(
       <Provider store={store}>
         <Router>
-          <AddCommentForm onSubmit={handleSubmit} onSuccess={mockOnSuccess}/>
+          <AddCommentForm onSubmit={handleSubmit} onSuccess={mockOnSuccess} />
         </Router>
       </Provider>
     )
-    const addCommentButton = screen.getByRole('button', {name: /Add/i})
+    const addCommentButton = screen.getByRole('button', {
+      name: /Add/i,
+    })
     expect(addCommentButton).toBeInTheDocument()
 
     await userEvent.click(addCommentButton)
@@ -38,17 +39,17 @@ describe('<AddCommentForm />', () => {
     const modal = screen.getByRole('group')
     expect(modal).toBeInTheDocument()
 
-      const commentInput = screen.getByText(/comment/i)
-      await userEvent.type(commentInput, fakeComment.comment)
+    const commentInput = screen.getByText(/comment/i)
+    await userEvent.type(commentInput, fakeComment.comment)
 
-      const submitCommentButton = screen.getAllByRole('button')[1]
+    const submitCommentButton = screen.getAllByRole('button')[1]
 
-      await userEvent.click(submitCommentButton)
+    await userEvent.click(submitCommentButton)
 
-      waitFor(() => {
-        expect(mockHandleSubmit).toHaveBeenCalledWith({
-          comment: fakeComment.comment
-        })
+    waitFor(() => {
+      expect(mockHandleSubmit).toHaveBeenCalledWith({
+        comment: fakeComment.comment,
       })
+    })
   }, 15000)
-}) 
+})
