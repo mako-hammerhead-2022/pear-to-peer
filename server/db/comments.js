@@ -3,22 +3,18 @@ const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
 async function getCommentsByItemIdWithAuthor(itemId, db = connection) {
-  try {
-    const comments = await db('comments')
-      .join('users', 'comments.auth0Id', 'users.auth0Id')
-      .select(
-        'comments.id as commentId',
-        'users.id as authorId',
-        'itemId',
-        'username as authorName',
-        'comment',
-        'comments.createdAt as timestamp'
-      )
-      .where({ itemId })
-    return comments
-  } catch (err) {
-    console.error(err)
-  }
+  const comments = await db('comments')
+    .join('users', 'comments.auth0Id', 'users.auth0Id')
+    .select(
+      'comments.id as commentId',
+      'users.id as authorId',
+      'itemId',
+      'username as authorName',
+      'comment',
+      'comments.createdAt as timestamp'
+    )
+    .where({ itemId })
+  return comments
 }
 
 // newComment: authorId, itemId, comment
