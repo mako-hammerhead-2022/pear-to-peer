@@ -76,7 +76,7 @@ export default function PageItemTile(props) {
           <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
             Description:{' '}
           </Text>
-          <Text height={'18vh'} size={'md'} overflow='scroll' fontSize='lg'>
+          <Text height={'18vh'} noOfLines={6} fontSize='lg'>
             {description}
           </Text>
 

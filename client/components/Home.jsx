@@ -39,7 +39,7 @@ export default function Home() {
                   <WrapItem
                     p={4}
                     w='25rem'
-                    h='27rem'
+                    h='auto'
                     border='2px'
                     borderColor={'#1D6638'}
                     borderStyle='solid'
