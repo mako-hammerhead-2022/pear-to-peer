@@ -14,7 +14,6 @@ vi.mock('@auth0/auth0-react')
 
 describe('<AddCommentForm />', () => {
   it('lets a user leave a comment', async () => {
-    const auth0Id = vi.fn()
     const mockHandleSubmit = vi.fn()
     const mockOnSuccess = vi.fn()
 

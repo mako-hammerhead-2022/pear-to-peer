@@ -10,41 +10,38 @@ const jwtWrapper = (req, res, next) => {
 }
 
 // GET /api/items
-router.get('/', (req, res) => {
-  db.getAllItemsWithUserInfo()
-    .then((items) => {
-      res.json(items)
-    })
-    .catch((err) => {
-      console.error(err)
-      res.status(500).send({ message: 'Something went wrong' })
-    })
+router.get('/', async (req, res) => {
+  try {
+    const items = await db.getAllItemsWithUserInfo()
+    res.json(items)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ message: 'Something went wrong' })
+  }
 })
 
 // GET /api/items/byUser/:id
-router.get('/byUser/:id', (req, res) => {
+router.get('/byUser/:id', async (req, res) => {
   const userId = req.params.id
-  db.getItemsByUserId(userId)
-    .then((userItems) => {
-      res.json(userItems)
-    })
-    .catch((err) => {
-      console.error(err)
-      res.status(500).send({ message: 'Something went wrong' })
-    })
+  try {
+    const userItems = await db.getItemsByUserId(userId)
+    res.json(userItems)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ message: 'Something went wrong' })
+  }
 })
 
 // GET /api/items/:id
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
-  db.getItemByIdWithUserInfo(id)
-    .then((item) => {
-      res.json(item)
-    })
-    .catch((err) => {
-      console.error(err)
-      res.status(500).send({ message: 'Something went wrong' })
-    })
+  try {
+    const item = await db.getItemByIdWithUserInfo(id)
+    res.json(item)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ message: 'Something went wrong' })
+  }
 })
 
 // POST /api/items
@@ -58,15 +55,13 @@ router.post('/', jwtWrapper, async (req, res) => {
     availability: req.body.availability,
     auth0Id: req.auth?.sub,
   }
-  return db
-    .insertItem(newItem)
-    .then((dbItem) => {
-      res.json(dbItem)
-    })
-    .catch((err) => {
-      console.error(err)
-      res.status(500).send({ message: 'Something went wrong' })
-    })
+  try {
+    const dbItem = await db.insertItem(newItem)
+    res.json(dbItem)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ message: 'Something went wrong' })
+  }
 })
 
 // PATCH /api/items/update/:id

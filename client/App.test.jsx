@@ -1,44 +1,126 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import React from 'react'
 import { Provider } from 'react-redux'
+import { MemoryRouter as Router } from 'react-router-dom'
+import { vi } from 'vitest'
 
-import App from '@/App'
-import store from '@/store'
+import App from '@/App.jsx'
+import AboutUs from '@/components/AboutUs.jsx'
+import AddItemForm from '@/components/AddItemForm.jsx'
+import Header from '@/components/Header.jsx'
+import Home from '@/components/Home.jsx'
+import Nav from '@/components/Nav.jsx'
+import NotFound from '@/components/NotFound.jsx'
+import Profile from '@/components/Profile.jsx'
+import Register from '@/components/Register.jsx'
+import { fakeItems } from '@/test/fakeData'
 
-// import { useSelector, useDispatch } from 'react-redux'
-// import { vi } from 'vitest'
+vi.mock('@auth0/auth0-react')
+vi.mock('@/auth0-utils')
 
-//vi.mock('react-redux')
-// cars
-// unit test - test a single bolt on a car
-// integration test - run an engine
-// end to end test - take it for a test drive
+const fakeStore = {
+  subscribe: vi.fn(),
+  getState: vi.fn(() => {
+    return {
+      items: {
+        data: fakeItems,
+        loading: false,
+        error: null,
+      },
+    }
+  }),
+  dispatch: vi.fn(),
+}
 
-// mock the hooks you need // most unit test you can get
-// mock the actual provider // still unit test, but tests some setup
-// use the real provider // more-like an integration test
+vi.mock('@/components/Home.jsx')
+vi.mock('@/components/Register.jsx')
+vi.mock('@/components/Profile.jsx')
+vi.mock('@/components/AboutUs.jsx')
+vi.mock('@/components/AddItemForm.jsx')
+vi.mock('@/components/Nav.jsx')
+vi.mock('@/components/Header.jsx')
+vi.mock('@/components/NotFound.jsx')
 
-// vitest extension
+const FakeAppProvider = ({ children, initialEntries = ['/'] }) => {
+  return (
+    <ChakraProvider>
+      <Provider store={fakeStore}>
+        <Router initialEntries={initialEntries}>{children}</Router>
+      </Provider>
+    </ChakraProvider>
+  )
+}
 
 describe('<App />', () => {
-  it.skip('renders', () => {
-    // useSelector.mockReturnValue(0)
-    // useDispatch.mockReturnValue(() => {})
-    render(
-      <Provider store={store}>
-        <App />
-      </Provider>
-    )
-    expect(screen.getAllByText(/vite/i)[0]).toBeInTheDocument()
+  beforeAll(() => {
+    Home.mockReturnValue(<div>Home Component</div>)
+    Register.mockReturnValue(<div>Register Component</div>)
+    Profile.mockReturnValue(<div>Profile Component</div>)
+    AboutUs.mockReturnValue(<div>AboutUs Component</div>)
+    AddItemForm.mockReturnValue(<div>AddFoodItem Component</div>)
+    Header.mockReturnValue(<div>Header Component</div>)
+    Nav.mockReturnValue(<div>Nav Component</div>)
+    NotFound.mockReturnValue(<div>Not Found Component</div>)
   })
-  it.skip('increments count correctly', async () => {
+  it('Renders the About Us default route and the navigation', () => {
     render(
-      <Provider store={store}>
+      <FakeAppProvider initialEntries={['/']}>
         <App />
-      </Provider>
+      </FakeAppProvider>
     )
-    expect(screen.getByText(/0/i)).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button'))
-    expect(screen.getByText(/1/i)).toBeInTheDocument()
+
+    expect(screen.getByText('AboutUs Component')).toBeInTheDocument()
+    expect(screen.getByText('Nav Component')).toBeInTheDocument()
+  })
+
+  it('Renders Home page at /home', () => {
+    render(
+      <FakeAppProvider initialEntries={['/home']}>
+        <App />
+      </FakeAppProvider>
+    )
+
+    expect(screen.getByText('Home Component')).toBeInTheDocument()
+  })
+
+  it('Renders Register page at /register', () => {
+    render(
+      <FakeAppProvider initialEntries={['/register']}>
+        <App />
+      </FakeAppProvider>
+    )
+
+    expect(screen.getByText('Register Component')).toBeInTheDocument()
+  })
+
+  it('Renders Addfooditem page at /addfooditem', () => {
+    render(
+      <FakeAppProvider initialEntries={['/addfooditem']}>
+        <App />
+      </FakeAppProvider>
+    )
+
+    expect(screen.getByText('AddFoodItem Component')).toBeInTheDocument()
+  })
+
+  it('Renders Profile page at /profile', () => {
+    render(
+      <FakeAppProvider initialEntries={['/profile']}>
+        <App />
+      </FakeAppProvider>
+    )
+
+    expect(screen.getByText('Profile Component')).toBeInTheDocument()
+  })
+
+  it('Renders NotFound page at everywhere else', () => {
+    render(
+      <FakeAppProvider initialEntries={['/*']}>
+        <App />
+      </FakeAppProvider>
+    )
+
+    expect(screen.getByText('Not Found Component')).toBeInTheDocument()
   })
 })

@@ -35,11 +35,12 @@ describe('getCommentsByItemIdWithAuthor', () => {
     expect(comments[1].authorName).toBe('HairyHarry123')
   })
   it('returns an error when database fails', async () => {
+    expect.assertions(2)
     try {
-      await db.getCommentsByItemIdWithAuthor(1, testDb)
+      await db.getCommentsByItemIdWithAuthor(undefined, testDb)
     } catch (err) {
-      expect(err).toBe('internal server error')
-      expect(err).toBe(500)
+      expect(err).toBeDefined()
+      expect(err.message).toContain('Undefined')
     }
   })
 })
