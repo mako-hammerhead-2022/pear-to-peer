@@ -6,6 +6,7 @@ const db = require('../../db/items')
 
 vi.spyOn(db, 'getAllItemsWithUserInfo')
 vi.spyOn(db, 'getItemsByUserId')
+vi.spyOn(db, 'getItemByIdWithUserInfo')
 vi.spyOn(db, 'insertItem')
 
 beforeAll(() => {
@@ -86,5 +87,33 @@ describe('POST /api/items/', () => {
 
     await request(server).post('/api/items').send(newItem)
     expect(db.insertItem).toHaveBeenCalledWith(newItem)
+  })
+})
+
+describe('GET /api/items/:id', () => {
+  it('gets an item for a given id', async () => {
+    const testItem = {
+      itemsId: 2,
+      userId: 2,
+      username: 'Slippers',
+      postcode: 5015,
+      itemName: 'toast',
+      allergens: 'bread',
+      description: 'golden brown',
+      imageUrl: 'image.jpg',
+      expiry: '2022-07-18 06:58:14',
+      availability: 'Yes',
+      createdAt: '2022-07-19 03:00:36',
+    }
+    db.getItemByIdWithUserInfo.mockReturnValue(Promise.resolve(testItem))
+    const res = await request(server).get('/api/items/2')
+    expect(res.body).toEqual(testItem)
+  })
+  it('returns a 500 status on db error', async () => {
+    db.getItemByIdWithUserInfo.mockImplementation(() => {
+      throw new Error()
+    })
+    const res = await request(server).get('/api/items/1')
+    expect(res.status).toBe(500)
   })
 })
