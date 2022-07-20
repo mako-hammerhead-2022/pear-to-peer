@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments('id').primary()
     table.string('itemName').notNullable()
     table.string('allergens').notNullable()
-    table.string('description')
+    table.text('description')
     table.string('imageUrl')
     table.timestamps(true, true, true)
     table.date('expiry')
