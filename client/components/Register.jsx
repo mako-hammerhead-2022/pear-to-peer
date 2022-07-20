@@ -163,7 +163,7 @@ export default function Register() {
                     </FormControl>
                   )}
                 </Field>
-                {/* TODO: validate postcode, only allow numbers */}
+
                 <Field name='postcode' validate={validatePostcode}>
                   {({ field, form }) => (
                     <FormControl
@@ -195,7 +195,15 @@ export default function Register() {
                     </FormControl>
                   )}
                 </Field>
-                <Button bgColor='#7da97a' mt={2} type='submit'>
+                <Button
+                  border='2px'
+                  color='#1D6638'
+                  borderColor={'#1D6638'}
+                  bgColor='#e5eee4'
+                  _hover={{ background: '#1D6638', color: '#e5eee4' }}
+                  mt={2}
+                  type='submit'
+                >
                   Submit
                 </Button>
               </Form>

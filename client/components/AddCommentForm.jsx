@@ -64,9 +64,13 @@ export default function AddCommentForm({ itemId }) {
               type='submit'
               isLoading={props.isSubmitting}
               onClick={props.handleSubmit}
-              bgColor='#7da97a'
+              border='2px'
+              color='#1D6638'
+              borderColor={'#1D6638'}
+              bgColor='#e5eee4'
+              _hover={{ background: '#1D6638', color: '#e5eee4' }}
             >
-              Add
+              Click to add
             </Button>
           </Form>
         )

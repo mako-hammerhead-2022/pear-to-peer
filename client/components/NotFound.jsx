@@ -6,7 +6,7 @@ import p2p from '@/images/p2p.gif'
 
 export default function NotFound() {
   return (
-    <Box bg='#f2f2f2' h='100vh' w='100vw' m='0'>
+    <Box bg='#fffff' h='100vh' w='100vw' m='0'>
       <VStack pt={20}>
         <Heading color='#1D6638'>404 - Page Not Found</Heading>
         <Image src={p2p} alt={'bouncing pear'} h='20em' />

@@ -1,5 +1,6 @@
 import '@fontsource/pacifico'
 import '@fontsource/heebo'
+import '@fontsource/prompt'
 
 import { extendTheme } from '@chakra-ui/react'
 
@@ -15,8 +16,8 @@ const theme = extendTheme({
   // },
   fonts: {
     headerFont: 'pacifico',
-    heading: 'heebo',
-    body: 'heebo',
+    heading: 'prompt',
+    body: 'prompt',
   },
 })
 

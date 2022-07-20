@@ -45,7 +45,9 @@ export default function FoodItemTile(props) {
           <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
             Allergens:
           </Text>
-          <Text fontSize='lg'>{allergens}</Text>
+          <Text as='i' fontSize='lg'>
+            {allergens}
+          </Text>
         </HStack>
         <HStack>
           <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
@@ -66,7 +68,16 @@ export default function FoodItemTile(props) {
           <Text fontSize='lg'>{postcode}</Text>
         </HStack>
 
-        <Button mb={4} w={'full'} onClick={onOpen} bgColor='#7da97a'>
+        <Button
+          mb={4}
+          w={'full'}
+          onClick={onOpen}
+          border='2px'
+          color='#1D6638'
+          borderColor={'#1D6638'}
+          bgColor='#e5eee4'
+          _hover={{ background: '#1D6638', color: '#e5eee4' }}
+        >
           View More
         </Button>
       </VStack>
@@ -77,19 +88,33 @@ export default function FoodItemTile(props) {
           <ModalHeader bg='#e5eee4' color='#1d6638'>
             {itemName}
           </ModalHeader>
-          <ModalCloseButton bg='#7da97a' />
+          <ModalCloseButton
+            border='2px'
+            color='#1D6638'
+            borderColor={'#1D6638'}
+            bgColor='#e5eee4'
+            _hover={{ background: '#1D6638', color: '#e5eee4' }}
+          />
           <ModalBody bg='#e5eee4'>
             <Center>
-              <Image borderRadius={'lg'} mb={4} src={imageUrl} alt={itemName} />
+              <Image
+                maxH={500}
+                borderRadius={'lg'}
+                mb={4}
+                src={imageUrl}
+                alt={itemName}
+              />
             </Center>
             <HStack mb={2}>
-              <Text color='#1D6638' fontSize='xl' fontWeight={'bold'}>
+              <Text fontSize='xl' fontWeight={'bold'}>
                 Allergens:{' '}
               </Text>
-              <Text fontSize='xl'>{allergens}</Text>
+              <Text as='i' fontSize='xl'>
+                {allergens}
+              </Text>
             </HStack>
 
-            <Text color='#1D6638' fontSize='xl' fontWeight={'bold'}>
+            <Text fontSize='xl' fontWeight={'bold'}>
               Description:{' '}
             </Text>
             <Text mb={2} fontSize='xl'>
@@ -97,21 +122,17 @@ export default function FoodItemTile(props) {
             </Text>
 
             <HStack mb={2}>
-              <Text color='#1D6638' fontWeight={'bold'}>
+              <Text fontSize='xl' fontWeight={'bold'}>
                 Location:{' '}
               </Text>
-              <Text>{postcode}</Text>
+              <Text fontSize='xl'>{postcode}</Text>
             </HStack>
             <HStack mb={2}>
-              <Text color='#1D6638' fontWeight={'bold'}>
-                Posted By:{' '}
-              </Text>
+              <Text fontWeight={'bold'}>Posted By: </Text>
               <Text>{username}</Text>
             </HStack>
             <HStack mb={2}>
-              <Text color='#1D6638' fontWeight={'bold'}>
-                Date Posted:{' '}
-              </Text>
+              <Text fontWeight={'bold'}>Date Posted: </Text>
               <Text>{createdAt}</Text>
             </HStack>
 

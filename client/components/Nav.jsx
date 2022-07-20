@@ -52,13 +52,18 @@ export default function Nav() {
               variant='solid'
               backgroundColor='#1d6638'
               display={{ base: 'display', md: 'none', lg: 'none' }}
+              _hover={{ color: '#1D6638', background: '#e5eee4' }}
             />
             <MenuList
               variant='solid'
               color='#1d6638'
               display={{ base: 'contents', md: 'none', lg: 'none' }}
             >
-              <MenuItem variant='solid' backgroundColor='#a5c2af'>
+              <MenuItem
+                _hover={{ color: '#1D6638', background: '#e5eee4' }}
+                variant='solid'
+                backgroundColor='#a5c2af'
+              >
                 <Link
                   fontWeight={'bold'}
                   fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
@@ -68,7 +73,11 @@ export default function Nav() {
                   About Us
                 </Link>
               </MenuItem>
-              <MenuItem variant='solid' backgroundColor='#a5c2af'>
+              <MenuItem
+                variant='solid'
+                backgroundColor='#a5c2af'
+                _hover={{ color: '#1D6638', background: '#e5eee4' }}
+              >
                 <Link
                   fontWeight={'bold'}
                   fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
@@ -78,7 +87,11 @@ export default function Nav() {
                   Home
                 </Link>
               </MenuItem>
-              <MenuItem variant='solid' backgroundColor='#a5c2af'>
+              <MenuItem
+                variant='solid'
+                backgroundColor='#a5c2af'
+                _hover={{ color: '#1D6638', background: '#e5eee4' }}
+              >
                 <Link
                   fontWeight={'bold'}
                   fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
@@ -88,7 +101,11 @@ export default function Nav() {
                   Profile
                 </Link>
               </MenuItem>
-              <MenuItem variant='solid' backgroundColor='#a5c2af'>
+              <MenuItem
+                variant='solid'
+                backgroundColor='#a5c2af'
+                _hover={{ color: '#1D6638', background: '#e5eee4' }}
+              >
                 <Link
                   fontWeight={'bold'}
                   fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
@@ -98,7 +115,11 @@ export default function Nav() {
                   Add Food
                 </Link>
               </MenuItem>
-              <MenuItem variant='solid' backgroundColor='#a5c2af'>
+              <MenuItem
+                variant='solid'
+                backgroundColor='#a5c2af'
+                _hover={{ color: '#1D6638', background: '#e5eee4' }}
+              >
                 <Link
                   fontWeight={'bold'}
                   fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
@@ -118,6 +139,7 @@ export default function Nav() {
           color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'none', md: 'contents', lg: 'contents' }}
+          _hover={{ color: '#4a8560' }}
           as={ReactLink}
           to='/'
         >
@@ -129,6 +151,7 @@ export default function Nav() {
           color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'none', md: 'contents', lg: 'contents' }}
+          _hover={{ color: '#4a8560' }}
           as={ReactLink}
           to='/home'
         >
@@ -140,6 +163,7 @@ export default function Nav() {
           color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'none', md: 'contents', lg: 'contents' }}
+          _hover={{ color: '#4a8560' }}
           as={ReactLink}
           to='/profile'
         >
@@ -151,6 +175,7 @@ export default function Nav() {
           color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'none', md: 'contents', lg: 'contents' }}
+          _hover={{ color: '#4a8560' }}
           as={ReactLink}
           to='/addfooditem'
         >
@@ -163,6 +188,7 @@ export default function Nav() {
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'none', md: 'contents', lg: 'contents' }}
           as={ReactLink}
+          _hover={{ color: '#4a8560' }}
           to='/'
           onClick={handleLogoff}
         >
@@ -177,6 +203,7 @@ export default function Nav() {
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'contents', md: 'contents', lg: 'contents' }}
           as={ReactLink}
+          _hover={{ color: '#4a8560' }}
           to='/'
           onClick={handleRegister}
         >
@@ -189,6 +216,7 @@ export default function Nav() {
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'contents', md: 'contents', lg: 'contents' }}
           as={ReactLink}
+          _hover={{ color: '#4a8560' }}
           to='/'
           onClick={handleSignIn}
         >
