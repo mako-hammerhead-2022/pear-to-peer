@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -19,7 +19,9 @@ export default function Comments(props) {
 
   return (
     <>
-      <Heading>Comments</Heading>
+      <Heading color='#1D6638' my={4} fontSize='2xl'>
+        Comments
+      </Heading>
       {comments && (
         <ul>
           {comments.map((commentObj) => {
@@ -32,7 +34,9 @@ export default function Comments(props) {
           })}
         </ul>
       )}
-      <AddCommentForm itemId={props.id} />
+      <Box mt={2}>
+        <AddCommentForm itemId={props.id} />
+      </Box>
     </>
   )
 }

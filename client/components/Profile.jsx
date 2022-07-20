@@ -1,5 +1,13 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Center,
+  Heading,
+  HStack,
+  Text,
+  Wrap,
+  WrapItem,
+} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -51,33 +59,90 @@ export default function Profile() {
 
   return (
     <>
-      <Heading>Your Profile:</Heading>
-      <Text>Name: {name}</Text>
-      <Text>Username: {username}</Text>
-      <Text>email: {email} </Text>
-      <Text>Postal Code: {postcode} </Text>
-      <Heading>Your Current Items:</Heading>
-      <Grid templateColumns='repeat(4, 1fr)' gap={6}>
+      <Center>
+        <Heading fontFamily='pacifico' color='#1D6638' py={10}>
+          Your Profile:
+        </Heading>
+      </Center>
+      <Box border='2px' borderStyle='solid' borderRadius={'lg'} p={4}>
+        <HStack>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+            Name:{' '}
+          </Text>
+          <Text fontSize='xl'>{name}</Text>
+        </HStack>
+        <HStack>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+            Username:{' '}
+          </Text>
+          <Text fontSize='xl'>{username}</Text>
+        </HStack>
+        <HStack>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+            Email:{' '}
+          </Text>
+          <Text fontSize='xl'>{email} </Text>
+        </HStack>
+        <HStack>
+          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+            Postal Code:{' '}
+          </Text>
+          <Text fontSize='xl'>{postcode} </Text>
+        </HStack>
+      </Box>
+      <Center>
+        <Heading py={4} fontFamily='pacifico' color='#1D6638' fontSize='3xl'>
+          Your Current Items:
+        </Heading>
+      </Center>
+
+      <Wrap spacing={10} justify='center'>
         {items.map((item) => {
           if (item.availability == 'Yes')
             return (
-              <GridItem key={item.itemsId}>
+              <WrapItem
+                p={4}
+                w='25rem'
+                h='auto'
+                borderColor={'#1D6638'}
+                border='2px'
+                borderStyle='solid'
+                borderRadius={'lg'}
+                key={item.itemsId}
+                justifyContent='center'
+              >
                 <PageItemTile data={item} />
-              </GridItem>
+              </WrapItem>
             )
         })}
-      </Grid>
-      <Heading>Your Previous Items:</Heading>
-      <Grid templateColumns='repeat(4, 1fr)' gap={6}>
+      </Wrap>
+
+      <Center>
+        <Heading py={4} fontFamily='pacifico' color='#1D6638' fontSize='3xl'>
+          Your Previous Items:
+        </Heading>
+      </Center>
+
+      <Wrap spacing={10} justify='center'>
         {items.map((item) => {
           if (item.availability == 'No')
             return (
-              <GridItem key={item.itemsId}>
+              <WrapItem
+                p={4}
+                w='25rem'
+                h='auto'
+                borderColor={'#1D6638'}
+                border='2px'
+                borderStyle='solid'
+                borderRadius={'lg'}
+                key={item.itemsId}
+                justifyContent='center'
+              >
                 <PageItemTile data={item} />
-              </GridItem>
+              </WrapItem>
             )
         })}
-      </Grid>
+      </Wrap>
     </>
   )
 }

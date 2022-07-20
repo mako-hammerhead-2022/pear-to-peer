@@ -1,11 +1,11 @@
 import {
   Button,
+  Center,
   Image,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   useDisclosure,
@@ -20,7 +20,7 @@ export default function UpdateItemModal(props) {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme='teal'>
+      <Button onClick={onOpen} bgColor='#7da97a'>
         Edit Item
       </Button>
 
@@ -32,15 +32,11 @@ export default function UpdateItemModal(props) {
           </ModalHeader>
           <ModalCloseButton bg='#7da97a' />
           <ModalBody bg='#e5eee4'>
-            <Image src={imageUrl} />
+            <Center>
+              <Image borderRadius={'lg'} mb={4} src={imageUrl} alt={itemName} />
+            </Center>
             <UpdateItem id={itemsId} />
           </ModalBody>
-
-          <ModalFooter bg='#e5eee4'>
-            <Button bg='#7da97a' mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
