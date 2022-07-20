@@ -10,7 +10,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
@@ -71,10 +70,14 @@ export default function PageItemTile(props) {
             </Text>
             <Text fontSize='lg'>{allergens}</Text>
           </HStack>
+
           <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
             Description:{' '}
           </Text>
-          <Text fontSize='lg'>{description}</Text>
+          <Text height={'18vh'} size={'md'} overflow='scroll' fontSize='lg'>
+            {description}
+          </Text>
+
           <HStack>
             <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
               Date Posted:{' '}
@@ -86,7 +89,7 @@ export default function PageItemTile(props) {
           {updatedItem.availability === 'Yes' ? (
             <Button
               mb={4}
-              w={'full'}
+              w={'14vw'}
               onClick={handleAvailability}
               bgColor='#7da97a'
             >
@@ -95,7 +98,7 @@ export default function PageItemTile(props) {
           ) : (
             <Button
               mb={4}
-              w={'full'}
+              w={'7vw'}
               onClick={handleAvailability}
               bgColor='#7da97a'
             >
@@ -114,7 +117,7 @@ export default function PageItemTile(props) {
           </HStack>
         </VStack>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal size='xl' isOpen={isOpen} onClose={onClose}>
           <ModalOverlay
             bgGradient='linear(to-t, #7DA97A, #e5eee4)'
             backdropFilter='auto'
@@ -150,6 +153,7 @@ export default function PageItemTile(props) {
                 <Text fontWeight={'bold'}>Date Posted: </Text>
                 <Text>{createdAt}</Text>
               </HStack>
+
               <Comments id={itemsId}></Comments>
             </ModalBody>
           </ModalContent>

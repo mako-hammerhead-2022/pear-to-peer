@@ -151,7 +151,13 @@ export function AddItemForm() {
                         >
                           Item Name:
                         </FormLabel>
-                        <Input {...field} type='text' id='itemName' />
+                        <Input
+                          mb={3}
+                          borderColor='#1D6638'
+                          {...field}
+                          type='text'
+                          id='itemName'
+                        />
                         <FormErrorMessage>
                           {form.errors.itemName}
                         </FormErrorMessage>
@@ -171,7 +177,13 @@ export function AddItemForm() {
                         >
                           Post expires after (days):
                         </FormLabel>
-                        <NumberInput id='expiry' min={1} max={14}>
+                        <NumberInput
+                          mb={3}
+                          borderColor='#1D6638'
+                          id='expiry'
+                          min={1}
+                          max={14}
+                        >
                           <NumberInputField {...field} id='expiry' required />
                           <FormErrorMessage>
                             {form.errors.expiry}
@@ -195,7 +207,14 @@ export function AddItemForm() {
                         >
                           Allergens:
                         </FormLabel>
-                        <Input {...field} type='text' id='allergens' required />
+                        <Input
+                          mb={3}
+                          borderColor='#1D6638'
+                          {...field}
+                          type='text'
+                          id='allergens'
+                          required
+                        />
                         <FormErrorMessage>
                           {form.errors.allergens}
                         </FormErrorMessage>
@@ -218,6 +237,8 @@ export function AddItemForm() {
                           Description of food item:
                         </FormLabel>
                         <Textarea
+                          mb={3}
+                          borderColor='#1D6638'
                           {...field}
                           type='text'
                           id='description'
@@ -240,6 +261,9 @@ export function AddItemForm() {
                           Upload image:
                         </FormLabel>
                         <Input
+                          py={1}
+                          mb={3}
+                          borderColor='#1D6638'
                           type='file'
                           name='image'
                           id='image'
@@ -271,6 +295,8 @@ export function AddItemForm() {
                     {({ field }) => (
                       <FormControl>
                         <Select
+                          mb={3}
+                          borderColor='#1D6638'
                           {...field}
                           name='availability'
                           id='availability'

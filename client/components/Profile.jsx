@@ -104,6 +104,7 @@ export default function Profile() {
                 p={4}
                 w='25rem'
                 h='auto'
+                borderColor={'#1D6638'}
                 border='2px'
                 borderStyle='solid'
                 borderRadius={'lg'}
@@ -130,6 +131,7 @@ export default function Profile() {
                 p={4}
                 w='25rem'
                 h='auto'
+                borderColor={'#1D6638'}
                 border='2px'
                 borderStyle='solid'
                 borderRadius={'lg'}

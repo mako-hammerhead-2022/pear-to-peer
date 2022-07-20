@@ -48,6 +48,7 @@ export default function AddCommentForm({ itemId }) {
                   isInvalid={form.errors.comment && form.touched.comment}
                 >
                   <Input
+                    borderColor='#1D6638'
                     {...field}
                     mb={4}
                     type='text'

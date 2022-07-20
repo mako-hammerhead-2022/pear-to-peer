@@ -105,6 +105,8 @@ export default function Register() {
                         Email:
                       </FormLabel>
                       <Input
+                        mb={3}
+                        borderColor='#1D6638'
                         {...field}
                         id='email'
                         value={props.values.email}
@@ -126,7 +128,12 @@ export default function Register() {
                       >
                         Your name:
                       </FormLabel>
-                      <Input {...field} id='name'></Input>
+                      <Input
+                        mb={3}
+                        borderColor='#1D6638'
+                        {...field}
+                        id='name'
+                      ></Input>
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
                   )}
@@ -144,7 +151,12 @@ export default function Register() {
                       >
                         Display name:
                       </FormLabel>
-                      <Input {...field} id='username'></Input>
+                      <Input
+                        mb={3}
+                        borderColor='#1D6638'
+                        {...field}
+                        id='username'
+                      ></Input>
                       <FormErrorMessage>
                         {form.errors.username}
                       </FormErrorMessage>
@@ -152,19 +164,26 @@ export default function Register() {
                   )}
                 </Field>
                 {/* TODO: validate postcode, only allow numbers */}
-                <Field
-                  color='#1D6638'
-                  fontWeight={'bold'}
-                  name='postcode'
-                  validate={validatePostcode}
-                >
+                <Field name='postcode' validate={validatePostcode}>
                   {({ field, form }) => (
                     <FormControl
                       isRequired
                       isInvalid={form.errors.postcode && form.touched.postcode}
                     >
-                      <FormLabel htmlFor='postcode'>Postal Code:</FormLabel>
-                      <NumberInput id='postcode' max={9999} min={100}>
+                      <FormLabel
+                        color='#1D6638'
+                        fontWeight={'bold'}
+                        htmlFor='postcode'
+                      >
+                        Postal Code:
+                      </FormLabel>
+                      <NumberInput
+                        mb={3}
+                        borderColor='#1D6638'
+                        id='postcode'
+                        max={9999}
+                        min={100}
+                      >
                         <FormErrorMessage>
                           {form.errors.postcode}
                         </FormErrorMessage>

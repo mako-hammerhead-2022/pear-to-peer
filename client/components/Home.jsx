@@ -41,6 +41,7 @@ export default function Home() {
                     w='25rem'
                     h='27rem'
                     border='2px'
+                    borderColor={'#1D6638'}
                     borderStyle='solid'
                     borderRadius={'lg'}
                     key={item.itemsId}

@@ -16,8 +16,8 @@ export default function AboutUs() {
         alt={'Pear Tree'}
         h='20rem'
       />
-      <Box w='60%'>
-        <Text fontSize='xl' mb={3}>
+      <Box w={{ base: '80%', md: '50%' }}>
+        <Text fontSize='xl' mb={3} textAlign='justify'>
           Pear 2 Peer is a community focused food sharing initiative which was
           established to help those in need and bring people in the community
           together. While times are tough, and the cost of living is rising,
@@ -26,7 +26,7 @@ export default function AboutUs() {
           community who are able to spare a little extra to post what they have
           available that can be given to others.
         </Text>
-        <Text fontSize='xl'>
+        <Text fontSize='xl' textAlign='justify'>
           Whether you have an overgrown lemon tree in your front yard, a few
           extra meals from a large pot of stew or you accidentally planted 18
           eggplants in your garden, feel free to sign up, and make a post so

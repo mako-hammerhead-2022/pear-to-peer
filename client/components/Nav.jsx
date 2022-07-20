@@ -185,6 +185,7 @@ export default function Nav() {
         <Spacer />
         <Link
           fontWeight={'bold'}
+          color='#f2f2f2'
           fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
           display={{ base: 'contents', md: 'contents', lg: 'contents' }}
           as={ReactLink}
