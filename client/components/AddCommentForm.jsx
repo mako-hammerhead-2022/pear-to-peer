@@ -1,5 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  Input,
+  useToast,
+} from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
@@ -9,6 +15,7 @@ import { postComment } from '@/slices/currentItem'
 export default function AddCommentForm({ itemId }) {
   const dispatch = useDispatch()
   const { getAccessTokenSilently } = useAuth0()
+  const toast = useToast()
 
   async function handleSubmit(formData) {
     const token = await getAccessTokenSilently()
@@ -17,6 +24,14 @@ export default function AddCommentForm({ itemId }) {
       comment: formData.comment,
     }
     dispatch(postComment({ newComment, token }))
+    toast({
+      title: 'Comments',
+      description: `Please check back for a reply. We won't notify you 🙄`,
+      status: 'success',
+      duration: 5000,
+
+      isClosable: true,
+    })
   }
 
   function validateComment(value) {

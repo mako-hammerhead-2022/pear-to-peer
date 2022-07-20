@@ -9,6 +9,7 @@ import {
   Input,
   NumberInput,
   NumberInputField,
+  useToast,
   Wrap,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
@@ -25,6 +26,7 @@ export default function Register() {
   const [form, setForm] = useState({
     email: '',
   })
+  const toast = useToast()
 
   useEffect(() => {
     if (user) {
@@ -41,6 +43,14 @@ export default function Register() {
       email: user?.email,
     }
     dispatch(postNewUser({ user: userToSave, token }))
+    toast({
+      title: 'Register successful!',
+      description: 'Thanks for supporting your community!',
+      status: 'success',
+      duration: 5000,
+
+      isClosable: true,
+    })
     navigate('/profile')
   }
 

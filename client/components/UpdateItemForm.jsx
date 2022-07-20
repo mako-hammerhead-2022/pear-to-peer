@@ -8,6 +8,7 @@ import {
   Input,
   Select,
   Textarea,
+  useToast,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import React, { useEffect } from 'react'
@@ -26,6 +27,7 @@ export default function UpdateItem(props) {
     useSelector((state) => state.currentItem)
 
   const dispatch = useDispatch()
+  const toast = useToast()
 
   useEffect(() => {
     dispatch(fetchItemById(props.id))
@@ -47,7 +49,14 @@ export default function UpdateItem(props) {
     }
 
     dispatch(patchItem({ item: updatedItem, token }))
-    console.log(updatedItem, 'itu')
+    toast({
+      title: 'Item Updated',
+      description: 'Your item has been updated!',
+      status: 'success',
+      duration: 5000,
+
+      isClosable: true,
+    })
   }
 
   function validateItemName(value) {
