@@ -82,28 +82,44 @@ export default function Profile() {
         p={4}
       >
         <HStack>
-          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+          <Text
+            fontSize={{ base: 'md', md: 'xl' }}
+            color='#1D6638'
+            fontWeight={'bold'}
+          >
             Name:{' '}
           </Text>
-          <Text fontSize='xl'>{name}</Text>
+          <Text fontSize={{ base: 'md', md: 'xl' }}>{name}</Text>
         </HStack>
         <HStack>
-          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+          <Text
+            fontSize={{ base: 'md', md: 'xl' }}
+            color='#1D6638'
+            fontWeight={'bold'}
+          >
             Username:{' '}
           </Text>
-          <Text fontSize='xl'>{username}</Text>
+          <Text fontSize={{ base: 'md', md: 'xl' }}>{username}</Text>
         </HStack>
         <HStack>
-          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+          <Text
+            fontSize={{ base: 'sm', md: 'xl' }}
+            color='#1D6638'
+            fontWeight={'bold'}
+          >
             Email:{' '}
           </Text>
-          <Text fontSize='xl'>{email} </Text>
+          <Text fontSize={{ base: 'sm', md: 'xl' }}>{email} </Text>
         </HStack>
         <HStack>
-          <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
+          <Text
+            fontSize={{ base: 'md', md: 'xl' }}
+            color='#1D6638'
+            fontWeight={'bold'}
+          >
             Postal Code:{' '}
           </Text>
-          <Text fontSize='xl'>{postcode} </Text>
+          <Text fontSize={{ base: 'md', md: 'xl' }}>{postcode} </Text>
         </HStack>
       </Box>
       <Center>

@@ -10,7 +10,7 @@ exports.seed = async function (knex) {
       id: 1,
       auth0Id: 'auth0|1',
       name: 'Harry Horatio',
-      username: 'HairyHarry123',
+      username: 'HarryWho123',
       email: 'heyharry@example.com',
       postcode: 5010,
     },
@@ -108,9 +108,9 @@ exports.seed = async function (knex) {
     {
       id: 12,
       auth0Id: 'auth0|12',
-      name: 'Barney Stinson',
-      username: 'legendWait4',
-      email: '8Dairy@example.com',
+      name: 'Rohan Fowler',
+      username: 'OGFounderOG',
+      email: 'dFounderFowler@example.com',
       postcode: 5026,
     },
   ])

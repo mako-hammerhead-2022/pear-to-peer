@@ -117,14 +117,18 @@ export function AddItemForm() {
   return (
     <>
       <Box
-        marginRight='20vw'
-        marginLeft='20vw'
-        border='2px'
-        borderWidth='5px'
-        borderColor='#1D6638'
+        marginRight={{ base: '1vw', md: '5vw', lg: '15vw', xl: '25vw' }}
+        marginLeft={{ base: '1vw', md: '5vw', lg: '15vw', xl: '25vw' }}
+        border={{ base: 'none', md: 'none', lg: '2px' }}
+        borderWidth={{ base: 'none', md: 'none', lg: '5px' }}
+        borderColor={{ base: 'none', md: 'none', lg: '#1D6638' }}
         borderRadius='10%'
       >
-        <Wrap marginBottom='5vw' marginTop='1vw' justify='center'>
+        <Wrap
+          marginBottom={{ base: '1vw', lg: '5vw' }}
+          marginTop={{ base: 'none', lg: '1vw' }}
+          justify='center'
+        >
           <Heading fontFamily='pacifico' color='#1D6638' py={10}>
             Details of your Food
           </Heading>
@@ -145,201 +149,203 @@ export function AddItemForm() {
             {(props) => {
               const { availability } = props.values
               return (
-                <Form>
-                  <Field name='itemName' validate={validateItemName}>
-                    {({ field, form }) => (
-                      <FormControl
-                        isRequired
-                        isInvalid={
-                          form.errors.itemName && form.touched.itemName
-                        }
-                      >
-                        <FormLabel
-                          color='#1D6638'
-                          fontWeight={'bold'}
-                          htmlFor='itemName'
+                <Box px={6}>
+                  <Form>
+                    <Field name='itemName' validate={validateItemName}>
+                      {({ field, form }) => (
+                        <FormControl
+                          isRequired
+                          isInvalid={
+                            form.errors.itemName && form.touched.itemName
+                          }
                         >
-                          Item Name:
-                        </FormLabel>
-                        <Input
-                          mb={3}
-                          borderColor='#1D6638'
-                          {...field}
-                          type='text'
-                          id='itemName'
-                        />
-                        <FormErrorMessage>
-                          {form.errors.itemName}
-                        </FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name='expiry' validate={validateExpiry}>
-                    {({ field, form }) => (
-                      <FormControl
-                        isRequired
-                        isInvalid={form.errors.expiry && form.touched.expiry}
-                      >
-                        <FormLabel
-                          color='#1D6638'
-                          fontWeight={'bold'}
-                          htmlFor='expiry'
-                        >
-                          Post expires after (days):
-                        </FormLabel>
-                        <NumberInput
-                          mb={3}
-                          borderColor='#1D6638'
-                          id='expiry'
-                          min={1}
-                          max={14}
-                        >
-                          <NumberInputField {...field} id='expiry' required />
+                          <FormLabel
+                            color='#1D6638'
+                            fontWeight={'bold'}
+                            htmlFor='itemName'
+                          >
+                            Item Name:
+                          </FormLabel>
+                          <Input
+                            mb={3}
+                            borderColor='#1D6638'
+                            {...field}
+                            type='text'
+                            id='itemName'
+                          />
                           <FormErrorMessage>
-                            {form.errors.expiry}
+                            {form.errors.itemName}
                           </FormErrorMessage>
-                        </NumberInput>
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name='allergens' validate={validateAllergens}>
-                    {({ field, form }) => (
-                      <FormControl
-                        isRequired
-                        isInvalid={
-                          form.errors.allergens && form.touched.allergens
-                        }
-                      >
-                        <FormLabel
-                          color='#1D6638'
-                          fontWeight={'bold'}
-                          htmlFor='allergens'
-                        >
-                          Allergens:
-                        </FormLabel>
-                        <Input
-                          mb={3}
-                          borderColor='#1D6638'
-                          {...field}
-                          type='text'
-                          id='allergens'
-                          required
-                        />
-                        <FormErrorMessage>
-                          {form.errors.allergens}
-                        </FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name='description' validate={validateDescription}>
-                    {({ field, form }) => (
-                      <FormControl
-                        isRequired
-                        isInvalid={
-                          form.errors.description && form.touched.description
-                        }
-                      >
-                        <FormLabel
-                          color='#1D6638'
-                          fontWeight={'bold'}
-                          htmlFor='description'
-                        >
-                          Description of food item:
-                        </FormLabel>
-                        <Textarea
-                          mb={3}
-                          borderColor='#1D6638'
-                          {...field}
-                          type='text'
-                          id='description'
-                          required
-                        />
-                        <FormErrorMessage>
-                          {form.errors.description}
-                        </FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name='image'>
-                    {() => (
-                      <FormControl isRequired>
-                        <FormLabel
-                          color='#1D6638'
-                          fontWeight={'bold'}
-                          htmlFor='image'
-                        >
-                          Upload image:
-                        </FormLabel>
-                        <Input
-                          py={1}
-                          mb={3}
-                          borderColor='#1D6638'
-                          type='file'
-                          name='image'
-                          id='image'
-                          accept='image/*'
-                          onChange={(e) => {
-                            props.setFieldValue(
-                              'image',
-                              e.currentTarget.files[0]
-                            )
-                          }}
-                        />
-
-                        <FormHelperText as='i'>
-                          Please include an image of your food. We love to see
-                          it!
-                        </FormHelperText>
-                      </FormControl>
-                    )}
-                  </Field>
-
-                  <FormLabel
-                    color='#1D6638'
-                    fontWeight={'bold'}
-                    htmlFor='availability'
-                  >
-                    Is this item available?
-                  </FormLabel>
-                  <Field name='availability'>
-                    {({ field }) => (
-                      <FormControl>
-                        <Select
-                          mb={3}
-                          borderColor='#1D6638'
-                          {...field}
-                          name='availability'
-                          id='availability'
-                          value={availability}
-                          required
-                        >
-                          <option value='Yes'>Yes</option>
-                          <option value='No'>No</option>
-                        </Select>
-                      </FormControl>
-                    )}
-                  </Field>
-
-                  <Container centerContent>
-                    <div>
-                      {isAuthenticated && (
-                        <Button
-                          type='submit'
-                          isLoading={props.isSubmitting}
-                          border='2px'
-                          color='#1D6638'
-                          borderColor={'#1D6638'}
-                          bgColor='#e5eee4'
-                          _hover={{ background: '#1D6638', color: '#e5eee4' }}
-                          m={2}
-                          onClick={props.handleSubmit}
-                        >
-                          Add Item
-                        </Button>
+                        </FormControl>
                       )}
-                    </div>
-                  </Container>
-                </Form>
+                    </Field>
+                    <Field name='expiry' validate={validateExpiry}>
+                      {({ field, form }) => (
+                        <FormControl
+                          isRequired
+                          isInvalid={form.errors.expiry && form.touched.expiry}
+                        >
+                          <FormLabel
+                            color='#1D6638'
+                            fontWeight={'bold'}
+                            htmlFor='expiry'
+                          >
+                            Post expires after (days):
+                          </FormLabel>
+                          <NumberInput
+                            mb={3}
+                            borderColor='#1D6638'
+                            id='expiry'
+                            min={1}
+                            max={14}
+                          >
+                            <NumberInputField {...field} id='expiry' required />
+                            <FormErrorMessage>
+                              {form.errors.expiry}
+                            </FormErrorMessage>
+                          </NumberInput>
+                        </FormControl>
+                      )}
+                    </Field>
+                    <Field name='allergens' validate={validateAllergens}>
+                      {({ field, form }) => (
+                        <FormControl
+                          isRequired
+                          isInvalid={
+                            form.errors.allergens && form.touched.allergens
+                          }
+                        >
+                          <FormLabel
+                            color='#1D6638'
+                            fontWeight={'bold'}
+                            htmlFor='allergens'
+                          >
+                            Allergens:
+                          </FormLabel>
+                          <Input
+                            mb={3}
+                            borderColor='#1D6638'
+                            {...field}
+                            type='text'
+                            id='allergens'
+                            required
+                          />
+                          <FormErrorMessage>
+                            {form.errors.allergens}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+                    <Field name='description' validate={validateDescription}>
+                      {({ field, form }) => (
+                        <FormControl
+                          isRequired
+                          isInvalid={
+                            form.errors.description && form.touched.description
+                          }
+                        >
+                          <FormLabel
+                            color='#1D6638'
+                            fontWeight={'bold'}
+                            htmlFor='description'
+                          >
+                            Description of food item:
+                          </FormLabel>
+                          <Textarea
+                            mb={3}
+                            borderColor='#1D6638'
+                            {...field}
+                            type='text'
+                            id='description'
+                            required
+                          />
+                          <FormErrorMessage>
+                            {form.errors.description}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+                    <Field name='image'>
+                      {() => (
+                        <FormControl isRequired>
+                          <FormLabel
+                            color='#1D6638'
+                            fontWeight={'bold'}
+                            htmlFor='image'
+                          >
+                            Upload image:
+                          </FormLabel>
+                          <Input
+                            py={1}
+                            mb={3}
+                            borderColor='#1D6638'
+                            type='file'
+                            name='image'
+                            id='image'
+                            accept='image/*'
+                            onChange={(e) => {
+                              props.setFieldValue(
+                                'image',
+                                e.currentTarget.files[0]
+                              )
+                            }}
+                          />
+
+                          <FormHelperText as='i'>
+                            Please include an image of your food. We love to see
+                            it!
+                          </FormHelperText>
+                        </FormControl>
+                      )}
+                    </Field>
+
+                    <FormLabel
+                      color='#1D6638'
+                      fontWeight={'bold'}
+                      htmlFor='availability'
+                    >
+                      Is this item available?
+                    </FormLabel>
+                    <Field name='availability'>
+                      {({ field }) => (
+                        <FormControl>
+                          <Select
+                            mb={3}
+                            borderColor='#1D6638'
+                            {...field}
+                            name='availability'
+                            id='availability'
+                            value={availability}
+                            required
+                          >
+                            <option value='Yes'>Yes</option>
+                            <option value='No'>No</option>
+                          </Select>
+                        </FormControl>
+                      )}
+                    </Field>
+
+                    <Container centerContent>
+                      <div>
+                        {isAuthenticated && (
+                          <Button
+                            type='submit'
+                            isLoading={props.isSubmitting}
+                            border='2px'
+                            color='#1D6638'
+                            borderColor={'#1D6638'}
+                            bgColor='#e5eee4'
+                            _hover={{ background: '#1D6638', color: '#e5eee4' }}
+                            m={2}
+                            onClick={props.handleSubmit}
+                          >
+                            Add Item
+                          </Button>
+                        )}
+                      </div>
+                    </Container>
+                  </Form>
+                </Box>
               )
             }}
           </Formik>

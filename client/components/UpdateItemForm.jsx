@@ -22,7 +22,6 @@ import {
 
 export default function UpdateItem(props) {
   const { getAccessTokenSilently } = useAuth0()
-  console.log(props, 'updateItemProps')
   const { itemName, allergens, description, expiry, availability, imageUrl } =
     useSelector((state) => state.currentItem)
 
@@ -72,7 +71,7 @@ export default function UpdateItem(props) {
   function validateAllergens(value) {
     let error
     if (!value) {
-      error = `Please enter in any allergens seperated by a comma (,). If no allergens please enter 'None'.`
+      error = `Please enter in any allergens separated by a comma (,). If no allergens please enter 'None'.`
     }
     return error
   }
@@ -80,8 +79,8 @@ export default function UpdateItem(props) {
     let error
     if (!value) {
       error = 'Please enter a description of your item (up to 250 characters).'
-    } else if (value.length > 251) {
-      error = `We love that you're passionate about your food, but you've gone above the character limit! Please describe your item in 250 characters or less`
+    } else if (value.length > 601) {
+      error = `We love that you're passionate about your food, but you've gone above the character limit! Please describe your item in 600 characters or less`
     }
     return error
   }
