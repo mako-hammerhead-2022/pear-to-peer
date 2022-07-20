@@ -37,11 +37,11 @@ describe('<AddItemForm />', () => {
 
     await userEvent.click(addItemButton)
 
-    const itemName = screen.getByLabelText(/Item Name:/i)
-    const allergens = screen.getByLabelText(/Allergens:/i)
-    const description = screen.getByLabelText(/Description of food item:/i)
-    const image = screen.getByLabelText(/Upload image:/i)
-    const availability = screen.getByLabelText(/Is this item available?/i) 
+    screen.getByLabelText(/Item Name:/i)
+    screen.getByLabelText(/Allergens:/i)
+    screen.getByLabelText(/Description of food item:/i)
+    screen.getByLabelText(/Upload image:/i)
+    screen.getByLabelText(/Is this item available?/i) 
 
     await userEvent.click(addItemButton)
 
