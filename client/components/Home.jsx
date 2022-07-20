@@ -46,6 +46,7 @@ export default function Home() {
                     borderRadius={'lg'}
                     key={item.itemsId}
                     justifyContent='center'
+                    bgColor='#d2e0d7'
                   >
                     <FoodItemTile data={item} />
                   </WrapItem>

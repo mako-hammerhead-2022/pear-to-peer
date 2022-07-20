@@ -30,7 +30,9 @@ describe('<AddCommentForm />', () => {
         </Router>
       </Provider>
     )
-    const addCommentButton = screen.getByRole('button', { name: /Add/i })
+    const addCommentButton = screen.getByRole('button', {
+      name: /Add/i,
+    })
     expect(addCommentButton).toBeInTheDocument()
 
     await userEvent.click(addCommentButton)

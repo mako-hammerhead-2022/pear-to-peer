@@ -20,7 +20,6 @@ export default function Header() {
           <Image h={{ base: 75, md: 100, lg: 150 }} src={logor} />
         </HStack>
       </Center>
-      {/* <Nav /> */}
     </>
   )
 }

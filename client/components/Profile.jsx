@@ -4,7 +4,9 @@ import {
   Center,
   Heading,
   HStack,
+  Image,
   Text,
+  VStack,
   Wrap,
   WrapItem,
 } from '@chakra-ui/react'
@@ -14,6 +16,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useIsRegistered } from '@/components/useIsRegistered'
 import PageItemTile from '@/components/UserItem'
+import pear from '@/images/loading.gif'
 import { fetchUserByAuth0Token } from '@/slices/userData'
 import { fetchItemsByUserId } from '@/slices/userItems'
 
@@ -50,7 +53,14 @@ export default function Profile() {
   }, [id])
 
   if (loading !== 'done') {
-    return <p>Loading...</p>
+    return (
+      <Box justify='center'>
+        <VStack>
+          <Heading color='#1D6638'>... Loading</Heading>
+          <Image src={pear} alt={'disappearing pear by eating'} h='20em' />
+        </VStack>
+      </Box>
+    )
   }
 
   if (isRegistered === false) {
@@ -64,7 +74,13 @@ export default function Profile() {
           Your Profile:
         </Heading>
       </Center>
-      <Box border='2px' borderStyle='solid' borderRadius={'lg'} p={4}>
+      <Box
+        bgColor='#d2e0d7'
+        border='2px'
+        borderStyle='solid'
+        borderRadius={'lg'}
+        p={4}
+      >
         <HStack>
           <Text fontSize='xl' color='#1D6638' fontWeight={'bold'}>
             Name:{' '}
@@ -110,6 +126,7 @@ export default function Profile() {
                 borderRadius={'lg'}
                 key={item.itemsId}
                 justifyContent='center'
+                bgColor='#d2e0d7'
               >
                 <PageItemTile data={item} />
               </WrapItem>
@@ -137,6 +154,7 @@ export default function Profile() {
                 borderRadius={'lg'}
                 key={item.itemsId}
                 justifyContent='center'
+                bgColor='#d2e0d7'
               >
                 <PageItemTile data={item} />
               </WrapItem>

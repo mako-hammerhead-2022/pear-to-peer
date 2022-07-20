@@ -220,8 +220,12 @@ export default function UpdateItem(props) {
                       <Button
                         type='submit'
                         isLoading={props.isSubmitting}
-                        bgColor='#7da97a'
-                        m={2}
+                        border='2px'
+                        color='#1D6638'
+                        borderColor={'#1D6638'}
+                        bgColor='#e5eee4'
+                        _hover={{ background: '#1D6638', color: '#e5eee4' }}
+                        m={4}
                         onClick={props.handleSubmit}
                       >
                         Update Item

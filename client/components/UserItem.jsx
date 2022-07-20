@@ -68,7 +68,9 @@ export default function PageItemTile(props) {
             <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
               Allergens:{' '}
             </Text>
-            <Text fontSize='lg'>{allergens}</Text>
+            <Text as='i' fontSize='lg'>
+              {allergens}
+            </Text>
           </HStack>
 
           <Text fontSize='lg' color='#1D6638' fontWeight={'bold'}>
@@ -91,16 +93,24 @@ export default function PageItemTile(props) {
               mb={4}
               w={'60'}
               onClick={handleAvailability}
-              bgColor='#7da97a'
+              border='2px'
+              color='#1D6638'
+              borderColor={'#1D6638'}
+              bgColor='#e5eee4'
+              _hover={{ background: '#1D6638', color: '#e5eee4' }}
             >
               Make Unavailable
             </Button>
           ) : (
             <Button
               mb={4}
-              w={'7vw'}
+              w={'60'}
               onClick={handleAvailability}
-              bgColor='#7da97a'
+              border='2px'
+              color='#1D6638'
+              borderColor={'#1D6638'}
+              bgColor='#e5eee4'
+              _hover={{ background: '#1D6638', color: '#e5eee4' }}
             >
               Make Available
             </Button>
@@ -110,7 +120,14 @@ export default function PageItemTile(props) {
               <UpdateItemModal data={props.data} />
             </Box>
             <Box>
-              <Button onClick={onOpen} bgColor='#7da97a'>
+              <Button
+                onClick={onOpen}
+                border='2px'
+                color='#1D6638'
+                borderColor={'#1D6638'}
+                bgColor='#e5eee4'
+                _hover={{ background: '#1D6638', color: '#e5eee4' }}
+              >
                 View Item
               </Button>
             </Box>
@@ -127,10 +144,17 @@ export default function PageItemTile(props) {
             <ModalHeader bg='#e5eee4' color='#1d6638'>
               {itemName}
             </ModalHeader>
-            <ModalCloseButton bg='#7da97a' />
+            <ModalCloseButton
+              border='2px'
+              color='#1D6638'
+              borderColor={'#1D6638'}
+              bgColor='#e5eee4'
+              _hover={{ background: '#1D6638', color: '#e5eee4' }}
+            />
             <ModalBody bg='#e5eee4'>
               <Center>
                 <Image
+                  maxH={500}
                   borderRadius={'lg'}
                   mb={4}
                   src={imageUrl}
@@ -141,7 +165,9 @@ export default function PageItemTile(props) {
                 <Text fontSize='xl' fontWeight={'bold'}>
                   Allergens:{' '}
                 </Text>
-                <Text fontSize='xl'>{allergens}</Text>
+                <Text as='i' fontSize='xl'>
+                  {allergens}
+                </Text>
               </HStack>
               <Text fontSize='xl' fontWeight={'bold'}>
                 Description:{' '}

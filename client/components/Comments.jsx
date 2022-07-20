@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Heading, HStack, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -26,10 +26,10 @@ export default function Comments(props) {
         <ul>
           {comments.map((commentObj) => {
             return (
-              <li key={commentObj.commentId}>
-                <strong>{commentObj.authorName}</strong>:&nbsp;
-                {commentObj.comment}
-              </li>
+              <HStack key={commentObj.commentId}>
+                <Text fontWeight={'bold'}>{commentObj.authorName}:</Text>
+                <Text>{commentObj.comment}</Text>
+              </HStack>
             )
           })}
         </ul>
