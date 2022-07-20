@@ -1,4 +1,4 @@
-import {ChakraProvider} from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
@@ -11,9 +11,10 @@ import AddItemForm from '@/components/AddItemForm.jsx'
 import Header from '@/components/Header.jsx'
 import Home from '@/components/Home.jsx'
 import Nav from '@/components/Nav.jsx'
+import NotFound from '@/components/NotFound.jsx'
 import Profile from '@/components/Profile.jsx'
 import Register from '@/components/Register.jsx'
-import {fakeItems} from '@/test/fakeData'
+import { fakeItems } from '@/test/fakeData'
 
 vi.mock('@auth0/auth0-react')
 vi.mock('@/auth0-utils')
@@ -39,14 +40,13 @@ vi.mock('@/components/AboutUs.jsx')
 vi.mock('@/components/AddItemForm.jsx')
 vi.mock('@/components/Nav.jsx')
 vi.mock('@/components/Header.jsx')
+vi.mock('@/components/NotFound.jsx')
 
 const FakeAppProvider = ({ children, initialEntries = ['/'] }) => {
   return (
     <ChakraProvider>
       <Provider store={fakeStore}>
-        <Router initialEntries={initialEntries}>
-          {children}
-        </Router>
+        <Router initialEntries={initialEntries}>{children}</Router>
       </Provider>
     </ChakraProvider>
   )
@@ -61,6 +61,7 @@ describe('<App />', () => {
     AddItemForm.mockReturnValue(<div>AddFoodItem Component</div>)
     Header.mockReturnValue(<div>Header Component</div>)
     Nav.mockReturnValue(<div>Nav Component</div>)
+    NotFound.mockReturnValue(<div>Not Found Component</div>)
   })
   it('Renders the About Us default route and the navigation', () => {
     render(
@@ -68,8 +69,6 @@ describe('<App />', () => {
         <App />
       </FakeAppProvider>
     )
-
-    screen.debug()
 
     expect(screen.getByText('AboutUs Component')).toBeInTheDocument()
     expect(screen.getByText('Nav Component')).toBeInTheDocument()
