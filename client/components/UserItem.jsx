@@ -89,7 +89,7 @@ export default function PageItemTile(props) {
           {updatedItem.availability === 'Yes' ? (
             <Button
               mb={4}
-              w={'14vw'}
+              w={'60'}
               onClick={handleAvailability}
               bgColor='#7da97a'
             >
