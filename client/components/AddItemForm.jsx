@@ -13,6 +13,7 @@ import {
   NumberInputField,
   Select,
   Textarea,
+  useToast,
   Wrap,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
@@ -33,6 +34,7 @@ export function AddItemForm() {
 
   const navigate = useNavigate()
   const { getAccessTokenSilently, isAuthenticated } = useAuth0()
+  const toast = useToast()
 
   useEffect(() => {
     async function getToken() {
@@ -60,6 +62,14 @@ export function AddItemForm() {
       userId: id,
     }
     dispatch(postNewItem({ item: itemToAdd, token }))
+    toast({
+      title: 'Item Added',
+      description: 'Thanks for supporting your community!',
+      status: 'success',
+      duration: 5000,
+
+      isClosable: true,
+    })
     navigate('/profile')
   }
 
