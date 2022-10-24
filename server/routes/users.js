@@ -40,4 +40,9 @@ router.post('/', jwtWrapper, async (req, res) => {
     res.status(500).send(err.message)
   }
 })
+
+router.patch('/update/', jwtWrapper, async (req, res) => {
+  cons
+})
+
 module.exports = router

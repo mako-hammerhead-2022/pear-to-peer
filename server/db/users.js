@@ -14,6 +14,10 @@ function getUserByAuth0Id(auth0Id, db = connection) {
   return db('users').select().where('auth0Id', auth0Id).first()
 }
 
+function updateUserByAuth0Id(auth0Id, db = connection) {
+  return db('users').update()
+}
+
 module.exports = {
   getAllUsers,
   createUser,
