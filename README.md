@@ -38,4 +38,6 @@ Signup method shouldn't matter. Complete the signup process and verify your emai
   - `AWS_ACCESS_KEY_ID: <access_key_id>`
   - `AWS_SECRET_ACCESS_KEY: <secret_access_key>`
 - Click 'Create Web Service'.
+- The deployment should be completed successfully in 5 - 10 minutes.
+- (_optional_) Go to settings, edit the build command and remove `&& npm run knex seed:run` to stop the database being overwritten on every build.
 
