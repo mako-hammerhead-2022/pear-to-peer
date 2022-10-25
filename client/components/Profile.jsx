@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import {
   Box,
+  Button,
   Center,
   Heading,
   HStack,
@@ -15,10 +16,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { useIsRegistered } from '@/components/useIsRegistered'
-import PageItemTile from '@/components/UserItem'
+import UserItem from '@/components/UserItem'
 import pear from '@/images/loading.gif'
 import { fetchUserByAuth0Token } from '@/slices/userData'
 import { fetchItemsByUserId } from '@/slices/userItems'
+
+import UpdateProfileModal from './UpdateProfileModal'
 
 export default function Profile() {
   const { getAccessTokenSilently } = useAuth0()
@@ -121,6 +124,7 @@ export default function Profile() {
           </Text>
           <Text fontSize={{ base: 'md', md: 'xl' }}>{postcode} </Text>
         </HStack>
+          <UpdateProfileModal />
       </Box>
       <Center>
         <Heading py={4} fontFamily='pacifico' color='#1D6638' fontSize='3xl'>
@@ -144,7 +148,7 @@ export default function Profile() {
                 justifyContent='center'
                 bgColor='#d2e0d7'
               >
-                <PageItemTile data={item} />
+                <UserItem data={item} />
               </WrapItem>
             )
         })}
@@ -172,7 +176,7 @@ export default function Profile() {
                 justifyContent='center'
                 bgColor='#d2e0d7'
               >
-                <PageItemTile data={item} />
+                <UserItem data={item} />
               </WrapItem>
             )
         })}

@@ -16,3 +16,12 @@ export function getUserByAuth0Token(token) {
     .then((res) => res.body)
     .catch((err) => console.error(err))
 }
+
+export function updateUser(user, token) {
+  return request
+    .patch(`/api/users/`)
+    .set('authorization', `Bearer ${token}`)
+    .send(user)
+    .then((res) => res.body)
+    .catch((err) => console.error(err))
+}

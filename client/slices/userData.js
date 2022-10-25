@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { addUser, getUserByAuth0Token } from '@/apiClient/users'
+import { addUser, getUserByAuth0Token, updateUser } from '@/apiClient/users'
 
 const initialState = {
   data: {
@@ -26,6 +26,14 @@ export const postNewUser = createAsyncThunk(
     const response = await addUser(user, token)
     return response
   }
+)
+
+export const patchUser = createAsyncThunk(
+  'userData/patchUser',
+    async({user, token}) => {
+      const response = await updateUser(user, token)
+      return response
+    }
 )
 
 export const userDataSlice = createSlice({
