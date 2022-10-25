@@ -14,12 +14,14 @@ function getUserByAuth0Id(auth0Id, db = connection) {
   return db('users').select().where('auth0Id', auth0Id).first()
 }
 
-function updateUserByAuth0Id(auth0Id, db = connection) {
-  return db('users').update()
+async function updateUserByAuth0Id(auth0Id, user, db = connection) {
+  await db('users').update(user).where('auth0Id', auth0Id)
+  return getUserByAuth0Id(auth0Id, db)
 }
 
 module.exports = {
   getAllUsers,
   createUser,
   getUserByAuth0Id,
+  updateUserByAuth0Id,
 }

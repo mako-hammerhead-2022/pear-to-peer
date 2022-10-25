@@ -19,19 +19,19 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import UpdateProfileForm from './UpdateProfileForm'
 
 export default function UpdateProfileModal(props) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { name, username, postcode } = useSelector(
+    (state) => state.userData.data
+  )
 
-const { isOpen, onOpen, onClose} = useDisclosure()
-const {name, username, postcode} = useSelector((state) => state.userData.data)
-
-
-return (
-  <>
-        <Button
+  return (
+    <>
+      <Button
         onClick={onOpen}
         border='2px'
         color='#1D6638'
@@ -57,11 +57,9 @@ return (
           />
           <ModalBody bg='#e5eee4'>
             <UpdateProfileForm />
-            {/* <UpdateItem id={itemsId} /> */}
           </ModalBody>
         </ModalContent>
       </Modal>
-      </>
-)
-
+    </>
+  )
 }

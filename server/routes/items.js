@@ -70,6 +70,7 @@ router.patch('/update/:id', jwtWrapper, async (req, res) => {
   const id = Number(updatedItem.itemsId)
   try {
     const prevItem = await db.getItemByIdWithUserInfo(id)
+    console.log(prevItem)
 
     if (prevItem.auth0Id !== req.auth?.sub) {
       res

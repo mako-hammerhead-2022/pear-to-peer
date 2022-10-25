@@ -42,7 +42,21 @@ router.post('/', jwtWrapper, async (req, res) => {
 })
 
 router.patch('/update/', jwtWrapper, async (req, res) => {
-  cons
+  const { name, username, postcode } = req.body
+  const auth0Id = req.auth?.sub
+  const userToUpdate = {
+    name,
+    username,
+    postcode,
+  }
+  try {
+    const updateUser = await db.updateUserByAuth0Id(auth0Id, userToUpdate)
+    console.log(updateUser, 'updateuser')
+    res.json(updateUser)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ message: 'Something went wrong' })
+  }
 })
 
 module.exports = router

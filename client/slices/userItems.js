@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-
 import { addItem, getAllItemsByUserId } from '@/apiClient/items'
 import { patchItem } from '@/slices/currentItem'
 
@@ -41,6 +40,7 @@ export const userItemsSlice = createSlice({
           }
         } else return item
       })
+
       return [...updatedItemArray]
     },
   },

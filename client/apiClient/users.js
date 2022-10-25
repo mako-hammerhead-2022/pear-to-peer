@@ -19,7 +19,7 @@ export function getUserByAuth0Token(token) {
 
 export function updateUser(user, token) {
   return request
-    .patch(`/api/users/`)
+    .patch(`/api/users/update`)
     .set('authorization', `Bearer ${token}`)
     .send(user)
     .then((res) => res.body)

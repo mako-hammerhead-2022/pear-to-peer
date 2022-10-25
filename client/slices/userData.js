@@ -30,10 +30,10 @@ export const postNewUser = createAsyncThunk(
 
 export const patchUser = createAsyncThunk(
   'userData/patchUser',
-    async({user, token}) => {
-      const response = await updateUser(user, token)
-      return response
-    }
+  async ({ user, token }) => {
+    const response = await updateUser(user, token)
+    return response
+  }
 )
 
 export const userDataSlice = createSlice({
@@ -56,6 +56,9 @@ export const userDataSlice = createSlice({
       return { ...state, loading: 'pending' }
     },
     [fetchUserByAuth0Token.fulfilled]: (state, { payload }) => {
+      return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
+    },
+    [patchUser.fulfilled]: (state, { payload }) => {
       return { ...state, data: { ...state.data, ...payload }, loading: 'done' }
     },
   },
